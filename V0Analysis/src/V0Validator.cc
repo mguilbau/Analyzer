@@ -58,12 +58,13 @@ void V0Validator::beginRun(const edm::Run& iRun, const edm::EventSetup& iSetup) 
 
   const double small = 1e-3;
   double pt;
-  // simple rebinning possible with a rebinning facto n = 2, 3, 6 !
-  for(pt =   0  ; pt <   2.0-small; pt +=  0.2) ptBins.push_back(pt); 
-  for(pt =   2.0; pt <   3.0-small; pt +=  0.5 ) ptBins.push_back(pt); 
-  for(pt =   3.0; pt <   6.0-small; pt +=  1.0 ) ptBins.push_back(pt);
-  for(pt =   6.0; pt <  10.0-small; pt +=  2.0 ) ptBins.push_back(pt); 
-  ptBins.push_back(10.0);
+  for(pt =   0  ; pt <   3.0-small; pt +=  0.2) ptBins.push_back(pt); 
+  for(pt =   3.0; pt <   5.0-small; pt +=  0.4 ) ptBins.push_back(pt); 
+  for(pt =   5.0; pt <   5.6-small; pt +=  0.6 ) ptBins.push_back(pt);
+  for(pt =   5.6; pt <   6.6-small; pt +=  1.0 ) ptBins.push_back(pt); 
+  for(pt =   6.6; pt <   9.0-small; pt +=  2.4 ) ptBins.push_back(pt);  
+  ptBins.push_back(9.0);
+  ptBins.push_back(12.0);
 
   double etaMin   = -2.4;
   double etaMax   =  2.4;
@@ -81,7 +82,7 @@ void V0Validator::beginRun(const edm::Run& iRun, const edm::EventSetup& iSetup) 
   ksEffVsEta_num = theDQMstore->make<TH1D>("K0sEffVsEta_num",
 			    "K^{0}_{S} Efficiency vs #eta", 40, -2.5, 2.5);
   ksEffVsPt_num = theDQMstore->make<TH1D>("K0sEffVsPt_num",
-			   "K^{0}_{S} Efficiency vs p_{T}", 70, 0., 20.);;
+			   "K^{0}_{S} Efficiency vs p_{T}", 70, 0., 20.);
   ksEffVsPtR_num = theDQMstore->make<TH2D>("K0sEffVsPtR_num",
                            "K^{0}_{S} Efficiency vs R and p_{T}", 40, 0., 40., 100, 0, 10.);
   ksEffVsEtaR_num = theDQMstore->make<TH2D>("K0sEffVsEtaR_num",
@@ -94,7 +95,7 @@ void V0Validator::beginRun(const edm::Run& iRun, const edm::EventSetup& iSetup) 
   ksTkEffVsEta_num = theDQMstore->make<TH1D>("K0sTkEffVsEta_num",
 			    "K^{0}_{S} Tracking Efficiency vs #eta", 40, -2.5, 2.5);
   ksTkEffVsPt_num = theDQMstore->make<TH1D>("K0sTkEffVsPt_num",
-			   "K^{0}_{S} Tracking Efficiency vs p_{T}", 70, 0., 20.);;
+			   "K^{0}_{S} Tracking Efficiency vs p_{T}", 70, 0., 20.);
   ksTkEffVsEtaPt_num = theDQMstore->make<TH2D>("K0sTkEffVsEtaPt_num",
                            "K^{0}_{S} Tracking Efficiency vs #eta and p_{T}", etaBins.size()-1, &etaBins[0], ptBins.size()-1, &ptBins[0]);
 
@@ -264,16 +265,16 @@ void V0Validator::beginRun(const edm::Run& iRun, const edm::EventSetup& iSetup) 
 			      lamMassNbins, minLamMass, maxLamMass);
   fakeKsMassPt = theDQMstore->make<TH2D>("ksMassPtFake",
                              "Mass vs p_{T} of fake K0S",
-                             100, 0, 10.0, ksMassNbins, minKsMass, maxKsMass);
+                             120, 0, 12.0, ksMassNbins, minKsMass, maxKsMass);
   goodKsMassPt = theDQMstore->make<TH2D>("ksMassPtGood",
                              "Mass vs p_{T} of good K0S",
-                             100, 0, 10.0, ksMassNbins, minKsMass, maxKsMass);
+                             120, 0, 12.0, ksMassNbins, minKsMass, maxKsMass);
   fakeLamMassPt = theDQMstore->make<TH2D>("lamMassPtFake",
                               "Mass vs p_{T} of fake Lambda",
-                              100, 0, 10.0, lamMassNbins, minLamMass, maxLamMass);
+                              120, 0, 12.0, lamMassNbins, minLamMass, maxLamMass);
   goodLamMassPt = theDQMstore->make<TH2D>("lamMassPtGood",
                               "Mass vs p_{T} of good Lambda",
-                              100, 0, 10.0, lamMassNbins, minLamMass, maxLamMass);
+                              120, 0, 12.0, lamMassNbins, minLamMass, maxLamMass);
 
   ksMassAll = theDQMstore->make<TH1D>("ksMassAll",
 				  "Invariant mass of all K0S",
@@ -283,46 +284,46 @@ void V0Validator::beginRun(const edm::Run& iRun, const edm::EventSetup& iSetup) 
 				   lamMassNbins, lamMassXmin, lamMassXmax);
   ksMassPtAll = theDQMstore->make<TH2D>("ksMassPtAll",
                                   "Invariant mass vs p_{T} of all K0S", 
-                                  100, 0, 10.0, ksMassNbins, ksMassXmin, ksMassXmax);
+                                  120, 0, 12.0, ksMassNbins, ksMassXmin, ksMassXmax);
   ksMassPtAllEta1 = theDQMstore->make<TH2D>("ksMassPtAllEta1",
                                   "Invariant mass vs p_{T} of all K0S",
-                                  100, 0, 10.0, ksMassNbins, ksMassXmin, ksMassXmax);
+                                  120, 0, 12.0, ksMassNbins, ksMassXmin, ksMassXmax);
   ksMassPtAllEta2 = theDQMstore->make<TH2D>("ksMassPtAllEta2",
                                   "Invariant mass vs p_{T} of all K0S",
-                                  100, 0, 10.0, ksMassNbins, ksMassXmin, ksMassXmax);
+                                  120, 0, 12.0, ksMassNbins, ksMassXmin, ksMassXmax);
   ksMassPtAllEta3 = theDQMstore->make<TH2D>("ksMassPtAllEta3",
                                   "Invariant mass vs p_{T} of all K0S",
-                                  100, 0, 10.0, ksMassNbins, ksMassXmin, ksMassXmax);
+                                  120, 0, 12.0, ksMassNbins, ksMassXmin, ksMassXmax);
   ksMassPtAllEta4 = theDQMstore->make<TH2D>("ksMassPtAllEta4",
                                   "Invariant mass vs p_{T} of all K0S",
-                                  100, 0, 10.0, ksMassNbins, ksMassXmin, ksMassXmax);
+                                  120, 0, 12.0, ksMassNbins, ksMassXmin, ksMassXmax);
   ksMassPtAllEta5 = theDQMstore->make<TH2D>("ksMassPtAllEta5",
                                   "Invariant mass vs p_{T} of all K0S",
-                                  100, 0, 10.0, ksMassNbins, ksMassXmin, ksMassXmax);
+                                  120, 0, 12.0, ksMassNbins, ksMassXmin, ksMassXmax);
   ksMassPtAllEta6 = theDQMstore->make<TH2D>("ksMassPtAllEta6",
                                   "Invariant mass vs p_{T} of all K0S",
-                                  100, 0, 10.0, ksMassNbins, ksMassXmin, ksMassXmax);
+                                  120, 0, 12.0, ksMassNbins, ksMassXmin, ksMassXmax);
   lamMassPtAll = theDQMstore->make<TH2D>("lamMassPtAll",
                                    "Invariant mass vs p_{T} of all #Lambda^{0}",
-                                   100, 0, 10.0, lamMassNbins, lamMassXmin, lamMassXmax);
+                                   120, 0, 12.0, lamMassNbins, lamMassXmin, lamMassXmax);
   lamMassPtAllEta1 = theDQMstore->make<TH2D>("lamMassPtAllEta1",
                                    "Invariant mass vs p_{T} of all #Lambda^{0}",
-                                   100, 0, 10.0, lamMassNbins, lamMassXmin, lamMassXmax);
+                                   120, 0, 12.0, lamMassNbins, lamMassXmin, lamMassXmax);
   lamMassPtAllEta2 = theDQMstore->make<TH2D>("lamMassPtAllEta2",
                                    "Invariant mass vs p_{T} of all #Lambda^{0}",
-                                   100, 0, 10.0, lamMassNbins, lamMassXmin, lamMassXmax);
+                                   120, 0, 12.0, lamMassNbins, lamMassXmin, lamMassXmax);
   lamMassPtAllEta3 = theDQMstore->make<TH2D>("lamMassPtAllEta3",
                                    "Invariant mass vs p_{T} of all #Lambda^{0}",
-                                   100, 0, 10.0, lamMassNbins, lamMassXmin, lamMassXmax);
+                                   120, 0, 12.0, lamMassNbins, lamMassXmin, lamMassXmax);
   lamMassPtAllEta4 = theDQMstore->make<TH2D>("lamMassPtAllEta4",
                                    "Invariant mass vs p_{T} of all #Lambda^{0}",
-                                   100, 0, 10.0, lamMassNbins, lamMassXmin, lamMassXmax);
+                                   120, 0, 12.0, lamMassNbins, lamMassXmin, lamMassXmax);
   lamMassPtAllEta5 = theDQMstore->make<TH2D>("lamMassPtAllEta5",
                                    "Invariant mass vs p_{T} of all #Lambda^{0}",
-                                   100, 0, 10.0, lamMassNbins, lamMassXmin, lamMassXmax);
+                                   120, 0, 12.0, lamMassNbins, lamMassXmin, lamMassXmax);
   lamMassPtAllEta6 = theDQMstore->make<TH2D>("lamMassPtAllEta6",
                                    "Invariant mass vs p_{T} of all #Lambda^{0}",
-                                   100, 0, 10.0, lamMassNbins, lamMassXmin, lamMassXmax);
+                                   120, 0, 12.0, lamMassNbins, lamMassXmin, lamMassXmax);
 
   ksFakeDauRadDist = theDQMstore->make<TH1D>("radDistFakeKs",
 				   "Production radius of daughter particle of Ks fake",
@@ -333,10 +334,10 @@ void V0Validator::beginRun(const edm::Run& iRun, const edm::EventSetup& iSetup) 
 
   ksResolutionPt = theDQMstore->make<TH2D>("ksResolutionPt",
                                     "K0s pT resolution",
-                                    100, 0, 10.0, 100, -0.5, 0.5); 
+                                    120, 0, 12.0, 100, -0.5, 0.5); 
   lamResolutionPt = theDQMstore->make<TH2D>("lamResolutionPt",
                                     "Lambda pT resolution",
-                                    100, 0, 10.0, 100, -0.5, 0.5); 
+                                    120, 0, 12.0, 100, -0.5, 0.5); 
 }
 
 void V0Validator::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup) {

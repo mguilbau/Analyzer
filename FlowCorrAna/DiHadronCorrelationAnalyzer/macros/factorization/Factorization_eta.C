@@ -51,10 +51,12 @@ for(int jj=0;jj<nfiles;jj++)
 */
       hsignal[i] = (TH2D*)fdiff[jj]->Get(Form("epetadeco_ana_HI_hfp/signalcosn_trg%d",i));
       hbackground[i] = (TH2D*)fdiff[jj]->Get(Form("epetadeco_ana_HI_hfp/backgroundcosn_trg%d",i));
+/*
       hsignal1[i] = (TH2D*)fdiff[jj]->Get(Form("epetadeco_ana_HI_hfm/signalcosn_trg%d",i));
       hbackground1[i] = (TH2D*)fdiff[jj]->Get(Form("epetadeco_ana_HI_hfm/backgroundcosn_trg%d",i));
       hsignal[i]->Add(hsignal1[i]);
       hbackground[i]->Add(hbackground1[i]);
+*/
 /*
     }
     else{
@@ -163,9 +165,9 @@ if(jj==0) cout<<Vn[i]<<" "<<VnError[i]<<endl;
       gr_band[jj][ii+2]->Draw("Fsame"); 
       fit_aver[jj][ii+2]->Draw("Lsame");
     }
- return; 
-  SaveCanvas(c,"HI/UCC","Facbreak_etatrg");
-  SaveCanvas(c1,"HI/UCC","Facbreak_eta");
+
+  SaveCanvas(c,"HI/UCC","Facbreak_etatrg_pt033_rereco_hfp");
+  SaveCanvas(c1,"HI/UCC","Facbreak_eta_pt033_rereco_hfp");
 
 /*
   TCanvas* c1 = new TCanvas("c1","c1",1200,450);
