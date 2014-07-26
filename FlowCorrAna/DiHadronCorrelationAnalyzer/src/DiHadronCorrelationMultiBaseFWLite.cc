@@ -241,7 +241,7 @@ void DiHadronCorrelationMultiBaseFWLite::Analyze(int ievt)
 
   hCentrality->Fill((double)hiCentrality);
 
-  if(cutPara.IsEventEngineer) hEventEngineer->Fill(GetEventEngineer());
+  if(cutPara.IsEventEngineer) hEventEngineer->Fill(GetEventEngineer(2));
 
   if(EPIndex>=0) 
   {
@@ -1694,7 +1694,7 @@ bool DiHadronCorrelationMultiBaseFWLite::SelectTriggerBit()
   return (accept && !veto);
 }
 
-double DiHadronCorrelationMultiBaseFWLite::GetEventEngineer()
+double DiHadronCorrelationMultiBaseFWLite::GetEventEngineer(int nn)
 {
    fwlite::Handle<CaloTowerCollection> calotowers;
    calotowers.getByLabel(event,"towerMaker");
@@ -1712,8 +1712,8 @@ double DiHadronCorrelationMultiBaseFWLite::GetEventEngineer()
      if(calotower.energy()<3) continue;
      if(fabs(eta)<3) continue;
 
-     q2x = q2x + et*cos(2*phi);
-     q2y = q2y + et*sin(2*phi);
+     q2x = q2x + et*cos(nn*phi);
+     q2y = q2y + et*sin(nn*phi);
      wsum = wsum + et;
    }
    q2x = q2x / wsum;

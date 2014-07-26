@@ -143,6 +143,7 @@ class DiHadronCorrelationMultiBase : public edm::EDAnalyzer {
    TH1D*  hPtCorrAll_ass;
    TH2D*  hdNdetadptCorrAll_ass;
    TH2D*  hdNdetadphiCorrAll_ass;
+   TH2D*  hEventEngineer;
    TH1D*  hCentrality;
    TH1D*  hHFTowerSum; 
    TH2D*  hHFvsNpixel;
@@ -154,6 +155,7 @@ class DiHadronCorrelationMultiBase : public edm::EDAnalyzer {
    TH2D*  hV0AP_masspipicut;
    TH1D*  hV0MassPiPi;
    TH1D*  hV0MassEE;
+   TH2D*  hInvMassVsPt_Signal;
 
    TH2D*  hdNdetadphi_trg[MAXPTTRGBINS];
    TH2D*  hdNdetadphi_ass[MAXPTASSBINS];
@@ -218,6 +220,7 @@ class DiHadronCorrelationMultiBase : public edm::EDAnalyzer {
    virtual void NormalizeHists() {};
    virtual void AssignTrgPtBins(double pt, double eta, double phi, double mass, double charge, double effweight);
    virtual void AssignAssPtBins(double pt, double eta, double phi, double mass, double charge, double effweight);
+   virtual double GetEventEngineer(const edm::Event& iEvent, const edm::EventSetup& iSetup, int nn);
    virtual int  GetCentralityBin(const edm::Event& iEvent, const edm::EventSetup& iSetup);
    virtual double GetDeltaEta(double eta_trg, double eta_ass);
    virtual double GetDeltaPhi(double phi_trg, double phi_ass);

@@ -58,5 +58,6 @@ epetadeco_ana = cms.EDAnalyzer('EPEtaDecoAnalyzer',
   IsPtWeightTrg = cms.bool(False),
   IsPtWeightAss = cms.bool(True),
   IsTrkQuality = cms.bool(True),
-  IsDebug = cms.bool(False)
+  IsDebug = cms.bool(False),
+  IsInvMass = cms.bool(False)
 )

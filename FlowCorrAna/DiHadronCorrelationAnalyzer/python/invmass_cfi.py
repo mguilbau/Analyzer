@@ -58,5 +58,7 @@ invmass_ana = cms.EDAnalyzer('InvMassAnalyzer',
   IsPtWeightTrg = cms.bool(False),
   IsPtWeightAss = cms.bool(False),
   IsTrkQuality = cms.bool(True),
-  IsDebug = cms.bool(False)
+  IsDebug = cms.bool(False),
+  IsInvMass = cms.bool(True),
+  IsEventEngineer = cms.bool(False)
 )

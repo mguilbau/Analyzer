@@ -31,7 +31,7 @@ void InvMassAnalyzer::beginRun(const edm::Run& iRun, const edm::EventSetup& iSet
 {
   hDeltaZvtx = theOutputs->make<TH1D>("deltazvtx",";#Delta z_{vtx}",200,-1.0,-1.0);
 
-  hInvMassVsPt_Signal = theOutputs->make<TH2D>("invmassvspt_signal",";p_{T}(GeV);Invariant Mass (GeV)",500,0,50,1500,0,3);
+//  hInvMassVsPt_Signal = theOutputs->make<TH2D>("invmassvspt_signal",";p_{T}(GeV);Invariant Mass (GeV)",500,0,50,1500,0,3);
   hInvMassVsPt_Background = theOutputs->make<TH2D>("invmassvspt_background",";p_{T}(GeV);Invariant Mass (GeV)",500,0,50,1500,0,3);
 
   DiHadronCorrelationMultiBase::beginRun(iRun, iSetup);
@@ -52,7 +52,7 @@ void InvMassAnalyzer::endRun(const edm::Run& iRun, const edm::EventSetup& iSetup
   for(unsigned int i=0;i<eventcorrArray.size();i++)
   {
     if( i % 100 == 0 ) cout << "Processing " << i << "th event" << endl;
-    FillHistsSignal(eventcorrArray[i]);
+//    FillHistsSignal(eventcorrArray[i]);
 
     unsigned int mixstart = i+1;
     unsigned int mixend = i+1+bkgFactor;
@@ -101,7 +101,7 @@ void InvMassAnalyzer::FillHistsSignal(const DiHadronCorrelationEvent& eventcorr)
 
       TLorentzVector pvector_total = pvector_ass + pvector_trg;
       double massInv = pvector_total.M();
-      hInvMassVsPt_Signal->Fill(pvector_total.Pt(),massInv);
+      hInvMassVsPt_Signal->Fill(pvector_total.Pt(),massInv-pvector_trg.M());
     }
   }
 }
@@ -127,7 +127,7 @@ void InvMassAnalyzer::FillHistsBackground(const DiHadronCorrelationEvent& eventc
 
       TLorentzVector pvector_total = pvector_ass + pvector_trg;
       double massInv = pvector_total.M();
-      hInvMassVsPt_Background->Fill(pvector_total.Pt(),massInv);
+      hInvMassVsPt_Background->Fill(pvector_total.Pt(),massInv-pvector_trg.M());
     }
   }
 }

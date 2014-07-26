@@ -101,6 +101,8 @@ DiHadronCorrelationMultiBase::DiHadronCorrelationMultiBase(const edm::ParameterS
   cutPara.IsPtWeightAss = iConfig.getParameter<bool>("IsPtWeightAss");   
   cutPara.IsTrkQuality = iConfig.getParameter<bool>("IsTrkQuality");
   cutPara.IsDebug = iConfig.getParameter<bool>("IsDebug");
+  cutPara.IsInvMass = iConfig.getParameter<bool>("IsInvMass");
+  cutPara.IsEventEngineer = iConfig.getParameter<bool>("IsEventEngineer");
 }
 
 //DiHadronCorrelationMultiBase::~DiHadronCorrelationMultiBase()
@@ -158,6 +160,9 @@ void DiHadronCorrelationMultiBase::beginRun(const edm::Run& iRun, const edm::Eve
     hHFvsZDC = theOutputs->make<TH2D>("hfvszdc",";HF Sum E_{T}; ZDC Sum E_{T};",600,0,6000,1000,0,80000);
 //    hNpart = theOutputs->make<TH1D>("Npart",";N_{part}",500,0,500);
   }
+  if(cutPara.IsInvMass) hInvMassVsPt_Signal = theOutputs->make<TH2D>("invmassvspt_signal",";p_{T}(GeV);Invariant Mass (GeV)",500,0,50,1500,0,3);
+  if(cutPara.IsEventEngineer) hEventEngineer = theOutputs->make<TH2D>("eventengineer",";centrality;q_{2}",200,0,200,1000,0,1.0);
+
 /*
   hV0InvMassVsPt = theOutputs->make<TH2D>("v0invmassvspt",";p_{T}(GeV);Invariant Mass (GeV)",200,0,20,1500,0,1.5);
   hV0InvMassVsPt_masspipicut = theOutputs->make<TH2D>("v0invmassvspt_masspipicut",";p_{T}(GeV);Invariant Mass (GeV)",200,0,20,1500,0,1.5);
@@ -237,6 +242,8 @@ void DiHadronCorrelationMultiBase::analyze(const edm::Event& iEvent, const edm::
 //  hNVtxVsNMult->Fill(nMult,nVertices);
   hMultCorrAll->Fill(nMultCorr,1.0/GetTrgWeight(nMult));
 
+  if(cutPara.IsEventEngineer) hEventEngineer->Fill(hiCentrality,GetEventEngineer(iEvent,iSetup,2));
+
   switch (trgID)
   {
      case kGenParticle:
@@ -295,6 +302,9 @@ void DiHadronCorrelationMultiBase::analyze(const edm::Event& iEvent, const edm::
        break;
   }
 
+  eventcorr->run = iEvent.id().run();
+  eventcorr->lumi = iEvent.luminosityBlock();
+  eventcorr->event = iEvent.id().event();
   eventcorr->nmult=nMult;
   eventcorr->centbin=hiCentrality;
   eventcorr->zvtx=zVtx;
@@ -371,7 +381,7 @@ void DiHadronCorrelationMultiBase::GetMult(const edm::Event& iEvent, const edm::
        if(cutPara.IsTrkQuality)
        {
          if(!trk.quality(reco::TrackBase::highPurity)) continue;
-         if(fabs(trk.ptError())/trk.pt()>0.10) continue;
+         if(fabs(trk.ptError())/trk.pt()>0.1) continue;
          if(fabs(dzvtx/dzerror) > 3.0) continue;
          if(fabs(dxyvtx/dxyerror) > 3.0) continue;
        }
@@ -470,8 +480,8 @@ void DiHadronCorrelationMultiBase::LoopTracks(const edm::Event& iEvent, const ed
      {
        if(!trk.quality(reco::TrackBase::highPurity)) continue;
        if(fabs(trk.ptError())/trk.pt()>0.1) continue;
-       if(fabs(dz/dzerror) > 3) continue;
-       if(fabs(dxy/dxyerror) > 3) continue;
+       if(fabs(dz/dzerror) > 3.0) continue;
+       if(fabs(dxy/dxyerror) > 3.0) continue;
      }  
 
      double effweight = GetEffWeight(eta,pt,0.5*(cutPara.zvtxmax+cutPara.zvtxmin),hiCentrality);
@@ -513,7 +523,7 @@ void DiHadronCorrelationMultiBase::LoopV0Candidates(const edm::Event& iEvent, co
 {
    edm::Handle<reco::VertexCompositeCandidateCollection > v0candidates;
    iEvent.getByLabel(cutPara.v0CandidateCollection.Data(),candtype.Data(), v0candidates);
-   if(!v0candidates->size()) { cout<<"Invalid or empty v0candidate collection!"<<endl; return; }
+   if(!v0candidates->size()) { return; }
 
    for(unsigned it=0; it<v0candidates->size(); ++it){
 
@@ -572,7 +582,8 @@ void DiHadronCorrelationMultiBase::LoopV0Candidates(const edm::Event& iEvent, co
      else alpha = (pll2-pll1)/(pll1+pll2);
 
      TVector3 dauvecsum(dauvec1+dauvec2);
-     double v0masspipi = sqrt((sqrt(0.13957*0.13957+pd1*pd1)+sqrt(0.13957*0.13957+pd2*pd2))*(sqrt(0.13957*0.13957+pd1*pd1)+sqrt(0.13957*0.13957+pd2*pd2))-dauvecsum.Mag2());
+//     double v0masspipi = sqrt((sqrt(0.13957*0.13957+pd1*pd1)+sqrt(0.13957*0.13957+pd2*pd2))*(sqrt(0.13957*0.13957+pd1*pd1)+sqrt(0.13957*0.13957+pd2*pd2))-dauvecsum.Mag2());
+     double v0masspipi = sqrt((sqrt(0.938272*0.938272+pd1*pd1)+sqrt(0.13957*0.13957+pd2*pd2))*(sqrt(0.938272*0.938272+pd1*pd1)+sqrt(0.13957*0.13957+pd2*pd2))-dauvecsum.Mag2());
      double v0massee = sqrt((sqrt(0.000511*0.000511+pd1*pd1)+sqrt(0.000511*0.000511+pd2*pd2))*(sqrt(0.000511*0.000511+pd1*pd1)+sqrt(0.000511*0.000511+pd2*pd2))-dauvecsum.Mag2());
 /*
      if(pt>1.0 && pt<2.0)
@@ -588,12 +599,55 @@ void DiHadronCorrelationMultiBase::LoopV0Candidates(const edm::Event& iEvent, co
 */
      if(! ((v0masspipi<(1.116-0.010) || v0masspipi>(1.116+0.010)) && v0massee > 0.015) ) continue;
 
-     if(istrg && fabs(mass-cutPara.mass_trg)>0.020) continue;
-     if(!istrg && fabs(mass-cutPara.mass_ass)>0.020) continue;
+     if(istrg && fabs(mass-cutPara.mass_trg)>0.01) continue;
+     if(!istrg && fabs(mass-cutPara.mass_ass)>0.01) continue;
 
      double effweight = 1.0;
      if(istrg) AssignTrgPtBins(pt,eta,phi,mass,charge,effweight);
      else AssignAssPtBins(pt,eta,phi,mass,charge,effweight);
+
+     if(cutPara.IsInvMass)
+     {
+       edm::Handle< reco::TrackCollection > tracks;
+       iEvent.getByLabel(cutPara.trgtrackCollection.Data(), tracks);
+       if( !tracks->size() ) { return; }
+   
+       for(unsigned it=0; it<tracks->size(); ++it){
+
+         const reco::Track & trk = (*tracks)[it];
+
+         double pt  = trk.pt();
+         if(pt<0.0001) continue;
+         double eta = trk.eta();
+         double phi = trk.phi();
+
+         // tracks' proximity to best vertex
+         math::XYZPoint bestvtx(xVtx,yVtx,zVtx);
+         double dz = trk.dz(bestvtx);
+         double dxy = trk.dxy(bestvtx);
+         double dzerror = sqrt(trk.dzError()*trk.dzError()+zVtxError*zVtxError);
+         double dxyerror = sqrt(trk.d0Error()*trk.d0Error()+xVtxError*yVtxError);
+         double charge = trk.charge();
+
+         // standard track quality cuts  
+         if(cutPara.IsTrkQuality)
+         {
+           if(!trk.quality(reco::TrackBase::highPurity)) continue;
+           if(fabs(trk.ptError())/trk.pt()>0.1) continue;
+           if(fabs(dz/dzerror) > 3.0) continue;
+           if(fabs(dxy/dxyerror) > 3.0) continue;
+         }  
+         if(pt<cutPara.ptassmin[0] || pt>cutPara.ptassmax[0] || eta<cutPara.etaassmin || eta>cutPara.etaassmax) continue;
+         TVector3 trk_vect(trk.px(),trk.py(),trk.pz());
+//         if(fabs(dauvec1.DeltaPhi(trk_vect))<0.03 && fabs(dauvec1.Eta()-trk_vect.Eta())<0.03) { cout<<"Daughter1: found a match!"<<endl; continue; }
+//         if(fabs(dauvec2.DeltaPhi(trk_vect))<0.03 && fabs(dauvec2.Eta()-trk_vect.Eta())<0.03) { cout<<"Daughter2: found a match!"<<endl; continue; }
+
+         TLorentzVector V0_vect(secvec,sqrt(mass*mass+secvec.Mag2())); 
+         TLorentzVector pion_vect(trk_vect,sqrt(trk.p()*trk.p()+0.139570*0.139570));  
+         TLorentzVector total_vect = V0_vect + pion_vect; 
+         hInvMassVsPt_Signal->Fill(total_vect.Pt(),total_vect.M()-V0_vect.M());
+       }
+     }
    }
 }
 
@@ -702,6 +756,37 @@ void DiHadronCorrelationMultiBase::AssignAssPtBins(double pt, double eta, double
        (eventcorr->effVect_ass[ptassbin]).push_back(effweight);
      }
    }
+}
+
+double DiHadronCorrelationMultiBase::GetEventEngineer(const edm::Event& iEvent, const edm::EventSetup& iSetup, int nn)
+{
+   edm::Handle<CaloTowerCollection> calotowers;
+   iEvent.getByLabel(std::string("towerMaker"), calotowers);
+   if(!calotowers->size()) { cout<<"Invalid or empty calotower collection!"<<endl; return -1; }
+
+   double q2x=0;
+   double q2y=0;
+   double wsum=0;
+   for(unsigned it=0; it<calotowers->size(); ++it){
+
+     const CaloTower & calotower = (*calotowers)[it];
+
+     double eta = calotower.eta();
+     double phi = calotower.phi();
+     double et  = calotower.et();
+
+     if(calotower.energy()<3) continue;
+     if(fabs(eta)<3) continue;
+
+     q2x = q2x + et*cos(nn*phi);
+     q2y = q2y + et*sin(nn*phi);
+     wsum = wsum + et;
+   }
+   q2x = q2x / wsum;
+   q2y = q2y / wsum;
+
+   double q2 = sqrt(q2x*q2x+q2y*q2y);
+   return q2;
 }
 
 int DiHadronCorrelationMultiBase::GetCentralityBin(const edm::Event& iEvent, const edm::EventSetup& iSetup)

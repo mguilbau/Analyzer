@@ -323,7 +323,7 @@ class DiHadronCorrelationMultiBaseFWLite{
    virtual void AssignTrgPtBins(double pt, double eta, double phi, double mass, double charge, double effweight);
    virtual void AssignAssPtBins(double pt, double eta, double phi, double mass, double charge, double effweight);
    virtual bool SelectTriggerBit();
-   virtual double GetEventEngineer();
+   virtual double GetEventEngineer(int nn);
    virtual int  GetCentralityBin();
    virtual double GetEventPlaneAngle(unsigned int index);
    virtual double GetDeltaEta(double eta_trg, double eta_ass);

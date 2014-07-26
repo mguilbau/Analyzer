@@ -25,6 +25,9 @@ class DiHadronCorrelationEvent {
    vector<double>    chgVect_ass[MAXPTASSBINS];
    vector<double>    effVect_ass[MAXPTASSBINS];
 //   double            multcorrVect_ass[MAXPTASSBINS];
+   int               run;
+   int               lumi;
+   int               event;
    int               nmult;
    int               centbin;
    double            zvtx;
@@ -33,6 +36,7 @@ class DiHadronCorrelationEvent {
    bool operator<(const DiHadronCorrelationEvent & b) const{
      if (centbin != b.centbin) return centbin < b.centbin;
      else if (zvtx != b.zvtx) return zvtx < b.zvtx;
+     else if (nmult != b.nmult) return nmult < b.nmult;
      else return false;
    }
 

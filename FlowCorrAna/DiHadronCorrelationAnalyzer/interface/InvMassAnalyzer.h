@@ -19,7 +19,7 @@ class InvMassAnalyzer : public DiHadronCorrelationMultiBase {
  protected:
 
    // histograms
-   TH2D* hInvMassVsPt_Signal;
+//   TH2D* hInvMassVsPt_Signal;
    TH2D* hInvMassVsPt_Background;
    TH1D* hDeltaZvtx;
 
