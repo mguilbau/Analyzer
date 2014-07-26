@@ -269,14 +269,50 @@ void eff_count()
   hEffvsPt_ks[6]->SetName("EffCountPt_ks_7");
   hEffvsPt_la[6]->SetName("EffCountPt_la_7");
 
-/*
+
   TCanvas* c1 = new TCanvas("c1","c1",900,450);
   c1->Divide(2,1);
   c1->cd(1);
-  hEffvsPt_ks[6]->Draw("PE");
+  hEffvsPt_ks[0]->Draw("PE");
   c1->cd(2);
-  hEffvsPt_la[6]->Draw("PE");
-*/
+  hEffvsPt_la[0]->Draw("PE");
+
+  TCanvas* c2 = new TCanvas("c2","c2",900,450);
+  c2->Divide(2,1);
+  c2->cd(1);
+  hEffvsPt_ks[1]->Draw("PE");
+  c2->cd(2);
+  hEffvsPt_la[1]->Draw("PE");
+
+  TCanvas* c3 = new TCanvas("c3","c3",900,450);
+  c3->Divide(2,1);
+  c3->cd(1);
+  hEffvsPt_ks[2]->Draw("PE");
+  c3->cd(2);
+  hEffvsPt_la[2]->Draw("PE");
+
+  TCanvas* c4 = new TCanvas("c4","c4",900,450);
+  c4->Divide(2,1);
+  c4->cd(1);
+  hEffvsPt_ks[3]->Draw("PE");
+  c4->cd(2);
+  hEffvsPt_la[3]->Draw("PE");
+
+  TCanvas* c5 = new TCanvas("c5","c5",900,450);
+  c5->Divide(2,1);
+  c5->cd(1);
+  hEffvsPt_ks[4]->Draw("PE");
+  c5->cd(2);
+  hEffvsPt_la[4]->Draw("PE");
+
+  TCanvas* c6 = new TCanvas("c6","c6",900,450);
+  c6->Divide(2,1);
+  c6->cd(1);
+  hEffvsPt_ks[5]->Draw("PE");
+  c6->cd(2);
+  hEffvsPt_la[5]->Draw("PE");
+
+return;
   TFile* fout = new TFile("V0Eff_counting_all.root","recreate");
   hYieldReco_la_ratio->Write();
   hYieldReco_ks_ratio->Write();
