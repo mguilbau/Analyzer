@@ -43,17 +43,6 @@ process.load("SimTracker.TrackAssociation.TrackAssociatorByChi2_cfi")
 process.load("RiceHIG.V0Analysis.v0selector_cff")
 process.load("RiceHIG.V0Analysis.v0validator_cff")
 
-process.generalV0CandidatesNew = process.generalV0Candidates.clone (
-    tkNhitsCut = cms.int32(0),
-    tkChi2Cut = cms.double(7.0),
-    dauTransImpactSigCut = cms.double(0.0),
-    dauLongImpactSigCut = cms.double(0.0),
-    xiVtxSignificance3DCut = cms.double(0.0),
-    xiVtxSignificance2DCut = cms.double(0.0),
-    vtxSignificance2DCut = cms.double(0.0),
-    vtxSignificance3DCut = cms.double(4.0)
-)   
-
 process.v0Validator.kShortCollection = cms.InputTag('selectV0CandidatesNewkshort:Kshort')
 process.v0Validator.lambdaCollection = cms.InputTag('selectV0CandidatesNewlambda:Lambda')
 process.v0Validator.isMatchByHitsOrChi2 = cms.bool(True)
@@ -61,14 +50,6 @@ process.v0Validator.isMergedTruth = cms.bool(False)
 
 process.selectV0CandidatesNewlambda.v0CollName = cms.string("generalV0CandidatesNew")
 process.selectV0CandidatesNewkshort.v0CollName = cms.string("generalV0CandidatesNew")
-process.selectV0CandidatesNewlambda.dxySigCut1 = cms.double(0.0)
-process.selectV0CandidatesNewlambda.dxySigCut2 = cms.double(0.0)
-process.selectV0CandidatesNewlambda.dzSigCut1 = cms.double(0.0)
-process.selectV0CandidatesNewlambda.dzSigCut2 = cms.double(0.0)
-process.selectV0CandidatesNewkshort.dxySigCut1 = cms.double(0.0)
-process.selectV0CandidatesNewkshort.dxySigCut2 = cms.double(0.0)
-process.selectV0CandidatesNewkshort.dzSigCut1 = cms.double(0.0)
-process.selectV0CandidatesNewkshort.dzSigCut2 = cms.double(0.0)
 
 process.options = cms.untracked.PSet(
     wantSummary = cms.untracked.bool(True)
@@ -81,7 +62,7 @@ process.TFileService = cms.Service("TFileService",
 process.TrackAssociatorByHits.Cut_RecoToSim = cms.double(0.5)
 process.TrackAssociatorByChi2ESProducer.chi2cut = cms.double(25.0)
 
-process.v0validation = cms.Sequence(process.generalV0CandidatesNew*process.selectV0CandidatesNewlambda*process.selectV0CandidatesNewkshort*process.v0Validator)
+process.v0validation = cms.Sequence(process.selectV0CandidatesNewlambda*process.selectV0CandidatesNewkshort*process.v0Validator)
 
 process.p = cms.Path(process.v0validation)
 
