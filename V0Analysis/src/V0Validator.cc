@@ -59,11 +59,12 @@ void V0Validator::beginRun(const edm::Run& iRun, const edm::EventSetup& iSetup) 
   const double small = 1e-3;
   double pt;
   for(pt =   0  ; pt <   2.0-small; pt +=  0.2 ) ptBins.push_back(pt); 
-  for(pt =   2.0; pt <   4.0-small; pt +=  0.4 ) ptBins.push_back(pt); 
-  for(pt =   4.0; pt <   6.4-small; pt +=  0.8 ) ptBins.push_back(pt);
-  for(pt =   6.4; pt <   8.0-small; pt +=  1.6 ) ptBins.push_back(pt);  
-  ptBins.push_back(8.0);
-  ptBins.push_back(12.0);
+  for(pt =   2.0; pt <   3.2-small; pt +=  0.6 ) ptBins.push_back(pt); 
+  for(pt =   3.2; pt <   4.2-small; pt +=  1.0 ) ptBins.push_back(pt);
+  for(pt =   4.2; pt <   6.0-small; pt +=  1.8 ) ptBins.push_back(pt);
+  for(pt =   6.0; pt <   9.0-small; pt +=  3.0 ) ptBins.push_back(pt);  
+  ptBins.push_back(9.0);
+  ptBins.push_back(15.0);
 
   double etaMin   = -2.0;
   double etaMax   =  2.0;
