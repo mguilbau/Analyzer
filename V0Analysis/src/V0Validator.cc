@@ -58,17 +58,17 @@ void V0Validator::beginRun(const edm::Run& iRun, const edm::EventSetup& iSetup) 
 
   const double small = 1e-3;
   double pt;
-  for(pt =   0  ; pt <   3.0-small; pt +=  0.2) ptBins.push_back(pt); 
-  for(pt =   3.0; pt <   5.0-small; pt +=  0.4 ) ptBins.push_back(pt); 
-  for(pt =   5.0; pt <   5.6-small; pt +=  0.6 ) ptBins.push_back(pt);
-  for(pt =   5.6; pt <   6.6-small; pt +=  1.0 ) ptBins.push_back(pt); 
-  for(pt =   6.6; pt <   9.0-small; pt +=  2.4 ) ptBins.push_back(pt);  
+  for(pt =   0  ; pt <   2.0-small; pt +=  0.2 ) ptBins.push_back(pt); 
+  for(pt =   2.0; pt <   3.2-small; pt +=  0.6 ) ptBins.push_back(pt); 
+  for(pt =   3.2; pt <   4.2-small; pt +=  1.0 ) ptBins.push_back(pt);
+  for(pt =   4.2; pt <   6.0-small; pt +=  1.8 ) ptBins.push_back(pt);
+  for(pt =   6.0; pt <   9.0-small; pt +=  3.0 ) ptBins.push_back(pt);  
   ptBins.push_back(9.0);
-  ptBins.push_back(12.0);
+  ptBins.push_back(15.0);
 
-  double etaMin   = -2.4;
-  double etaMax   =  2.4;
-  double etaWidth =  0.8;
+  double etaMin   = -2.0;
+  double etaMax   =  2.0;
+  double etaWidth =  1.0;
   for(double eta = etaMin; eta < etaMax + etaWidth/2; eta += etaWidth)
     etaBins.push_back(eta);
 
@@ -416,12 +416,10 @@ void V0Validator::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetu
 
       ksMassAll->Fill( mass );
       ksMassPtAll->Fill( K0sCandpT, mass );
-      if(K0sCandEta>-2.4 && K0sCandEta<-1.6) ksMassPtAllEta1->Fill( K0sCandpT, mass );
-      if(K0sCandEta>-1.6 && K0sCandEta<-0.8) ksMassPtAllEta2->Fill( K0sCandpT, mass );
-      if(K0sCandEta>-0.8 && K0sCandEta<0.0) ksMassPtAllEta3->Fill( K0sCandpT, mass );
-      if(K0sCandEta>0.0 && K0sCandEta<0.8) ksMassPtAllEta4->Fill( K0sCandpT, mass );
-      if(K0sCandEta>0.8 && K0sCandEta<1.6) ksMassPtAllEta5->Fill( K0sCandpT, mass );
-      if(K0sCandEta>1.6 && K0sCandEta<2.4) ksMassPtAllEta6->Fill( K0sCandpT, mass );
+      if(K0sCandEta>-2.0 && K0sCandEta<-1.0) ksMassPtAllEta1->Fill( K0sCandpT, mass );
+      if(K0sCandEta>-1.0 && K0sCandEta<0.0) ksMassPtAllEta2->Fill( K0sCandpT, mass );
+      if(K0sCandEta>0.0 && K0sCandEta<1.0) ksMassPtAllEta3->Fill( K0sCandpT, mass );
+      if(K0sCandEta>1.0 && K0sCandEta<2.0) ksMassPtAllEta4->Fill( K0sCandpT, mass );
     }
   }
   if ( lambdaCollection.isValid() && lambdaCollection->size() > 0 ) {
@@ -436,12 +434,10 @@ void V0Validator::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetu
 
       lamMassAll->Fill( mass );
       lamMassPtAll->Fill( LamCandpT, mass );
-      if(LamCandEta>-2.4 && LamCandEta<-1.6) lamMassPtAllEta1->Fill( LamCandpT, mass );
-      if(LamCandEta>-1.6 && LamCandEta<-0.8) lamMassPtAllEta2->Fill( LamCandpT, mass );
-      if(LamCandEta>-0.8 && LamCandEta<0.0) lamMassPtAllEta3->Fill( LamCandpT, mass );
-      if(LamCandEta>0.0 && LamCandEta<0.8) lamMassPtAllEta4->Fill( LamCandpT, mass );
-      if(LamCandEta>0.8 && LamCandEta<1.6) lamMassPtAllEta5->Fill( LamCandpT, mass );
-      if(LamCandEta>1.6 && LamCandEta<2.4) lamMassPtAllEta6->Fill( LamCandpT, mass );
+      if(LamCandEta>-2.0 && LamCandEta<-1.0) lamMassPtAllEta1->Fill( LamCandpT, mass );
+      if(LamCandEta>-1.0 && LamCandEta<0.0) lamMassPtAllEta2->Fill( LamCandpT, mass );
+      if(LamCandEta>0.0 && LamCandEta<1.0) lamMassPtAllEta3->Fill( LamCandpT, mass );
+      if(LamCandEta>1.0 && LamCandEta<2.0) lamMassPtAllEta4->Fill( LamCandpT, mass );
     }
   }
 
