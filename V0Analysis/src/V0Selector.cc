@@ -40,6 +40,8 @@ V0Selector::V0Selector(const edm::ParameterSet& iConfig)
   v0IDName_       = iConfig.getParameter<string>("v0IDName");
   etaCutMin_      = iConfig.getParameter<double>("etaCutMin");
   etaCutMax_      = iConfig.getParameter<double>("etaCutMax");
+  nHitCut1_       = iConfig.getParameter<double>("nHitCut1");
+  nHitCut2_       = iConfig.getParameter<double>("nHitCut2");
   dxySigCut1_     = iConfig.getParameter<double>("dxySigCut1");
   dxySigCut2_     = iConfig.getParameter<double>("dxySigCut2");
   dzSigCut1_      = iConfig.getParameter<double>("dzSigCut1");
@@ -116,12 +118,14 @@ void V0Selector::produce(edm::Event& iEvent, const edm::EventSetup& iSetup) {
        double nhit1 = dau1->numberOfValidHits();
        double nhit2 = dau2->numberOfValidHits();
 
+       if(nhit1 <= nHitCut1_ || nhit2 <= nHitCut2_) continue;
+
        //algo
        double algo1 = dau1->algo();
        double algo2 = dau2->algo();
 
        //dau eta
-       double eta1 = dau1->eta();
+
        double eta2 = dau2->eta();
 
        //DCA

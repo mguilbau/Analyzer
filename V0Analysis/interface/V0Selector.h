@@ -69,6 +69,7 @@ private:
   edm::InputTag vertexCollName_;
   std::string v0CollName_;
   std::string v0IDName_;
+  int nHitCut1_,nHitCut2_;
   double etaCutMin_,etaCutMax_;
   double dxySigCut1_,dxySigCut2_,dzSigCut1_,dzSigCut2_;
   double vtxChi2Cut_;
