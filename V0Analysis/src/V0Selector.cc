@@ -193,11 +193,18 @@ void V0Selector::produce(edm::Event& iEvent, const edm::EventSetup& iSetup) {
 
        if(v0IDName_ == "Kshort")
        {
-         double massd2=piMass;
-         double massd1=protonMass;
+         double massd1=piMass;
+         double massd2=protonMass;
          double energyd1 = sqrt(massd1*massd1+pd1*pd1);
          double energyd2 = sqrt(massd2*massd2+pd2*pd2);
          double invmass = sqrt((energyd1+energyd2)*(energyd1+energyd2)-dauvecsum.Mag2());
+         if(fabs(invmass-lambdaMass)<misIDMassCut_) continue;
+
+         massd2=piMass;
+         massd1=protonMass;
+         energyd1 = sqrt(massd1*massd1+pd1*pd1);
+         energyd2 = sqrt(massd2*massd2+pd2*pd2);
+         invmass = sqrt((energyd1+energyd2)*(energyd1+energyd2)-dauvecsum.Mag2());
          if(fabs(invmass-lambdaMass)<misIDMassCut_) continue;
        }
 
