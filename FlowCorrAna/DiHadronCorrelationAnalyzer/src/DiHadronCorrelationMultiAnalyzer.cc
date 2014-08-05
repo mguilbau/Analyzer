@@ -24,8 +24,8 @@ DiHadronCorrelationMultiAnalyzer::DiHadronCorrelationMultiAnalyzer(const edm::Pa
   bkgTrgEffWeight(0),
   bkgAssEffWeight(0)
 {
-  cutPara.IsSymmetrize=0;
-  cutPara.IsHarmonics=0;
+  cutPara.IsSymmetrize=1;
+  cutPara.IsHarmonics = iConfig.getParameter<bool>("IsHarmonics");
   cutPara.IsHarmonicsEta1Eta2=0;
   bkgFactor = 10; 
 }
@@ -38,7 +38,7 @@ void DiHadronCorrelationMultiAnalyzer::beginRun(const edm::Run& iRun, const edm:
   double etabinwidth = (cutPara.etatrgmax-cutPara.etaassmin-cutPara.etatrgmin+cutPara.etaassmax)/NEtaBins;
   double phibinwidth = 2*PI/NPhiBins;
 
-  hDeltaZvtx = theOutputs->make<TH1D>("deltazvtx",";#Delta z_{vtx}",200,-1.0,-1.0);
+  hDeltaZvtx = theOutputs->make<TH1D>("deltazvtx",";#Delta z_{vtx}",200,-1.0,1.0);
 
   if(cutPara.IsHarmonicsEta1Eta2)
   {
@@ -68,12 +68,12 @@ void DiHadronCorrelationMultiAnalyzer::beginRun(const edm::Run& iRun, const edm:
 
       if(cutPara.IsHarmonics)
       {
-        hSignalCosn[itrg][jass] = theOutputs->make<TH2D>(Form("signalcosn_trg%d_ass%d",itrg,jass),";cos(n#Delta#phi);n",500,-1.0,1.0,15,0.5,15.5);
-        hBackgroundCosn[itrg][jass] = theOutputs->make<TH2D>(Form("backgroundcosn_trg%d_ass%d",itrg,jass),";cos(n#Delta#phi);n",500,-1.0,1.0,15,0.5,15.5);
-        hSignalSinn[itrg][jass] = theOutputs->make<TH2D>(Form("signalsinn_trg%d_ass%d",itrg,jass),";sin(n#Delta#phi);n",500,-1.0,1.0,15,0.5,15.5);
-        hBackgroundSinn[itrg][jass] = theOutputs->make<TH2D>(Form("backgroundsinn_trg%d_ass%d",itrg,jass),";sin(n#Delta#phi);n",500,-1.0,1.0,15,0.5,15.5);
-        hSignalRhon[itrg][jass] = theOutputs->make<TH2D>(Form("signalrhon_trg%d_ass%d",itrg,jass),";#rho;n",500,0.0,2.0,15,0.5,15.5);
-        hBackgroundRhon[itrg][jass] = theOutputs->make<TH2D>(Form("backgroundrhon_trg%d_ass%d",itrg,jass),";#rho;n",500,0.0,2.0,15,0.5,15.5);
+        hSignalCosn[itrg][jass] = theOutputs->make<TH2D>(Form("signalcosn_trg%d_ass%d",itrg,jass),";cos(n#Delta#phi);n",50000,-1.0,1.0,3,1.5,4.5);
+        hBackgroundCosn[itrg][jass] = theOutputs->make<TH2D>(Form("backgroundcosn_trg%d_ass%d",itrg,jass),";cos(n#Delta#phi);n",50000,-1.0,1.0,3,1.5,4.5);
+        hSignalSinn[itrg][jass] = theOutputs->make<TH2D>(Form("signalsinn_trg%d_ass%d",itrg,jass),";sin(n#Delta#phi);n",50000,-1.0,1.0,3,1.5,4.5);
+        hBackgroundSinn[itrg][jass] = theOutputs->make<TH2D>(Form("backgroundsinn_trg%d_ass%d",itrg,jass),";sin(n#Delta#phi);n",50000,-1.0,1.0,3,1.5,4.5);
+        hSignalRhon[itrg][jass] = theOutputs->make<TH2D>(Form("signalrhon_trg%d_ass%d",itrg,jass),";#rho;n",50000,-1.0,1.0,3,1.5,4.5);
+        hBackgroundRhon[itrg][jass] = theOutputs->make<TH2D>(Form("backgroundrhon_trg%d_ass%d",itrg,jass),";#rho;n",50000,-1.0,1.0,3,1.5,4.5);
       }
 
       hSignal2PEPCorrelator[itrg][jass] = theOutputs->make<TH1D>(Form("signal2pepcorrelator_trg%d_ass%d",itrg,jass),";cos(#phi_{#alpha}-3#phi_{#beta}+2#Psi_{2})",600,-0.6,0.6);
@@ -223,7 +223,7 @@ void DiHadronCorrelationMultiAnalyzer::FillHistsSignal(const DiHadronCorrelation
           // Direct calculation of Fourier harmonics for pairs
           if(cutPara.IsHarmonics && fabs(deltaEta)>2) 
           {
-            for(int nn = 0; nn<5; nn++)
+            for(int nn = 1; nn<4; nn++)
             {
 //              if(nn==0) effweight = effweight * pt_ass * pt_trg / (pt_ass-ptMean2_ass[jass]/ptMean_ass[jass]) / (pt_trg-ptMean2_trg[itrg]/ptMean_trg[itrg])
               sumcosn[nn] = sumcosn[nn] + cos((nn+1)*fabs(deltaPhi))/effweight;
@@ -239,7 +239,7 @@ void DiHadronCorrelationMultiAnalyzer::FillHistsSignal(const DiHadronCorrelation
             int ieta2 = (int)(eta_ass/0.3)+8;
             if(eta_trg<0) ieta1--;
             if(eta_ass<0) ieta2--;
-            for(int nn = 0; nn<5; nn++)
+            for(int nn = 1; nn<4; nn++)
             {
               sumcosn_eta1eta2[ieta1][ieta2][nn] = sumcosn_eta1eta2[ieta1][ieta2][nn] + cos((nn+1)*fabs(deltaPhi))/effweight;                             
               npairs_eta1eta2[ieta1][ieta2][nn] += 1.0/effweight;
@@ -275,7 +275,7 @@ void DiHadronCorrelationMultiAnalyzer::FillHistsSignal(const DiHadronCorrelation
 
       if(cutPara.IsHarmonics) 
       { 
-        for(int nn = 0; nn<5; nn++) 
+        for(int nn = 1; nn<4; nn++) 
         {
           if(!npairs[nn]) continue;
           sumcosn[nn]=sumcosn[nn]/npairs[nn];
@@ -290,7 +290,7 @@ void DiHadronCorrelationMultiAnalyzer::FillHistsSignal(const DiHadronCorrelation
       {
         for(int ieta1=0; ieta1<16; ieta1++)
           for(int ieta2=0; ieta2<16; ieta2++)
-            for(int nn = 0; nn<5; nn++)
+            for(int nn = 1; nn<4; nn++)
             {
                 if(!npairs_eta1eta2[ieta1][ieta2][nn]) continue;
                 sumcosn_eta1eta2[ieta1][ieta2][nn]=sumcosn_eta1eta2[ieta1][ieta2][nn]/npairs_eta1eta2[ieta1][ieta2][nn];
@@ -354,7 +354,7 @@ void DiHadronCorrelationMultiAnalyzer::FillHistsBackground(const DiHadronCorrela
           // Direct calculation of Fourier harmonics for pairs
           if(cutPara.IsHarmonics && fabs(deltaEta)>2) 
           {
-            for(int nn = 0; nn<5; nn++)
+            for(int nn = 1; nn<4; nn++)
             {
 //              if(nn==0) effweight = effweight * pt_ass * pt_trg / (pt_ass-ptMean2_ass[jass]/ptMean_ass[jass]) / (pt_trg-ptMean2_trg[itrg]/ptMean_trg[itrg]);
               sumcosn[nn] = sumcosn[nn] + cos((nn+1)*fabs(deltaPhi))/effweight;
@@ -369,7 +369,7 @@ void DiHadronCorrelationMultiAnalyzer::FillHistsBackground(const DiHadronCorrela
             int ieta2 = (int)(eta_ass/0.3)+8;
             if(eta_trg<0) ieta1--;
             if(eta_ass<0) ieta2--;
-            for(int nn = 0; nn<5; nn++)
+            for(int nn = 1; nn<4; nn++)
             {
               sumcosn_eta1eta2[ieta1][ieta2][nn] = sumcosn_eta1eta2[ieta1][ieta2][nn] + cos((nn+1)*fabs(deltaPhi))/effweight;
               npairs_eta1eta2[ieta1][ieta2][nn] += 1.0/effweight;
@@ -404,7 +404,7 @@ void DiHadronCorrelationMultiAnalyzer::FillHistsBackground(const DiHadronCorrela
 
       if(cutPara.IsHarmonics)
       {
-        for(int nn = 0; nn<5; nn++)
+        for(int nn = 1; nn<4; nn++)
         {
           if(!npairs[nn]) continue;
           sumcosn[nn]=sumcosn[nn]/npairs[nn];
@@ -419,7 +419,7 @@ void DiHadronCorrelationMultiAnalyzer::FillHistsBackground(const DiHadronCorrela
       {
         for(int ieta1=0; ieta1<16; ieta1++)
           for(int ieta2=0; ieta2<16; ieta2++)
-            for(int nn = 0; nn<5; nn++)
+            for(int nn = 1; nn<4; nn++)
             {
                 if(!npairs_eta1eta2[ieta1][ieta2][nn]) continue;
                 sumcosn_eta1eta2[ieta1][ieta2][nn]=sumcosn_eta1eta2[ieta1][ieta2][nn]/npairs_eta1eta2[ieta1][ieta2][nn];

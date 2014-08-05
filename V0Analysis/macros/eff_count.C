@@ -3,13 +3,16 @@ void eff_count()
   using namespace RooFit;
 
   TFile* f;
-  f = new TFile("/net/hisrv0001/home/davidlw/scratch1/v0validation_V0EffCountAnav1_all_v6.root");
+  f = new TFile("/net/hisrv0001/home/davidlw/scratch1/v0validation/v0validation_V0EffCountAnav1_10M_v12.root");
 //  f = new TFile("/net/hisrv0001/home/davidlw/scratch1/v0validation_V0EffMatchAna_EPOSall_v14.root");
 //  f = new TFile("/net/hisrv0001/home/davidlw/scratch1/v0validation_V0EffMatchAna_v12.root");
-
+/*
   double ptbins[] = {0.0,0.2,0.4,0.6,0.8,1.0,1.2,1.4,1.6,1.8,2.0,2.2,2.4,2.6,2.8,3.0,3.4,3.8,4.2,4.6,5.0,5.6,6.6,9.0,12.0};
   int nptbins[] = {0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,34,38,42,46,50,56,66,90,120};
   double ptbinwidth[] = {0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.4,0.4,0.4,0.4,0.4,0.6,1.0,2.4,3.0};
+*/
+  double ptbins[] = {0.0,0.2,0.4,0.6,0.8,1.0,1.2,1.4,1.6,1.8,2.0,2.6,3.2,4.2,6.0,9.0};
+  double ptbinwidth[] = {0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.2,0.6,0.6,1.0,1.8,3.0};
 
   TH2D* ksmassptall[7];
   TH2D* lamassptall[7];
@@ -70,26 +73,26 @@ void eff_count()
   TLine* l1_ks[7][30];
   TLine* l2_ks[7][30];
 
-  for(int i=0;i<24;i++)
+  for(int i=0;i<15;i++)
   {
    for(int j=0;j<7;j++)
    {
     int nminpt = ksmassptall[j]->GetXaxis()->FindBin(ptbins[i]+0.0001);
     int nmaxpt = ksmassptall[j]->GetXaxis()->FindBin(ptbins[i+1]-0.0001);
    
-//    ksmassall[j][i] = ksmassptall[j]->ProjectionY(Form("ksMassAllEta%d_%d",j+1,i),nminpt,nmaxpt,"e");
-//    lamassall[j][i] = lamassptall[j]->ProjectionY(Form("lamMassAllEta%d_%d",j+1,i),nminpt,nmaxpt,"e");
+    ksmassall[j][i] = ksmassptall[j]->ProjectionY(Form("ksMassAllEta%d_%d",j+1,i),nminpt,nmaxpt,"e");
+    lamassall[j][i] = lamassptall[j]->ProjectionY(Form("lamMassAllEta%d_%d",j+1,i),nminpt,nmaxpt,"e");
 
-    ksmassall[j][i] = ksmassptall[j]->ProjectionY(Form("ksMassAllEta%d_%d",j+1,i),nptbins[i]+1,nptbins[i+1],"e");
-    lamassall[j][i] = lamassptall[j]->ProjectionY(Form("lamMassAllEta%d_%d",j+1,i),nptbins[i]+1,nptbins[i+1],"e");
+//    ksmassall[j][i] = ksmassptall[j]->ProjectionY(Form("ksMassAllEta%d_%d",j+1,i),nptbins[i]+1,nptbins[i+1],"e");
+//    lamassall[j][i] = lamassptall[j]->ProjectionY(Form("lamMassAllEta%d_%d",j+1,i),nptbins[i]+1,nptbins[i+1],"e");
 
-    x_la[j][i] = new RooRealVar(Form("x_la_eta%d_%d",j+1,i),"mass",1.1,1.14);
+    x_la[j][i] = new RooRealVar(Form("x_la_eta%d_%d",j+1,i),"mass",1.,1.2);
     data_la[j][i] = new RooDataHist(Form("data_la_eta%d_%d",j+1,i),"dataset",*x_la[j][i],lamassall[j][i]);
     xframe_la[j][i] = x_la[j][i]->frame(80);
     data_la[j][i]->plotOn(xframe_la[j][i],Name(Form("data_la_eta%d_%d",j+1,i)));
     mean_la[j][i] = new RooRealVar(Form("mean_la_eta%d_%d",j+1,i),"mean",1.115,1.11,1.12);
-    sigma1_la[j][i] = new RooRealVar(Form("sigma1_la_eta%d_%d",j+1,i),"sigma1",0.005,0.001,0.008);
-    sigma2_la[j][i] = new RooRealVar(Form("sigma2_la_eta%d_%d",j+1,i),"sigma2",0.005,0.001,0.008);
+    sigma1_la[j][i] = new RooRealVar(Form("sigma1_la_eta%d_%d",j+1,i),"sigma1",0.003,0.001,0.01);
+    sigma2_la[j][i] = new RooRealVar(Form("sigma2_la_eta%d_%d",j+1,i),"sigma2",0.003,0.001,0.01);
     sig1_la[j][i] = new RooRealVar(Form("sig1_la_eta%d_%d",j+1,i),"signal1",10,0,10000000);
     sig2_la[j][i] = new RooRealVar(Form("sig2_la_eta%d_%d",j+1,i),"signal2",10,0,10000000);
     a_la[j][i] = new RooRealVar(Form("a_la_eta%d_%d",j+1,i),"a",0,-100000,100000);
@@ -101,9 +104,12 @@ void eff_count()
     poly_la[j][i] = new RooPolynomial(Form("poly_la_eta%d_%d",j+1,i),"poly",*x_la[j][i],RooArgList(*a_la[j][i],*b_la[j][i],*cp_la[j][i],*d_la[j][i]));
     polysig_la[j][i] = new RooRealVar(Form("polysig_la_eta%d_%d",j+1,i),"polysig",10,0,10000000);
     sum_la[j][i] = new RooAddPdf(Form("sum_la_eta%d_%d",j+1,i),"sum",RooArgList(*gaus1_la[j][i],*gaus2_la[j][i],*poly_la[j][i]),RooArgList(*sig1_la[j][i],*sig2_la[j][i],*polysig_la[j][i]));
-    sum_la[j][i]->fitTo(*data_la[j][i]);
-    sum_la[j][i]->fitTo(*data_la[j][i]);
-    sum_la[j][i]->fitTo(*data_la[j][i]);
+
+
+    x_la[j][i]->setRange("cut",1.10,1.14);
+    sum_la[j][i]->fitTo(*data_la[j][i],Range("cut"));
+    sum_la[j][i]->fitTo(*data_la[j][i],Range("cut"));
+    sum_la[j][i]->fitTo(*data_la[j][i],Range("cut"));
     sum_la[j][i]->plotOn(xframe_la[j][i],Name(Form("sum_la_eta%d_%d",j+1,i)));
     sum_la[j][i]->plotOn(xframe_la[j][i],Components(*poly_la[j][i]),LineStyle(kDashed));
 
@@ -117,8 +123,8 @@ void eff_count()
     double sigwf1  = sigf1 /(sigf1 +sigf2 );
     double sigwf2  = sigf2 /(sigf1 +sigf2 );
     double sigmaf  = sqrt(sigmaf1 **2*sigwf1  + sigmaf2 **2*sigwf2 );
-    double massmin  = meanf  - 2*sigmaf ;
-    double massmax  = meanf  + 2*sigmaf ;
+    double massmin  = meanf  - 5*sigmaf ;
+    double massmax  = meanf  + 5*sigmaf ;
     int nmin = lamassall[j][i]->GetXaxis()->FindBin(massmin);
     int nmax = lamassall[j][i]->GetXaxis()->FindBin(massmax);
     double totyhe = 0;
@@ -136,32 +142,24 @@ void eff_count()
     double isig2f = isig2->getVal();
     double bkgy = ibkgf*bkgf;
     double bkgye = ibkgf*bkgfe;
-//    double sigyh  = totyh - bkgy;
-    double sigyh  = sigf1+sigf2;
+    double sigyh  = totyh - bkgy;
+//    double sigyh  = sigf1+sigf2;
 
     double sigyhe = sqrt(totyhe*totyhe+bkgye*bkgye); 
     double sigy1  = isig1f *sigf1 ;
     double sigy2  = isig2f *sigf2 ;
     double sigy  = sigy1  + sigy2 ;
 
-    if(i<=1)
-    {
-      hYieldReco_la->SetBinContent(j+1,i+1,0);
-      hYieldReco_la->SetBinError(j+1,i+1,0);
-    }
-    else
-    {
-      hYieldReco_la->SetBinContent(j+1,i+1,sigyh);
-      hYieldReco_la->SetBinError(j+1,i+1,sigyhe);
-    }
+    hYieldReco_la->SetBinContent(j+1,i+1,sigyh);
+    hYieldReco_la->SetBinError(j+1,i+1,sigyhe);
 
     x_ks[j][i] = new RooRealVar(Form("x_ks_eta%d_%d",j+1,i),"mass",0.44,0.56);
     data_ks[j][i] = new RooDataHist(Form("data_ks_eta%d_%d",j+1,i),"dataset",*x_ks[j][i],ksmassall[j][i]);
     xframe_ks[j][i] = x_ks[j][i]->frame(80);
     data_ks[j][i]->plotOn(xframe_ks[j][i],Name(Form("data_ks_eta%d_%d",j+1,i)));
     mean_ks[j][i] = new RooRealVar(Form("mean_ks_eta%d_%d",j+1,i),"mean",0.50,0.49,0.51);
-    sigma1_ks[j][i] = new RooRealVar(Form("sigma1_ks_eta%d_%d",j+1,i),"sigma1",0.01,0.001,0.02);
-    sigma2_ks[j][i] = new RooRealVar(Form("sigma2_ks_eta%d_%d",j+1,i),"sigma2",0.01,0.001,0.02);
+    sigma1_ks[j][i] = new RooRealVar(Form("sigma1_ks_eta%d_%d",j+1,i),"sigma1",0.003,0.001,0.01);
+    sigma2_ks[j][i] = new RooRealVar(Form("sigma2_ks_eta%d_%d",j+1,i),"sigma2",0.003,0.001,0.01);
     sig1_ks[j][i] = new RooRealVar(Form("sig1_ks_eta%d_%d",j+1,i),"signal1",10,0,10000000);
     sig2_ks[j][i] = new RooRealVar(Form("sig2_ks_eta%d_%d",j+1,i),"signal2",10,0,10000000);
     a_ks[j][i] = new RooRealVar(Form("a_ks_eta%d_%d",j+1,i),"a",0,-100000,100000);
@@ -173,9 +171,14 @@ void eff_count()
     poly_ks[j][i] = new RooPolynomial(Form("poly_ks_eta%d_%d",j+1,i),"poly",*x_ks[j][i],RooArgList(*a_ks[j][i],*b_ks[j][i],*cp_ks[j][i],*d_ks[j][i]));
     polysig_ks[j][i] = new RooRealVar(Form("polysig_ks_eta%d_%d",j+1,i),"polysig",10,0,10000000);
     sum_ks[j][i] = new RooAddPdf(Form("sum_ks_eta%d_%d",j+1,i),"sum",RooArgList(*gaus1_ks[j][i],*gaus2_ks[j][i],*poly_ks[j][i]),RooArgList(*sig1_ks[j][i],*sig2_ks[j][i],*polysig_ks[j][i]));
-    sum_ks[j][i]->fitTo(*data_ks[j][i]);
-    sum_ks[j][i]->fitTo(*data_ks[j][i]);
-    sum_ks[j][i]->fitTo(*data_ks[j][i]);
+
+    x_ks[j][i].setRange("cut",0.45,0.54);
+    sum_ks[j][i]->fitTo(*data_ks[j][i],Range("cut"));
+    sum_ks[j][i]->fitTo(*data_ks[j][i],Range("cut"));
+    sum_ks[j][i]->fitTo(*data_ks[j][i],Range("cut"));
+    sum_ks[j][i]->fitTo(*data_ks[j][i],Range("cut"));
+    sum_ks[j][i]->fitTo(*data_ks[j][i],Range("cut"));
+    sum_ks[j][i]->fitTo(*data_ks[j][i],Range("cut"));
     sum_ks[j][i]->plotOn(xframe_ks[j][i],Name(Form("sum_ks_eta%d_%d",j+1,i)));
     sum_ks[j][i]->plotOn(xframe_ks[j][i],Components(*poly_ks[j][i]),LineStyle(kDashed));
 
@@ -189,8 +192,8 @@ void eff_count()
     double sigwf1  = sigf1 /(sigf1 +sigf2 );
     double sigwf2  = sigf2 /(sigf1 +sigf2 );
     double sigmaf  = sqrt(sigmaf1 **2*sigwf1  + sigmaf2 **2*sigwf2 );
-    double massmin  = meanf  - 2*sigmaf ;
-    double massmax  = meanf  + 2*sigmaf ;
+    double massmin  = meanf  - 5*sigmaf ;
+    double massmax  = meanf  + 5*sigmaf ;
     int nmin = ksmassall[j][i]->GetXaxis()->FindBin(massmin);
     int nmax = ksmassall[j][i]->GetXaxis()->FindBin(massmax);
     double totyhe = 0;
@@ -208,27 +211,18 @@ void eff_count()
     double isig2f = isig2->getVal();
     double bkgy = ibkgf*bkgf ;
     double bkgye = ibkgf*bkgfe ;
-//    double sigyh  = totyh - bkgy;
-    double sigyh  = sigf1+sigf2;
+    double sigyh  = totyh - bkgy;
+//    double sigyh  = sigf1+sigf2;
 
     double sigyhe = sqrt(totyhe*totyhe+bkgye*bkgye);
     double sigy1  = isig1f *sigf1 ;
     double sigy2  = isig2f *sigf2 ;
     double sigy  = sigy1  + sigy2 ;
     
-    if(i==0)
-    {
-      hYieldReco_ks->SetBinContent(j+1,i+1,0);
-      hYieldReco_ks->SetBinError(j+1,i+1,0);
-    }
-    else
-    {
-      hYieldReco_ks->SetBinContent(j+1,i+1,sigyh);
-      hYieldReco_ks->SetBinError(j+1,i+1,sigyhe);
-    }
-   }
+    hYieldReco_ks->SetBinContent(j+1,i+1,sigyh);
+    hYieldReco_ks->SetBinError(j+1,i+1,sigyhe);
   }
-
+}
   for(int i=0;i<6;i++)
   {
     hYieldRecoPt_ks[i] = hYieldReco_ks->ProjectionY(Form("ks_%d",i),i+1,i+1,"e");
@@ -245,14 +239,14 @@ void eff_count()
 
   TH2D* hYieldReco_la_ratio = (TH2D*)hYieldReco_la->Clone("EffCountEtaPt_la");
   hYieldReco_la_ratio->Divide(hYieldGen_la);
-  TCanvas* c4 = new TCanvas("c4","c4",550,500);
+  TCanvas* cc4 = new TCanvas("cc4","cc4",550,500);
   hYieldReco_la_ratio->SetAxisRange(0,1.0,"Z");
   hYieldReco_la_ratio->SetAxisRange(0.2,10.0,"Y");
   hYieldReco_la_ratio->Draw("lego2");  
 
   TH2D* hYieldReco_ks_ratio = (TH2D*)hYieldReco_ks->Clone("EffCountEtaPt_ks");
   hYieldReco_ks_ratio->Divide(hYieldGen_ks);
-  TCanvas* c5 = new TCanvas("c5","c5",550,500);
+  TCanvas* cc5 = new TCanvas("cc5","cc5",550,500);
   hYieldReco_ks_ratio->SetAxisRange(0,1.0,"Z");
   hYieldReco_ks_ratio->SetAxisRange(0.2,10.0,"Y");
   hYieldReco_ks_ratio->Draw("lego2");
@@ -312,8 +306,7 @@ void eff_count()
   c6->cd(2);
   hEffvsPt_la[5]->Draw("PE");
 
-return;
-  TFile* fout = new TFile("V0Eff_counting_all.root","recreate");
+  TFile* fout = new TFile("V0Eff_counting_10M.root","recreate");
   hYieldReco_la_ratio->Write();
   hYieldReco_ks_ratio->Write();
   for(int i=0;i<7;i++)

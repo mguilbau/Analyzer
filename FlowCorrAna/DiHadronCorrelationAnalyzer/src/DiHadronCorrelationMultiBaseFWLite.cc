@@ -812,17 +812,15 @@ void DiHadronCorrelationMultiBaseFWLite::GetMult()
        int nlayers = trk.hitPattern().trackerLayersWithMeasurement();
        // standard quality cuts
 
-       if(cutPara.IsTrkQuality)
+       if(cutPara.IsPPTrkQuality)
        {
          if(!trk.quality(reco::TrackBase::highPurity)) continue;
-         if(fabs(trk.ptError())/trk.pt()>0.10) continue;
-         if(fabs(dzvtx/dzerror) > 3) continue;
-         if(fabs(dxyvtx/dxyerror) > 3) continue;
+         if(fabs(trk.ptError())/trk.pt()>0.1) continue;
+         if(fabs(dzvtx/dzerror) > 3.0) continue;
+         if(fabs(dxyvtx/dxyerror) > 3.0) continue;
        }
-//       if(fabs(dzvtx) > 0.1) continue;
-//       if(fabs(dxyvtx) > 0.05) continue;
-//       if(nhits<5) continue;
-//       if (chi2n > 0.15*nlayers) continue;
+
+       if(cutPara.IsHITrkQuality && !trk.quality(reco::TrackBase::highPurity)) continue;
 
        double eta = trk.eta();
        double pt  = trk.pt();
@@ -969,8 +967,8 @@ void DiHadronCorrelationMultiBaseFWLite::LoopTracks(bool istrg, TString input, i
 */
      // tracks' proximity to best vertex
      math::XYZPoint bestvtx(xVtx,yVtx,zVtx);
-     double dz = trk.dz(bestvtx);
-     double dxy = trk.dxy(bestvtx);
+     double dzvtx = trk.dz(bestvtx);
+     double dxyvtx = trk.dxy(bestvtx);
      double dzerror = sqrt(trk.dzError()*trk.dzError()+zVtxError*zVtxError);
      double dxyerror = sqrt(trk.d0Error()*trk.d0Error()+xVtxError*yVtxError);
      double pterror = trk.ptError();
@@ -983,23 +981,17 @@ void DiHadronCorrelationMultiBaseFWLite::LoopTracks(bool istrg, TString input, i
      double charge = trk.charge();
      double chi2n = trk.normalizedChi2();
      int nlayers = trk.hitPattern().trackerLayersWithMeasurement();
+
 // standard track quality cuts  
-     if(cutPara.IsTrkQuality)
+     if(cutPara.IsPPTrkQuality)
      {
        if(!trk.quality(reco::TrackBase::highPurity)) continue;
        if(fabs(trk.ptError())/trk.pt()>0.1) continue;
-       if(fabs(dz/dzerror) > 3) continue;
-       if(fabs(dxy/dxyerror) > 3) continue;
-/*
-       if(fabs(trk.ptError())/trk.pt()>0.1) continue;
-       if(fabs(dz/dzerror) > 5) continue;
-       if(fabs(dxy/dxyerror) > 5) continue;
-*/
-     }  
-//     if(fabs(dz) > 0.1) continue;
-//     if(fabs(dxy) > 0.05) continue;
-//     if(nhits<5) continue;
-//     if(chi2n > 0.15*nlayers) continue;
+       if(fabs(dzvtx/dzerror) > 3.0) continue;
+       if(fabs(dxyvtx/dxyerror) > 3.0) continue;
+     }
+
+     if(cutPara.IsHITrkQuality && !trk.quality(reco::TrackBase::highPurity)) continue;
 
 /*
      if(pt>0.4 && fabs(eta)<2.4)
@@ -1036,7 +1028,7 @@ void DiHadronCorrelationMultiBaseFWLite::LoopTracks(bool istrg, TString input, i
          hTrkYVtxSimResVsNMult->Fill(nMult,vy-yVtxSim);
        }
      }
-     if(cutPara.IsTrackNtuple) trackNtuple->Fill(vx,vy,vz,dz,dxy,sqrt(dzerror*dzerror+zVtxError*zVtxError),sqrt(dxyerror*dxyerror+xVtxError*yVtxError),nhits,chi2,algo,eta,phi,pt,pterror);
+     if(cutPara.IsTrackNtuple) trackNtuple->Fill(vx,vy,vz,dzvtx,dxyvtx,sqrt(dzerror*dzerror+zVtxError*zVtxError),sqrt(dxyerror*dxyerror+xVtxError*yVtxError),nhits,chi2,algo,eta,phi,pt,pterror);
 
      double effweight = GetEffWeight(eta,pt,0.5*(cutPara.zvtxmax+cutPara.zvtxmin),hiCentrality);
      double trgweight = GetTrgWeight(nMult);

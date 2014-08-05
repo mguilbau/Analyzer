@@ -51,6 +51,6 @@ process.TFileService = cms.Service("TFileService",
                                    )
 
 process.ana_step = cms.Path(process.hltHIMB*process.corr_ana_HI)
-process.corr_ana_HI.IsCorr = cms.bool(False)
+#process.corr_ana_HI.IsCorr = cms.bool(False)
 process.corr_ana_HI.centmin = cms.int32(0)
-process.corr_ana_HI.centmax = cms.int32(200)
+process.corr_ana_HI.centmax = cms.int32(20)

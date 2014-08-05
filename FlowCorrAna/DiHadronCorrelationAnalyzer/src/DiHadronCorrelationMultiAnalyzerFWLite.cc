@@ -70,7 +70,7 @@ void DiHadronCorrelationMultiAnalyzerFWLite::MakeHists()
   double etabinwidth = (cutPara.etatrgmax-cutPara.etaassmin-cutPara.etatrgmin+cutPara.etaassmax)/NEtaBins;
   double phibinwidth = 2*PI/NPhiBins;
 
-  hDeltaZvtx = new TH1D("deltazvtx",";#Delta z_{vtx}",200,-1.0,-1.0);
+  hDeltaZvtx = new TH1D("deltazvtx",";#Delta z_{vtx}",200,-1.0,1.0);
 
   for(int itrg=0;itrg<(int)(cutPara.pttrgmin.size());itrg++)
   {

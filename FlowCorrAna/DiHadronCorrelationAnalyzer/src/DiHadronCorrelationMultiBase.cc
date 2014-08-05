@@ -24,7 +24,6 @@
 
 DiHadronCorrelationMultiBase::DiHadronCorrelationMultiBase(const edm::ParameterSet& iConfig) :
   cent(0),
-  hEffWeight(0),
   hTrgWeight(0),
   nMult(0),
   nMultAll_trg(0),
@@ -99,10 +98,16 @@ DiHadronCorrelationMultiBase::DiHadronCorrelationMultiBase(const edm::ParameterS
   cutPara.IsFullMatrix = iConfig.getParameter<bool>("IsFullMatrix");
   cutPara.IsPtWeightTrg = iConfig.getParameter<bool>("IsPtWeightTrg");
   cutPara.IsPtWeightAss = iConfig.getParameter<bool>("IsPtWeightAss");   
-  cutPara.IsTrkQuality = iConfig.getParameter<bool>("IsTrkQuality");
+  cutPara.IsPPTrkQuality = iConfig.getParameter<bool>("IsPPTrkQuality");
+  cutPara.IsHITrkQuality = iConfig.getParameter<bool>("IsHITrkQuality");
   cutPara.IsDebug = iConfig.getParameter<bool>("IsDebug");
   cutPara.IsInvMass = iConfig.getParameter<bool>("IsInvMass");
   cutPara.IsEventEngineer = iConfig.getParameter<bool>("IsEventEngineer");
+
+  TString eff_filename(iConfig.getParameter<string>("EffFileName")); 
+  edm::FileInPath fip(Form("FlowCorrAna/DiHadronCorrelationAnalyzer/data/%s",eff_filename.Data()));
+  TFile f(fip.fullPath().c_str(),"READ");
+  hEffWeight = (TH2F*)f.Get("rTotalEff3D");
 }
 
 //DiHadronCorrelationMultiBase::~DiHadronCorrelationMultiBase()
@@ -378,13 +383,15 @@ void DiHadronCorrelationMultiBase::GetMult(const edm::Event& iEvent, const edm::
        int nlayers = trk.hitPattern().trackerLayersWithMeasurement();
        // standard quality cuts
 
-       if(cutPara.IsTrkQuality)
+       if(cutPara.IsPPTrkQuality)
        {
          if(!trk.quality(reco::TrackBase::highPurity)) continue;
          if(fabs(trk.ptError())/trk.pt()>0.1) continue;
          if(fabs(dzvtx/dzerror) > 3.0) continue;
          if(fabs(dxyvtx/dxyerror) > 3.0) continue;
        }
+
+       if(cutPara.IsHITrkQuality && !trk.quality(reco::TrackBase::highPurity)) continue;
 
        double eta = trk.eta();
        double pt  = trk.pt();
@@ -460,8 +467,8 @@ void DiHadronCorrelationMultiBase::LoopTracks(const edm::Event& iEvent, const ed
 
      // tracks' proximity to best vertex
      math::XYZPoint bestvtx(xVtx,yVtx,zVtx);
-     double dz = trk.dz(bestvtx);
-     double dxy = trk.dxy(bestvtx);
+     double dzvtx = trk.dz(bestvtx);
+     double dxyvtx = trk.dxy(bestvtx);
      double dzerror = sqrt(trk.dzError()*trk.dzError()+zVtxError*zVtxError);
      double dxyerror = sqrt(trk.d0Error()*trk.d0Error()+xVtxError*yVtxError);
      double pterror = trk.ptError();
@@ -475,14 +482,15 @@ void DiHadronCorrelationMultiBase::LoopTracks(const edm::Event& iEvent, const ed
      double chi2n = trk.normalizedChi2();
      int nlayers = trk.hitPattern().trackerLayersWithMeasurement();
 
-// standard track quality cuts  
-     if(cutPara.IsTrkQuality)
+     if(cutPara.IsPPTrkQuality)
      {
        if(!trk.quality(reco::TrackBase::highPurity)) continue;
        if(fabs(trk.ptError())/trk.pt()>0.1) continue;
-       if(fabs(dz/dzerror) > 3.0) continue;
-       if(fabs(dxy/dxyerror) > 3.0) continue;
-     }  
+       if(fabs(dzvtx/dzerror) > 3.0) continue;
+       if(fabs(dxyvtx/dxyerror) > 3.0) continue;
+     }
+
+     if(cutPara.IsHITrkQuality && !trk.quality(reco::TrackBase::highPurity)) continue;
 
      double effweight = GetEffWeight(eta,pt,0.5*(cutPara.zvtxmax+cutPara.zvtxmin),hiCentrality);
      double trgweight = GetTrgWeight(nMult);
@@ -510,7 +518,7 @@ void DiHadronCorrelationMultiBase::LoopCaloTower(const edm::Event& iEvent, const
 //     double et  = calotower.energy();
      double charge = 0;
      
-     if(calotower.energy()<3) continue;
+     if(calotower.energy()<3 && fabs(eta)>3) continue;
 
      double effweight = 1.0;
 
@@ -623,20 +631,22 @@ void DiHadronCorrelationMultiBase::LoopV0Candidates(const edm::Event& iEvent, co
 
          // tracks' proximity to best vertex
          math::XYZPoint bestvtx(xVtx,yVtx,zVtx);
-         double dz = trk.dz(bestvtx);
-         double dxy = trk.dxy(bestvtx);
+         double dzvtx = trk.dz(bestvtx);
+         double dxyvtx = trk.dxy(bestvtx);
          double dzerror = sqrt(trk.dzError()*trk.dzError()+zVtxError*zVtxError);
          double dxyerror = sqrt(trk.d0Error()*trk.d0Error()+xVtxError*yVtxError);
          double charge = trk.charge();
 
-         // standard track quality cuts  
-         if(cutPara.IsTrkQuality)
+         if(cutPara.IsPPTrkQuality)
          {
            if(!trk.quality(reco::TrackBase::highPurity)) continue;
            if(fabs(trk.ptError())/trk.pt()>0.1) continue;
-           if(fabs(dz/dzerror) > 3.0) continue;
-           if(fabs(dxy/dxyerror) > 3.0) continue;
-         }  
+           if(fabs(dzvtx/dzerror) > 3.0) continue;
+           if(fabs(dxyvtx/dxyerror) > 3.0) continue;
+         }
+
+         if(cutPara.IsHITrkQuality && !trk.quality(reco::TrackBase::highPurity)) continue;
+
          if(pt<cutPara.ptassmin[0] || pt>cutPara.ptassmax[0] || eta<cutPara.etaassmin || eta>cutPara.etaassmax) continue;
          TVector3 trk_vect(trk.px(),trk.py(),trk.pz());
 //         if(fabs(dauvec1.DeltaPhi(trk_vect))<0.03 && fabs(dauvec1.Eta()-trk_vect.Eta())<0.03) { cout<<"Daughter1: found a match!"<<endl; continue; }
@@ -812,17 +822,17 @@ int DiHadronCorrelationMultiBase::GetCentralityBin(const edm::Event& iEvent, con
   int bin = cent->getBin();
 
 // UCC centrality bins
-  if(hft>3260 && npixel>51400 && cutPara.centmin==100 && cutPara.centmax == 1000) bin=100;
-  if(hft>3400 && hft<3600 && npixel>51000 && npixel<57000 && cutPara.centmin==200 && cutPara.centmax == 1000) bin=200;
-  if(hft>3400 && hft<3600 && npixel>51000 && npixel<57000 && zdc<2000 && cutPara.centmin==300 && cutPara.centmax == 1000) bin=300;
-  if(hft>3129.3 && cutPara.centmin==50 && cutPara.centmax == 1000) bin=50;
-  if(hft>3094.3 && npixel>48787 && cutPara.centmin==51 && cutPara.centmax == 1000) bin=51;
-  if((7.0*hft+zdc)<36000 && cutPara.centmin==500 && cutPara.centmax == 1000) bin=500;
-//  if((7.0*hft+zdc)<36000 && hft>3260 && npixel>51400 && cutPara.centmin==110 && cutPara.centmax == 1000) bin=110; // hft>3420 && npixel>31300 && 45*hft+zdc<188372
-  if((45*hft+zdc)<188372 && hft>3420 && npixel>31300 && cutPara.centmin==110 && cutPara.centmax == 1000) bin=110;
-  if((7.0*hft+zdc)<36000 && 1.15*hft>zdc && hft>3260 && npixel>51400 && cutPara.centmin==120 && cutPara.centmax == 1000) bin=120;
-  if((7.0*hft+zdc)<36000 && hft>3393 && npixel>53450 && cutPara.centmin==210 && cutPara.centmax == 1000) bin=210;
-  if((7.0*hft+zdc)<36000 && 1.15*hft>zdc && hft>3393 && npixel>53450 && cutPara.centmin==220 && cutPara.centmax == 1000) bin=220;
+  if(hft>3260 && npixel>51400 && cutPara.centmin==1000 && cutPara.centmax == 10000) bin=1000;
+  if(hft>3400 && hft<3600 && npixel>51000 && npixel<57000 && cutPara.centmin==2000 && cutPara.centmax == 10000) bin=2000;
+  if(hft>3400 && hft<3600 && npixel>51000 && npixel<57000 && zdc<2000 && cutPara.centmin==3000 && cutPara.centmax == 10000) bin=3000;
+  if(hft>3129.3 && cutPara.centmin==500 && cutPara.centmax == 10000) bin=500;
+  if(hft>3094.3 && npixel>48787 && cutPara.centmin==510 && cutPara.centmax == 10000) bin=510;
+  if((7.0*hft+zdc)<36000 && cutPara.centmin==5000 && cutPara.centmax == 10000) bin=5000;
+//  if((7.0*hft+zdc)<36000 && hft>3260 && npixel>51400 && cutPara.centmin==1100 && cutPara.centmax == 10000) bin=1100; // hft>3420 && npixel>31300 && 45*hft+zdc<188372
+  if((45*hft+zdc)<188372 && hft>3420 && npixel>31300 && cutPara.centmin==1100 && cutPara.centmax == 10000) bin=1100;
+  if((7.0*hft+zdc)<36000 && 1.15*hft>zdc && hft>3260 && npixel>51400 && cutPara.centmin==1200 && cutPara.centmax == 10000) bin=1200;
+  if((7.0*hft+zdc)<36000 && hft>3393 && npixel>53450 && cutPara.centmin==2100 && cutPara.centmax == 10000) bin=2100;
+  if((7.0*hft+zdc)<36000 && 1.15*hft>zdc && hft>3393 && npixel>53450 && cutPara.centmin==2200 && cutPara.centmax == 10000) bin=2200;
 // pPb centrality bins
 /*
   if(!cutPara.centralityCollection.Contains("pACentrality")) return bin;

@@ -30,7 +30,7 @@ long makeKey(long run, long event){
 
 
 void L1q1trigger(){
-  const TString l1_input = "~/scratch1/L1UpgradeAnalyzer.root";
+  const TString l1_input = "~/scratch1/DiHadronCorrelations/L1UpgradeAnalyzer.root";
 
   TFile *lFile = TFile::Open(l1_input);
   Int_t l1Up_evt, l1Up_run, l1Up_et, l1Up_q2;
@@ -113,7 +113,7 @@ void L1q1trigger(){
                 
       q2On = sqrt(l1Up_q2)/l1Up_et;
 
-      if(l1Up_run<182060 && l1Up_run>182050 & l1Up_et<2839 && l1Up_et>1198)
+//      if(l1Up_run<182060 && l1Up_run>182050 & l1Up_et<2839 && l1Up_et>1198)
     //  if(l1Up_et<2839 && l1Up_et>1198)
       {
         q2CorrHist->Fill(q2hf,q2On);

@@ -29,12 +29,12 @@ EPEtaDecoAnalyzer::~EPEtaDecoAnalyzer()
 
 void EPEtaDecoAnalyzer::beginRun(const edm::Run& iRun, const edm::EventSetup& iSetup)
 {
-  hDeltaZvtx = theOutputs->make<TH1D>("deltazvtx",";#Delta z_{vtx}",200,-1.0,-1.0);
+  hDeltaZvtx = theOutputs->make<TH1D>("deltazvtx",";#Delta z_{vtx}",200,-1.0,1.0);
 
   for(int itrg=0;itrg<MAXETATRGBINS;itrg++)
   {
-    hSignalCosn[itrg] = theOutputs->make<TH2D>(Form("signalcosn_trg%d",itrg),";cos(n#Delta#phi);n",60000,-0.3,0.3,5,0.5,5.5);
-    hBackgroundCosn[itrg]= theOutputs->make<TH2D>(Form("backgroundcosn_trg%d",itrg),";cos(n#Delta#phi);n",60000,-0.3,0.3,5,0.5,5.5);
+    hSignalCosn[itrg] = theOutputs->make<TH2D>(Form("signalcosn_trg%d",itrg),";cos(n#Delta#phi);n",30000,-0.3,0.3,3,1.5,4.5);
+    hBackgroundCosn[itrg]= theOutputs->make<TH2D>(Form("backgroundcosn_trg%d",itrg),";cos(n#Delta#phi);n",30000,-0.3,0.3,3,1.5,4.5);
   }
   DiHadronCorrelationMultiBase::beginRun(iRun, iSetup);
 }
@@ -89,8 +89,8 @@ void EPEtaDecoAnalyzer::FillHistsSignal(const DiHadronCorrelationEvent& eventcor
     double nMultCorr_trg = eventcorr.nMultCorrVect_trg[0];
     double nMultCorr_ass = eventcorr.nMultCorrVect_ass[0];
 
-    double sumcosn[MAXETATRGBINS][15]={{0.0}};
-    double npairs[MAXETATRGBINS][15]={{0.0}};
+    double sumcosn[MAXETATRGBINS][5]={{0.0}};
+    double npairs[MAXETATRGBINS][5]={{0.0}};
 
     for(unsigned int ntrg=0;ntrg<ntrgsize;ntrg++)
     {
@@ -125,7 +125,7 @@ void EPEtaDecoAnalyzer::FillHistsSignal(const DiHadronCorrelationEvent& eventcor
         int ietabin = (int)((eta_trg+2.4)/ETATRGBINWIDTH);
         if(cutPara.etaassmin<0 && cutPara.etaassmax<0) ietabin = (int)((2.4-eta_trg)/ETATRGBINWIDTH);
 
-        for(int nn = 0; nn<5; nn++)
+        for(int nn = 1; nn<4; nn++)
         {
           sumcosn[ietabin][nn] = sumcosn[ietabin][nn] + cos((nn+1)*fabs(deltaPhi))/effweight;
           npairs[ietabin][nn] += 1.0/effweight;
@@ -133,7 +133,7 @@ void EPEtaDecoAnalyzer::FillHistsSignal(const DiHadronCorrelationEvent& eventcor
       }
     }
     for(int i=0;i<MAXETATRGBINS;i++)
-      for(int nn = 0; nn<5; nn++) 
+      for(int nn = 1; nn<4; nn++) 
       {
         if(npairs[i][nn]==0.0) continue;
         sumcosn[i][nn]=sumcosn[i][nn]/npairs[i][nn];
@@ -148,8 +148,8 @@ void EPEtaDecoAnalyzer::FillHistsBackground(const DiHadronCorrelationEvent& even
       double nMultCorr_trg = eventcorr_trg.nMultCorrVect_trg[0];
       double nMultCorr_ass = eventcorr_ass.nMultCorrVect_ass[0];
 
-      double sumcosn[MAXETATRGBINS][15]={{0.0}};
-      double npairs[MAXETATRGBINS][15]={{0.0}};
+      double sumcosn[MAXETATRGBINS][5]={{0.0}};
+      double npairs[MAXETATRGBINS][5]={{0.0}};
 
       for(unsigned int ntrg=0;ntrg<ntrgsize;ntrg++)
       {
@@ -182,7 +182,7 @@ void EPEtaDecoAnalyzer::FillHistsBackground(const DiHadronCorrelationEvent& even
           int ietabin = (int)((eta_trg+2.4)/ETATRGBINWIDTH);
           if(cutPara.etaassmin<0 && cutPara.etaassmax<0) ietabin = (int)((2.4-eta_trg)/ETATRGBINWIDTH);
 
-          for(int nn = 0; nn<5; nn++)
+          for(int nn = 1; nn<4; nn++)
           {
             sumcosn[ietabin][nn] = sumcosn[ietabin][nn] + cos((nn+1)*fabs(deltaPhi))/effweight;
             npairs[ietabin][nn] += 1.0/effweight;
@@ -190,7 +190,7 @@ void EPEtaDecoAnalyzer::FillHistsBackground(const DiHadronCorrelationEvent& even
       }
    }
    for(int i=0;i<MAXETATRGBINS;i++)
-     for(int nn = 0; nn<5; nn++)
+     for(int nn = 1; nn<4; nn++)
      {
        if(!npairs[i][nn]) continue;
        sumcosn[i][nn]=sumcosn[i][nn]/npairs[i][nn];

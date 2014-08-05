@@ -89,7 +89,8 @@ class CutParameters {
    bool IsHarmonics;
    bool IsHarmonicsEta1Eta2;
    bool IsFlowQVector;
-   bool IsTrkQuality;
+   bool IsPPTrkQuality;
+   bool IsHITrkQuality;
    bool IsDebug;
 };
 

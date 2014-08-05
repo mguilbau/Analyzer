@@ -5,6 +5,8 @@
 #include <vector>
 #include <string>
 #include <memory>
+#include <iostream>
+#include <math.h>
 
 // user include files
 #include "FWCore/Framework/interface/Frameworkfwd.h"

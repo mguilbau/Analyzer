@@ -1,10 +1,10 @@
 void eff_fit()
 {
-  TFile* f = new TFile("V0Eff_counting_all.root");
+  TFile* f = new TFile("V0Eff_counting_10M.root");
 
   TH2D* ks2D = (TH2D*)f->Get("EffCountEtaPt_ks");
   TH2D* la2D = (TH2D*)f->Get("EffCountEtaPt_la");
-
+/*
   TH2D* ks2Dnew = (TH2D*)ks2D->Clone("ks2Dnew");
   TH2D* la2Dnew = (TH2D*)la2D->Clone("la2Dnew");
   ks2Dnew->Reset();
@@ -37,7 +37,7 @@ cout<<ks2Dnew->GetNbinsY()<<endl;
   {
     c10->cd(i+1);
     hEffvsPt_ks[i] = ks2D->ProjectionY(Form("effvspt_ks_%d",i+1),i+1,i+1,"e");
-    hEffvsPt_ks[i]->Smooth(10);
+//    hEffvsPt_ks[i]->Smooth(10);
     hEffvsPt_ks[i]->Draw("PE");
     for(int j=1;j<=ks2D->GetNbinsY();j++)
     {
@@ -48,7 +48,7 @@ cout<<j<<" "<<hEffvsPt_ks[i]->GetBinContent(j)<<endl;
 
     c11->cd(i+1);
     hEffvsPt_la[i] = la2D->ProjectionY(Form("effvspt_la_%d",i+1),i+1,i+1,"e");
-    hEffvsPt_la[i]->Smooth(10);
+//    hEffvsPt_la[i]->Smooth(10);
     hEffvsPt_la[i]->Draw("PE");
     for(int j=1;j<=la2D->GetNbinsY();j++)
     {
@@ -148,15 +148,7 @@ cout<<j<<" "<<hEffvsPt_ks[i]->GetBinContent(j)<<endl;
   TCanvas* cc = new TCanvas("cc","cc",550,500);
 //  ks2Dnew->SetAxisRange(0,5.8,"Y");
   ks2Dnew->Draw("lego2");  
-/*
-  TCanvas* cc1 = new TCanvas("cc1","cc1",550,500);
-  ks2Dfiner->SetAxisRange(0,5.8,"Y");
-  ks2Dfiner->Draw("SURF1");
-*/
-  TCanvas* cc2 = new TCanvas("cc2","cc2",550,500);
-//  la2Dnew->SetAxisRange(0,5.8,"Y");
-  la2Dnew->Draw("lego2");
-/*
+
   TCanvas* cc3 = new TCanvas("cc3","cc3",550,500);
   la2Dfiner->SetAxisRange(0,5.8,"Y");
   la2Dfiner->Draw("SURF1");
@@ -168,8 +160,8 @@ cout<<j<<" "<<hEffvsPt_ks[i]->GetBinContent(j)<<endl;
   TCanvas* cc5 = new TCanvas("cc5","cc5",550,500);
   la2D->Draw("lego2");
 
-  TFile* fout = new TFile("Efficiency2D_V0_all_smooth10.root","recreate");
-  ks2Dnew->Write();
-  la2Dnew->Write();
+  TFile* fout = new TFile("Efficiency2D_V0_10M.root","recreate");
+  ks2D->Write("ks2Dnew");
+  la2D->Write("la2Dnew");
   fout->Close();
 }

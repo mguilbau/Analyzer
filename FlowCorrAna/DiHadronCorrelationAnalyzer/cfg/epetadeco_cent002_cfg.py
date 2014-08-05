@@ -2,6 +2,7 @@ import FWCore.ParameterSet.Config as cms
 
 process = cms.Process("corr")
 process.load("FWCore.MessageService.MessageLogger_cfi")
+process.MessageLogger.cerr.FwkReport.reportEvery = 2000
 
 ### conditions
 process.load("Configuration.StandardSequences.FrontierConditions_GlobalTag_cff")
@@ -53,7 +54,7 @@ process.TFileService = cms.Service("TFileService",
 
 process.ana_hfp = cms.Path(process.hltHIUCC*process.epetadeco_ana_HI_hfp)
 process.ana_hfm = cms.Path(process.hltHIUCC*process.epetadeco_ana_HI_hfm)
-process.epetadeco_ana_HI_hfp.centmin = cms.int32(110)
-process.epetadeco_ana_HI_hfp.centmax = cms.int32(1000)
-process.epetadeco_ana_HI_hfm.centmin = cms.int32(110)
-process.epetadeco_ana_HI_hfm.centmax = cms.int32(1000)
+process.epetadeco_ana_HI_hfp.centmin = cms.int32(1100)
+process.epetadeco_ana_HI_hfp.centmax = cms.int32(10000)
+process.epetadeco_ana_HI_hfm.centmin = cms.int32(1100)
+process.epetadeco_ana_HI_hfm.centmax = cms.int32(10000)

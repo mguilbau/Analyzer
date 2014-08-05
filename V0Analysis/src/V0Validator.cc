@@ -66,9 +66,9 @@ void V0Validator::beginRun(const edm::Run& iRun, const edm::EventSetup& iSetup) 
   ptBins.push_back(9.0);
   ptBins.push_back(15.0);
 
-  double etaMin   = -2.0;
-  double etaMax   =  2.0;
-  double etaWidth =  1.0;
+  double etaMin   = -2.4;
+  double etaMax   =  2.4;
+  double etaWidth =  0.8;
   for(double eta = etaMin; eta < etaMax + etaWidth/2; eta += etaWidth)
     etaBins.push_back(eta);
 
@@ -348,6 +348,16 @@ void V0Validator::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetu
   using namespace std;
   using namespace reco;
 
+  edm::Handle<reco::VertexCollection> vertices;
+  iEvent.getByLabel("offlinePrimaryVertices",vertices);
+  double bestvz=-999.9, bestvx=-999.9, bestvy=-999.9;
+  double bestvzError=-999.9, bestvxError=-999.9, bestvyError=-999.9;
+  const reco::Vertex & vtx = (*vertices)[0];
+  bestvz = vtx.z(); bestvx = vtx.x(); bestvy = vtx.y();
+  bestvzError = vtx.zError(); bestvxError = vtx.xError(); bestvyError = vtx.yError();
+
+  if(bestvz < -15.0 || bestvz>15.0) return;
+
   // Get event setup info, B-field and tracker geometry
 //  ESHandle<MagneticField> bFieldHandle;
 //  iSetup.get<IdealMagneticFieldRecord>().get(bFieldHandle);
@@ -414,12 +424,14 @@ void V0Validator::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetu
       K0sCandEta = iK0s->momentum().eta();
       mass = iK0s->mass();
 
-      ksMassAll->Fill( mass );
-      ksMassPtAll->Fill( K0sCandpT, mass );
-      if(K0sCandEta>-2.0 && K0sCandEta<-1.0) ksMassPtAllEta1->Fill( K0sCandpT, mass );
-      if(K0sCandEta>-1.0 && K0sCandEta<0.0) ksMassPtAllEta2->Fill( K0sCandpT, mass );
-      if(K0sCandEta>0.0 && K0sCandEta<1.0) ksMassPtAllEta3->Fill( K0sCandpT, mass );
-      if(K0sCandEta>1.0 && K0sCandEta<2.0) ksMassPtAllEta4->Fill( K0sCandpT, mass );
+      if(K0sCandEta>-2.4 && K0sCandEta<2.4) ksMassAll->Fill( mass );
+      if(K0sCandEta>-2.4 && K0sCandEta<2.4) ksMassPtAll->Fill( K0sCandpT, mass );
+      if(K0sCandEta>-2.4 && K0sCandEta<-1.6) ksMassPtAllEta1->Fill( K0sCandpT, mass );
+      if(K0sCandEta>-1.6 && K0sCandEta<-0.8) ksMassPtAllEta2->Fill( K0sCandpT, mass );
+      if(K0sCandEta>-0.8 && K0sCandEta<0.0) ksMassPtAllEta3->Fill( K0sCandpT, mass );
+      if(K0sCandEta>0.0 && K0sCandEta<0.8) ksMassPtAllEta4->Fill( K0sCandpT, mass );
+      if(K0sCandEta>0.8 && K0sCandEta<1.6) ksMassPtAllEta5->Fill( K0sCandpT, mass );
+      if(K0sCandEta>1.6 && K0sCandEta<2.4) ksMassPtAllEta6->Fill( K0sCandpT, mass );
     }
   }
   if ( lambdaCollection.isValid() && lambdaCollection->size() > 0 ) {
@@ -432,12 +444,14 @@ void V0Validator::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetu
       LamCandEta = iLam->momentum().eta();
       mass = iLam->mass();
 
-      lamMassAll->Fill( mass );
-      lamMassPtAll->Fill( LamCandpT, mass );
-      if(LamCandEta>-2.0 && LamCandEta<-1.0) lamMassPtAllEta1->Fill( LamCandpT, mass );
-      if(LamCandEta>-1.0 && LamCandEta<0.0) lamMassPtAllEta2->Fill( LamCandpT, mass );
-      if(LamCandEta>0.0 && LamCandEta<1.0) lamMassPtAllEta3->Fill( LamCandpT, mass );
-      if(LamCandEta>1.0 && LamCandEta<2.0) lamMassPtAllEta4->Fill( LamCandpT, mass );
+      if(LamCandEta>-2.4 && LamCandEta<2.4) lamMassAll->Fill( mass );
+      if(LamCandEta>-2.4 && LamCandEta<2.4) lamMassPtAll->Fill( LamCandpT, mass );
+      if(LamCandEta>-2.4 && LamCandEta<-1.6) lamMassPtAllEta1->Fill( LamCandpT, mass );
+      if(LamCandEta>-1.6 && LamCandEta<-0.8) lamMassPtAllEta2->Fill( LamCandpT, mass );
+      if(LamCandEta>-0.8 && LamCandEta<0.0) lamMassPtAllEta3->Fill( LamCandpT, mass );
+      if(LamCandEta>0.0 && LamCandEta<0.8) lamMassPtAllEta4->Fill( LamCandpT, mass );
+      if(LamCandEta>0.8 && LamCandEta<1.6) lamMassPtAllEta5->Fill( LamCandpT, mass );
+      if(LamCandEta>1.6 && LamCandEta<2.4) lamMassPtAllEta6->Fill( LamCandpT, mass );
     }
   }
 

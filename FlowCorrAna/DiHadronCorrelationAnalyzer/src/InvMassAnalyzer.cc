@@ -29,7 +29,7 @@ InvMassAnalyzer::~InvMassAnalyzer()
 
 void InvMassAnalyzer::beginRun(const edm::Run& iRun, const edm::EventSetup& iSetup)
 {
-  hDeltaZvtx = theOutputs->make<TH1D>("deltazvtx",";#Delta z_{vtx}",200,-1.0,-1.0);
+  hDeltaZvtx = theOutputs->make<TH1D>("deltazvtx",";#Delta z_{vtx}",200,-1.0,1.0);
 
 //  hInvMassVsPt_Signal = theOutputs->make<TH2D>("invmassvspt_signal",";p_{T}(GeV);Invariant Mass (GeV)",500,0,50,1500,0,3);
   hInvMassVsPt_Background = theOutputs->make<TH2D>("invmassvspt_background",";p_{T}(GeV);Invariant Mass (GeV)",500,0,50,1500,0,3);

@@ -29,7 +29,7 @@ EbyEFlowAnalyzer::~EbyEFlowAnalyzer()
 
 void EbyEFlowAnalyzer::beginRun(const edm::Run& iRun, const edm::EventSetup& iSetup)
 {
-  hDeltaZvtx = theOutputs->make<TH1D>("deltazvtx",";#Delta z_{vtx}",200,-1.0,-1.0);
+  hDeltaZvtx = theOutputs->make<TH1D>("deltazvtx",";#Delta z_{vtx}",200,-1.0,1.0);
 
   hQ2HFPVsHFM = theOutputs->make<TH2D>("q2hfpvshfm",";q_{2}^{HF+};q_{2}^{HF-}",1000,0.,0.5,1000,0.,0.5);
   hQ2HFPVsMid = theOutputs->make<TH2D>("q2hfpvsmid",";q_{2}^{HF+};q_{2}^{Mid}",1000,0.,0.5,1000,0.,0.5);

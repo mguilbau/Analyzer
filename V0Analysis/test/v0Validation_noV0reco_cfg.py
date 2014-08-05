@@ -2,6 +2,7 @@ import FWCore.ParameterSet.Config as cms
 
 process = cms.Process("V0Val")
 process.load("FWCore.MessageService.MessageLogger_cfi")
+process.MessageLogger.cerr.FwkReport.reportEvery = 2000
 
 ### standard includes
 process.load('Configuration.StandardSequences.Generator_cff')
@@ -28,7 +29,8 @@ process.maxEvents = cms.untracked.PSet(
 
 process.source = cms.Source("PoolSource",
                                 fileNames = cms.untracked.vstring(
-'/store/user/davidlw/Hijing_PPb502_MinimumBias/RecoSkim_batch1_v1/84cb8c951385c1f95541c031462cec6b/pPb_MB_493_1_IUN.root'
+#'/store/user/davidlw/Hijing_PPb502_MinimumBias/RecoSkim_batch1_v1/84cb8c951385c1f95541c031462cec6b/pPb_MB_493_1_IUN.root'
+'/store/user/davidlw/Hijing_PPb502_MinimumBias/RecoSkim_batch1_v1/84cb8c951385c1f95541c031462cec6b/pPb_MB_100_1_tG6.root'
 #'root://xrootd1.cmsaf.mit.edu//store/user/vzhukova/HIJING_MB/HIJING_MB_RECO_v3/13a591fee6315e7fb1e99e6ba8e52eaa/reco_hijing_2582_1_tV4.root'
 #'root://xrootd1.cmsaf.mit.edu//store/user/vzhukova/HIJING_MB/HIJING_MB_RECO_v3/13a591fee6315e7fb1e99e6ba8e52eaa/reco_hijing_1000_1_Bov.root'
 #'/store/user/vzhukova/HYDGET_PERIPH_batch7/HYDGET_PERIPH_RECO_batch7/b7d33bba7673cdb1ee6f4983c0800c79/HYDGET_PERIPH_RECO_10_1_7bq.root'
@@ -43,6 +45,8 @@ process.load("SimTracker.TrackAssociation.TrackAssociatorByChi2_cfi")
 process.load("RiceHIG.V0Analysis.v0selector_cff")
 process.load("RiceHIG.V0Analysis.v0validator_cff")
 
+#process.v0Validator.kShortCollection = cms.InputTag('generalV0CandidatesNew:Kshort')
+#process.v0Validator.lambdaCollection = cms.InputTag('generalV0CandidatesNew:Lambda')
 process.v0Validator.kShortCollection = cms.InputTag('selectV0CandidatesNewkshort:Kshort')
 process.v0Validator.lambdaCollection = cms.InputTag('selectV0CandidatesNewlambda:Lambda')
 process.v0Validator.isMatchByHitsOrChi2 = cms.bool(True)
@@ -63,6 +67,7 @@ process.TrackAssociatorByHits.Cut_RecoToSim = cms.double(0.5)
 process.TrackAssociatorByChi2ESProducer.chi2cut = cms.double(25.0)
 
 process.v0validation = cms.Sequence(process.selectV0CandidatesNewlambda*process.selectV0CandidatesNewkshort*process.v0Validator)
+#process.v0validation = cms.Sequence(process.v0Validator)
 
 process.p = cms.Path(process.v0validation)
 
