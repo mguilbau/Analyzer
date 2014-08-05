@@ -2,7 +2,7 @@
 
 pdname=HIMinBiasUPC
 dataset=/HIMinBiasUPC/davidlw-Skim_rereco_pixeltracks_v1-4b65ef5aa7a26abf1f962cd25f7df02d/USER
-tag=pttrg033_ptassallweight_etaass445_v8
+tag=pttrg033_ptassallweight_etaass45_v8
 njobs=10
 
 cat > crab_epetadeco_cent002.cfg << EOF 

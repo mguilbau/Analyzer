@@ -55,11 +55,13 @@ epetadeco_ana = cms.EDAnalyzer('EPEtaDecoAnalyzer',
   IsCorr = cms.bool(True),
   IsHI = cms.bool(True),
   IsFullMatrix = cms.bool(True),
-  IsPtWeightTrg = cms.bool(False),
+  IsPtWeightTrg = cms.bool(True),
   IsPtWeightAss = cms.bool(True),
   IsHITrkQuality = cms.bool(False),
   IsPPTrkQuality = cms.bool(True),
   IsDebug = cms.bool(False),
   IsInvMass = cms.bool(False),
-  IsEventEngineer = cms.bool(False)
+  IsEventEngineer = cms.bool(False),
+
+  EffFileName = cms.string('TrackCorrections_HIJING_538_OFFICIAL_Mar24.root')
 )
