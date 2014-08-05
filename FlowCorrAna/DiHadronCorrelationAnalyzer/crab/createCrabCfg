@@ -1,0 +1,226 @@
+#!/bin/bash
+
+pdname=HIMinBiasUPC
+dataset=/HIMinBiasUPC/davidlw-Skim_rereco_pixeltracks_v1-4b65ef5aa7a26abf1f962cd25f7df02d/USER
+tag=pttrg033_ptassallweight_etaass445_v8
+njobs=10
+
+cat > crab_epetadeco_cent002.cfg << EOF 
+[CRAB]
+jobtype = cmssw
+scheduler = remoteGlidein
+use_server   = 0
+
+[CMSSW]
+use_dbs3 = 1 
+dbs_url                 = phys03
+datasetpath             = $dataset
+pset                    = ../cfg/epetadeco_cent002_cfg.py
+total_number_of_lumis   = -1 
+lumis_per_job     = $njobs 
+output_file = epetadeco.root
+
+[USER]
+copy_data               = 1
+storage_element         = T2_US_MIT
+
+user_remote_dir = $pdname/EPEtaDeco_cent002_$tag
+ui_working_dir = $pdname/EPEtaDeco_cent002_$tag
+check_user_remote_dir   = 0
+EOF
+
+cat > crab_epetadeco_cent05.cfg << EOF 
+[CRAB]
+jobtype = cmssw
+scheduler = remoteGlidein
+use_server   = 0
+
+[CMSSW]
+use_dbs3 = 1 
+dbs_url                 = phys03
+datasetpath             = $dataset
+pset                    = ../cfg/epetadeco_cent05_cfg.py
+total_number_of_lumis   = -1 
+lumis_per_job     = $njobs
+output_file = epetadeco.root
+
+[USER]
+copy_data               = 1
+storage_element         = T2_US_MIT
+
+user_remote_dir = $pdname/EPEtaDeco_cent05_$tag
+ui_working_dir = $pdname/EPEtaDeco_cent05_$tag
+check_user_remote_dir   = 0
+EOF
+
+cat > crab_epetadeco_cent510.cfg << EOF 
+[CRAB]
+jobtype = cmssw
+scheduler = remoteGlidein
+use_server   = 0
+
+[CMSSW]
+use_dbs3 = 1 
+dbs_url                 = phys03
+datasetpath             = $dataset
+pset                    = ../cfg/epetadeco_cent510_cfg.py
+total_number_of_lumis   = -1 
+lumis_per_job     = $njobs 
+output_file = epetadeco.root
+
+[USER]
+copy_data               = 1
+storage_element         = T2_US_MIT
+
+user_remote_dir = $pdname/EPEtaDeco_cent510_$tag
+ui_working_dir = $pdname/EPEtaDeco_cent510_$tag
+check_user_remote_dir   = 0
+EOF
+
+cat > crab_epetadeco_cent1020.cfg << EOF 
+[CRAB]
+jobtype = cmssw
+scheduler = remoteGlidein
+use_server   = 0
+
+[CMSSW]
+use_dbs3 = 1 
+dbs_url                 = phys03
+datasetpath             = $dataset
+pset                    = ../cfg/epetadeco_cent1020_cfg.py
+total_number_of_lumis   = -1 
+lumis_per_job     = $njobs 
+output_file = epetadeco.root
+
+[USER]
+copy_data               = 1
+storage_element         = T2_US_MIT
+
+user_remote_dir = $pdname/EPEtaDeco_cent1020_$tag
+ui_working_dir = $pdname/EPEtaDeco_cent1020_$tag
+check_user_remote_dir   = 0
+EOF
+
+cat > crab_epetadeco_cent2030.cfg << EOF 
+[CRAB]
+jobtype = cmssw
+scheduler = remoteGlidein
+use_server   = 0
+
+[CMSSW]
+use_dbs3 = 1 
+dbs_url                 = phys03
+datasetpath             = $dataset
+pset                    = ../cfg/epetadeco_cent2030_cfg.py
+total_number_of_lumis   = -1 
+lumis_per_job     = $njobs 
+output_file = epetadeco.root
+
+[USER]
+copy_data               = 1
+storage_element         = T2_US_MIT
+
+user_remote_dir = $pdname/EPEtaDeco_cent2030_$tag
+ui_working_dir = $pdname/EPEtaDeco_cent2030_$tag
+check_user_remote_dir   = 0
+EOF
+
+cat > crab_epetadeco_cent3040.cfg << EOF 
+[CRAB]
+jobtype = cmssw
+scheduler = remoteGlidein
+use_server   = 0
+
+[CMSSW]
+use_dbs3 = 1 
+dbs_url                 = phys03
+datasetpath             = $dataset
+pset                    = ../cfg/epetadeco_cent3040_cfg.py
+total_number_of_lumis   = -1 
+lumis_per_job     = $njobs 
+output_file = epetadeco.root
+
+[USER]
+copy_data               = 1
+storage_element         = T2_US_MIT
+
+user_remote_dir = $pdname/EPEtaDeco_cent3040_$tag
+ui_working_dir = $pdname/EPEtaDeco_cent3040_$tag
+check_user_remote_dir   = 0
+EOF
+
+cat > crab_epetadeco_cent4050.cfg << EOF 
+[CRAB]
+jobtype = cmssw
+scheduler = remoteGlidein
+use_server   = 0
+
+[CMSSW]
+use_dbs3 = 1 
+dbs_url                 = phys03
+datasetpath             = $dataset
+pset                    = ../cfg/epetadeco_cent4050_cfg.py
+total_number_of_lumis   = -1 
+lumis_per_job     = $njobs 
+output_file = epetadeco.root
+
+[USER]
+copy_data               = 1
+storage_element         = T2_US_MIT
+
+user_remote_dir = $pdname/EPEtaDeco_cent4050_$tag
+ui_working_dir = $pdname/EPEtaDeco_cent4050_$tag
+check_user_remote_dir   = 0
+EOF
+
+cat > crab_epetadeco_cent5060.cfg << EOF 
+[CRAB]
+jobtype = cmssw
+scheduler = remoteGlidein
+use_server   = 0
+
+[CMSSW]
+use_dbs3 = 1 
+dbs_url                 = phys03
+datasetpath             = $dataset
+pset                    = ../cfg/epetadeco_cent5060_cfg.py
+total_number_of_lumis   = -1 
+lumis_per_job     = $njobs 
+output_file = epetadeco.root
+
+[USER]
+copy_data               = 1
+storage_element         = T2_US_MIT
+
+user_remote_dir = $pdname/EPEtaDeco_cent5060_$tag
+ui_working_dir = $pdname/EPEtaDeco_cent5060_$tag
+check_user_remote_dir   = 0
+EOF
+
+cat > submit_epetadeco << EOF 
+crab -create -submit -cfg crab_epetadeco_cent5060.cfg
+crab -create -submit -cfg crab_epetadeco_cent4050.cfg
+crab -create -submit -cfg crab_epetadeco_cent3040.cfg
+crab -create -submit -cfg crab_epetadeco_cent2030.cfg
+crab -create -submit -cfg crab_epetadeco_cent1020.cfg
+crab -create -submit -cfg crab_epetadeco_cent510.cfg
+crab -create -submit -cfg crab_epetadeco_cent05.cfg
+crab -create -submit -cfg crab_epetadeco_cent002.cfg
+EOF
+
+chmod u+x submit_epetadeco
+
+hadoopdir=/mnt/hadoop/cms/store/user/davidlw/$pdname
+scratchdir=/export/d00/scratch/davidlw/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged
+cat > merge_epetadeco << EOF 
+nohup hadd -f $scratchdir/epetadeco_cent5060_$tag.root $hadoopdir/EPEtaDeco_cent5060_$tag/*.root > /tmp/nohup.out &
+nohup hadd -f $scratchdir/epetadeco_cent4050_$tag.root $hadoopdir/EPEtaDeco_cent4050_$tag/*.root > /tmp/nohup1.out &
+nohup hadd -f $scratchdir/epetadeco_cent3040_$tag.root $hadoopdir/EPEtaDeco_cent3040_$tag/*.root > /tmp/nohup2.out &
+nohup hadd -f $scratchdir/epetadeco_cent2030_$tag.root $hadoopdir/EPEtaDeco_cent2030_$tag/*.root > /tmp/nohup3.out &
+nohup hadd -f $scratchdir/epetadeco_cent1020_$tag.root $hadoopdir/EPEtaDeco_cent1020_$tag/*.root > /tmp/nohup4.out &
+nohup hadd -f $scratchdir/epetadeco_cent510_$tag.root $hadoopdir/EPEtaDeco_cent510_$tag/*.root > /tmp/nohup5.out &
+nohup hadd -f $scratchdir/epetadeco_cent05_$tag.root $hadoopdir/EPEtaDeco_cent05_$tag/*.root > /tmp/nohup6.out &
+nohup hadd -f $scratchdir/epetadeco_cent002_$tag.root $hadoopdir/EPEtaDeco_cent002_$tag/*.root > /tmp/nohup7.out &
+EOF
+
+chmod u+x merge_epetadeco
