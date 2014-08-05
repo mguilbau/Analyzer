@@ -90,8 +90,8 @@ void JetChemistryAnalyzerFWLite::FillHistsSignal(const DiHadronCorrelationEvent&
      for(unsigned int n=0;n<ntrgsize;n++)
      {
        TLorentzVector pvector_trg = (eventcorr.pVect_trg[i])[n];	  
-       double effweight_trg = (eventcorr.effVect_trg[i])[n];
-       double chg_trg = (eventcorr.chgVect_trg[i])[n];
+//       double effweight_trg = (eventcorr.effVect_trg[i])[n];
+//       double chg_trg = (eventcorr.chgVect_trg[i])[n];
        double eta_trg = pvector_trg.Eta();
        double phi_trg = pvector_trg.Phi();
        double pt_trg = pvector_trg.Pt();
@@ -100,8 +100,8 @@ void JetChemistryAnalyzerFWLite::FillHistsSignal(const DiHadronCorrelationEvent&
        for(unsigned int m=0;m<nasssize;m++)
        {
          TLorentzVector pvector_ass = (eventcorr.pVect_ass[0])[m];
-         double effweight_ass = (eventcorr.effVect_ass[0])[m];
-         double chg_ass = (eventcorr.chgVect_ass[0])[m];
+//         double effweight_ass = (eventcorr.effVect_ass[0])[m];
+//         double chg_ass = (eventcorr.chgVect_ass[0])[m];
          double eta_ass = pvector_ass.Eta();
          double phi_ass = pvector_ass.Phi();
          double pt_ass = pvector_ass.Pt();    

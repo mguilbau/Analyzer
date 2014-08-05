@@ -125,7 +125,7 @@ class DiHadronCorrelationMultiBase : public edm::EDAnalyzer {
    edm::Service<TFileService> theOutputs;
 
    // histograms
-   TH3D*  hEffWeight;
+   TH2D*  hEffWeight;
    TH1D*  hTrgWeight;
    TH1D*  hNVtx;
    TH2D*  hNVtxVsNMult;

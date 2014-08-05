@@ -189,7 +189,7 @@ void DiHadronCorrelationMultiBaseFWLite::Analyze(int ievt)
   if((hiCentrality<cutPara.centmin || hiCentrality>=cutPara.centmax) && (cutPara.centmin!=-1 || cutPara.centmax!=-1)) return;
 
   // Select vertex
-  double zvtxbincentertmp=0;
+//  double zvtxbincentertmp=0;
   if(cutPara.IsVtxSel)
   {
     GetVertices();
@@ -197,7 +197,7 @@ void DiHadronCorrelationMultiBaseFWLite::Analyze(int ievt)
     double yVtxtmp = yVtx-cutPara.yvtxcenter;
     double xVtxtmp = xVtx-cutPara.xvtxcenter;
     double rhotmp = sqrt(xVtxtmp*xVtxtmp+yVtxtmp*yVtxtmp);
-    zvtxbincentertmp = (int)((zVtxtmp-cutPara.zvtxmin)/cutPara.zvtxbin)*cutPara.zvtxbin+cutPara.zvtxmin+cutPara.zvtxbin/2;
+//    zvtxbincentertmp = (int)((zVtxtmp-cutPara.zvtxmin)/cutPara.zvtxbin)*cutPara.zvtxbin+cutPara.zvtxmin+cutPara.zvtxbin/2;
     if( zVtxtmp<cutPara.zvtxmin || zVtxtmp>cutPara.zvtxmax || rhotmp<cutPara.rhomin || rhotmp>cutPara.rhomax ) return;
     if(cutPara.IsGenVtx)
     {
@@ -435,18 +435,19 @@ void DiHadronCorrelationMultiBaseFWLite::Analyze(int ievt)
   hMultRawTrigVsAssoc->Fill(nMultAll_trg,nMultAll_ass);
 
   // event shape
+/*
   double thrust = 0;
   double recoil = 0;
   double sphericity = 0;
-//  if(cutPara.IsDoEventShape)
-//  {
-//    EventShape t((eventcorr->pVect_all).begin(), (eventcorr->pVect_all).end());
-//    t.SetTran();
-//    thrust = t.thrust();
-//    recoil = t.recoil();
-//    sphericity = t.sphericity();
-//  }
-
+  if(cutPara.IsDoEventShape)
+  {
+    EventShape t((eventcorr->pVect_all).begin(), (eventcorr->pVect_all).end());
+    t.SetTran();
+    thrust = t.thrust();
+    recoil = t.recoil();
+    sphericity = t.sphericity();
+  }
+*/
   // Fill gen-level information ntuple
   if(cutPara.IsHIGenInfoNtuple)
   {
@@ -472,7 +473,7 @@ void DiHadronCorrelationMultiBaseFWLite::Analyze(int ievt)
     // get beamspot
     fwlite::Handle<reco::BeamSpot> beamspot;
     beamspot.getByLabel(event, "offlineBeamSpot");
-
+/*
     float ntupledata[15]={0};
     ntupledata[0] = event.id().run();
     ntupledata[1] = event.luminosityBlock();
@@ -493,6 +494,7 @@ void DiHadronCorrelationMultiBaseFWLite::Analyze(int ievt)
     ntupledata[13] = sphericity;    
     ntupledata[14] = recoil;
 //    eventNtuple->Fill(ntupledata);
+*/
   }
 
 //  if(cutPara.IsInvMass) FillHistsInvariantMass(*eventcorr);
@@ -807,9 +809,11 @@ void DiHadronCorrelationMultiBaseFWLite::GetMult()
        double dxyvtx = trk.dxy(bestvtx);      
        double dzerror = sqrt(trk.dzError()*trk.dzError()+zVtxError*zVtxError);
        double dxyerror = sqrt(trk.d0Error()*trk.d0Error()+xVtxError*yVtxError);
+/*
        int nhits = trk.numberOfValidHits();
        double chi2n = trk.normalizedChi2();
        int nlayers = trk.hitPattern().trackerLayersWithMeasurement();
+*/
        // standard quality cuts
 
        if(cutPara.IsPPTrkQuality)
@@ -941,8 +945,8 @@ void DiHadronCorrelationMultiBaseFWLite::LoopTracks(bool istrg, TString input, i
    double leadeta = 0;
    double leadphi = 0;
    double leadcharge = 0;
-*/
    int nMultTmp = 0;
+*/
 
    //----- loop over tracks -----
    fwlite::Handle<std::vector<reco::Track> > tracks;
@@ -977,10 +981,12 @@ void DiHadronCorrelationMultiBaseFWLite::LoopTracks(bool istrg, TString input, i
      double vz = trk.vz();
      int nhits = trk.numberOfValidHits();
      int algo = trk.algo();
-     double chi2 = trk.chi2();
      double charge = trk.charge();
+     double chi2 = trk.chi2();
+/*
      double chi2n = trk.normalizedChi2();
      int nlayers = trk.hitPattern().trackerLayersWithMeasurement();
+*/
 
 // standard track quality cuts  
      if(cutPara.IsPPTrkQuality)

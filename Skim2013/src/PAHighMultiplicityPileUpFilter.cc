@@ -96,9 +96,9 @@ PAHighMultiplicityPileUpFilter::filter(edm::Event& iEvent, const edm::EventSetup
    for (unsigned int i =1; i<vsorted.size(); i++)
    {
      double dz = fabs( vsorted[i].z() - vsorted[0].z() );
-     double dx = fabs( vsorted[i].x() - vsorted[0].x() );
-     double dy = fabs( vsorted[i].y() - vsorted[0].y() );
-     double dxy  = sqrt ( dx*dx + dy*dy );
+//     double dx = fabs( vsorted[i].x() - vsorted[0].x() );
+//     double dy = fabs( vsorted[i].y() - vsorted[0].y() );
+//     double dxy  = sqrt ( dx*dx + dy*dy );
      double nTrk = vsorted[i].tracksSize();
 
      if(nTrk>func2D_->Eval(dz,vsorted[0].tracksSize()) && dz>0.2) accepted = false; 

@@ -77,10 +77,10 @@ void EbyEFlowAnalyzer::FillHistsSignal(const DiHadronCorrelationEvent& eventcorr
   {
     TLorentzVector pvector_trg = (eventcorr.pVect_trg[0])[ntrg];	  
     double effweight_trg = (eventcorr.effVect_trg[0])[ntrg];
-    double chg_trg = (eventcorr.chgVect_trg[0])[ntrg];
+//    double chg_trg = (eventcorr.chgVect_trg[0])[ntrg];
     double eta_trg = pvector_trg.Eta();
     double phi_trg = pvector_trg.Phi();
-    double pt_trg = pvector_trg.Pt();
+//    double pt_trg = pvector_trg.Pt();
 
     if(fabs(eta_trg)>3)
     {

@@ -350,11 +350,11 @@ void V0Validator::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetu
 
   edm::Handle<reco::VertexCollection> vertices;
   iEvent.getByLabel("offlinePrimaryVertices",vertices);
-  double bestvz=-999.9, bestvx=-999.9, bestvy=-999.9;
-  double bestvzError=-999.9, bestvxError=-999.9, bestvyError=-999.9;
+  double bestvz=-999.9;// bestvx=-999.9, bestvy=-999.9;
+//  double bestvzError=-999.9, bestvxError=-999.9, bestvyError=-999.9;
   const reco::Vertex & vtx = (*vertices)[0];
-  bestvz = vtx.z(); bestvx = vtx.x(); bestvy = vtx.y();
-  bestvzError = vtx.zError(); bestvxError = vtx.xError(); bestvyError = vtx.yError();
+  bestvz = vtx.z(); //bestvx = vtx.x(); bestvy = vtx.y();
+//  bestvzError = vtx.zError(); bestvxError = vtx.xError(); bestvyError = vtx.yError();
 
   if(bestvz < -15.0 || bestvz>15.0) return;
 
@@ -855,7 +855,7 @@ void V0Validator::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetu
     TrackingParticle* itp1 = const_cast<TrackingParticle*>(tpr1.get());
     if(fabs(itp1->pdgId()) == 3122)
     {
-      int status = itp1->status();
+//      int status = itp1->status();
       bool isSecLam=0;
       for( TrackingVertex::tp_iterator genmother = itp1->parentVertex()->sourceTracks_begin();
                          genmother != itp1->parentVertex()->sourceTracks_end(); genmother++) {
@@ -894,7 +894,7 @@ void V0Validator::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetu
 //	&& fabs(itp1->momentum().eta()) < 2.4
 //	&& sqrt( itp1->momentum().perp2() ) > 0.0) {
     ) {
-      int nhits1 = itp1->trackPSimHit().size();
+//      int nhits1 = itp1->trackPSimHit().size();
       bool isLambda = false;
       if( itp1->pdgId() == 2212 ) isLambda = true;
       if( itp1->parentVertex()->nDaughterTracks() == 2 ) {
@@ -918,7 +918,7 @@ void V0Validator::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetu
 	//	  && sqrt(itp2->momentum().perp2()) > 0.0) {
               ) {
 		if(itp2->parentVertex() == itp1->parentVertex()) {
-                  int nhits2 = itp2->trackPSimHit().size();
+//                  int nhits2 = itp2->trackPSimHit().size();
 
 		  // Found a good pair of Lambda daughters
 		  TrackingVertexRef piCand2Vertex = itp2->parentVertex();

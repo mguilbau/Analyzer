@@ -104,11 +104,11 @@ void V0Selector::produce(edm::Event& iEvent, const edm::EventSetup& iSetup) {
 
        //pt,mass
        double eta = v0cand->eta();
-       double pt = v0cand->pt();
+//       double pt = v0cand->pt();
        double px = v0cand->px();
        double py = v0cand->py();
        double pz = v0cand->pz();
-       double mass = v0cand->mass();
+//       double mass = v0cand->mass();
 
        if(eta > etaCutMax_ || eta < etaCutMin_) continue;
 
@@ -121,12 +121,11 @@ void V0Selector::produce(edm::Event& iEvent, const edm::EventSetup& iSetup) {
        if(nhit1 <= nHitCut1_ || nhit2 <= nHitCut2_) continue;
 
        //algo
-       double algo1 = dau1->algo();
-       double algo2 = dau2->algo();
+//       double algo1 = dau1->algo();
+//       double algo2 = dau2->algo();
 
        //dau eta
-
-       double eta2 = dau2->eta();
+//       double eta2 = dau2->eta();
 
        //DCA
        math::XYZPoint bestvtx(bestvx,bestvy,bestvz);
@@ -168,9 +167,9 @@ void V0Selector::produce(edm::Event& iEvent, const edm::EventSetup& iSetup) {
        if(dlos < decayLSigCut_) continue;
 
        double pd1 = dau1->p();
-       double charged1 = dau1->charge();
+//       double charged1 = dau1->charge();
        double pd2 = dau2->p();
-       double charged2 = dau2->charge();
+//       double charged2 = dau2->charge();
 
        TVector3 dauvec1(dau1->px(),dau1->py(),dau1->pz());
        TVector3 dauvec2(dau2->px(),dau2->py(),dau2->pz());

@@ -107,7 +107,7 @@ DiHadronCorrelationMultiBase::DiHadronCorrelationMultiBase(const edm::ParameterS
   TString eff_filename(iConfig.getParameter<string>("EffFileName")); 
   edm::FileInPath fip(Form("FlowCorrAna/DiHadronCorrelationAnalyzer/data/%s",eff_filename.Data()));
   TFile f(fip.fullPath().c_str(),"READ");
-  hEffWeight = (TH2F*)f.Get("rTotalEff3D");
+  hEffWeight = (TH2D*)f.Get("rTotalEff3D");
 }
 
 //DiHadronCorrelationMultiBase::~DiHadronCorrelationMultiBase()
@@ -216,7 +216,7 @@ void DiHadronCorrelationMultiBase::analyze(const edm::Event& iEvent, const edm::
   eventcorr = new DiHadronCorrelationEvent();
 
   // Select vertex
-  double zvtxbincentertmp=0;
+//  double zvtxbincentertmp=0;
   if(cutPara.IsVtxSel)
   {
     GetVertices(iEvent,iSetup);
@@ -228,7 +228,7 @@ void DiHadronCorrelationMultiBase::analyze(const edm::Event& iEvent, const edm::
     double yVtxtmp = yVtx-cutPara.yvtxcenter;
     double xVtxtmp = xVtx-cutPara.xvtxcenter;
     double rhotmp = sqrt(xVtxtmp*xVtxtmp+yVtxtmp*yVtxtmp);
-    zvtxbincentertmp = (int)((zVtxtmp-cutPara.zvtxmin)/cutPara.zvtxbin)*cutPara.zvtxbin+cutPara.zvtxmin+cutPara.zvtxbin/2;
+//    zvtxbincentertmp = (int)((zVtxtmp-cutPara.zvtxmin)/cutPara.zvtxbin)*cutPara.zvtxbin+cutPara.zvtxmin+cutPara.zvtxbin/2;
     if( zVtxtmp<cutPara.zvtxmin || zVtxtmp>cutPara.zvtxmax || rhotmp<cutPara.rhomin || rhotmp>cutPara.rhomax ) return;
   }
 
@@ -378,9 +378,11 @@ void DiHadronCorrelationMultiBase::GetMult(const edm::Event& iEvent, const edm::
        double dxyvtx = trk.dxy(bestvtx);      
        double dzerror = sqrt(trk.dzError()*trk.dzError()+zVtxError*zVtxError);
        double dxyerror = sqrt(trk.d0Error()*trk.d0Error()+xVtxError*yVtxError);
+/*
        int nhits = trk.numberOfValidHits();
        double chi2n = trk.normalizedChi2();
        int nlayers = trk.hitPattern().trackerLayersWithMeasurement();
+*/
        // standard quality cuts
 
        if(cutPara.IsPPTrkQuality)
@@ -471,6 +473,7 @@ void DiHadronCorrelationMultiBase::LoopTracks(const edm::Event& iEvent, const ed
      double dxyvtx = trk.dxy(bestvtx);
      double dzerror = sqrt(trk.dzError()*trk.dzError()+zVtxError*zVtxError);
      double dxyerror = sqrt(trk.d0Error()*trk.d0Error()+xVtxError*yVtxError);
+/*
      double pterror = trk.ptError();
      double vx = trk.vx();
      double vy = trk.vy();
@@ -478,9 +481,10 @@ void DiHadronCorrelationMultiBase::LoopTracks(const edm::Event& iEvent, const ed
      int nhits = trk.numberOfValidHits();
      int algo = trk.algo();
      double chi2 = trk.chi2();
-     double charge = trk.charge();
      double chi2n = trk.normalizedChi2();
      int nlayers = trk.hitPattern().trackerLayersWithMeasurement();
+*/
+     double charge = trk.charge();
 
      if(cutPara.IsPPTrkQuality)
      {
@@ -573,22 +577,23 @@ void DiHadronCorrelationMultiBase::LoopV0Candidates(const edm::Event& iEvent, co
      double pyd1 = dau1->py();
      double pzd1 = dau1->pz();
      double pd1 = dau1->p();
-     double charged1 = dau1->charge();
+//     double charged1 = dau1->charge();
      double pxd2 = dau2->px();
      double pyd2 = dau2->py();
      double pzd2 = dau2->pz();
      double pd2 = dau2->p();
-     double charged2 = dau2->charge();
+//     double charged2 = dau2->charge();
 
      TVector3 dauvec1(pxd1,pyd1,pzd1);
      TVector3 dauvec2(pxd2,pyd2,pzd2);
+/*
      double qT = pd1*sin(dauvec1.Angle(secvec));
      double pll1 = pd1*cos(dauvec1.Angle(secvec));
      double pll2 = pd2*cos(dauvec2.Angle(secvec));
-     double alpha = 0;
+     double alpha;
      if(charged1>0 && charged2<0) alpha = (pll1-pll2)/(pll1+pll2);
      else alpha = (pll2-pll1)/(pll1+pll2);
-
+*/
      TVector3 dauvecsum(dauvec1+dauvec2);
 //     double v0masspipi = sqrt((sqrt(0.13957*0.13957+pd1*pd1)+sqrt(0.13957*0.13957+pd2*pd2))*(sqrt(0.13957*0.13957+pd1*pd1)+sqrt(0.13957*0.13957+pd2*pd2))-dauvecsum.Mag2());
      double v0masspipi = sqrt((sqrt(0.938272*0.938272+pd1*pd1)+sqrt(0.13957*0.13957+pd2*pd2))*(sqrt(0.938272*0.938272+pd1*pd1)+sqrt(0.13957*0.13957+pd2*pd2))-dauvecsum.Mag2());
@@ -627,7 +632,7 @@ void DiHadronCorrelationMultiBase::LoopV0Candidates(const edm::Event& iEvent, co
          double pt  = trk.pt();
          if(pt<0.0001) continue;
          double eta = trk.eta();
-         double phi = trk.phi();
+//         double phi = trk.phi();
 
          // tracks' proximity to best vertex
          math::XYZPoint bestvtx(xVtx,yVtx,zVtx);
@@ -635,7 +640,7 @@ void DiHadronCorrelationMultiBase::LoopV0Candidates(const edm::Event& iEvent, co
          double dxyvtx = trk.dxy(bestvtx);
          double dzerror = sqrt(trk.dzError()*trk.dzError()+zVtxError*zVtxError);
          double dxyerror = sqrt(trk.d0Error()*trk.d0Error()+xVtxError*yVtxError);
-         double charge = trk.charge();
+//         double charge = trk.charge();
 
          if(cutPara.IsPPTrkQuality)
          {
@@ -804,7 +809,7 @@ int DiHadronCorrelationMultiBase::GetCentralityBin(const edm::Event& iEvent, con
   if(!cent) cent = new CentralityProvider(iSetup);
   cent->newEvent(iEvent,iSetup);
 
-  double hf = cent->raw()->EtHFhitSum();
+//  double hf = cent->raw()->EtHFhitSum();
   double hft = cent->raw()->EtHFtowerSum();
   double npixel = cent->raw()->multiplicityPixel();
   double zdc = cent->raw()->zdcSum();

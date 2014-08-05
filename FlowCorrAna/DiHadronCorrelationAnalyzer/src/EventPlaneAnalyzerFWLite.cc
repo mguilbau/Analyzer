@@ -48,8 +48,8 @@ void EventPlaneAnalyzerFWLite::Process()
 
 void EventPlaneAnalyzerFWLite::MakeHists()
 {
-  double etabinwidth = (cutPara.etatrgmax-cutPara.etaassmin-cutPara.etatrgmin+cutPara.etaassmax)/NEtaBins;
-  double phibinwidth = 2*PI/NPhiBins;
+//  double etabinwidth = (cutPara.etatrgmax-cutPara.etaassmin-cutPara.etatrgmin+cutPara.etaassmax)/NEtaBins;
+//  double phibinwidth = 2*PI/NPhiBins;
 
   for(int i=0;i<(int)(cutPara.pttrgmin.size());i++)
   {
@@ -86,9 +86,9 @@ void EventPlaneAnalyzerFWLite::FillHistsSignal(const DiHadronCorrelationEvent& e
    for(unsigned int n=0;n<nasssize;n++)
    {
      TLorentzVector pvector = (eventcorr.pVect_ass[0])[n];
-     double eta = pvector.Eta();
+//     double eta = pvector.Eta();
      double phi = pvector.Phi();
-     double pt  = pvector.Pt();
+//     double pt  = pvector.Pt();
 //     sumcos += (pt-ptMean2_ass[0]/ptMean_ass[0]) * cos(phi);
 //     sumsin += (pt-ptMean2_ass[0]/ptMean_ass[0]) * sin(phi);
      sumcos += cos(phi);
@@ -104,11 +104,11 @@ void EventPlaneAnalyzerFWLite::FillHistsSignal(const DiHadronCorrelationEvent& e
      for(unsigned int n=0;n<ntrgsize;n++)
      {
        TLorentzVector pvector = (eventcorr.pVect_trg[i])[n];	  
-       double effweight = (eventcorr.effVect_trg[i])[n];
-       double chg = (eventcorr.chgVect_trg[i])[n];
+//       double effweight = (eventcorr.effVect_trg[i])[n];
+//       double chg = (eventcorr.chgVect_trg[i])[n];
        double eta = pvector.Eta();
        double phi = pvector.Phi();
-       double pt = pvector.Pt();
+//       double pt = pvector.Pt();
 //       double deltaPhi = phi-eventcorr.epangle;
        double deltaPhi = phi-psi1;
        if(deltaPhi>PI) deltaPhi=deltaPhi-2*PI;
