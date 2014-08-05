@@ -234,11 +234,11 @@ void DiHadronCorrelationMultiAnalyzerFWLite::FillHistsSignal(const DiHadronCorre
       unsigned int ntrgsize = eventcorr.pVect_trg[itrg].size();
       unsigned int nasssize = eventcorr.pVect_ass[jass].size();
       double nMultCorr_trg = eventcorr.nMultCorrVect_trg[itrg];
-      double nMultCorr_ass = eventcorr.nMultCorrVect_ass[jass];
+//      double nMultCorr_ass = eventcorr.nMultCorrVect_ass[jass];
 
       double sumcosn[15]={0};
-      double sumsinn[15]={0};
-      double sumrhon[15]={0};
+//      double sumsinn[15]={0};
+//      double sumrhon[15]={0};
       double npairs[15]={0};
       for(unsigned int ntrg=0;ntrg<ntrgsize;ntrg++)
       {
@@ -334,10 +334,10 @@ void DiHadronCorrelationMultiAnalyzerFWLite::FillHistsBackground(const DiHadronC
       unsigned int ntrgsize = eventcorr_trg.pVect_trg[itrg].size();
       unsigned int nasssize = eventcorr_ass.pVect_ass[jass].size();
       double nMultCorr_trg = eventcorr_trg.nMultCorrVect_trg[itrg];
-      double nMultCorr_ass = eventcorr_ass.nMultCorrVect_ass[jass];
+//      double nMultCorr_ass = eventcorr_ass.nMultCorrVect_ass[jass];
 
       double sumcosn[15]={0};
-      double sumsinn[15]={0};
+//      double sumsinn[15]={0};
       double npairs[15]={0};
       for(unsigned int ntrg=0;ntrg<ntrgsize;ntrg++)
       {

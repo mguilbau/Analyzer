@@ -138,10 +138,12 @@ void EbyEFlowAnalyzerFWLite::FillHistsSignal(const DiHadronCorrelationEvent& eve
     {
       TLorentzVector pvector_trg = (eventcorr.pVect_trg[itrg])[ntrg];	  
       double effweight_trg = (eventcorr.effVect_trg[itrg])[ntrg];
+/*
       double chg_trg = (eventcorr.chgVect_trg[itrg])[ntrg];
       double eta_trg = pvector_trg.Eta();
-      double phi_trg = pvector_trg.Phi();
       double pt_trg = pvector_trg.Pt();
+*/
+      double phi_trg = pvector_trg.Phi();
 
       for(int nn = 0; nn<5; nn++)
       {
@@ -157,10 +159,12 @@ void EbyEFlowAnalyzerFWLite::FillHistsSignal(const DiHadronCorrelationEvent& eve
     {
       TLorentzVector pvector_ass = (eventcorr.pVect_ass[itrg])[nass];
       double effweight_ass = (eventcorr.effVect_ass[itrg])[nass];
+/*
       double chg_ass = (eventcorr.chgVect_ass[itrg])[nass];
       double eta_ass = pvector_ass.Eta();
-      double phi_ass = pvector_ass.Phi();
       double pt_ass = pvector_ass.Pt();
+*/
+      double phi_ass = pvector_ass.Phi();
 
       for(int nn = 0; nn<5; nn++)
       {

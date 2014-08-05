@@ -89,8 +89,8 @@ void EPEtaDecoAnalyzerFWLite::FillHistsSignal(const DiHadronCorrelationEvent& ev
 {
     unsigned int ntrgsize = eventcorr.pVect_trg[0].size();
     unsigned int nasssize = eventcorr.pVect_ass[0].size();
-    double nMultCorr_trg = eventcorr.nMultCorrVect_trg[0];
-    double nMultCorr_ass = eventcorr.nMultCorrVect_ass[0];
+//    double nMultCorr_trg = eventcorr.nMultCorrVect_trg[0];
+//    double nMultCorr_ass = eventcorr.nMultCorrVect_ass[0];
 
     double sumcosn[MAXETATRGBINS][15]={{0.0}};
     double npairs[MAXETATRGBINS][15]={{0.0}};
@@ -101,23 +101,23 @@ void EPEtaDecoAnalyzerFWLite::FillHistsSignal(const DiHadronCorrelationEvent& ev
       double chg_trg = (eventcorr.chgVect_trg[0])[ntrg];
       double eta_trg = pvector_trg.Eta();
       double phi_trg = pvector_trg.Phi();
-      double pt_trg = pvector_trg.Pt();
+//      double pt_trg = pvector_trg.Pt();
 
       for(unsigned int nass=0;nass<nasssize;nass++)
       {
         TLorentzVector pvector_ass = (eventcorr.pVect_ass[0])[nass];   
         double effweight_ass = (eventcorr.effVect_ass[0])[nass];
         double chg_ass = (eventcorr.chgVect_ass[0])[nass];
-        double eta_ass = pvector_ass.Eta();
+//        double eta_ass = pvector_ass.Eta();
         double phi_ass = pvector_ass.Phi();
-        double pt_ass = pvector_ass.Pt();
+//        double pt_ass = pvector_ass.Pt();
 
         // check charge sign
         if( (checksign == 0) && (chg_trg != chg_ass)) continue;
         if( (checksign == 1) && (chg_trg == chg_ass)) continue;
 
         double deltaPhi=GetDeltaPhi(phi_trg,phi_ass);
-        double deltaEta=GetDeltaEta(eta_trg,eta_ass);
+//        double deltaEta=GetDeltaEta(eta_trg,eta_ass);
 
 //        if(deltaEta==0.0 && deltaPhi==0.0 && pt_trg==pt_ass) continue; // two particles are identical
 
@@ -148,8 +148,8 @@ void EPEtaDecoAnalyzerFWLite::FillHistsBackground(const DiHadronCorrelationEvent
 {
       unsigned int ntrgsize = eventcorr_trg.pVect_trg[0].size();
       unsigned int nasssize = eventcorr_ass.pVect_ass[0].size();
-      double nMultCorr_trg = eventcorr_trg.nMultCorrVect_trg[0];
-      double nMultCorr_ass = eventcorr_ass.nMultCorrVect_ass[0];
+//      double nMultCorr_trg = eventcorr_trg.nMultCorrVect_trg[0];
+//      double nMultCorr_ass = eventcorr_ass.nMultCorrVect_ass[0];
 
       double sumcosn[MAXETATRGBINS][15]={{0.0}};
       double npairs[MAXETATRGBINS][15]={{0.0}};
@@ -160,26 +160,26 @@ void EPEtaDecoAnalyzerFWLite::FillHistsBackground(const DiHadronCorrelationEvent
         double chg_trg = (eventcorr_trg.chgVect_trg[0])[ntrg];
         double eta_trg = pvector_trg.Eta();
         double phi_trg = pvector_trg.Phi();
-        double pt_trg = pvector_trg.Pt();
+//        double pt_trg = pvector_trg.Pt();
 
         for(unsigned int nass=0;nass<nasssize;nass++)
         {
           TLorentzVector pvector_ass = (eventcorr_ass.pVect_ass[0])[nass];   
           double effweight_ass = (eventcorr_ass.effVect_ass[0])[nass];
           double chg_ass = (eventcorr_ass.chgVect_ass[0])[nass];
-          double eta_ass = pvector_ass.Eta();
+//          double eta_ass = pvector_ass.Eta();
           double phi_ass = pvector_ass.Phi();
-          double pt_ass = pvector_ass.Pt();
+//          double pt_ass = pvector_ass.Pt();
 
           // check charge sign
           if( (checksign == 0) && (chg_trg != chg_ass)) continue;
           if( (checksign == 1) && (chg_trg == chg_ass)) continue;
 
           double deltaPhi=GetDeltaPhi(phi_trg,phi_ass);
-          double deltaEta=GetDeltaEta(eta_trg,eta_ass);
+//          double deltaEta=GetDeltaEta(eta_trg,eta_ass);
 
           // total weight
-          double effweight = effweight_trg * effweight_ass * nMultCorr_trg;
+          double effweight = effweight_trg * effweight_ass;
 
           int ietabin = (int)((eta_trg+2.4)/ETATRGBINWIDTH);
           if(cutPara.etaassmin<0 && cutPara.etaassmax<0) ietabin = (int)((2.4-eta_trg)/ETATRGBINWIDTH);
