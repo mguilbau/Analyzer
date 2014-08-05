@@ -108,14 +108,14 @@ epetadeco_ana_HI_hfm_cent5060 = epetadeco_ana_HI_hfm.clone(
 )
 
 epetadeco_ana_pPb_hfp = epetadeco_ana.clone(
-  etaassmin = cms.double(3.0),
-  etaassmax = cms.double(4.0)
+  etaassmin = cms.double(4.0),
+  etaassmax = cms.double(5.0)
 #  etaassmin = cms.double(3.0),
 #  etaassmax = cms.double(4.0)
 )
 epetadeco_ana_pPb_hfm = epetadeco_ana.clone(
-  etaassmin = cms.double(-4.0),
-  etaassmax = cms.double(-3.0)
+  etaassmin = cms.double(-5.0),
+  etaassmax = cms.double(-4.0)
 #  etaassmin = cms.double(-4.0),
 #  etaassmax = cms.double(-3.0)
 )

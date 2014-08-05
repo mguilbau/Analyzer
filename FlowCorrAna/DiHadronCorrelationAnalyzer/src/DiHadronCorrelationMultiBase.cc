@@ -516,13 +516,14 @@ void DiHadronCorrelationMultiBase::LoopCaloTower(const edm::Event& iEvent, const
      //const reco::Candidate & calotower = (*calotowers)[it];
      const CaloTower & calotower = (*calotowers)[it];
 
+     double et  = calotower.et();
+     if(et<0.01) continue;        
      double eta = calotower.eta();
      double phi = calotower.phi();
-     double et  = calotower.et();
 //     double et  = calotower.energy();
      double charge = 0;
      
-     if(calotower.energy()<3 && fabs(eta)>3) continue;
+//     if(calotower.energy()<3 && fabs(eta)>3) continue;
 
      double effweight = 1.0;
 
