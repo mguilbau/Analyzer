@@ -21,11 +21,19 @@ class EbyEFlowAnalyzer : public DiHadronCorrelationMultiBase {
 
    // histograms
    TH1D* hDeltaZvtx;
+
+   TH2D* hQ2XPvsN;
+   TH2D* hQ2YPvsN;
+   TH1D* hQ2XDiff;
+   TH1D* hQ2YDiff;
+   TH2D* hQ2XYDiff;
+   TH2D* hQ2XY;
+/*
    TH2D* hQ2HFPVsHFM;
    TH2D* hQ2HFPVsMid;
    TH2D* hQ2HFMVsMid;
-
    TNtuple* q2Ntuple;
+*/
 
    virtual void beginRun(const edm::Run&, const edm::EventSetup&);
    virtual void endRun(const edm::Run&, const edm::EventSetup&);

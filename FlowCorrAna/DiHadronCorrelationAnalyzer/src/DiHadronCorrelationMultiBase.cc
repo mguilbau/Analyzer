@@ -24,6 +24,7 @@
 
 DiHadronCorrelationMultiBase::DiHadronCorrelationMultiBase(const edm::ParameterSet& iConfig) :
   cent(0),
+  hEffWeight(0),
   hTrgWeight(0),
   nMult(0),
   nMultAll_trg(0),
@@ -105,6 +106,7 @@ DiHadronCorrelationMultiBase::DiHadronCorrelationMultiBase(const edm::ParameterS
   cutPara.IsEventEngineer = iConfig.getParameter<bool>("IsEventEngineer");
 
   TString eff_filename(iConfig.getParameter<string>("EffFileName")); 
+  if(eff_filename.IsNull()) return;
   edm::FileInPath fip(Form("FlowCorrAna/DiHadronCorrelationAnalyzer/data/%s",eff_filename.Data()));
   TFile f(fip.fullPath().c_str(),"READ");
   hEffWeight = (TH2D*)f.Get("rTotalEff3D");

@@ -5,7 +5,7 @@ process.load("FWCore.MessageService.MessageLogger_cfi")
 process.MessageLogger.cerr.FwkReport.reportEvery = 2000
 
 process.maxEvents = cms.untracked.PSet(
-    input = cms.untracked.int32(10000)
+    input = cms.untracked.int32(-1)
 )
 
 process.source = cms.Source("PoolSource",
@@ -16,7 +16,7 @@ process.source = cms.Source("PoolSource",
                 )
 #                                secondaryFileNames = cms.untracked.vstring('')
                             )
-process.load("FlowCorrAna.DiHadronCorrelationAnalyzer.epetadeco_cff")
+process.load("FlowCorrAna.DiHadronCorrelationAnalyzer.ebyeflow_cff")
 
 process.options = cms.untracked.PSet(
     wantSummary = cms.untracked.bool(True)
@@ -24,13 +24,7 @@ process.options = cms.untracked.PSet(
 
 # Additional output definition
 process.TFileService = cms.Service("TFileService",
-                                   fileName = cms.string('epetadeco.root')
+                                   fileName = cms.string('ebyeflow.root')
                                    )
 
-process.ana = cms.Path(process.epetadeco_ana_220260_seq)
-process.epetadeco_ana_pPb_hfp.nmin = cms.int32(220)
-process.epetadeco_ana_pPb_hfp.nmax = cms.int32(260)
-process.epetadeco_ana_pPb_hfm.nmin = cms.int32(220)
-process.epetadeco_ana_pPb_hfm.nmax = cms.int32(260)
-#process.epetadeco_ana_pPb_hfp.IsCorr = cms.bool(False)
-#process.epetadeco_ana_pPb_hfm.IsCorr = cms.bool(False)
+process.ana = cms.Path(process.ebyeflow_ana_220260_seq)

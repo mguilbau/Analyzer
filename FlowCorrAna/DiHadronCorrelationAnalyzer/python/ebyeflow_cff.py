@@ -1,6 +1,7 @@
 import FWCore.ParameterSet.Config as cms
 
 from FlowCorrAna.DiHadronCorrelationAnalyzer.ebyeflow_cfi import *
+from FlowCorrAna.DiHadronCorrelationAnalyzer.hltFilter_cff import *
 
 ebyeflow_ana_HI = ebyeflow_ana.clone(
   TrgTrackCollection = cms.string('hiLowPtPixelTracks'),
@@ -47,3 +48,11 @@ ebyeflow_ana_HI_cent5060 = ebyeflow_ana_HI.clone(
   centmin = cms.int32(100),
   centmax = cms.int32(120)
 )
+
+ebyeflow_ana_pPb = ebyeflow_ana.clone()
+
+ebyeflow_ana_120150_seq = cms.Sequence(hltHM120150*ebyeflow_ana_pPb)
+ebyeflow_ana_150185_seq = cms.Sequence(hltHM150185*ebyeflow_ana_pPb)
+ebyeflow_ana_185220_seq = cms.Sequence(hltHM185220*ebyeflow_ana_pPb)
+ebyeflow_ana_220260_seq = cms.Sequence(hltHM220*ebyeflow_ana_pPb)
+ebyeflow_ana_260_seq = cms.Sequence(hltHM220*ebyeflow_ana_pPb)
