@@ -13,6 +13,7 @@
 #include <TClonesArray.h>
 #include <TString.h>
 #include <TVector3.h>
+#include <TRandom3.h>
 #include <vector> 
 #include <iostream>
 #include "Math/Vector3D.h"
@@ -84,13 +85,63 @@ void EbyEFlowAnalyzer::FillHistsSignal(const DiHadronCorrelationEvent& eventcorr
   double q2x_n=0; double q2y_n=0; double wsum_n=0;
   double q2x=0; double q2y=0; double wsum=0;
 
-  for(unsigned int ntrg=0;ntrg<ntrgsize;ntrg++)
+  bool flag[5000]={0};
+  for(unsigned int ntrg=0;ntrg<ntrgsize/2;ntrg++)
   {
-    TLorentzVector pvector_trg = (eventcorr.pVect_trg[0])[ntrg];	  
-    double effweight_trg = (eventcorr.effVect_trg[0])[ntrg];
-    double chg_trg = (eventcorr.chgVect_trg[0])[ntrg];
+    int itrg = (int)(gRandom->Rndm()*ntrgsize);
+    if(flag[itrg]) {ntrg--; continue;}
+    flag[itrg]=1;
+
+    TLorentzVector pvector_trg = (eventcorr.pVect_trg[0])[itrg];
+    double effweight_trg = (eventcorr.effVect_trg[0])[itrg];
+//    double chg_trg = (eventcorr.chgVect_trg[0])[itrg];
     double eta_trg = pvector_trg.Eta();
     double phi_trg = pvector_trg.Phi();
+
+    if(fabs(eta_trg)<2.4)
+    {
+        q2x_p = q2x_p + (1.0/effweight_trg)*cos(2*phi_trg);
+        q2y_p = q2y_p + (1.0/effweight_trg)*sin(2*phi_trg);
+        wsum_p = wsum_p + 1.0/effweight_trg;
+    }
+  }
+
+  for(unsigned int ntrg=0;ntrg<ntrgsize;ntrg++)
+  {
+    int itrg=ntrg;
+    if(flag[itrg]) {continue;}
+
+    TLorentzVector pvector_trg = (eventcorr.pVect_trg[0])[itrg];
+    double effweight_trg = (eventcorr.effVect_trg[0])[itrg];
+//    double chg_trg = (eventcorr.chgVect_trg[0])[itrg];
+    double eta_trg = pvector_trg.Eta();
+    double phi_trg = pvector_trg.Phi();
+
+    if(fabs(eta_trg)<2.4)
+    {
+      q2x_n = q2x_n + (1.0/effweight_trg)*cos(2*phi_trg);
+      q2y_n = q2y_n + (1.0/effweight_trg)*sin(2*phi_trg);
+      wsum_n = wsum_n + 1.0/effweight_trg;
+    }
+  }
+
+  q2x=q2x_p+q2x_n;
+  q2y=q2y_p+q2y_n;
+  wsum = wsum_p + wsum_n;
+
+/*
+  for(unsigned int ntrg=0;ntrg<ntrgsize;ntrg++)
+  {
+    int itrg = (int)(gRandom->Rndm()*ntrgsize);
+    if(flag[itrg]) {ntrg--; continue;}
+    flag[itrg]=1;
+
+    TLorentzVector pvector_trg = (eventcorr.pVect_trg[0])[itrg]; 
+    double effweight_trg = (eventcorr.effVect_trg[0])[itrg];
+    double chg_trg = (eventcorr.chgVect_trg[0])[itrg];
+    double eta_trg = pvector_trg.Eta();
+    double phi_trg = pvector_trg.Phi();
+
 //    double pt_trg = pvector_trg.Pt();
 
     if(fabs(eta_trg)<2.4)
@@ -111,6 +162,9 @@ void EbyEFlowAnalyzer::FillHistsSignal(const DiHadronCorrelationEvent& eventcorr
       q2y=q2y_p+q2y_n;
       wsum = wsum_p + wsum_n;
     }
+*/
+
+
 /*
     if(fabs(eta_trg)>3)
     {
@@ -137,7 +191,9 @@ void EbyEFlowAnalyzer::FillHistsSignal(const DiHadronCorrelationEvent& eventcorr
       wsum_mid = wsum_mid + 1.0/effweight_trg;
     }
 */
-  }
+
+//  }
+
 /*
   q2x_hf = q2x_hf / wsum_hf;
   q2y_hf = q2y_hf / wsum_hf;
