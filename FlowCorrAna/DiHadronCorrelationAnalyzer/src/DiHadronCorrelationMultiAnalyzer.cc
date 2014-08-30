@@ -120,7 +120,7 @@ void DiHadronCorrelationMultiAnalyzer::endRun(const edm::Run& iRun, const edm::E
   cout<< "Start running correlation analysis!" << endl;
   for(unsigned int i=0;i<eventcorrArray.size();i++)
   {
-    if( i % 1 == 0 ) cout << "Processing " << i << "th event" << endl;
+    if( i % 100 == 0 ) cout << "Processing " << i << "th event" << endl;
     FillHistsSignal(eventcorrArray[i]);
 
     unsigned int mixstart = i+1;
