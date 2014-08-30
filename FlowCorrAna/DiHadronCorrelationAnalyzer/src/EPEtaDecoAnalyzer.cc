@@ -21,7 +21,7 @@ using namespace std;
 EPEtaDecoAnalyzer::EPEtaDecoAnalyzer(const edm::ParameterSet& iConfig) :
   DiHadronCorrelationMultiBase(iConfig)
 {
-  bkgFactor = 5;
+  bkgFactor = 10;
 }
 
 EPEtaDecoAnalyzer::~EPEtaDecoAnalyzer() 
@@ -36,6 +36,13 @@ void EPEtaDecoAnalyzer::beginRun(const edm::Run& iRun, const edm::EventSetup& iS
     hSignalCosn[itrg] = theOutputs->make<TH2D>(Form("signalcosn_trg%d",itrg),";cos(n#Delta#phi);n",30000,-0.3,0.3,3,1.5,4.5);
     hBackgroundCosn[itrg]= theOutputs->make<TH2D>(Form("backgroundcosn_trg%d",itrg),";cos(n#Delta#phi);n",30000,-0.3,0.3,3,1.5,4.5);
   }
+
+  for(int i=1;i<4;i++)
+  {
+    hSignalSinnPvsN[i] = theOutputs->make<TH2D>(Form("signalsin%dpvsn",i+1),Form(";sin(%d#Delta#phi)_{P};sin(%d#Delta#phi)_{N}",i+1,i+1),500,-0.3,0.3,500,-0.3,0.3);
+    hBackgroundSinnPvsN[i] = theOutputs->make<TH2D>(Form("backgroundsin%dpvsn",i+1),Form(";sin(%d#Delta#phi)_{P};sin(%d#Delta#phi)_{N}",i+1,i+1),500,-0.3,0.3,500,-0.3,0.3);
+  }
+
   DiHadronCorrelationMultiBase::beginRun(iRun, iSetup);
 }
 
@@ -90,6 +97,7 @@ void EPEtaDecoAnalyzer::FillHistsSignal(const DiHadronCorrelationEvent& eventcor
 //    double nMultCorr_ass = eventcorr.nMultCorrVect_ass[0];
 
     double sumcosn[MAXETATRGBINS][5]={{0.0}};
+    double sumsinn[MAXETATRGBINS][5]={{0.0}};
     double npairs[MAXETATRGBINS][5]={{0.0}};
 
     for(unsigned int ntrg=0;ntrg<ntrgsize;ntrg++)
@@ -98,7 +106,7 @@ void EPEtaDecoAnalyzer::FillHistsSignal(const DiHadronCorrelationEvent& eventcor
       double effweight_trg = (eventcorr.effVect_trg[0])[ntrg];
       double chg_trg = (eventcorr.chgVect_trg[0])[ntrg];
       double eta_trg = pvector_trg.Eta();
-      double phi_trg = pvector_trg.Phi();
+//      double phi_trg = pvector_trg.Phi();
 //      double pt_trg = pvector_trg.Pt();
 
       for(unsigned int nass=0;nass<nasssize;nass++)
@@ -107,14 +115,15 @@ void EPEtaDecoAnalyzer::FillHistsSignal(const DiHadronCorrelationEvent& eventcor
         double effweight_ass = (eventcorr.effVect_ass[0])[nass];
         double chg_ass = (eventcorr.chgVect_ass[0])[nass];
 //        double eta_ass = pvector_ass.Eta();
-        double phi_ass = pvector_ass.Phi();
+//        double phi_ass = pvector_ass.Phi();
 //        double pt_ass = pvector_ass.Pt();
 
         // check charge sign
         if( (checksign == 0) && (chg_trg != chg_ass)) continue;
         if( (checksign == 1) && (chg_trg == chg_ass)) continue;
 
-        double deltaPhi=GetDeltaPhi(phi_trg,phi_ass);
+        double deltaPhi= pvector_trg.DeltaPhi(pvector_ass);
+//        double deltaPhi=GetDeltaPhi(phi_trg,phi_ass);
 //        double deltaEta=GetDeltaEta(eta_trg,eta_ass);
 
 //        if(deltaEta==0.0 && deltaPhi==0.0 && pt_trg==pt_ass) continue; // two particles are identical
@@ -127,17 +136,27 @@ void EPEtaDecoAnalyzer::FillHistsSignal(const DiHadronCorrelationEvent& eventcor
 
         for(int nn = 1; nn<4; nn++)
         {
-          sumcosn[ietabin][nn] = sumcosn[ietabin][nn] + cos((nn+1)*fabs(deltaPhi))/effweight;
+          sumcosn[ietabin][nn] = sumcosn[ietabin][nn] + cos((nn+1)*deltaPhi)/effweight;
+          sumsinn[ietabin][nn] = sumsinn[ietabin][nn] + sin((nn+1)*deltaPhi)/effweight;
           npairs[ietabin][nn] += 1.0/effweight;
         }
+//        delete pvector_ass;
       }
+//      delete pvector_trg;
     }
     for(int i=0;i<MAXETATRGBINS;i++)
       for(int nn = 1; nn<4; nn++) 
       {
         if(npairs[i][nn]==0.0) continue;
         sumcosn[i][nn]=sumcosn[i][nn]/npairs[i][nn];
+        sumsinn[i][nn]=sumsinn[i][nn]/npairs[i][nn];
         hSignalCosn[i]->Fill(sumcosn[i][nn],nn+1);
+      }
+
+//    for(int i=0;i<MAXETATRGBINS/2;i++)
+      for(int nn = 1; nn<4; nn++)
+      {
+        if(sumcosn[0][nn]!=0 && sumsinn[MAXETATRGBINS-1][nn]!=0) hSignalSinnPvsN[nn]->Fill(sumsinn[0][nn],sumsinn[MAXETATRGBINS-1][nn]);
       }
 }
 
@@ -149,6 +168,7 @@ void EPEtaDecoAnalyzer::FillHistsBackground(const DiHadronCorrelationEvent& even
 //      double nMultCorr_ass = eventcorr_ass.nMultCorrVect_ass[0];
 
       double sumcosn[MAXETATRGBINS][5]={{0.0}};
+      double sumsinn[MAXETATRGBINS][5]={{0.0}};
       double npairs[MAXETATRGBINS][5]={{0.0}};
 
       for(unsigned int ntrg=0;ntrg<ntrgsize;ntrg++)
@@ -157,7 +177,7 @@ void EPEtaDecoAnalyzer::FillHistsBackground(const DiHadronCorrelationEvent& even
         double effweight_trg = (eventcorr_trg.effVect_trg[0])[ntrg];
         double chg_trg = (eventcorr_trg.chgVect_trg[0])[ntrg];
         double eta_trg = pvector_trg.Eta();
-        double phi_trg = pvector_trg.Phi();
+//        double phi_trg = pvector_trg.Phi();
 //        double pt_trg = pvector_trg.Pt();
 
         for(unsigned int nass=0;nass<nasssize;nass++)
@@ -166,14 +186,15 @@ void EPEtaDecoAnalyzer::FillHistsBackground(const DiHadronCorrelationEvent& even
           double effweight_ass = (eventcorr_ass.effVect_ass[0])[nass];
           double chg_ass = (eventcorr_ass.chgVect_ass[0])[nass];
 //          double eta_ass = pvector_ass.Eta();
-          double phi_ass = pvector_ass.Phi();
+//          double phi_ass = pvector_ass.Phi();
 //          double pt_ass = pvector_ass.Pt();
 
           // check charge sign
           if( (checksign == 0) && (chg_trg != chg_ass)) continue;
           if( (checksign == 1) && (chg_trg == chg_ass)) continue;
 
-          double deltaPhi=GetDeltaPhi(phi_trg,phi_ass);
+          double deltaPhi= pvector_trg.DeltaPhi(pvector_ass);
+//          double deltaPhi=GetDeltaPhi(phi_trg,phi_ass);
 //          double deltaEta=GetDeltaEta(eta_trg,eta_ass);
 
           // total weight
@@ -184,16 +205,26 @@ void EPEtaDecoAnalyzer::FillHistsBackground(const DiHadronCorrelationEvent& even
 
           for(int nn = 1; nn<4; nn++)
           {
-            sumcosn[ietabin][nn] = sumcosn[ietabin][nn] + cos((nn+1)*fabs(deltaPhi))/effweight;
+            sumcosn[ietabin][nn] = sumcosn[ietabin][nn] + cos((nn+1)*deltaPhi)/effweight;
+            sumsinn[ietabin][nn] = sumsinn[ietabin][nn] + sin((nn+1)*deltaPhi)/effweight;
             npairs[ietabin][nn] += 1.0/effweight;
           }
+//          delete pvector_ass;
       }
+//      delete pvector_trg;
    }
    for(int i=0;i<MAXETATRGBINS;i++)
      for(int nn = 1; nn<4; nn++)
      {
        if(!npairs[i][nn]) continue;
        sumcosn[i][nn]=sumcosn[i][nn]/npairs[i][nn];
+       sumsinn[i][nn]=sumsinn[i][nn]/npairs[i][nn];
        hBackgroundCosn[i]->Fill(sumcosn[i][nn],nn+1);
+     }
+
+//   for(int i=0;i<MAXETATRGBINS/2;i++)
+     for(int nn = 1; nn<4; nn++)
+     {
+       if(sumcosn[0][nn]!=0 && sumsinn[MAXETATRGBINS-1][nn]!=0) hBackgroundSinnPvsN[nn]->Fill(sumsinn[0][nn],sumsinn[MAXETATRGBINS-1][nn]);
      }
 }

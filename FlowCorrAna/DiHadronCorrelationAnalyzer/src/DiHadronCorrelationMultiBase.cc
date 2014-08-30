@@ -151,7 +151,7 @@ void DiHadronCorrelationMultiBase::beginRun(const edm::Run& iRun, const edm::Eve
     hPtAll_trg = theOutputs->make<TH1D>("ptall_trg",";p_{T}(GeV/c)",ptBins.size()-1, &ptBins[0]);
     hNVtx = theOutputs->make<TH1D>("nvtx",";nVertices",51,-0.5,50.5);
 //  hNVtxVsNMult = theOutputs->make<TH2D>("nvtxvsnmult",";nMult;nVertices",500,0,500,50,0,50);
-//  hdNdetadptAll_trg = theOutputs->make<TH2D>("dNdetadptall_trg",";#eta;pT(GeV)",120,-6.0,6.0,100,0,10.0);
+    hdNdetadptAll_trg = theOutputs->make<TH2D>("dNdetadptall_trg",";#eta;pT(GeV)",120,-6.0,6.0,100,0,10.0);
     hdNdetadphiAll_trg = theOutputs->make<TH2D>("dNdetadphiall_trg",";#eta;#phi",120,-6.0,6.0,36,-PI,PI);
     hPtAll_ass = theOutputs->make<TH1D>("ptall_ass",";p_{T}(GeV/c)",5000,0,50);
 //  hdNdetadptAll_ass = theOutputs->make<TH2D>("dNdetadptall_ass",";#eta;pT(GeV)",120,-6.0,6.0,100,0,10.0);
@@ -712,7 +712,7 @@ void DiHadronCorrelationMultiBase::AssignTrgPtBins(double pt, double eta, double
    if(cutPara.IsDebug)
    {
      hdNdetadphiAll_trg->Fill(eta,phi);
-//   hdNdetadptAll_trg->Fill(eta,pt);
+     hdNdetadptAll_trg->Fill(eta,pt);
      hdNdetadphiCorrAll_trg->Fill(eta,phi,1.0/effweight);
 //   hdNdetadptCorrAll_trg->Fill(eta,pt,1.0/effweight);
      hPtAll_trg->Fill(pt,1.0/hPtAll_trg->GetBinWidth(hPtAll_trg->FindBin(pt)));
@@ -721,7 +721,7 @@ void DiHadronCorrelationMultiBase::AssignTrgPtBins(double pt, double eta, double
 
    TLorentzVector pvector;
    pvector.SetPtEtaPhiM(pt,eta,phi,mass);
-   if(pt>0.4 && fabs(eta)<2.4) (eventcorr->pVect_all).push_back(pvector);
+//   if(pt>0.4 && fabs(eta)<2.4) (eventcorr->pVect_all).push_back(pvector);
    for(int pttrgbin=0;pttrgbin<(int)(cutPara.pttrgmin.size());pttrgbin++)
    {
      if(GetPttrgBin(pt,eta,pttrgbin))

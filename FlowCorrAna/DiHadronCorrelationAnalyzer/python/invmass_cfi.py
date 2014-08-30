@@ -61,5 +61,7 @@ invmass_ana = cms.EDAnalyzer('InvMassAnalyzer',
   IsPPTrkQuality = cms.bool(True),
   IsDebug = cms.bool(False),
   IsInvMass = cms.bool(True),
-  IsEventEngineer = cms.bool(False)
+  IsEventEngineer = cms.bool(False),
+
+  EffFileName = cms.string('')
 )

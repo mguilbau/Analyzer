@@ -1604,7 +1604,7 @@ void DiHadronCorrelationMultiBaseFWLite::AssignTrgPtBins(double pt, double eta, 
 
    TLorentzVector pvector;
    pvector.SetPtEtaPhiM(pt,eta,phi,mass);
-   if(pt>0.4 && fabs(eta)<2.4) (eventcorr->pVect_all).push_back(pvector);
+//   if(pt>0.4 && fabs(eta)<2.4) (eventcorr->pVect_all).push_back(pvector);
    for(int pttrgbin=0;pttrgbin<(int)(cutPara.pttrgmin.size());pttrgbin++)
    {
      if(GetPttrgBin(pt,eta,pttrgbin))

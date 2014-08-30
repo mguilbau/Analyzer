@@ -6,23 +6,23 @@ void Factorization_eta()
   const int nfiles = 16;
   TString filename[nfiles];
 
-  filename[0] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent002_pttrg033_ptassallweight_etaass45_v8.root");
-  filename[1] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent05_pttrg033_ptassallweight_etaass45_v8.root");
-  filename[2] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent510_pttrg033_ptassallweight_etaass45_v8.root");
-  filename[3] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent1020_pttrg033_ptassallweight_etaass45_v8.root");
-  filename[4] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent2030_pttrg033_ptassallweight_etaass45_v8.root");
-  filename[5] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent3040_pttrg033_ptassallweight_etaass45_v8.root");
-  filename[6] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent4050_pttrg033_ptassallweight_etaass45_v8.root");
-  filename[7] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent5060_pttrg033_ptassallweight_etaass45_v8.root");
+  filename[0] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent002_pttrg053_ptassallweight_etaass45_eff0_v14.root");
+  filename[1] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent05_pttrg053_ptassallweight_etaass45_eff0_v14.root");
+  filename[2] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent510_pttrg053_ptassallweight_etaass45_eff0_v14.root");
+  filename[3] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent1020_pttrg053_ptassallweight_etaass45_eff0_v14.root");
+  filename[4] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent2030_pttrg053_ptassallweight_etaass45_eff0_v14.root");
+  filename[5] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent3040_pttrg053_ptassallweight_etaass45_eff0_v14.root");
+  filename[6] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent4050_pttrg053_ptassallweight_etaass45_eff0_v14.root");
+  filename[7] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent5060_pttrg053_ptassallweight_etaass45_eff0_v14.root");
 
-  filename[8] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent002_pttrg033_ptassallweight_etaass34_v8.root");
-  filename[9] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent05_pttrg033_ptassallweight_etaass34_v8.root");
-  filename[10] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent510_pttrg033_ptassallweight_etaass34_v8.root");
-  filename[11] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent1020_pttrg033_ptassallweight_etaass34_v8.root");
-  filename[12] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent2030_pttrg033_ptassallweight_etaass34_v8.root");
-  filename[13] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent3040_pttrg033_ptassallweight_etaass34_v8.root");
-  filename[14] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent4050_pttrg033_ptassallweight_etaass34_v8.root");
-  filename[15] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent5060_pttrg033_ptassallweight_etaass34_v8.root");
+  filename[8] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent002_pttrg053_ptassallweight_etaass34_eff0_v14.root");
+  filename[9] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent05_pttrg053_ptassallweight_etaass34_eff0_v14.root");
+  filename[10] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent510_pttrg053_ptassallweight_etaass34_eff0_v14.root");
+  filename[11] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent1020_pttrg053_ptassallweight_etaass34_eff0_v14.root");
+  filename[12] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent2030_pttrg053_ptassallweight_etaass34_eff0_v14.root");
+  filename[13] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent3040_pttrg053_ptassallweight_etaass34_eff0_v14.root");
+  filename[14] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent4050_pttrg053_ptassallweight_etaass34_eff0_v14.root");
+  filename[15] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent5060_pttrg053_ptassallweight_etaass34_eff0_v14.root");
 
   const int ntrgbins = 16;
   const int ntrgbins1 = ntrgbins;
@@ -37,6 +37,7 @@ void Factorization_eta()
   double slope_err[6][nfiles];
   double slope1[6][nfiles];
   double slope1_err[6][nfiles];
+//  double eta[ntrgbins2] = {0.1,0.3,0.5,0.7,0.9,1.1,1.3,1.5,1.7,1.9,2.1,2.3};  
   double eta[ntrgbins2] = {0.15,0.45,0.75,1.05,1.35,1.65,1.95,2.25};
 //  double eta[ntrgbins2] = {0.2,0.6,1.0,1.4,1.8,2.2};
   double eta_err[ntrgbins2] = {0.0};
@@ -77,7 +78,7 @@ for(int jj=0;jj<nfiles;jj++)
     {
       Vn[i]=hsignal_1D[i][nbin]->GetMean()-hbackground_1D[i][nbin]->GetMean();
       VnError[i]=sqrt(hsignal_1D[i][nbin]->GetMeanError()*hsignal_1D[i][nbin]->GetMeanError()+hbackground_1D[i][nbin]->GetMeanError()*hbackground_1D[i][nbin]->GetMeanError());
-if(jj==0) cout<<Vn[i]<<" "<<VnError[i]<<endl;
+if(jj==1) cout<<Vn[i]<<" "<<VnError[i]<<endl;
     } 
 
     for(int i=0;i<ntrgbins2;i++)
@@ -91,8 +92,8 @@ if(jj==0) cout<<Vn[i]<<" "<<VnError[i]<<endl;
 
 //    fit[jj][nbin] = new TF1(Form("fit_%d_%d",nbin,jj),"(1+[0]*(-x-4.5)*(-x-4.5))/(1+[0]*(x-4.5)*(x-4.5))",0,3.0);
 //    fit[jj][nbin] = new TF1(Form("fit_%d_%d",nbin,jj),"(1+[0]*(-x-4.5))/(1+[0]*(x-4.5))",0,3.0);
-    if(jj<8) fit[jj][nbin] = new TF1(Form("fit_%d_%d",nbin,jj),"exp([0]*(-x-4.5))/exp([0]*(x-4.5))",0.0,2.5);
-    else fit[jj][nbin] = new TF1(Form("fit_%d_%d",nbin,jj),"exp([0]*(-x-3.5))/exp([0]*(x-3.5))",0.0,1.5);
+    if(jj<8) fit[jj][nbin] = new TF1(Form("fit_%d_%d",nbin,jj),"exp([0]*(-x-4.5))/exp([0]*(x-4.5))",0.0,2.4);
+    else fit[jj][nbin] = new TF1(Form("fit_%d_%d",nbin,jj),"exp([0]*(-x-3.5))/exp([0]*(x-3.5))",0.0,1.4);
     fit[jj][nbin]->SetParameter(0,0.01);
     gr[jj][nbin]->Fit(Form("fit_%d_%d",nbin,jj),"RNO");
     fit[jj][nbin]->SetLineColor(color[nbin]);
@@ -242,6 +243,27 @@ if(jj==0) cout<<Vn[i]<<" "<<VnError[i]<<endl;
   cc->cd(1);
   legend3->Draw("same");
 
+  TCanvas* ccc = new TCanvas("ccc","ccc",900,500);
+  makeMultiPanelCanvas(ccc,4,2,0.01,0.0,0.2,0.2,0.02);
+  TH2D* htmp2 = new TH2D("htmp2",";#eta^{a};r_{4}(#eta^{a},#eta^{b})",100,-0.1,2.65,100,0.801,1.06);
+  fixedFontHist(htmp2,1.8,2.2);
+  htmp2->GetXaxis()->CenterTitle();
+  htmp2->GetYaxis()->CenterTitle();
+  htmp2->GetYaxis()->SetTitleSize(htmp2->GetYaxis()->GetTitleSize()*1.2);
+  htmp2->GetXaxis()->SetTitleSize(htmp2->GetXaxis()->GetTitleSize()*1.);
+  for(int jj=0;jj<8;jj++)
+  {
+    ccc->cd(jj+1);
+    htmp2->Draw();
+    ll->Draw("Lsame");
+    gr[jj][3]->Draw("Psame");
+    fit[jj][3]->Draw("Lsame");
+    gr[jj+8][3]->SetMarkerStyle(25);
+    fit[jj+8][3]->SetLineStyle(5);
+    gr[jj+8][3]->Draw("Psame");
+    fit[jj+8][3]->Draw("Lsame");
+  }
+
   TCanvas* c1 = new TCanvas("c1","c1",500,500);
   TH2D* htmp2 = new TH2D("htmp2",";Centrality;C",100,0,1.0,100,0.0,0.06);
   htmp2->Draw();
@@ -309,9 +331,10 @@ if(jj==0) cout<<Vn[i]<<" "<<VnError[i]<<endl;
   legend4->AddEntry(fit1_aver[0][2],"n=3","L");
   cc2->cd(1);
   legend4->Draw("same");
-
-  SaveCanvas(c,"HI/FactBreak","epetadeco_HI_r2");
-  SaveCanvas(cc,"HI/FactBreak","epetadeco_HI_r3");
-  SaveCanvas(c1,"HI/FactBreak","epetadeco_HI_C");
-  SaveCanvas(cc2,"HI/FactBreak","epetadeco_HI_cos");
+return;
+//  SaveCanvas(c,"HI/FactBreak","epetadeco_HI_r2");
+//  SaveCanvas(cc,"HI/FactBreak","epetadeco_HI_r3");
+  SaveCanvas(ccc,"HI/FactBreak","epetadeco_HI_r4");
+//  SaveCanvas(c1,"HI/FactBreak","epetadeco_HI_C");
+//  SaveCanvas(cc2,"HI/FactBreak","epetadeco_HI_cos");
 }

@@ -63,6 +63,9 @@ class DiHadronCorrelationMultiAnalyzer : public DiHadronCorrelationMultiBase {
    TH1D* hBackgroundPhiTotal[MAXPTTRGBINS][MAXPTASSBINS];
    TH2D* hMultSignalPairVsPhiTotal[MAXPTTRGBINS][MAXPTASSBINS];
    TH2D* hMultBackgroundPairVsPhiTotal[MAXPTTRGBINS][MAXPTASSBINS];
+   TH2D* hSignal_pt1pt2;
+   TH2D* hBackground_pt1pt2;
+   TH2D* hCorrelation_pt1pt2;
 
    // parameters
    double signalTrgEffWeight;

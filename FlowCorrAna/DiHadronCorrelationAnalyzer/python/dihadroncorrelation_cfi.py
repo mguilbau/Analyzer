@@ -54,6 +54,7 @@ corr_ana = cms.EDAnalyzer('DiHadronCorrelationMultiAnalyzer',
   IsVtxSel = cms.bool(True),
   IsCorr = cms.bool(True),
   IsHI = cms.bool(False),
+  IsHarmonics = cms.bool(True),
   IsFullMatrix = cms.bool(True),
   IsPtWeightTrg = cms.bool(False),
   IsPtWeightAss = cms.bool(False),
@@ -61,5 +62,7 @@ corr_ana = cms.EDAnalyzer('DiHadronCorrelationMultiAnalyzer',
   IsPPTrkQuality = cms.bool(True),
   IsDebug = cms.bool(False),
   IsInvMass = cms.bool(False),
-  IsEventEngineer = cms.bool(False)
+  IsEventEngineer = cms.bool(False),
+
+  EffFileName = cms.string('')
 )

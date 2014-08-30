@@ -4,9 +4,17 @@ from FlowCorrAna.DiHadronCorrelationAnalyzer.ebyeflow_cfi import *
 from FlowCorrAna.DiHadronCorrelationAnalyzer.hltFilter_cff import *
 
 ebyeflow_ana_HI = ebyeflow_ana.clone(
-  TrgTrackCollection = cms.string('hiLowPtPixelTracks'),
+#  TrgTrackCollection = cms.string('hiLowPtPixelTracks'),
+  TrgTrackCollection = cms.string('hiGeneralTracks'),
   VertexCollection = cms.string('hiSelectedVertex'),
   GenParticleCollection = cms.string('hiGenParticles'),
+
+  IsHITrkQuality = cms.bool(True),
+  IsPPTrkQuality = cms.bool(False),
+
+  pttrgmin = cms.vdouble(1.0),
+
+  EffFileName = cms.string('')
 )
 
 ebyeflow_ana_HI_cent002 = ebyeflow_ana_HI.clone(

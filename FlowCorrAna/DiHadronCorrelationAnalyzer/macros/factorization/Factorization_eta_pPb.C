@@ -5,16 +5,21 @@ void Factorization_eta_pPb()
 {
   const int nfiles = 8;
   TString filename[nfiles];
-  filename[1] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n150185_pttrg033_ptassallweight_etaass45_all_v8.root");
-  filename[2] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n185220_pttrg033_ptassallweight_etaass45_all_v8.root");
-  filename[3] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n220260_pttrg033_ptassallweight_etaass45_all_v8.root");
-  filename[0] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n120150_pttrg033_ptassallweight_etaass45_all_v8.root");
+  filename[1] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n150185_pttrg033_ptassallweight_etaass45_eff1_all_v10.root");
+  filename[2] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n185220_pttrg033_ptassallweight_etaass45_eff1_all_v10.root");
+  filename[3] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n220260_pttrg033_ptassallweight_etaass45_eff1_all_v10.root");
+  filename[0] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n120150_pttrg033_ptassallweight_etaass45_eff1_all_v10.root");
 
-  filename[5] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n150185_pttrg033_ptassallweight_etaass34_all_v8.root");
-  filename[6] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n185220_pttrg033_ptassallweight_etaass34_all_v8.root");
-  filename[7] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n220260_pttrg033_ptassallweight_etaass34_all_v8.root");
-  filename[4] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n120150_pttrg033_ptassallweight_etaass34_all_v8.root");
-
+  filename[5] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n150185_pttrg13_ptassallweight_etaass45_eff1_v10.root");
+  filename[6] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n185220_pttrg13_ptassallweight_etaass45_eff1_v10.root");
+  filename[7] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n220260_pttrg13_ptassallweight_etaass45_eff1_v10.root");
+  filename[4] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n120150_pttrg13_ptassallweight_etaass45_eff1_v10.root");
+/*
+  filename[9] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n150185_pttrg033_ptassallweight_etaass445_eff1_all_v10.root");
+  filename[10] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n185220_pttrg033_ptassallweight_etaass445_eff1_all_v10.root");
+  filename[11] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n220260_pttrg033_ptassallweight_etaass445_eff1_all_v10.root");
+  filename[8] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n120150_pttrg033_ptassallweight_etaass445_eff1_all_v10.root");
+*/
   const int ntrgbins = 16;
   const int ntrgbins1 = ntrgbins;
   const int ntrgbins2 = ntrgbins/2;
@@ -59,7 +64,7 @@ for(int jj=0;jj<nfiles;jj++)
     hbackground1_1D[i] = (TH1D*)hbackground1[i]->ProfileY(Form("background1_1D_trg%d",i),-1,-1,"e");
   }
 
-  for(int nbin=1;nbin<4;nbin++)
+  for(int nbin=1;nbin<2;nbin++)
   {
     double Vn[ntrgbins1];
     double VnError[ntrgbins1];
@@ -76,7 +81,7 @@ for(int jj=0;jj<nfiles;jj++)
 
     for(int i=0;i<ntrgbins1;i++)
     {
-cout<<nbin<<" "<<i<<" "<<hsignal_1D[i]->GetBinContent(nbin)<<" "<<hsignal_1D[i]->GetBinError(nbin)<<endl;
+if(nbin==1 && (jj==3 || jj==7)) cout<<nbin<<" "<<i<<" "<<hsignal1_1D[i]->GetBinContent(nbin)<<" "<<hsignal1_1D[i]->GetBinError(nbin)<<" "<<hbackground1_1D[i]->GetBinContent(nbin)<<" "<<hbackground1_1D[i]->GetBinError(nbin)<<endl;
       Vn[i]=hsignal_1D[i]->GetBinContent(nbin)-hbackground_1D[i]->GetBinContent(nbin);
       VnError[i]=sqrt(hsignal_1D[i]->GetBinError(nbin)*hsignal_1D[i]->GetBinError(nbin)+hbackground_1D[i]->GetBinError(nbin)*hbackground_1D[i]->GetBinError(nbin));
       Vn1[i]=hsignal1_1D[i]->GetBinContent(nbin)-hbackground1_1D[i]->GetBinContent(nbin);
@@ -103,20 +108,31 @@ cout<<nbin<<" "<<i<<" "<<hsignal_1D[i]->GetBinContent(nbin)<<" "<<hsignal_1D[i]-
     gr1[jj][nbin]->SetMarkerColor(color[nbin]);
     gr_tot[jj][nbin] = new TGraphErrors(ntrgbins2,eta,rn_tot,eta_err,rn_tot_err);
     gr_tot[jj][nbin]->SetMarkerColor(color[nbin]);
+//    gr_tot[jj][nbin]->SetMarkerSize(0.9*gr_tot[jj][nbin]->GetMarkerSize());
     gr_ratio[jj][nbin] = new TGraphErrors(ntrgbins2,eta,rn_ratio,eta_err,rn_ratio_err);
-    gr_ratio[jj][nbin]->SetMarkerColor(color[nbin]);
-
+    gr_ratio[jj][nbin]->SetMarkerColor(color[nbin]); 
     if(jj<4) fit[jj][nbin] = new TF1(Form("fit_%d_%d",nbin,jj),"exp(2*[0]*(-x-4.5))/exp(2*[0]*(x-4.5))",0.0,2.5);
-    else fit[jj][nbin] = new TF1(Form("fit_%d_%d",nbin,jj),"exp(2*[0]*(-x-3.5))/exp(2*[0]*(x-3.5))",0.0,1.5);
+    else if(jj>=4 && jj<8) fit[jj][nbin] = new TF1(Form("fit_%d_%d",nbin,jj),"exp(2*[0]*(-x-3.5))/exp(2*[0]*(x-3.5))",0.0,1.4);
+    else if(jj>=8) fit[jj][nbin] = new TF1(Form("fit_%d_%d",nbin,jj),"exp(2*[0]*(-x-4.7))/exp(2*[0]*(x-4.7))",0.0,2.5);
+/*
+    if(jj<4) fit[jj][nbin] = new TF1(Form("fit_%d_%d",nbin,jj),"(1-[1]+[1]*exp([0]*(-x-4.5)))/(1-[1]+[1]*exp([0]*(x-4.5)))",0.0,2.5);
+    else if(jj>=4 && jj<8) fit[jj][nbin] = new TF1(Form("fit_%d_%d",nbin,jj),"(1-[1]+[1]*exp([0]*(-x-3.5)))/(1-[1]+[1]*exp([0]*(x-3.5)))",0.0,1.4);
+    else if(jj>=8) fit[jj][nbin] = new TF1(Form("fit_%d_%d",nbin,jj),"(1-[1]+[1]*exp([0]*(-x-4.7)))/(1-[1]+[1]*exp([0]*(x-4.7)))",0.0,2.5);
+*/
     fit[jj][nbin]->SetParameter(0,0.01);
+    fit[jj][nbin]->SetParameter(1,0.1);
+    fit[jj][nbin]->SetParLimits(1,0,0.2);
     gr_tot[jj][nbin]->Fit(Form("fit_%d_%d",nbin,jj),"RNO");
     fit[jj][nbin]->SetLineColor(color[nbin]);
     fit[jj][nbin]->SetLineStyle(9);
     fit[jj][nbin]->SetLineWidth(1);
 
+//    fit1_aver[jj][nbin] = new TF1(Form("fit1_aver_%d_%d",nbin,jj),"[1]*exp(-[0]*x)+1-[1]",0,5.0);
     fit1_aver[jj][nbin] = new TF1(Form("fit1_aver_%d_%d",nbin,jj),"exp(-[0]*x)",0,5.0);
     fit1_aver[jj][nbin]->SetParameter(0,fit[jj][nbin]->GetParameter(0));
     fit1_aver[jj][nbin]->SetParError(0,fit[jj][nbin]->GetParError(0));
+//    fit1_aver[jj][nbin]->SetParameter(1,fit[jj][nbin]->GetParameter(1));
+//    fit1_aver[jj][nbin]->SetParError(1,fit[jj][nbin]->GetParError(1));
     fit1_aver[jj][nbin]->SetLineStyle(1);
     fit1_aver[jj][nbin]->SetLineColor(color[nbin]);
     gr1_band[jj][nbin] = new TGraph(53);
@@ -152,10 +168,16 @@ cout<<nbin<<" "<<i<<" "<<hsignal_1D[i]->GetBinContent(nbin)<<" "<<hsignal_1D[i]-
     fit[jj+4][1]->SetLineStyle(5);
     gr_tot[jj+4][1]->Draw("Psame");
     fit[jj+4][1]->Draw("Lsame");
+/*
+    gr_tot[jj+8][1]->SetMarkerStyle(28);
+    fit[jj+8][1]->SetLineStyle(9);
+    gr_tot[jj+8][1]->Draw("Psame");
+    fit[jj+8][1]->Draw("Lsame");
+*/
   }
   TLatex* latex = new TLatex();
   latex->SetNDC();
-  latex->SetTextSize(1.4*latex->GetTextSize());
+  latex->SetTextSize(1.43*latex->GetTextSize());
   c->cd(1);
   latex->DrawLatex(0.27,0.05,histtitle[0]);
   latex->DrawLatex(0.55,0.74,"0.3 < p_{T}^{a} < 3 GeV/c");
@@ -169,12 +191,14 @@ cout<<nbin<<" "<<i<<" "<<hsignal_1D[i]->GetBinContent(nbin)<<" "<<hsignal_1D[i]-
   latex->SetTextSize(0.85*latex->GetTextSize());
   latex->DrawLatex(0.27,0.22,histtitle[2]);
 
-  TLegend* legend = new TLegend(0.22,0.14,0.62,0.46);
+  TLegend* legend = new TLegend(0.22,0.16,0.62,0.36);
   legend->SetFillStyle(0);
+//  legend->AddEntry(gr_tot[8][1],"4.4<#eta^{b}<5","P");
   legend->AddEntry(gr_tot[0][1],"4<#eta^{b}<5","P");
-  legend->AddEntry(fit[0][1],"Exponential fit","L");
+//  legend->AddEntry(fit[0][1],"Exponential fit","L");
   legend->AddEntry(gr_tot[4][1],"3<#eta^{b}<4","P");
-  legend->AddEntry(fit[4][1],"Exponential fit","L");
+//  legend->AddEntry(fit[4][1],"Exponential fit","L");
+
   c->cd(1);  
   legend->Draw();
 
@@ -305,7 +329,6 @@ cout<<nbin<<" "<<i<<" "<<hsignal_1D[i]->GetBinContent(nbin)<<" "<<hsignal_1D[i]-
   cc2->cd(3);
   latex3->SetTextSize(0.85*latex3->GetTextSize());
   latex3->DrawLatex(0.24,0.22,histtitle[2]);
-
 return;
   SaveCanvas(c,"HI/FactBreak","epetadeco_pPb_r2tot");
   SaveCanvas(c2,"HI/FactBreak","epetadeco_pPb_r2sep");

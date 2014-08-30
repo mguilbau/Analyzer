@@ -79,6 +79,10 @@ void DiHadronCorrelationMultiAnalyzer::beginRun(const edm::Run& iRun, const edm:
       hSignal2PEPCorrelator[itrg][jass] = theOutputs->make<TH1D>(Form("signal2pepcorrelator_trg%d_ass%d",itrg,jass),";cos(#phi_{#alpha}-3#phi_{#beta}+2#Psi_{2})",600,-0.6,0.6);
       hBackground2PEPCorrelator[itrg][jass] = theOutputs->make<TH1D>(Form("background2pepcorrelator_trg%d_ass%d",itrg,jass),";cos(#phi_{#alpha}-3#phi_{#beta}+2#Psi_{2})",600,-0.6,0.6);
 
+      hSignal_pt1pt2 = theOutputs->make<TH2D>("signal_pt1pt2",";p_{T,1};p_{T,2}", 50, 0, 5.0, 50, 0, 5.0);
+      hBackground_pt1pt2 = theOutputs->make<TH2D>("background_pt1pt2",";p_{T,1};p_{T,2}", 50, 0, 5.0, 50, 0, 5.0);
+      hCorrelation_pt1pt2 = theOutputs->make<TH2D>("correlation_pt1pt2",";p_{T,1};p_{T,2}", 50, 0, 5.0, 50, 0, 5.0);
+
       hSignal_eta1eta2[itrg][jass] = theOutputs->make<TH2D>(Form("signal_eta1eta2_trg%d_ass%d",itrg,jass),";#eta_{1};#eta_{2}",
                                      NEtaBins*2+1,cutPara.etatrgmin-etabinwidth/2.,cutPara.etatrgmax+etabinwidth/2.,
                                      NEtaBins*2+1,cutPara.etaassmin-etabinwidth/2.,cutPara.etaassmax+etabinwidth/2.);
@@ -116,7 +120,7 @@ void DiHadronCorrelationMultiAnalyzer::endRun(const edm::Run& iRun, const edm::E
   cout<< "Start running correlation analysis!" << endl;
   for(unsigned int i=0;i<eventcorrArray.size();i++)
   {
-    if( i % 100 == 0 ) cout << "Processing " << i << "th event" << endl;
+    if( i % 1 == 0 ) cout << "Processing " << i << "th event" << endl;
     FillHistsSignal(eventcorrArray[i]);
 
     unsigned int mixstart = i+1;
@@ -165,6 +169,11 @@ void DiHadronCorrelationMultiAnalyzer::NormalizeHists()
      if(hBackground_eta1eta2[itrg][jass]) hCorrelation_eta1eta2[itrg][jass]->Divide(hBackground_eta1eta2[itrg][jass]);
      if(hBackground_phi1phi2[itrg][jass]) hCorrelation_phi1phi2[itrg][jass]->Divide(hBackground_phi1phi2[itrg][jass]);
     }
+  }
+  if(hBackground_pt1pt2)
+  {
+    hCorrelation_pt1pt2->Add(hSignal_pt1pt2);
+    hCorrelation_pt1pt2->Divide(hBackground_pt1pt2);
   }
 }
 
@@ -270,6 +279,8 @@ void DiHadronCorrelationMultiAnalyzer::FillHistsSignal(const DiHadronCorrelation
             hSignal_eta1eta2[itrg][jass]->Fill(eta_ass,eta_trg,1.0/effweight/nMultCorr_trg);
             hSignal_phi1phi2[itrg][jass]->Fill(phi_ass,phi_trg,1.0/effweight/nMultCorr_trg);
           }
+
+          if(fabs(deltaPhi)<PI/8. && fabs(deltaEta)>2) hSignal_pt1pt2->Fill(pt_trg,pt_ass,1.0/effweight/nMultCorr_trg);
         }
       }
 
@@ -399,6 +410,8 @@ void DiHadronCorrelationMultiAnalyzer::FillHistsBackground(const DiHadronCorrela
             hBackground_eta1eta2[itrg][jass]->Fill(eta_ass,eta_trg,1.0/effweight);
             hBackground_phi1phi2[itrg][jass]->Fill(phi_ass,phi_trg,1.0/effweight);
           }
+
+          if(fabs(deltaPhi)<PI/8. && fabs(deltaEta)>2) hBackground_pt1pt2->Fill(pt_trg,pt_ass,1.0/effweight);
         }
       }
 

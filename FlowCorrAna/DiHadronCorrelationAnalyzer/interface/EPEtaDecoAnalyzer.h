@@ -14,8 +14,8 @@ class TH3D;
 class TTree;
 class TList;
 
-#define MAXETATRGBINS 16
-#define ETATRGBINWIDTH 0.3
+#define MAXETATRGBINS 24
+#define ETATRGBINWIDTH 0.2
 
 class EPEtaDecoAnalyzer : public DiHadronCorrelationMultiBase {
    
@@ -25,6 +25,8 @@ class EPEtaDecoAnalyzer : public DiHadronCorrelationMultiBase {
    TH1D* hDeltaZvtx;
    TH2D* hSignalCosn[MAXETATRGBINS];
    TH2D* hBackgroundCosn[MAXETATRGBINS];
+   TH2D* hSignalSinnPvsN[5];
+   TH2D* hBackgroundSinnPvsN[5];
 
    // parameters
    int    bkgFactor;

@@ -7,13 +7,13 @@ dataset=/PAHighPt/davidlw-PA2013_FlowCorr_PromptReco_TrkHM_Gplus_Rereco_v15-702f
 njobs=10
 
 ### epetadeco
-tag=pttrg033_ptassallweight_etaass34_rereco_eff1_v10
+#tag=pttrg13_ptassallweight_etaass45_eff1_v10
 #tag=pttrgallweighttower_ptassallweight_etaass45_eff1_v9
-type=epetadeco
+#type=epetadeco
 
 ### ebyeflow
-#tag=pttrg033_rereco_eff1_v1
-#type=ebyeflow
+tag=pttrg033_rereco_eff1_v3
+type=ebyeflow
 
 cat > crab_${type}_n120150_pPb.cfg << EOF 
 [CRAB]

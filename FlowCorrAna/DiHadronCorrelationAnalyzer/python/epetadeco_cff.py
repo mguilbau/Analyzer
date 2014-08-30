@@ -4,16 +4,19 @@ from FlowCorrAna.DiHadronCorrelationAnalyzer.epetadeco_cfi import *
 from FlowCorrAna.DiHadronCorrelationAnalyzer.hltFilter_cff import *
 
 epetadeco_ana_HI_hfp = epetadeco_ana.clone(
-  TrgTrackCollection = cms.string('hiLowPtPixelTracks'),
+#  TrgTrackCollection = cms.string('hiLowPtPixelTracks'),
+  TrgTrackCollection = cms.string('hiGeneralTracks'),
   VertexCollection = cms.string('hiSelectedVertex'),
   GenParticleCollection = cms.string('hiGenParticles'),
 
   IsHITrkQuality = cms.bool(True),
   IsPPTrkQuality = cms.bool(False),
 
-  etaassmin = cms.double(4.4),
-  etaassmax = cms.double(5.0),
-  pttrgmin = cms.vdouble(0.3)
+  etaassmin = cms.double(3.0),
+  etaassmax = cms.double(4.0),
+  pttrgmin = cms.vdouble(0.5),
+
+  EffFileName = cms.string('')
 )
 
 epetadeco_ana_HI_nocorr = epetadeco_ana_HI_hfp.clone(
@@ -23,8 +26,8 @@ epetadeco_ana_HI_nocorr = epetadeco_ana_HI_hfp.clone(
 )
 
 epetadeco_ana_HI_hfm = epetadeco_ana_HI_hfp.clone(
-  etaassmin = cms.double(-5.0),
-  etaassmax = cms.double(-4.4)
+  etaassmin = cms.double(-4.0),
+  etaassmax = cms.double(-3.0)
 )
 
 epetadeco_ana_HI_hfp_cent002 = epetadeco_ana_HI_hfp.clone(

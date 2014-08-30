@@ -9,7 +9,7 @@ process.load("Configuration.StandardSequences.FrontierConditions_GlobalTag_cff")
 process.GlobalTag.globaltag = 'GR_R_53_LV6::All'
 
 process.maxEvents = cms.untracked.PSet(
-    input = cms.untracked.int32(-1)
+    input = cms.untracked.int32(100)
 )
 
 from HeavyIonsAnalysis.Configuration.CommonFunctions_cff import *
@@ -36,7 +36,10 @@ process.hltHIUCC.throw = cms.bool(False)
 process.source = cms.Source("PoolSource",
                                 fileNames = cms.untracked.vstring(
 #'/store/user/davidlw/HIMinBiasUPC/PR2011_MBUCC_TRKANASKIM_official_v1/71a7d203fff2b3f389673e6fdd587ee0/hiGoodColl_1023_1_S52.root'
-'/store/user/davidlw/HIMinBiasUPC/Skim_rereco_pixeltracks_v1/4b65ef5aa7a26abf1f962cd25f7df02d/hiMB_88_1_qbI.root'
+#'/store/user/davidlw/HIMinBiasUPC/Skim_rereco_pixeltracks_v1/4b65ef5aa7a26abf1f962cd25f7df02d/hiMB_88_1_qbI.root'
+#'file:/net/hisrv0001/home/davidlw/pPb_HM.root'
+#'/store/user/davidlw/PAHighPt/PA2013_FlowCorr_PromptReco_TrkHM_Gplus_Rereco_test_v16/715df7e97fe4580df23ba197854aed1a/pPb_HM_27_1_Htu.root'
+'/store/user/davidlw/HIMinBiasUPC/Skim_rereco_generaltracks_UCC_v1/1407d97c78fb8eac4c87a1e8dfca2bd9/hiUCC_982_2_HdG.root'
                 )
                             )
 process.load("FlowCorrAna.DiHadronCorrelationAnalyzer.dihadroncorrelation_cff")
@@ -50,7 +53,10 @@ process.TFileService = cms.Service("TFileService",
                                    fileName = cms.string('dihadroncorrelation.root')
                                    )
 
-process.ana_step = cms.Path(process.hltHIMB*process.corr_ana_HI)
+process.ana_step = cms.Path(process.hltHIUCC*process.corr_ana_HI)
 #process.corr_ana_HI.IsCorr = cms.bool(False)
-process.corr_ana_HI.centmin = cms.int32(0)
-process.corr_ana_HI.centmax = cms.int32(20)
+#process.ana_step = cms.Path(process.corr_ana)
+process.corr_ana_HI.centmin = cms.int32(1100)
+process.corr_ana_HI.centmax = cms.int32(10000)
+#process.corr_ana.V0CandidateCollection = cms.string('generalV0CandidateLowPt')
+#process.corr_ana.TriggerID = cms.string('Kshort')

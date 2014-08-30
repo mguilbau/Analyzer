@@ -84,8 +84,8 @@ void EbyEFlowAnalyzer::FillHistsSignal(const DiHadronCorrelationEvent& eventcorr
   double q2x_p=0; double q2y_p=0; double wsum_p=0;
   double q2x_n=0; double q2y_n=0; double wsum_n=0;
   double q2x=0; double q2y=0; double wsum=0;
-
-  bool flag[5000]={0};
+/*
+  bool flag[50000]={0};
   for(unsigned int ntrg=0;ntrg<ntrgsize/2;ntrg++)
   {
     int itrg = (int)(gRandom->Rndm()*ntrgsize);
@@ -128,17 +128,13 @@ void EbyEFlowAnalyzer::FillHistsSignal(const DiHadronCorrelationEvent& eventcorr
   q2x=q2x_p+q2x_n;
   q2y=q2y_p+q2y_n;
   wsum = wsum_p + wsum_n;
+*/
 
-/*
   for(unsigned int ntrg=0;ntrg<ntrgsize;ntrg++)
   {
-    int itrg = (int)(gRandom->Rndm()*ntrgsize);
-    if(flag[itrg]) {ntrg--; continue;}
-    flag[itrg]=1;
-
-    TLorentzVector pvector_trg = (eventcorr.pVect_trg[0])[itrg]; 
-    double effweight_trg = (eventcorr.effVect_trg[0])[itrg];
-    double chg_trg = (eventcorr.chgVect_trg[0])[itrg];
+    TLorentzVector pvector_trg = (eventcorr.pVect_trg[0])[ntrg]; 
+    double effweight_trg = (eventcorr.effVect_trg[0])[ntrg];
+//    double chg_trg = (eventcorr.chgVect_trg[0])[ntrg];
     double eta_trg = pvector_trg.Eta();
     double phi_trg = pvector_trg.Phi();
 
@@ -146,14 +142,16 @@ void EbyEFlowAnalyzer::FillHistsSignal(const DiHadronCorrelationEvent& eventcorr
 
     if(fabs(eta_trg)<2.4)
     {
-      if(chg_trg>0)
+//      if(chg_trg>0)
+      if(eta_trg>0)
       {
         q2x_p = q2x_p + (1.0/effweight_trg)*cos(2*phi_trg);
         q2y_p = q2y_p + (1.0/effweight_trg)*sin(2*phi_trg);
         wsum_p = wsum_p + 1.0/effweight_trg;
       }
-      if(chg_trg<0) 
-      { 
+//      if(chg_trg<0) 
+      if(eta_trg<0)
+      {
         q2x_n = q2x_n + (1.0/effweight_trg)*cos(2*phi_trg);
         q2y_n = q2y_n + (1.0/effweight_trg)*sin(2*phi_trg);
         wsum_n = wsum_n + 1.0/effweight_trg;
@@ -162,8 +160,6 @@ void EbyEFlowAnalyzer::FillHistsSignal(const DiHadronCorrelationEvent& eventcorr
       q2y=q2y_p+q2y_n;
       wsum = wsum_p + wsum_n;
     }
-*/
-
 
 /*
     if(fabs(eta_trg)>3)
@@ -192,7 +188,7 @@ void EbyEFlowAnalyzer::FillHistsSignal(const DiHadronCorrelationEvent& eventcorr
     }
 */
 
-//  }
+  }
 
 /*
   q2x_hf = q2x_hf / wsum_hf;
@@ -210,8 +206,8 @@ void EbyEFlowAnalyzer::FillHistsSignal(const DiHadronCorrelationEvent& eventcorr
   q2y_n = q2y_n / wsum_n;
   q2x = q2x / wsum;
   q2y = q2y / wsum;
-  hQ2XPvsN->Fill(q2x_p,q2x_n);
-  hQ2YPvsN->Fill(q2y_p,q2y_n);
+  hQ2XPvsN->Fill(q2x_p/2.,q2x_n/2.);
+  hQ2YPvsN->Fill(q2y_p/2.,q2y_n/2.);
   hQ2XDiff->Fill((q2x_p-q2x_n)/2.);
   hQ2YDiff->Fill((q2y_p-q2y_n)/2.);
   hQ2XYDiff->Fill((q2x_p-q2x_n)/2.,(q2y_p-q2y_n)/2.);

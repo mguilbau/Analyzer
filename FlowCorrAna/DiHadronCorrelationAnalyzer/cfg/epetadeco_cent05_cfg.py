@@ -9,7 +9,7 @@ process.load("Configuration.StandardSequences.FrontierConditions_GlobalTag_cff")
 process.GlobalTag.globaltag = 'GR_R_53_LV6::All'
 
 process.maxEvents = cms.untracked.PSet(
-    input = cms.untracked.int32(500)
+    input = cms.untracked.int32(-1)
 )
 
 from HeavyIonsAnalysis.Configuration.CommonFunctions_cff import *
@@ -37,7 +37,9 @@ process.source = cms.Source("PoolSource",
                                 fileNames = cms.untracked.vstring(
 #'/store/user/davidlw/HIMinBiasUPC/PR2011_MBUCC_TRKANASKIM_official_v1/71a7d203fff2b3f389673e6fdd587ee0/hiGoodColl_1023_1_S52.root'
 #'root://xrootd.unl.edu//store/user/appeltel/HIMinBiasUPC/pixelTrackReco_devel_v0/a236e4501225ae15b3601563d612abb5/pixeltrackreco_6_1_qSR.root'
-'root://xrootd1.cmsaf.mit.edu//store/user/davidlw/HIMinBiasUPC/Skim_rereco_pixeltracks_v1/4b65ef5aa7a26abf1f962cd25f7df02d/hiMB_88_1_qbI.root'
+#'/store/user/davidlw/HIMinBiasUPC/Skim_rereco_pixeltracks_v1/4b65ef5aa7a26abf1f962cd25f7df02d/hiMB_69_1_5b2.root'
+'/store/user/davidlw/HIMinBiasUPC/Skim_rereco_generaltracks_MB_v1/9c1b4b9b6b9ff3e493a474ba7d01bc76/hiMB_1331_1_jU2.root'
+#'/store/user/davidlw/rereco_53X.root'
                 )
 #                                secondaryFileNames = cms.untracked.vstring('')
                             )
@@ -56,5 +58,7 @@ process.ana_hfp = cms.Path(process.hltHIMB*process.epetadeco_ana_HI_hfp)
 process.ana_hfm = cms.Path(process.hltHIMB*process.epetadeco_ana_HI_hfm)
 process.epetadeco_ana_HI_hfp.centmin = cms.int32(0)
 process.epetadeco_ana_HI_hfp.centmax = cms.int32(10)
+#process.epetadeco_ana_HI_hfp.IsCorr = cms.bool(False)
 process.epetadeco_ana_HI_hfm.centmin = cms.int32(0)
 process.epetadeco_ana_HI_hfm.centmax = cms.int32(10)
+#process.epetadeco_ana_HI_hfm.IsCorr = cms.bool(False)
