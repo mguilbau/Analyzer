@@ -166,13 +166,13 @@ void V0Selector::produce(edm::Event& iEvent, const edm::EventSetup& iSetup) {
        double dlos = dl/dlerror;
        if(dlos < decayLSigCut_) continue;
 
-       double pd1 = dau1->p();
+       double pd1 = d1->p();
 //       double charged1 = dau1->charge();
-       double pd2 = dau2->p();
+       double pd2 = d2->p();
 //       double charged2 = dau2->charge();
 
-       TVector3 dauvec1(dau1->px(),dau1->py(),dau1->pz());
-       TVector3 dauvec2(dau2->px(),dau2->py(),dau2->pz());
+       TVector3 dauvec1(d1->px(),d1->py(),d1->pz());
+       TVector3 dauvec2(d2->px(),d2->py(),d2->pz());
        TVector3 dauvecsum(dauvec1+dauvec2);
 
        double energyd1e = sqrt(electronMassSquared+pd1*pd1);
