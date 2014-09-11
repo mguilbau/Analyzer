@@ -38,6 +38,7 @@ PbPb skim:
 pPb MC sample (53X):
 - EPOS LHC, 5M: /ReggeGribovPartonMCfix_EposLHC_5TeV_pPb/davidlw-RecoSkim_batch1_v1-84cb8c951385c1f95541c031462cec6b/USER
 - Hijing, 5M: /Hijing_PPb502_MinimumBias/davidlw-RecoSkim_batch2_v1-84cb8c951385c1f95541c031462cec6b/USER
+- Hijing, 1M: /Hijing_PPb502_MinimumBias/davidlw-RecoSkim_batch4_v1-84cb8c951385c1f95541c031462cec6b/USER
 - Hijing, 2M, trackingParticles: /HIJING_MB/davidlw-RecoSkim_batch3_v1-84cb8c951385c1f95541c031462cec6b/USER
 - Hijing, 10M: /Hijing_PPb502_MinimumBias/davidlw-RecoSkim_batch1_v1-84cb8c951385c1f95541c031462cec6b/USER
 
