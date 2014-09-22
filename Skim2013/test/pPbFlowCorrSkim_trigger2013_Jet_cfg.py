@@ -22,7 +22,7 @@ process.source = cms.Source("PoolSource",
 )
 
 # =============== Other Statements =====================
-process.maxEvents = cms.untracked.PSet(input = cms.untracked.int32(100))
+process.maxEvents = cms.untracked.PSet(input = cms.untracked.int32(500))
 process.options = cms.untracked.PSet(wantSummary = cms.untracked.bool(True))
 process.GlobalTag.globaltag = 'GR_P_V43F::All'
 
@@ -48,16 +48,11 @@ process.eventFilter_HM = cms.Sequence(
 )
 
 process.eventFilter_HM_step = cms.Path( process.eventFilter_HM )
-#process.extraTrks_HM_step   = cms.Path( process.eventFilter_HM * process.refitterForDeDx * process.ppSingleTrackFilterSequence )
-#process.highPurityTracks.src = cms.InputTag("refitterForDeDx")
 
 process.pACentrality_step = cms.Path( process.eventFilter_HM * process.pACentrality)
 process.pACentrality.producePixelhits = False
 
 process.dEdx_step = cms.Path( process.eventFilter_HM * process.dEdx )
-#process.refitterForDeDx.src = 'selectTracks' 
-process.energyLossProducer.trackProducer      = cms.string('selectTracks')
-process.energyLossProducer.trajectoryProducer = cms.string('selectTracks')
 
 ########## ReTracking #########################################################################
 process.generalTracksLowPt = process.generalTracks.clone()
@@ -104,8 +99,20 @@ process.generalV0CandidatesNew = process.generalV0Candidates.clone (
     vtxSignificance2DCut = cms.double(0.0),
     vtxSignificance3DCut = cms.double(4.0)
 )
-
 process.v0rereco_step = cms.Path( process.eventFilter_HM * process.generalV0CandidatesNew )
+
+process.generalV0CandidatesNewRefitted = process.generalV0Candidates.clone (
+    trackRecoAlgorithm = cms.InputTag('refitterForDeDx'),
+    tkNhitsCut = cms.int32(0),
+    tkChi2Cut = cms.double(7.0),
+    dauTransImpactSigCut = cms.double(1.0),
+    dauLongImpactSigCut = cms.double(1.0),
+    xiVtxSignificance3DCut = cms.double(0.0),
+    xiVtxSignificance2DCut = cms.double(0.0),
+    vtxSignificance2DCut = cms.double(0.0),
+    vtxSignificance3DCut = cms.double(4.0)
+)
+process.v0rereco_refitted_step = cms.Path( process.eventFilter_HM * process.generalV0CandidatesNewRefitted )
 
 ########## MinBias tracking ###################################################################
 # Tracker local reco
@@ -156,7 +163,7 @@ process.output_HM = cms.OutputModule("PoolOutputModule",
     SelectEvents = cms.untracked.PSet(SelectEvents = cms.vstring('eventFilter_HM_step')),
     dataset = cms.untracked.PSet(
       dataTier = cms.untracked.string('AOD'),
-      filterName = cms.untracked.string('pPb_HM'))
+      filterName = cms.untracked.string('pPb_Jet'))
 )
 
 process.output_HM_step = cms.EndPath(process.output_HM)
@@ -169,5 +176,6 @@ process.schedule = cms.Schedule(
 #    process.MBtracking_step, 
 #    process.reTracking_step,
     process.v0rereco_step,
+#    process.v0rereco_refitted_step,
     process.output_HM_step
 )

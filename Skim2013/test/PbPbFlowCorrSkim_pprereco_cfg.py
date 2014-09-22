@@ -21,7 +21,7 @@ process.source = cms.Source("PoolSource",
 # =============== Other Statements =====================
 process.maxEvents = cms.untracked.PSet(input = cms.untracked.int32(4000))
 process.options = cms.untracked.PSet(wantSummary = cms.untracked.bool(True))
-process.GlobalTag.globaltag = 'GR_P_V41::All'
+process.GlobalTag.globaltag = 'GR_R_53_LV6::All'
 
 # =============== Import Sequences =====================
 process.load("davidlw.HighPtFlow2011.ppExtraReco_cff")
@@ -36,11 +36,10 @@ process.hltMB.andOr = cms.bool(True)
 process.hltMB.throw = cms.bool(False)
 
 process.eventFilter_MB = cms.Sequence( 
-#    process.hltMB *
-#    process.collisionEventSelection )
+    process.hltMB *
+    process.collisionEventSelection
 )
 process.eventFilter_MB_step = cms.Path( process.eventFilter_MB )
-process.extraTrks_MB_step   = cms.Path( process.eventFilter_MB * process.ppSingleTrackFilterSequence )
 
 process.load("davidlw.HighPtFlow2011.ppanalysisSkimContentFull_cff")
 process.output_MB = cms.OutputModule("PoolOutputModule",
@@ -55,6 +54,5 @@ process.output_MB_step = cms.EndPath(process.output_MB)
 
 process.schedule = cms.Schedule(
     process.eventFilter_MB_step,
-    process.extraTrks_MB_step,
     process.output_MB_step,
 )
