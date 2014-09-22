@@ -1,6 +1,6 @@
 import FWCore.ParameterSet.Config as cms
-from RiceHIG.Skim2013.eventSelection_cff import *
-from RiceHIG.Skim2013.ppExtraReco_cff import *
+from davidlw.HighPtFlow2011.eventSelection_cff import *
+from davidlw.HighPtFlow2011.ppExtraReco_cff import *
 
 nTrkOffFilter120150Sequence = cms.Sequence(
                             hltN120150pA *

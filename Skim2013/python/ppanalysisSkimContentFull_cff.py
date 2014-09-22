@@ -14,7 +14,7 @@ analysisSkimContent = cms.PSet(
       'keep L1GlobalTriggerReadoutRecord_gtDigis_*_*',
 #      'keep *_l1extraParticles_*_*',
       # jet
-#      'keep *_towerMaker_*_*',
+      'keep *_towerMaker_*_*',
       'keep *patJet*_selectedPatJets*_*_*',
       'keep *PFJet*_ak5PFJets_*_*',
       # photons
