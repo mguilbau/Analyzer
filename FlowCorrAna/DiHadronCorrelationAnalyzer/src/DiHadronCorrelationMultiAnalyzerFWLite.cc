@@ -52,7 +52,7 @@ void DiHadronCorrelationMultiAnalyzerFWLite::Process()
     if(mixend>eventcorrArray.size()) mixend=eventcorrArray.size();
     for(unsigned int j=mixstart;j<mixend;j++)
     {
-      if(eventcorrArray[i].centbin != eventcorrArray[j].centbin) break;
+//      if(eventcorrArray[i].centbin != eventcorrArray[j].centbin) break;
       double deltazvtx = eventcorrArray[i].zvtx-eventcorrArray[j].zvtx;
       hDeltaZvtx->Fill(deltazvtx);
       FillHistsBackground(eventcorrArray[i],eventcorrArray[j]);
@@ -244,7 +244,7 @@ void DiHadronCorrelationMultiAnalyzerFWLite::FillHistsSignal(const DiHadronCorre
       {
         TLorentzVector pvector_trg = (eventcorr.pVect_trg[itrg])[ntrg];	  
         double effweight_trg = (eventcorr.effVect_trg[itrg])[ntrg];
-        double chg_trg = (eventcorr.chgVect_trg[itrg])[ntrg];
+//        double chg_trg = (eventcorr.chgVect_trg[itrg])[ntrg];
         double eta_trg = pvector_trg.Eta();
         double phi_trg = pvector_trg.Phi();
         double pt_trg = pvector_trg.Pt();
@@ -253,14 +253,14 @@ void DiHadronCorrelationMultiAnalyzerFWLite::FillHistsSignal(const DiHadronCorre
         {
           TLorentzVector pvector_ass = (eventcorr.pVect_ass[jass])[nass];   
           double effweight_ass = (eventcorr.effVect_ass[jass])[nass];
-          double chg_ass = (eventcorr.chgVect_ass[jass])[nass];
+//          double chg_ass = (eventcorr.chgVect_ass[jass])[nass];
           double eta_ass = pvector_ass.Eta();
           double phi_ass = pvector_ass.Phi();
           double pt_ass = pvector_ass.Pt();
 
           // check charge sign
-          if( (checksign == 0) && (chg_trg != chg_ass)) continue;
-          if( (checksign == 1) && (chg_trg == chg_ass)) continue;
+//          if( (checksign == 0) && (chg_trg != chg_ass)) continue;
+//          if( (checksign == 1) && (chg_trg == chg_ass)) continue;
 
           double deltaPhi=GetDeltaPhi(phi_trg,phi_ass);
           double deltaEta=GetDeltaEta(eta_trg,eta_ass);
@@ -343,7 +343,7 @@ void DiHadronCorrelationMultiAnalyzerFWLite::FillHistsBackground(const DiHadronC
       {
         TLorentzVector pvector_trg = (eventcorr_trg.pVect_trg[itrg])[ntrg];	  
         double effweight_trg = (eventcorr_trg.effVect_trg[itrg])[ntrg];
-        double chg_trg = (eventcorr_trg.chgVect_trg[itrg])[ntrg];
+//        double chg_trg = (eventcorr_trg.chgVect_trg[itrg])[ntrg];
         double eta_trg = pvector_trg.Eta();
         double phi_trg = pvector_trg.Phi();
         double pt_trg = pvector_trg.Pt();
@@ -352,14 +352,14 @@ void DiHadronCorrelationMultiAnalyzerFWLite::FillHistsBackground(const DiHadronC
         {
           TLorentzVector pvector_ass = (eventcorr_ass.pVect_ass[jass])[nass];   
           double effweight_ass = (eventcorr_ass.effVect_ass[jass])[nass];
-          double chg_ass = (eventcorr_ass.chgVect_ass[jass])[nass];
+//          double chg_ass = (eventcorr_ass.chgVect_ass[jass])[nass];
           double eta_ass = pvector_ass.Eta();
           double phi_ass = pvector_ass.Phi();
           double pt_ass = pvector_ass.Pt();
 
           // check charge sign
-          if( (checksign == 0) && (chg_trg != chg_ass)) continue;
-          if( (checksign == 1) && (chg_trg == chg_ass)) continue;
+//          if( (checksign == 0) && (chg_trg != chg_ass)) continue;
+//          if( (checksign == 1) && (chg_trg == chg_ass)) continue;
 
           double deltaPhi=GetDeltaPhi(phi_trg,phi_ass);
           double deltaEta=GetDeltaEta(eta_trg,eta_ass);
