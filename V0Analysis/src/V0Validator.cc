@@ -66,9 +66,9 @@ void V0Validator::beginRun(const edm::Run& iRun, const edm::EventSetup& iSetup) 
   ptBins.push_back(9.0);
   ptBins.push_back(15.0);
 
-  double etaMin   = -2.4;
-  double etaMax   =  2.4;
-  double etaWidth =  0.8;
+  double etaMin   = -3.0;
+  double etaMax   =  3.0;
+  double etaWidth =  0.5;
   for(double eta = etaMin; eta < etaMax + etaWidth/2; eta += etaWidth)
     etaBins.push_back(eta);
 
@@ -276,6 +276,12 @@ void V0Validator::beginRun(const edm::Run& iRun, const edm::EventSetup& iSetup) 
                               "Mass vs p_{T} of good Lambda",
                               120, 0, 12.0, lamMassNbins, minLamMass, maxLamMass);
 
+  ksEtaPtAll = theDQMstore->make<TH2D>("ksEtaPtAll",
+                                  "#eta vs p_{T} of all K0S",
+                                  128, -3.2, 3.2, 12, 0, 6.0);
+  lamEtaPtAll = theDQMstore->make<TH2D>("lamEtaPtAll",
+                                  "#eta vs p_{T} of all #Lambda^{0}",
+                                  128, -3.2, 3.2, 12, 0, 6.0);
   ksMassAll = theDQMstore->make<TH1D>("ksMassAll",
 				  "Invariant mass of all K0S",
 				  ksMassNbins, ksMassXmin, ksMassXmax);
@@ -285,45 +291,18 @@ void V0Validator::beginRun(const edm::Run& iRun, const edm::EventSetup& iSetup) 
   ksMassPtAll = theDQMstore->make<TH2D>("ksMassPtAll",
                                   "Invariant mass vs p_{T} of all K0S", 
                                   120, 0, 12.0, ksMassNbins, ksMassXmin, ksMassXmax);
-  ksMassPtAllEta1 = theDQMstore->make<TH2D>("ksMassPtAllEta1",
-                                  "Invariant mass vs p_{T} of all K0S",
-                                  120, 0, 12.0, ksMassNbins, ksMassXmin, ksMassXmax);
-  ksMassPtAllEta2 = theDQMstore->make<TH2D>("ksMassPtAllEta2",
-                                  "Invariant mass vs p_{T} of all K0S",
-                                  120, 0, 12.0, ksMassNbins, ksMassXmin, ksMassXmax);
-  ksMassPtAllEta3 = theDQMstore->make<TH2D>("ksMassPtAllEta3",
-                                  "Invariant mass vs p_{T} of all K0S",
-                                  120, 0, 12.0, ksMassNbins, ksMassXmin, ksMassXmax);
-  ksMassPtAllEta4 = theDQMstore->make<TH2D>("ksMassPtAllEta4",
-                                  "Invariant mass vs p_{T} of all K0S",
-                                  120, 0, 12.0, ksMassNbins, ksMassXmin, ksMassXmax);
-  ksMassPtAllEta5 = theDQMstore->make<TH2D>("ksMassPtAllEta5",
-                                  "Invariant mass vs p_{T} of all K0S",
-                                  120, 0, 12.0, ksMassNbins, ksMassXmin, ksMassXmax);
-  ksMassPtAllEta6 = theDQMstore->make<TH2D>("ksMassPtAllEta6",
-                                  "Invariant mass vs p_{T} of all K0S",
-                                  120, 0, 12.0, ksMassNbins, ksMassXmin, ksMassXmax);
   lamMassPtAll = theDQMstore->make<TH2D>("lamMassPtAll",
                                    "Invariant mass vs p_{T} of all #Lambda^{0}",
                                    120, 0, 12.0, lamMassNbins, lamMassXmin, lamMassXmax);
-  lamMassPtAllEta1 = theDQMstore->make<TH2D>("lamMassPtAllEta1",
+  for(int i=0;i<12;i++)
+  {
+    ksMassPtAllEta[i] = theDQMstore->make<TH2D>(Form("ksMassPtAllEta%d",i+1),
+                                  "Invariant mass vs p_{T} of all K0S",
+                                  120, 0, 12.0, ksMassNbins, ksMassXmin, ksMassXmax);
+    lamMassPtAllEta[i] = theDQMstore->make<TH2D>(Form("lamMassPtAllEta%d",i+1),
                                    "Invariant mass vs p_{T} of all #Lambda^{0}",
                                    120, 0, 12.0, lamMassNbins, lamMassXmin, lamMassXmax);
-  lamMassPtAllEta2 = theDQMstore->make<TH2D>("lamMassPtAllEta2",
-                                   "Invariant mass vs p_{T} of all #Lambda^{0}",
-                                   120, 0, 12.0, lamMassNbins, lamMassXmin, lamMassXmax);
-  lamMassPtAllEta3 = theDQMstore->make<TH2D>("lamMassPtAllEta3",
-                                   "Invariant mass vs p_{T} of all #Lambda^{0}",
-                                   120, 0, 12.0, lamMassNbins, lamMassXmin, lamMassXmax);
-  lamMassPtAllEta4 = theDQMstore->make<TH2D>("lamMassPtAllEta4",
-                                   "Invariant mass vs p_{T} of all #Lambda^{0}",
-                                   120, 0, 12.0, lamMassNbins, lamMassXmin, lamMassXmax);
-  lamMassPtAllEta5 = theDQMstore->make<TH2D>("lamMassPtAllEta5",
-                                   "Invariant mass vs p_{T} of all #Lambda^{0}",
-                                   120, 0, 12.0, lamMassNbins, lamMassXmin, lamMassXmax);
-  lamMassPtAllEta6 = theDQMstore->make<TH2D>("lamMassPtAllEta6",
-                                   "Invariant mass vs p_{T} of all #Lambda^{0}",
-                                   120, 0, 12.0, lamMassNbins, lamMassXmin, lamMassXmax);
+  }
 
   ksFakeDauRadDist = theDQMstore->make<TH1D>("radDistFakeKs",
 				   "Production radius of daughter particle of Ks fake",
@@ -389,7 +368,7 @@ void V0Validator::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetu
     const reco::GenParticle & genCand = (*genParticleCollection)[it];
     int id = genCand.pdgId();
 
-    double eta = genCand.eta();
+    double eta = genCand.rapidity()+0.47;
     double pt  = genCand.pt();
 
     if(fabs(id)==310) ksGenVsEtaPt->Fill(eta,pt);
@@ -421,17 +400,15 @@ void V0Validator::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetu
          iK0s++) {
       // Fill values to be histogrammed
       K0sCandpT = (sqrt( iK0s->momentum().perp2() ));
-      K0sCandEta = iK0s->momentum().eta();
+      K0sCandEta = iK0s->rapidity()+0.47;
+//      K0sCandEta = iK0s->momentum().eta();
       mass = iK0s->mass();
 
-      if(K0sCandEta>-2.4 && K0sCandEta<2.4) ksMassAll->Fill( mass );
-      if(K0sCandEta>-2.4 && K0sCandEta<2.4) ksMassPtAll->Fill( K0sCandpT, mass );
-      if(K0sCandEta>-2.4 && K0sCandEta<-1.6) ksMassPtAllEta1->Fill( K0sCandpT, mass );
-      if(K0sCandEta>-1.6 && K0sCandEta<-0.8) ksMassPtAllEta2->Fill( K0sCandpT, mass );
-      if(K0sCandEta>-0.8 && K0sCandEta<0.0) ksMassPtAllEta3->Fill( K0sCandpT, mass );
-      if(K0sCandEta>0.0 && K0sCandEta<0.8) ksMassPtAllEta4->Fill( K0sCandpT, mass );
-      if(K0sCandEta>0.8 && K0sCandEta<1.6) ksMassPtAllEta5->Fill( K0sCandpT, mass );
-      if(K0sCandEta>1.6 && K0sCandEta<2.4) ksMassPtAllEta6->Fill( K0sCandpT, mass );
+      ksEtaPtAll->Fill( K0sCandEta, K0sCandpT );
+      if(K0sCandEta>-3.0 && K0sCandEta<3.0) ksMassAll->Fill( mass );
+      if(K0sCandEta>-3.0 && K0sCandEta<3.0) ksMassPtAll->Fill( K0sCandpT, mass );
+      for(int i=0;i<12;i++)
+        if(K0sCandEta>etaBins[i] && K0sCandEta<etaBins[i+1]) ksMassPtAllEta[i]->Fill( K0sCandpT, mass ); 
     }
   }
   if ( lambdaCollection.isValid() && lambdaCollection->size() > 0 ) {
@@ -441,17 +418,15 @@ void V0Validator::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetu
          iLam++) {
       // Fill values to be histogrammed
       LamCandpT = (sqrt( iLam->momentum().perp2() ));
-      LamCandEta = iLam->momentum().eta();
+      LamCandEta = iLam->rapidity()+0.47;
+//      LamCandEta = iLam->momentum().eta();
       mass = iLam->mass();
 
-      if(LamCandEta>-2.4 && LamCandEta<2.4) lamMassAll->Fill( mass );
-      if(LamCandEta>-2.4 && LamCandEta<2.4) lamMassPtAll->Fill( LamCandpT, mass );
-      if(LamCandEta>-2.4 && LamCandEta<-1.6) lamMassPtAllEta1->Fill( LamCandpT, mass );
-      if(LamCandEta>-1.6 && LamCandEta<-0.8) lamMassPtAllEta2->Fill( LamCandpT, mass );
-      if(LamCandEta>-0.8 && LamCandEta<0.0) lamMassPtAllEta3->Fill( LamCandpT, mass );
-      if(LamCandEta>0.0 && LamCandEta<0.8) lamMassPtAllEta4->Fill( LamCandpT, mass );
-      if(LamCandEta>0.8 && LamCandEta<1.6) lamMassPtAllEta5->Fill( LamCandpT, mass );
-      if(LamCandEta>1.6 && LamCandEta<2.4) lamMassPtAllEta6->Fill( LamCandpT, mass );
+      lamEtaPtAll->Fill( LamCandEta, LamCandpT );
+      if(LamCandEta>-3. && LamCandEta<3.) lamMassAll->Fill( mass );
+      if(LamCandEta>-3. && LamCandEta<3.) lamMassPtAll->Fill( LamCandpT, mass );
+      for(int i=0;i<12;i++)
+        if(LamCandEta>etaBins[i] && LamCandEta<etaBins[i+1]) lamMassPtAllEta[i]->Fill( LamCandEta, mass );
     }
   }
 
@@ -544,7 +519,7 @@ void V0Validator::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetu
 	 iK0s++) {
       // Fill values to be histogrammed
       K0sCandpT = (sqrt( iK0s->momentum().perp2() ));
-      K0sCandEta = iK0s->momentum().eta();
+      K0sCandEta = iK0s->rapidity();
       K0sCandR = (sqrt( iK0s->vertex().perp2() ));
       K0sCandStatus = 0;
       mass = iK0s->mass();
@@ -699,7 +674,7 @@ void V0Validator::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetu
 	 iLam++) {
       // Fill values to be histogrammed
       LamCandpT = (sqrt( iLam->momentum().perp2() ));
-      LamCandEta = iLam->momentum().eta();
+      LamCandEta = iLam->rapidity();
       LamCandR = (sqrt( iLam->vertex().perp2() ));
       LamCandStatus = 0;
       mass = iLam->mass();
@@ -873,7 +848,7 @@ void V0Validator::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetu
       if(!itp1->decayVertices().size()) continue;
 
       double LamGenpTtmp = sqrt(itp1->momentum().perp2());
-      double LamGenEtatmp = itp1->momentum().eta();
+      double LamGenEtatmp = itp1->rapidity();
       lamEffVsEtaPt_denom_test->Fill(LamGenEtatmp,LamGenpTtmp);
       lamEffVsPt_denom_test->Fill(LamGenpTtmp);
     }
@@ -935,7 +910,7 @@ void V0Validator::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetu
 		    if( fabs((*iTP2)->pdgId()) == 3122 && (*iTP2)->status()!=-99 ) {
 		      // found generated Lambda
 		      LamGenpT = sqrt((*iTP2)->momentum().perp2());
-		      LamGenEta = (*iTP2)->momentum().eta();
+		      LamGenEta = (*iTP2)->rapidity();
 		      LamGenR = sqrt(itp2->vertex().perp2());
 		      genLam++;
 		      if(trueLams.size() > 0) {
@@ -1082,7 +1057,7 @@ void V0Validator::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetu
 		    K0sGenStatus = 0;
 		    if( (*iTP2)->pdgId() == 310 && (*iTP2)->status() != -99 ) {
 		      K0sGenpT = sqrt( (*iTP2)->momentum().perp2() );
-		      K0sGenEta = (*iTP2)->momentum().eta();
+		      K0sGenEta = (*iTP2)->rapidity();
 		      K0sGenR = sqrt(itp2->vertex().perp2());
 		      genK0s++;
 		      int loop_2 = 0;
