@@ -33,7 +33,7 @@ process.epetadeco_ana_pPb_hfm.nmin = cms.int32(260)
 process.epetadeco_ana_pPb_hfm.nmax = cms.int32(1000)
 
 # for reverse
-process.epetadeco_ana_pPb_hfp.etaassmin = cms.double(-5.0)
-process.epetadeco_ana_pPb_hfp.etaassmax = cms.double(-4.0)
-process.epetadeco_ana_pPb_hfm.etaassmin = cms.double(4.0)
-process.epetadeco_ana_pPb_hfm.etaassmax = cms.double(5.0)
+#process.epetadeco_ana_pPb_hfp.etaassmin = cms.double(4.0)
+#process.epetadeco_ana_pPb_hfp.etaassmax = cms.double(5.0)
+#process.epetadeco_ana_pPb_hfm.etaassmin = cms.double(-5.0)
+#process.epetadeco_ana_pPb_hfm.etaassmax = cms.double(-4.0)
