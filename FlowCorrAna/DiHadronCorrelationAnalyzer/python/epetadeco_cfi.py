@@ -1,6 +1,6 @@
 import FWCore.ParameterSet.Config as cms
 
-epetadeco_ana = cms.EDAnalyzer('EPEtaDecoAnalyzer',
+epetadeco_ana = cms.EDAnalyzer('EPEtaDecoAnalyzerSP',
 
   TrgTrackCollection = cms.string('generalTracks'),
   VertexCollection = cms.string('offlinePrimaryVertices'),
@@ -40,6 +40,8 @@ epetadeco_ana = cms.EDAnalyzer('EPEtaDecoAnalyzer',
   ptmultmax = cms.double(10000),
   runmin = cms.int32(-1),
   runmax = cms.int32(-1),
+  nvtxmax = cms.int32(9999),
+  etacms = cms.double(0.0),
 
   mass_trg = cms.double(0.140),
   mass_ass = cms.double(0.140),
