@@ -4,7 +4,8 @@ from FlowCorrAna.DiHadronCorrelationAnalyzer.dihadroncorrelation_cfi import *
 
 corr_ana_HI = corr_ana.clone(
 #  TrgTrackCollection = cms.string('hiLowPtPixelTracks'),
-  TrgTrackCollection = cms.string('hiGeneralTracks'),
+  TrgTrackCollection = cms.string('hiGeneralAndPixelTracks'),
+#  TrgTrackCollection = cms.string('hiGeneralTracks'),
   VertexCollection = cms.string('hiSelectedVertex'),
   GenParticleCollection = cms.string('hiGenParticles'),
 
@@ -14,9 +15,33 @@ corr_ana_HI = corr_ana.clone(
   yvtxcenter = cms.double(0.037),
   zvtxcenter = cms.double(-0.54),
 
+  pttrgmin = cms.vdouble(0.3, 0.5, 0.75, 1.0, 1.5, 2.0, 2.5),
+  pttrgmax = cms.vdouble(0.5, 0.75, 1.0, 1.5, 2.0, 2.5, 3.0),
+  ptassmin = cms.vdouble(0.3, 0.5, 0.75, 1.0, 1.5, 2.0, 2.5),
+  ptassmax = cms.vdouble(0.5, 0.75, 1.0, 1.5, 2.0, 2.5, 3.0),
+
   IsHarmonics = cms.bool(True),
+  IsFullMatrix = cms.bool(False),
   IsHITrkQuality = cms.bool(True),
   IsPPTrkQuality = cms.bool(False),
+)
+
+corr_ana_HI_hf = corr_ana_HI.clone(
+  pttrgmin = cms.vdouble(0.0),
+  pttrgmax = cms.vdouble(10000.0),
+  ptassmin = cms.vdouble(0.0),
+  ptassmax = cms.vdouble(10000.0),
+
+  etatrgmin = cms.double(-5.0),
+  etatrgmax = cms.double(-4.0),
+  etaassmin = cms.double(4.0),
+  etaassmax = cms.double(5.0),
+
+  IsPtWeightTrg = cms.bool(True),
+  IsPtWeightAss = cms.bool(True),
+
+  TriggerID = cms.string('CaloTower'),
+  AssociateID = cms.string('CaloTower'),
 )
 
 corr_ana_HI_highPt = corr_ana_HI.clone(
