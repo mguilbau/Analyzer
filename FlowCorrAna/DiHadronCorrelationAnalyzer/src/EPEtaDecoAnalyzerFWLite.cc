@@ -98,7 +98,7 @@ void EPEtaDecoAnalyzerFWLite::FillHistsSignal(const DiHadronCorrelationEvent& ev
     {
       TLorentzVector pvector_trg = (eventcorr.pVect_trg[0])[ntrg];	  
       double effweight_trg = (eventcorr.effVect_trg[0])[ntrg];
-      double chg_trg = (eventcorr.chgVect_trg[0])[ntrg];
+//      double chg_trg = (eventcorr.chgVect_trg[0])[ntrg];
       double eta_trg = pvector_trg.Eta();
       double phi_trg = pvector_trg.Phi();
 //      double pt_trg = pvector_trg.Pt();
@@ -107,14 +107,14 @@ void EPEtaDecoAnalyzerFWLite::FillHistsSignal(const DiHadronCorrelationEvent& ev
       {
         TLorentzVector pvector_ass = (eventcorr.pVect_ass[0])[nass];   
         double effweight_ass = (eventcorr.effVect_ass[0])[nass];
-        double chg_ass = (eventcorr.chgVect_ass[0])[nass];
+//        double chg_ass = (eventcorr.chgVect_ass[0])[nass];
 //        double eta_ass = pvector_ass.Eta();
         double phi_ass = pvector_ass.Phi();
 //        double pt_ass = pvector_ass.Pt();
 
         // check charge sign
-        if( (checksign == 0) && (chg_trg != chg_ass)) continue;
-        if( (checksign == 1) && (chg_trg == chg_ass)) continue;
+//        if( (checksign == 0) && (chg_trg != chg_ass)) continue;
+//        if( (checksign == 1) && (chg_trg == chg_ass)) continue;
 
         double deltaPhi=GetDeltaPhi(phi_trg,phi_ass);
 //        double deltaEta=GetDeltaEta(eta_trg,eta_ass);
@@ -157,7 +157,7 @@ void EPEtaDecoAnalyzerFWLite::FillHistsBackground(const DiHadronCorrelationEvent
       {
         TLorentzVector pvector_trg = (eventcorr_trg.pVect_trg[0])[ntrg];	  
         double effweight_trg = (eventcorr_trg.effVect_trg[0])[ntrg];
-        double chg_trg = (eventcorr_trg.chgVect_trg[0])[ntrg];
+//        double chg_trg = (eventcorr_trg.chgVect_trg[0])[ntrg];
         double eta_trg = pvector_trg.Eta();
         double phi_trg = pvector_trg.Phi();
 //        double pt_trg = pvector_trg.Pt();
@@ -166,14 +166,14 @@ void EPEtaDecoAnalyzerFWLite::FillHistsBackground(const DiHadronCorrelationEvent
         {
           TLorentzVector pvector_ass = (eventcorr_ass.pVect_ass[0])[nass];   
           double effweight_ass = (eventcorr_ass.effVect_ass[0])[nass];
-          double chg_ass = (eventcorr_ass.chgVect_ass[0])[nass];
+//          double chg_ass = (eventcorr_ass.chgVect_ass[0])[nass];
 //          double eta_ass = pvector_ass.Eta();
           double phi_ass = pvector_ass.Phi();
 //          double pt_ass = pvector_ass.Pt();
 
           // check charge sign
-          if( (checksign == 0) && (chg_trg != chg_ass)) continue;
-          if( (checksign == 1) && (chg_trg == chg_ass)) continue;
+//          if( (checksign == 0) && (chg_trg != chg_ass)) continue;
+//          if( (checksign == 1) && (chg_trg == chg_ass)) continue;
 
           double deltaPhi=GetDeltaPhi(phi_trg,phi_ass);
 //          double deltaEta=GetDeltaEta(eta_trg,eta_ass);
