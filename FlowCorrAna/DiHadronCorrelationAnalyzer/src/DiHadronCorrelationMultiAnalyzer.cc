@@ -54,6 +54,7 @@ void DiHadronCorrelationMultiAnalyzer::beginRun(const edm::Run& iRun, const edm:
   {
     for(int jass=0;jass<(int)(cutPara.ptassmin.size());jass++)
     {
+      if(!cutPara.IsFullMatrix && itrg<jass) continue;
       hSignal[itrg][jass] = theOutputs->make<TH2D>(Form("signal_trg%d_ass%d",itrg,jass),";#Delta#eta;#Delta#phi",
                                      NEtaBins+1,cutPara.etatrgmin-cutPara.etaassmax-etabinwidth/2.,cutPara.etatrgmax-cutPara.etaassmin+etabinwidth/2.,                    
 	                             NPhiBins-1,-(PI-phibinwidth)/2.0,(PI*3.0-phibinwidth)/2.0);
@@ -68,21 +69,23 @@ void DiHadronCorrelationMultiAnalyzer::beginRun(const edm::Run& iRun, const edm:
 
       if(cutPara.IsHarmonics)
       {
-        hSignalCosn[itrg][jass] = theOutputs->make<TH2D>(Form("signalcosn_trg%d_ass%d",itrg,jass),";cos(n#Delta#phi);n",50000,-1.0,1.0,3,1.5,4.5);
-        hBackgroundCosn[itrg][jass] = theOutputs->make<TH2D>(Form("backgroundcosn_trg%d_ass%d",itrg,jass),";cos(n#Delta#phi);n",50000,-1.0,1.0,3,1.5,4.5);
+        hSignalCosn[itrg][jass] = theOutputs->make<TH2D>(Form("signalcosn_trg%d_ass%d",itrg,jass),";cos(n#Delta#phi);n",20000,-1.0,1.0,3,1.5,4.5);
+        hBackgroundCosn[itrg][jass] = theOutputs->make<TH2D>(Form("backgroundcosn_trg%d_ass%d",itrg,jass),";cos(n#Delta#phi);n",20000,-1.0,1.0,3,1.5,4.5);
+/*
         hSignalSinn[itrg][jass] = theOutputs->make<TH2D>(Form("signalsinn_trg%d_ass%d",itrg,jass),";sin(n#Delta#phi);n",50000,-1.0,1.0,3,1.5,4.5);
         hBackgroundSinn[itrg][jass] = theOutputs->make<TH2D>(Form("backgroundsinn_trg%d_ass%d",itrg,jass),";sin(n#Delta#phi);n",50000,-1.0,1.0,3,1.5,4.5);
         hSignalRhon[itrg][jass] = theOutputs->make<TH2D>(Form("signalrhon_trg%d_ass%d",itrg,jass),";#rho;n",50000,-1.0,1.0,3,1.5,4.5);
         hBackgroundRhon[itrg][jass] = theOutputs->make<TH2D>(Form("backgroundrhon_trg%d_ass%d",itrg,jass),";#rho;n",50000,-1.0,1.0,3,1.5,4.5);
+*/
       }
 
       hSignal2PEPCorrelator[itrg][jass] = theOutputs->make<TH1D>(Form("signal2pepcorrelator_trg%d_ass%d",itrg,jass),";cos(#phi_{#alpha}-3#phi_{#beta}+2#Psi_{2})",600,-0.6,0.6);
       hBackground2PEPCorrelator[itrg][jass] = theOutputs->make<TH1D>(Form("background2pepcorrelator_trg%d_ass%d",itrg,jass),";cos(#phi_{#alpha}-3#phi_{#beta}+2#Psi_{2})",600,-0.6,0.6);
-
+/*
       hSignal_pt1pt2 = theOutputs->make<TH2D>("signal_pt1pt2",";p_{T,1};p_{T,2}", 50, 0, 5.0, 50, 0, 5.0);
       hBackground_pt1pt2 = theOutputs->make<TH2D>("background_pt1pt2",";p_{T,1};p_{T,2}", 50, 0, 5.0, 50, 0, 5.0);
       hCorrelation_pt1pt2 = theOutputs->make<TH2D>("correlation_pt1pt2",";p_{T,1};p_{T,2}", 50, 0, 5.0, 50, 0, 5.0);
-
+*/
       hSignal_eta1eta2[itrg][jass] = theOutputs->make<TH2D>(Form("signal_eta1eta2_trg%d_ass%d",itrg,jass),";#eta_{1};#eta_{2}",
                                      NEtaBins*2+1,cutPara.etatrgmin-etabinwidth/2.,cutPara.etatrgmax+etabinwidth/2.,
                                      NEtaBins*2+1,cutPara.etaassmin-etabinwidth/2.,cutPara.etaassmax+etabinwidth/2.);
@@ -129,7 +132,7 @@ void DiHadronCorrelationMultiAnalyzer::endRun(const edm::Run& iRun, const edm::E
     if(mixend>eventcorrArray.size()) mixend=eventcorrArray.size();
     for(unsigned int j=mixstart;j<mixend;j++)
     {
-      if(eventcorrArray[i].centbin != eventcorrArray[j].centbin) break;
+//      if(eventcorrArray[i].centbin != eventcorrArray[j].centbin) break;
       double deltazvtx = eventcorrArray[i].zvtx-eventcorrArray[j].zvtx;
       hDeltaZvtx->Fill(deltazvtx);
 
@@ -148,6 +151,8 @@ void DiHadronCorrelationMultiAnalyzer::NormalizeHists()
   {
     for(int jass=0;jass<(int)(cutPara.ptassmin.size());jass++)
     {
+      if(!cutPara.IsFullMatrix && itrg<jass) continue;
+
       if(hSignal[itrg][jass]->Integral()==0) continue;
       if(hBackground[itrg][jass]->Integral()==0) continue;
 
@@ -170,11 +175,13 @@ void DiHadronCorrelationMultiAnalyzer::NormalizeHists()
      if(hBackground_phi1phi2[itrg][jass]) hCorrelation_phi1phi2[itrg][jass]->Divide(hBackground_phi1phi2[itrg][jass]);
     }
   }
+/*
   if(hBackground_pt1pt2)
   {
     hCorrelation_pt1pt2->Add(hSignal_pt1pt2);
     hCorrelation_pt1pt2->Divide(hBackground_pt1pt2);
   }
+*/
 }
 
 //--------------- Calculate signal distributions ----------------------
@@ -183,6 +190,8 @@ void DiHadronCorrelationMultiAnalyzer::FillHistsSignal(const DiHadronCorrelation
   for(unsigned int itrg=0;itrg<cutPara.pttrgmin.size();itrg++)
     for(unsigned int jass=0;jass<cutPara.ptassmin.size();jass++)
     {
+      if(!cutPara.IsFullMatrix && itrg<jass) continue;
+
       unsigned int ntrgsize = eventcorr.pVect_trg[itrg].size();
       unsigned int nasssize = eventcorr.pVect_ass[jass].size();
       double nMultCorr_trg = eventcorr.nMultCorrVect_trg[itrg];
@@ -198,7 +207,7 @@ void DiHadronCorrelationMultiAnalyzer::FillHistsSignal(const DiHadronCorrelation
       {
         TLorentzVector pvector_trg = (eventcorr.pVect_trg[itrg])[ntrg];	  
         double effweight_trg = (eventcorr.effVect_trg[itrg])[ntrg];
-        double chg_trg = (eventcorr.chgVect_trg[itrg])[ntrg];
+//        double chg_trg = (eventcorr.chgVect_trg[itrg])[ntrg];
         double eta_trg = pvector_trg.Eta();
         double phi_trg = pvector_trg.Phi();
         double pt_trg = pvector_trg.Pt();
@@ -207,14 +216,14 @@ void DiHadronCorrelationMultiAnalyzer::FillHistsSignal(const DiHadronCorrelation
         {
           TLorentzVector pvector_ass = (eventcorr.pVect_ass[jass])[nass];   
           double effweight_ass = (eventcorr.effVect_ass[jass])[nass];
-          double chg_ass = (eventcorr.chgVect_ass[jass])[nass];
+//          double chg_ass = (eventcorr.chgVect_ass[jass])[nass];
           double eta_ass = pvector_ass.Eta();
           double phi_ass = pvector_ass.Phi();
           double pt_ass = pvector_ass.Pt();
 
           // check charge sign
-          if( (checksign == 0) && (chg_trg != chg_ass)) continue;
-          if( (checksign == 1) && (chg_trg == chg_ass)) continue;
+//          if( (checksign == 0) && (chg_trg != chg_ass)) continue;
+//          if( (checksign == 1) && (chg_trg == chg_ass)) continue;
 
           double deltaPhi=GetDeltaPhi(phi_trg,phi_ass);
           double deltaEta=GetDeltaEta(eta_trg,eta_ass);
@@ -280,7 +289,7 @@ void DiHadronCorrelationMultiAnalyzer::FillHistsSignal(const DiHadronCorrelation
             hSignal_phi1phi2[itrg][jass]->Fill(phi_ass,phi_trg,1.0/effweight/nMultCorr_trg);
           }
 
-          if(fabs(deltaPhi)<PI/8. && fabs(deltaEta)>2) hSignal_pt1pt2->Fill(pt_trg,pt_ass,1.0/effweight/nMultCorr_trg);
+//          if(fabs(deltaPhi)<PI/8. && fabs(deltaEta)>2) hSignal_pt1pt2->Fill(pt_trg,pt_ass,1.0/effweight/nMultCorr_trg);
         }
       }
 
@@ -316,6 +325,8 @@ void DiHadronCorrelationMultiAnalyzer::FillHistsBackground(const DiHadronCorrela
   for(unsigned int itrg=0;itrg<cutPara.pttrgmin.size();itrg++)
     for(unsigned int jass=0;jass<cutPara.ptassmin.size();jass++)
     {
+      if(!cutPara.IsFullMatrix && itrg<jass) continue;
+
       unsigned int ntrgsize = eventcorr_trg.pVect_trg[itrg].size();
       unsigned int nasssize = eventcorr_ass.pVect_ass[jass].size();
       double nMultCorr_trg = eventcorr_trg.nMultCorrVect_trg[itrg];
@@ -330,7 +341,7 @@ void DiHadronCorrelationMultiAnalyzer::FillHistsBackground(const DiHadronCorrela
       {
         TLorentzVector pvector_trg = (eventcorr_trg.pVect_trg[itrg])[ntrg];	  
         double effweight_trg = (eventcorr_trg.effVect_trg[itrg])[ntrg];
-        double chg_trg = (eventcorr_trg.chgVect_trg[itrg])[ntrg];
+//        double chg_trg = (eventcorr_trg.chgVect_trg[itrg])[ntrg];
         double eta_trg = pvector_trg.Eta();
         double phi_trg = pvector_trg.Phi();
         double pt_trg = pvector_trg.Pt();
@@ -339,14 +350,14 @@ void DiHadronCorrelationMultiAnalyzer::FillHistsBackground(const DiHadronCorrela
         {
           TLorentzVector pvector_ass = (eventcorr_ass.pVect_ass[jass])[nass];   
           double effweight_ass = (eventcorr_ass.effVect_ass[jass])[nass];
-          double chg_ass = (eventcorr_ass.chgVect_ass[jass])[nass];
+//          double chg_ass = (eventcorr_ass.chgVect_ass[jass])[nass];
           double eta_ass = pvector_ass.Eta();
           double phi_ass = pvector_ass.Phi();
           double pt_ass = pvector_ass.Pt();
 
           // check charge sign
-          if( (checksign == 0) && (chg_trg != chg_ass)) continue;
-          if( (checksign == 1) && (chg_trg == chg_ass)) continue;
+//          if( (checksign == 0) && (chg_trg != chg_ass)) continue;
+//          if( (checksign == 1) && (chg_trg == chg_ass)) continue;
 
           double deltaPhi=GetDeltaPhi(phi_trg,phi_ass);
           double deltaEta=GetDeltaEta(eta_trg,eta_ass);
@@ -411,7 +422,7 @@ void DiHadronCorrelationMultiAnalyzer::FillHistsBackground(const DiHadronCorrela
             hBackground_phi1phi2[itrg][jass]->Fill(phi_ass,phi_trg,1.0/effweight);
           }
 
-          if(fabs(deltaPhi)<PI/8. && fabs(deltaEta)>2) hBackground_pt1pt2->Fill(pt_trg,pt_ass,1.0/effweight);
+//          if(fabs(deltaPhi)<PI/8. && fabs(deltaEta)>2) hBackground_pt1pt2->Fill(pt_trg,pt_ass,1.0/effweight);
         }
       }
 
