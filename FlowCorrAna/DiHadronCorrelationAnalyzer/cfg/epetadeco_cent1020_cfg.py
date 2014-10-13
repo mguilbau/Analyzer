@@ -9,7 +9,7 @@ process.load("Configuration.StandardSequences.FrontierConditions_GlobalTag_cff")
 process.GlobalTag.globaltag = 'GR_R_53_LV6::All'
 
 process.maxEvents = cms.untracked.PSet(
-    input = cms.untracked.int32(500)
+    input = cms.untracked.int32(-1)
 )
 
 from HeavyIonsAnalysis.Configuration.CommonFunctions_cff import *
@@ -37,7 +37,7 @@ process.source = cms.Source("PoolSource",
                                 fileNames = cms.untracked.vstring(
 #'/store/user/davidlw/HIMinBiasUPC/PR2011_MBUCC_TRKANASKIM_official_v1/71a7d203fff2b3f389673e6fdd587ee0/hiGoodColl_1023_1_S52.root'
 #'root://xrootd.unl.edu//store/user/appeltel/HIMinBiasUPC/pixelTrackReco_devel_v0/a236e4501225ae15b3601563d612abb5/pixeltrackreco_6_1_qSR.root'
-'/store/user/davidlw/HIMinBiasUPC/Skim_rereco_pixeltracks_v1/4b65ef5aa7a26abf1f962cd25f7df02d/hiMB_88_1_qbI.root'
+'/store/user/davidlw/HIMinBiasUPC/Skim_rereco_MB_pixeltracks_final_v2/9c1b4b9b6b9ff3e493a474ba7d01bc76/hiMB_1795_1_37e.root'
                 )
 #                                secondaryFileNames = cms.untracked.vstring('')
                             )
@@ -58,3 +58,5 @@ process.epetadeco_ana_HI_hfp.centmin = cms.int32(20)
 process.epetadeco_ana_HI_hfp.centmax = cms.int32(40)
 process.epetadeco_ana_HI_hfm.centmin = cms.int32(20)
 process.epetadeco_ana_HI_hfm.centmax = cms.int32(40)
+process.epetadeco_ana_HI_hfp.EffFileName = cms.string('TrackCorrections_HYDJET_5320_hiGenPixelTrk_cent1030.root')
+process.epetadeco_ana_HI_hfm.EffFileName = cms.string('TrackCorrections_HYDJET_5320_hiGenPixelTrk_cent1030.root')
