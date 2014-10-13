@@ -60,7 +60,7 @@ void InvMassAnalyzer::endRun(const edm::Run& iRun, const edm::EventSetup& iSetup
     if(mixend>eventcorrArray.size()) mixend=eventcorrArray.size();
     for(unsigned int j=mixstart;j<mixend;j++)
     {
-      if(eventcorrArray[i].centbin != eventcorrArray[j].centbin) break;
+//      if(eventcorrArray[i].centbin != eventcorrArray[j].centbin) break;
 //      if(eventcorrArray[i].centbin != eventcorrArray[j].centbin) continue;
 
       double deltazvtx = eventcorrArray[i].zvtx-eventcorrArray[j].zvtx;
@@ -88,16 +88,16 @@ void InvMassAnalyzer::FillHistsSignal(const DiHadronCorrelationEvent& eventcorr)
   for(unsigned int ntrg=0;ntrg<ntrgsize;ntrg++)
   {
     TLorentzVector pvector_trg = (eventcorr.pVect_trg[0])[ntrg];
-    double chg_trg = (eventcorr.chgVect_trg[0])[ntrg];
+//    double chg_trg = (eventcorr.chgVect_trg[0])[ntrg];
       
     for(unsigned int nass=0;nass<nasssize;nass++)
     {
       TLorentzVector pvector_ass = (eventcorr.pVect_ass[0])[nass];
-      double chg_ass = (eventcorr.chgVect_ass[0])[nass];
+//      double chg_ass = (eventcorr.chgVect_ass[0])[nass];
 
       // check charge sign
-      if( (checksign == 0) && (chg_trg != chg_ass)) continue;
-      if( (checksign == 1) && (chg_trg == chg_ass)) continue;
+//      if( (checksign == 0) && (chg_trg != chg_ass)) continue;
+//      if( (checksign == 1) && (chg_trg == chg_ass)) continue;
 
       TLorentzVector pvector_total = pvector_ass + pvector_trg;
       double massInv = pvector_total.M();
@@ -114,16 +114,16 @@ void InvMassAnalyzer::FillHistsBackground(const DiHadronCorrelationEvent& eventc
   for(unsigned int ntrg=0;ntrg<ntrgsize;ntrg++)
   {
     TLorentzVector pvector_trg = (eventcorr_trg.pVect_trg[0])[ntrg];
-    double chg_trg = (eventcorr_trg.chgVect_trg[0])[ntrg];
+//    double chg_trg = (eventcorr_trg.chgVect_trg[0])[ntrg];
       
     for(unsigned int nass=0;nass<nasssize;nass++)
     {
       TLorentzVector pvector_ass = (eventcorr_ass.pVect_ass[0])[nass];
-      double chg_ass = (eventcorr_ass.chgVect_ass[0])[nass];
+//      double chg_ass = (eventcorr_ass.chgVect_ass[0])[nass];
 
       // check charge sign
-      if( (checksign == 0) && (chg_trg != chg_ass)) continue;
-      if( (checksign == 1) && (chg_trg == chg_ass)) continue;
+//      if( (checksign == 0) && (chg_trg != chg_ass)) continue;
+//      if( (checksign == 1) && (chg_trg == chg_ass)) continue;
 
       TLorentzVector pvector_total = pvector_ass + pvector_trg;
       double massInv = pvector_total.M();
