@@ -28,7 +28,7 @@ process.maxEvents = cms.untracked.PSet(
 
 process.source = cms.Source("PoolSource",
                                 fileNames = cms.untracked.vstring(
-'/store/user/davidlw/Hijing_PPb502_MinimumBias/RecoSkim_batch1_v1/84cb8c951385c1f95541c031462cec6b/pPb_MB_493_1_IUN.root'
+'/store/user/davidlw/Hijing_PPb502_MinimumBias/RecoSkim_batch1_v1/84cb8c951385c1f95541c031462cec6b/pPb_MB_100_1_tG6.root'
 #'root://xrootd1.cmsaf.mit.edu//store/user/vzhukova/HIJING_MB/HIJING_MB_RECO_v3/13a591fee6315e7fb1e99e6ba8e52eaa/reco_hijing_2582_1_tV4.root'
 #'root://xrootd1.cmsaf.mit.edu//store/user/vzhukova/HIJING_MB/HIJING_MB_RECO_v3/13a591fee6315e7fb1e99e6ba8e52eaa/reco_hijing_1000_1_Bov.root'
 #'/store/user/vzhukova/HYDGET_PERIPH_batch7/HYDGET_PERIPH_RECO_batch7/b7d33bba7673cdb1ee6f4983c0800c79/HYDGET_PERIPH_RECO_10_1_7bq.root'
@@ -81,7 +81,7 @@ process.TFileService = cms.Service("TFileService",
 process.TrackAssociatorByHits.Cut_RecoToSim = cms.double(0.5)
 process.TrackAssociatorByChi2ESProducer.chi2cut = cms.double(25.0)
 
-process.v0validation = cms.Sequence(process.generalV0CandidatesNew*process.selectV0CandidatesNewlambda*process.selectV0CandidatesNewkshort*process.v0Validator)
+process.v0validation = cms.Sequence(process.selectV0CandidatesNewlambda*process.selectV0CandidatesNewkshort*process.v0Validator)
 
 process.p = cms.Path(process.v0validation)
 
