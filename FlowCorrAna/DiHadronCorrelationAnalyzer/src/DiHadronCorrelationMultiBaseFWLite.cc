@@ -499,10 +499,10 @@ void DiHadronCorrelationMultiBaseFWLite::Analyze(int ievt)
 
 //  if(cutPara.IsInvMass) FillHistsInvariantMass(*eventcorr);
 
-  eventcorr->nmult=nMult;
-  eventcorr->centbin=hiCentrality;
+//  eventcorr->nmult=nMult;
+//  eventcorr->centbin=hiCentrality;
   eventcorr->zvtx=zVtx;
-  eventcorr->epangle=EPAngle;
+//  eventcorr->epangle=EPAngle;
 
   for(unsigned int itrg=0;itrg<cutPara.pttrgmin.size();itrg++)
   {
@@ -1618,7 +1618,7 @@ void DiHadronCorrelationMultiBaseFWLite::AssignTrgPtBins(double pt, double eta, 
 
        nMultAll_trg++; nMultAllCorr_trg = nMultAllCorr_trg + 1.0/effweight;
        (eventcorr->pVect_trg[pttrgbin]).push_back(pvector);
-       (eventcorr->chgVect_trg[pttrgbin]).push_back(charge);
+//       (eventcorr->chgVect_trg[pttrgbin]).push_back(charge);
        (eventcorr->effVect_trg[pttrgbin]).push_back(effweight);
     }
    }
@@ -1650,7 +1650,7 @@ void DiHadronCorrelationMultiBaseFWLite::AssignAssPtBins(double pt, double eta, 
 
        nMultAll_ass++; nMultAllCorr_ass = nMultAllCorr_ass + 1.0/effweight;
        (eventcorr->pVect_ass[ptassbin]).push_back(pvector); 
-       (eventcorr->chgVect_ass[ptassbin]).push_back(charge);
+//       (eventcorr->chgVect_ass[ptassbin]).push_back(charge);
        (eventcorr->effVect_ass[ptassbin]).push_back(effweight);
      }
    }
