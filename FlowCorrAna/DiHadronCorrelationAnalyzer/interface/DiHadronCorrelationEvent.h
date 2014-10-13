@@ -14,29 +14,29 @@ class DiHadronCorrelationEvent {
 
  public:                                                                                           
    //  vectors for tracks, hits etc
-   vector<TLorentzVector>  pVect_all;
+//   vector<TLorentzVector>  pVect_all;
    vector<TLorentzVector>  pVect_trg[MAXPTTRGBINS];
-   vector<double>    nMultCorrVect_trg;
-   vector<double>    chgVect_trg[MAXPTTRGBINS];
-   vector<double>    effVect_trg[MAXPTTRGBINS];
+   vector<float>    nMultCorrVect_trg;
+//   vector<float>    chgVect_trg[MAXPTTRGBINS];
+   vector<float>    effVect_trg[MAXPTTRGBINS];
 //   double            multcorrVect_trg[MAXPTTRGBINS];
    vector<TLorentzVector>  pVect_ass[MAXPTASSBINS];
-   vector<double>    nMultCorrVect_ass;
-   vector<double>    chgVect_ass[MAXPTASSBINS];
-   vector<double>    effVect_ass[MAXPTASSBINS];
+   vector<float>    nMultCorrVect_ass;
+//   vector<float>    chgVect_ass[MAXPTASSBINS];
+   vector<float>    effVect_ass[MAXPTASSBINS];
 //   double            multcorrVect_ass[MAXPTASSBINS];
    int               run;
-   int               lumi;
+//   int               lumi;
    int               event;
-   int               nmult;
-   int               centbin;
-   double            zvtx;
-   double            epangle;
+//   int               nmult;
+//   int               centbin;
+   float            zvtx;
+//   float            epangle;
 
    bool operator<(const DiHadronCorrelationEvent & b) const{
-     if (centbin != b.centbin) return centbin < b.centbin;
-     else if (zvtx != b.zvtx) return zvtx < b.zvtx;
-     else if (nmult != b.nmult) return nmult < b.nmult;
+     if (zvtx != b.zvtx) return zvtx < b.zvtx;
+//     else if (centbin != b.centbin) return centbin < b.centbin;
+//     else if (nmult != b.nmult) return nmult < b.nmult;
      else return false;
    }
 
