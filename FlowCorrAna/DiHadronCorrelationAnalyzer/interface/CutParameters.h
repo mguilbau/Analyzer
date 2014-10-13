@@ -36,6 +36,7 @@ class CutParameters {
    double  zvtxmax;
    double  zvtxbin;
    double  vtxsepmin;
+   double  etacms;
    int     nvtxmax;
    bool    istrigger;
    vector<TString> triggernames;
