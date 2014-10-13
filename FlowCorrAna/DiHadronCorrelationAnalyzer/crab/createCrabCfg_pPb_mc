@@ -1,0 +1,57 @@
+#!/bin/bash
+
+pdname=ReggeGribovPartonMCfix_EposLHC_5TeV_pPb
+dataset=/ReggeGribovPartonMCfix_EposLHC_5TeV_pPb/davidlw-RecoSkim_batch1_v1-84cb8c951385c1f95541c031462cec6b/USER
+nevents=50000
+
+### epetadeco
+tag=pttrg033_ptassallweight_etaass34_eff1_v42
+#tag=pttrgallweighttower_ptassallweight_etaass45_eff1_v9
+type=epetadeco_gen
+
+### ebyeflow
+#tag=pttrg033_rereco_eff1_v3
+#type=ebyeflow
+
+cat > crab_${type}_n100_pPb.cfg << EOF 
+[CRAB]
+jobtype = cmssw
+scheduler = remoteGlidein
+use_server   = 0
+
+[CMSSW]
+use_dbs3 = 1 
+dbs_url                 = phys03
+datasetpath             = $dataset
+pset                    = ../cfg/${type}_pPb_cfg.py
+total_number_of_events   = -1 
+events_per_job     = $nevents 
+output_file = ${type}.root
+
+[USER]
+copy_data               = 1
+storage_element         = T2_US_MIT
+
+user_remote_dir = $pdname/${type}_n100_$tag
+ui_working_dir = $pdname/${type}_n100_$tag
+check_user_remote_dir   = 0
+
+[GRID]
+max_rss = 3000
+se_white_list = mit.edu
+allow_overflow = 0
+EOF
+
+cat > submit_${type}_pPb << EOF 
+crab -create -submit -cfg crab_${type}_n100_pPb.cfg
+EOF
+
+chmod u+x submit_${type}_pPb
+
+hadoopdir=/mnt/hadoop/cms/store/user/davidlw/$pdname
+scratchdir=/export/d00/scratch/davidlw/DiHadronCorrelations/outputs_312/EPOSReco_Minbias_5TeV/merged
+cat > merge_${type}_pPb << EOF 
+nohup hadd -f $scratchdir/${type}_n100_$tag.root $hadoopdir/${type}_n100_$tag/*.root > /tmp/nohup.out & 
+EOF
+
+chmod u+x merge_${type}_pPb
