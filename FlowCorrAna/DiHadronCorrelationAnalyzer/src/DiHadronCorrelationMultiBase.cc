@@ -35,6 +35,9 @@ DiHadronCorrelationMultiBase::DiHadronCorrelationMultiBase(const edm::ParameterS
   nVertices(0),
   maxofflinetracks(0),
   nCentBins(200),
+  hft(0),
+  npixel(0),
+  zdc(0),
   xVtx(-99999.),
   yVtx(-99999.),
   zVtx(-99999.),	
@@ -82,6 +85,8 @@ DiHadronCorrelationMultiBase::DiHadronCorrelationMultiBase(const edm::ParameterS
   cutPara.ptmultmax = iConfig.getParameter<double>("ptmultmax");
   cutPara.runmin = iConfig.getParameter<int>("runmin");
   cutPara.runmax = iConfig.getParameter<int>("runmax");
+  cutPara.etacms = iConfig.getParameter<double>("etacms");
+  cutPara.nvtxmax = iConfig.getParameter<int>("nvtxmax");
 
   cutPara.mass_trg = iConfig.getParameter<double>("mass_trg");
   cutPara.mass_ass = iConfig.getParameter<double>("mass_ass");
@@ -123,7 +128,7 @@ void DiHadronCorrelationMultiBase::beginRun(const edm::Run& iRun, const edm::Eve
 {
   // pt bins
   std::vector<double> ptBins;
-
+/*
   ptBins.push_back(0.0);
   ptBins.push_back(0.3);
   ptBins.push_back(0.5);
@@ -140,31 +145,52 @@ void DiHadronCorrelationMultiBase::beginRun(const edm::Run& iRun, const edm::Eve
   ptBins.push_back(6.0);
   ptBins.push_back(7.0);
   ptBins.push_back(8.0);
+*/
+  const double small = 1e-3;
+  double pt;
+
+  for(pt =   0  ; pt <   1.2-small; pt +=  0.05) ptBins.push_back(pt); // 24 bins
+  for(pt =   1.2; pt <   2.4-small; pt +=  0.1 ) ptBins.push_back(pt); // 12 bins
+  for(pt =   2.4; pt <   7.2-small; pt +=  0.4 ) ptBins.push_back(pt); // 12 bins
+  for(pt =   7.2; pt <  14.4-small; pt +=  1.2 ) ptBins.push_back(pt); // 6 bins
+  for(pt =  14.4; pt <  28.8-small; pt +=  2.4 ) ptBins.push_back(pt); // 6 bins 
+  for(pt =  28.8; pt <  48.0-small; pt +=  3.2 ) ptBins.push_back(pt); // 6 bins
+  for(pt =  48.0; pt <  86.4-small; pt +=  6.4 ) ptBins.push_back(pt); // 6 bins
+  for(pt =  86.4; pt < 189.6-small; pt +=  8.6 ) ptBins.push_back(pt); // 6 bins
+  ptBins.push_back(189.6);
+
+  static float etaMin   = -3.0;
+  static float etaMax   =  3.0;
+  static float etaWidth =  0.2;
+  std::vector<double> etaBins;
+
+  for(double eta = etaMin; eta < etaMax + etaWidth/2; eta += etaWidth)
+    etaBins.push_back(eta);
 
   hMultRawAll = theOutputs->make<TH1D>("multrawall",";n",10000,0,10000);
   hMultCorrAll = theOutputs->make<TH1D>("multcorrall",";n",10000,0,10000);
   hZVtx = theOutputs->make<TH1D>("zvtx",";z_{vtx} (cm)",160,-20,20);
-  hXYVtx = theOutputs->make<TH2D>("xyvtx",";x_{vtx} (cm);y_{vtx} (cm)",1000,-0.5,0.5,1000,-0.5,0.5);
+  hXYVtx = theOutputs->make<TH2D>("xyvtx",";x_{vtx} (cm);y_{vtx} (cm)",100,-0.5,0.5,100,-0.5,0.5);
   hCentrality = theOutputs->make<TH1D>("centrality",";centbin",nCentBins+1,-1,nCentBins);
   if(cutPara.IsDebug)
   {
     hPtAll_trg = theOutputs->make<TH1D>("ptall_trg",";p_{T}(GeV/c)",ptBins.size()-1, &ptBins[0]);
     hNVtx = theOutputs->make<TH1D>("nvtx",";nVertices",51,-0.5,50.5);
 //  hNVtxVsNMult = theOutputs->make<TH2D>("nvtxvsnmult",";nMult;nVertices",500,0,500,50,0,50);
-    hdNdetadptAll_trg = theOutputs->make<TH2D>("dNdetadptall_trg",";#eta;pT(GeV)",120,-6.0,6.0,100,0,10.0);
+    hdNdetadptAll_trg = theOutputs->make<TH2D>("dNdetadptall_trg",";#eta;pT(GeV)",etaBins.size()-1, &etaBins[0],ptBins.size()-1, &ptBins[0]);
     hdNdetadphiAll_trg = theOutputs->make<TH2D>("dNdetadphiall_trg",";#eta;#phi",120,-6.0,6.0,36,-PI,PI);
     hPtAll_ass = theOutputs->make<TH1D>("ptall_ass",";p_{T}(GeV/c)",5000,0,50);
-//  hdNdetadptAll_ass = theOutputs->make<TH2D>("dNdetadptall_ass",";#eta;pT(GeV)",120,-6.0,6.0,100,0,10.0);
+    hdNdetadptAll_ass = theOutputs->make<TH2D>("dNdetadptall_ass",";#eta;pT(GeV)",120,-6.0,6.0,1000,0,10.0);
     hdNdetadphiAll_ass = theOutputs->make<TH2D>("dNdetadphiall_ass",";#eta;#phi",120,-6.0,6.0,36,-PI,PI);
     hPtCorrAll_trg = theOutputs->make<TH1D>("ptcorrall_trg",";p_{T}(GeV/c)",ptBins.size()-1, &ptBins[0]);
-//  hdNdetadptCorrAll_trg = theOutputs->make<TH2D>("dNdetadptcorrall_trg",";#eta;pT(GeV)",120,-6.0,6.0,100,0,10.0);
+    hdNdetadptCorrAll_trg = theOutputs->make<TH2D>("dNdetadptcorrall_trg",";#eta;pT(GeV)",120,-6.0,6.0,1000,0,10.0);
     hdNdetadphiCorrAll_trg = theOutputs->make<TH2D>("dNdetadphicorrall_trg",";#eta;#phi",120,-6.0,6.0,36,-PI,PI);
     hPtCorrAll_ass = theOutputs->make<TH1D>("ptcorrall_ass",";p_{T}(GeV/c)",1000,0,100);
-//  hdNdetadptCorrAll_ass = theOutputs->make<TH2D>("dNdetadptcorrall_ass",";#eta;pT(GeV)",120,-6.0,6.0,100,0,10.0);
+    hdNdetadptCorrAll_ass = theOutputs->make<TH2D>("dNdetadptcorrall_ass",";#eta;pT(GeV)",120,-6.0,6.0,1000,0,10.0);
     hdNdetadphiCorrAll_ass = theOutputs->make<TH2D>("dNdetadphicorrall_ass",";#eta;#phi",120,-6.0,6.0,36,-PI,PI);
     hHFTowerSum = theOutputs->make<TH1D>("hftowersum",";HF Sum E_{T}",600,0,6000);
-    hHFvsNpixel = theOutputs->make<TH2D>("hfvsnpixel",";HF Sum E_{T}; Npixel;",600,0,6000,1000,0,80000);
-    hHFvsZDC = theOutputs->make<TH2D>("hfvszdc",";HF Sum E_{T}; ZDC Sum E_{T};",600,0,6000,1000,0,80000);
+    hHFvsNpixel = theOutputs->make<TH2D>("hfvsnpixel",";HF Sum E_{T}; Npixel;",600,0,6000,800,0,80000);
+    hHFvsZDC = theOutputs->make<TH2D>("hfvszdc",";HF Sum E_{T}; ZDC Sum E_{T};",600,0,6000,800,0,80000);
 //    hNpart = theOutputs->make<TH1D>("Npart",";N_{part}",500,0,500);
   }
   if(cutPara.IsInvMass) hInvMassVsPt_Signal = theOutputs->make<TH2D>("invmassvspt_signal",";p_{T}(GeV);Invariant Mass (GeV)",500,0,50,1500,0,3);
@@ -226,6 +252,8 @@ void DiHadronCorrelationMultiBase::analyze(const edm::Event& iEvent, const edm::
     hXYVtx->Fill(xVtx,yVtx);
     if(cutPara.IsDebug) hNVtx->Fill(nVertices);
 
+    if(nVertices>cutPara.nvtxmax) return;
+
     double zVtxtmp = zVtx-cutPara.zvtxcenter;
     double yVtxtmp = yVtx-cutPara.yvtxcenter;
     double xVtxtmp = xVtx-cutPara.xvtxcenter;
@@ -239,6 +267,12 @@ void DiHadronCorrelationMultiBase::analyze(const edm::Event& iEvent, const edm::
   {
     hiCentrality = GetCentralityBin(iEvent,iSetup);
     if(hiCentrality<cutPara.centmin || hiCentrality>=cutPara.centmax) return;
+    if(cutPara.IsDebug)
+    {
+      hHFTowerSum->Fill(hft);
+      hHFvsNpixel->Fill(hft,npixel);
+      hHFvsZDC->Fill(hft,zdc);
+    }
   }
   hCentrality->Fill(hiCentrality);
 
@@ -310,10 +344,10 @@ void DiHadronCorrelationMultiBase::analyze(const edm::Event& iEvent, const edm::
   }
 
   eventcorr->run = iEvent.id().run();
-  eventcorr->lumi = iEvent.luminosityBlock();
+//  eventcorr->lumi = iEvent.luminosityBlock();
   eventcorr->event = iEvent.id().event();
-  eventcorr->nmult=nMult;
-  eventcorr->centbin=hiCentrality;
+//  eventcorr->nmult=nMult;
+//  eventcorr->centbin=hiCentrality;
   eventcorr->zvtx=zVtx;
 
   for(unsigned int itrg=0;itrg<cutPara.pttrgmin.size();itrg++)
@@ -491,9 +525,10 @@ void DiHadronCorrelationMultiBase::LoopTracks(const edm::Event& iEvent, const ed
      if(cutPara.IsPPTrkQuality)
      {
        if(!trk.quality(reco::TrackBase::highPurity)) continue;
-       if(fabs(trk.ptError())/trk.pt()>0.1) continue;
+       if(fabs(trk.ptError())/trk.pt() > 0.1) continue;
        if(fabs(dzvtx/dzerror) > 3.0) continue;
        if(fabs(dxyvtx/dxyerror) > 3.0) continue;
+ //      if(trk.numberOfValidHits()<6) continue;
      }
 
      if(cutPara.IsHITrkQuality && !trk.quality(reco::TrackBase::highPurity)) continue;
@@ -522,7 +557,7 @@ void DiHadronCorrelationMultiBase::LoopCaloTower(const edm::Event& iEvent, const
      if(et<0.01) continue;        
      double eta = calotower.eta();
      double phi = calotower.phi();
-//     double et  = calotower.energy();
+   //  et  = calotower.energy();
      double charge = 0;
      
 //     if(calotower.energy()<3 && fabs(eta)>3) continue;
@@ -714,7 +749,7 @@ void DiHadronCorrelationMultiBase::AssignTrgPtBins(double pt, double eta, double
      hdNdetadphiAll_trg->Fill(eta,phi);
      hdNdetadptAll_trg->Fill(eta,pt);
      hdNdetadphiCorrAll_trg->Fill(eta,phi,1.0/effweight);
-//   hdNdetadptCorrAll_trg->Fill(eta,pt,1.0/effweight);
+     hdNdetadptCorrAll_trg->Fill(eta,pt,1.0/effweight);
      hPtAll_trg->Fill(pt,1.0/hPtAll_trg->GetBinWidth(hPtAll_trg->FindBin(pt)));
      hPtCorrAll_trg->Fill(pt,1./effweight/hPtAll_trg->GetBinWidth(hPtAll_trg->FindBin(pt)));
    }
@@ -735,7 +770,7 @@ void DiHadronCorrelationMultiBase::AssignTrgPtBins(double pt, double eta, double
        }
        nMultAll_trg++; nMultAllCorr_trg = nMultAllCorr_trg + 1.0/effweight;
        (eventcorr->pVect_trg[pttrgbin]).push_back(pvector);
-       (eventcorr->chgVect_trg[pttrgbin]).push_back(charge);
+//       (eventcorr->chgVect_trg[pttrgbin]).push_back(charge);
        (eventcorr->effVect_trg[pttrgbin]).push_back(effweight);
     }
    }
@@ -748,11 +783,11 @@ void DiHadronCorrelationMultiBase::AssignAssPtBins(double pt, double eta, double
    if(cutPara.IsDebug)
    {
      hdNdetadphiAll_ass->Fill(eta,phi);
-//   hdNdetadptAll_ass->Fill(eta,pt);
-     hdNdetadphiCorrAll_ass->Fill(eta,phi,effweight);
-//   hdNdetadptCorrAll_ass->Fill(eta,pt,effweight);
+     hdNdetadptAll_ass->Fill(eta,pt);
+     hdNdetadphiCorrAll_ass->Fill(eta,phi,1.0/effweight);
+     hdNdetadptCorrAll_ass->Fill(eta,pt,1.0/effweight);
      hPtAll_ass->Fill(pt);
-     hPtCorrAll_ass->Fill(pt,effweight);
+     hPtCorrAll_ass->Fill(pt,1.0/effweight);
    }
 
    TLorentzVector pvector;
@@ -770,7 +805,7 @@ void DiHadronCorrelationMultiBase::AssignAssPtBins(double pt, double eta, double
        }
        nMultAll_ass++; nMultAllCorr_ass = nMultAllCorr_ass + 1.0/effweight;
        (eventcorr->pVect_ass[ptassbin]).push_back(pvector); 
-       (eventcorr->chgVect_ass[ptassbin]).push_back(charge);
+//       (eventcorr->chgVect_ass[ptassbin]).push_back(charge);
        (eventcorr->effVect_ass[ptassbin]).push_back(effweight);
      }
    }
@@ -813,20 +848,20 @@ int DiHadronCorrelationMultiBase::GetCentralityBin(const edm::Event& iEvent, con
   cent->newEvent(iEvent,iSetup);
 
 //  double hf = cent->raw()->EtHFhitSum();
-  double hft = cent->raw()->EtHFtowerSum();
-  double npixel = cent->raw()->multiplicityPixel();
-  double zdc = cent->raw()->zdcSum();
+  hft = cent->raw()->EtHFtowerSum();
+  npixel = cent->raw()->multiplicityPixel();
+  zdc = cent->raw()->zdcSum();
 //  double eb = cent->raw()->EtEBSum();
 //  double eep = cent->raw()->EtEESumPlus();
 //  double eem = cent->raw()->EtEESumMinus();
-
-  if(cutPara.IsDebug)
-  {
-    hHFTowerSum->Fill(hft);
-    hHFvsNpixel->Fill(hft,npixel);
-    hHFvsZDC->Fill(hft,zdc);
-  }
-
+/*
+    if(cutPara.IsDebug)
+    {
+      hHFTowerSum->Fill(hft);
+      hHFvsNpixel->Fill(hft,npixel);
+      hHFvsZDC->Fill(hft,zdc);
+    }
+*/
   int bin = cent->getBin();
 
 // UCC centrality bins
@@ -837,7 +872,8 @@ int DiHadronCorrelationMultiBase::GetCentralityBin(const edm::Event& iEvent, con
   if(hft>3094.3 && npixel>48787 && cutPara.centmin==510 && cutPara.centmax == 10000) bin=510;
   if((7.0*hft+zdc)<36000 && cutPara.centmin==5000 && cutPara.centmax == 10000) bin=5000;
 //  if((7.0*hft+zdc)<36000 && hft>3260 && npixel>51400 && cutPara.centmin==1100 && cutPara.centmax == 10000) bin=1100; // hft>3420 && npixel>31300 && 45*hft+zdc<188372
-  if((45*hft+zdc)<188372 && hft>3420 && npixel>31300 && cutPara.centmin==1100 && cutPara.centmax == 10000) bin=1100;
+//  if((20.*hft+zdc)<114000 && hft>3400 && npixel>31000 && cutPara.centmin==1100 && cutPara.centmax == 10000) bin=1100;
+  if((20.*hft+zdc)<114000 && hft>3420 && npixel>31500 && cutPara.centmin==1100 && cutPara.centmax == 10000) bin=1100;
   if((7.0*hft+zdc)<36000 && 1.15*hft>zdc && hft>3260 && npixel>51400 && cutPara.centmin==1200 && cutPara.centmax == 10000) bin=1200;
   if((7.0*hft+zdc)<36000 && hft>3393 && npixel>53450 && cutPara.centmin==2100 && cutPara.centmax == 10000) bin=2100;
   if((7.0*hft+zdc)<36000 && 1.15*hft>zdc && hft>3393 && npixel>53450 && cutPara.centmin==2200 && cutPara.centmax == 10000) bin=2200;
@@ -909,7 +945,7 @@ double DiHadronCorrelationMultiBase::GetEffWeight(double eta, double pt, double 
   if(!hEffWeight) return effweight;
   if(!cutPara.IsHI) effweight = hEffWeight->GetBinContent(hEffWeight->FindBin(eta,pt));
   else effweight = hEffWeight->GetBinContent(hEffWeight->FindBin(eta,pt,centbin));
-  if(effweight<0.01) effweight=1.0;
+  if(effweight<0.005) effweight=1.0;
   return effweight;
 }
 
