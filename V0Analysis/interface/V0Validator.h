@@ -220,22 +220,14 @@ private:
   TH2D* goodKsMassPt;
   TH2D* fakeLamMassPt;
   TH2D* goodLamMassPt;
+  TH2D* ksEtaPtAll;
+  TH2D* lamEtaPtAll;
   TH1D* ksMassAll;
   TH1D* lamMassAll;
   TH2D* ksMassPtAll;
-  TH2D* ksMassPtAllEta1;
-  TH2D* ksMassPtAllEta2;
-  TH2D* ksMassPtAllEta3;
-  TH2D* ksMassPtAllEta4;
-  TH2D* ksMassPtAllEta5;
-  TH2D* ksMassPtAllEta6;
+  TH2D* ksMassPtAllEta[12];
   TH2D* lamMassPtAll;
-  TH2D* lamMassPtAllEta1;
-  TH2D* lamMassPtAllEta2;
-  TH2D* lamMassPtAllEta3;
-  TH2D* lamMassPtAllEta4;
-  TH2D* lamMassPtAllEta5;
-  TH2D* lamMassPtAllEta6;
+  TH2D* lamMassPtAllEta[12];
 
   TH1D* ksFakeDauRadDist;
   TH1D* lamFakeDauRadDist;
