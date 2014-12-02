@@ -48,3 +48,6 @@ pp MC sample (447):
 PbPb MC sample (53X):
 - HYDJET, 32K: /Hydjet1p8_TuneDrum_Quenched_MinBias_2760GeV/davidlw-RECO_v1-0e6ab43111ff2b7e6299139d8f86b661/USER
 - HYDJET, 50-100% peripheral: TBD
+- Hijing, 2M: /Hijing_PbPb_MinimumBias_b13_cmssw5_3_14_batch1/davidlw-RecoSkim_v1-96137662441175d818189f055278f49a/USER
+- Hijing, 2M: /Hijing_PbPb_MinimumBias_b13_cmssw5_3_14_batch3/davidlw-RecoSkim3_v1-96137662441175d818189f055278f49a/USER
+- Hijing, 2M: /Hijing_PbPb_MinimumBias_b13_cmssw5_3_14_batch4/davidlw-RecoSkim4_v1-96137662441175d818189f055278f49a/USER
