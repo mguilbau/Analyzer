@@ -26,7 +26,7 @@ pp skims (42X):
 /MinimumBias/davidlw-PP2010B_Apr21ReReco_MB_v9-36adfa9ae7dce15c9f3c602d52ade4c9/USER
 
 PbPb skim:
-- MB, pp rereco (53X): /HIMinBiasUPC/davidlw-PR2011_MBPPRereco_TRKANASKIM_v3-d2bc9bf4f9af8a8187da055215671f98-PbPb_HM/USER
+- MB, pp rereco (53X): /HIMinBiasUPC/davidlw-PR2011_MBPPRereco_TRKANASKIM_v4-2be5f21752c831f670ba8ae18cdae752/USER
 - MB & UCC, HI rereco, 2M test sample (53X): /HIMinBiasUPC/davidlw-Skim_rereco_pixeltracks_v1-4b65ef5aa7a26abf1f962cd25f7df02d/USER
 - MB & UCC, HI prompt, no pixeltracks, full sample (44X): /store/user/davidlw/HIMinBiasUPC/PR2011_MBUCC_TRKANASKIM_official_v1
 - MB, HI prompt, pixeltracks, nearly full sample (44X): /store/user/davidlw/HIMinBiasUPC/PR2011_MBUCC_pixeltracks_TRKANASKIM_official_v6
