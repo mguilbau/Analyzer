@@ -27,13 +27,8 @@ pp skims (42X):
 
 PbPb skim:
 - MB, pp rereco (53X): /HIMinBiasUPC/davidlw-PR2011_MBPPRereco_TRKANASKIM_v4-2be5f21752c831f670ba8ae18cdae752/USER
-- MB & UCC, HI rereco, 2M test sample (53X): /HIMinBiasUPC/davidlw-Skim_rereco_pixeltracks_v1-4b65ef5aa7a26abf1f962cd25f7df02d/USER
-- MB & UCC, HI prompt, no pixeltracks, full sample (44X): /store/user/davidlw/HIMinBiasUPC/PR2011_MBUCC_TRKANASKIM_official_v1
-- MB, HI prompt, pixeltracks, nearly full sample (44X): /store/user/davidlw/HIMinBiasUPC/PR2011_MBUCC_pixeltracks_TRKANASKIM_official_v6
-- UCC, HI prompt, pixeltracks, nearly full sample (44X): /store/user/davidlw/HIMinBiasUPC/PR2011_UCC_pixeltracks_TRKANASKIM_official_v6
-- High pT track, no pixeltracks, full sample (44X): /store/user/davidlw/HIHighPt/PR2011_HighPtTrack12_TRKANASKIM_official_v1
-- High pT track, pixeltracks, nearly full sample (44X): /store/user/davidlw/HIHighPt/PR2011_HighPtTrack12_pixeltracks_TRKANASKIM_official_v6
-
+- MB, pixel track (53X): /HIMinBiasUPC/davidlw-Skim_rereco_MB_pixeltracks_final_v2-9c1b4b9b6b9ff3e493a474ba7d01bc76/USER (hiGeneralAndPixelTracks,use highPurity; hiSelectedVertex)
+- UCC, pixel tracks (53X): /HIMinBiasUPC/davidlw-Skim_rereco_UCC_pixeltracks_final_v2-1407d97c78fb8eac4c87a1e8dfca2bd9/USER (hiGeneralAndPixelTracks,use highPurity; hiSelectedVertex)
 
 pPb MC sample (53X):
 - EPOS LHC, 5M: /ReggeGribovPartonMCfix_EposLHC_5TeV_pPb/davidlw-RecoSkim_batch1_v1-84cb8c951385c1f95541c031462cec6b/USER
