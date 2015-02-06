@@ -12,13 +12,8 @@ reverse: /PAHighPt/davidlw-PA2013_FlowCorr_PromptReco_TrkHMPt12_Gplus_Reverse_v1
 prompt: /PAHighPt/davidlw-PA2013_FlowCorr_PromptReco_TrkHMPt12_Gplus_v15-67b343be419cbc696fd1a318fe62657e/USER
 rereco: /PAHighPt/davidlw-PA2013_FlowCorr_PromptReco_TrkHMPt12_Gplus_Rereco_v15-67b343be419cbc696fd1a318fe62657e/USER
 - High pT track:
-rereco: /PAHighPt/davidlw-PA2013_FlowCorr_PromptReco_HighPtTrk_Gplus_Rereco_v12-0c6daa6be0b79998eaaf1061c82e98d6-pPb_HighPtTrack/USER
-prompt: /PAHighPt/davidlw-PA2013_FlowCorr_PromptReco_HighPtTrk_Gplus_v12-0c6daa6be0b79998eaaf1061c82e98d6-pPb_HighPtTrack/USER
-reverse: /PAHighPt/davidlw-PA2013_FlowCorr_PromptReco_HighPtTrk_Gplus_Reverse_v12-0c6daa6be0b79998eaaf1061c82e98d6-pPb_HighPtTrack/USER
+prompt: /PAHighPt/davidlw-PA2013_FlowCorr_PromptReco_HighPtTrk_Gplus_v15-c6b99cb1f721daa89a4764fc538dcae5/USER
 - Jet:
-rereco: /PAHighPt/davidlw-PA2013_FlowCorr_PromptReco_Jet_Gplus_Rereco_v12-d2a71c3e10bdac33a8236fd290776517-pPb_HM/USER
-prompt: /PAHighPt/davidlw-PA2013_FlowCorr_PromptReco_Jet_Gplus_v12-d2a71c3e10bdac33a8236fd290776517-pPb_HM/USER
-reverse: /PAHighPt/davidlw-PA2013_FlowCorr_PromptReco_Jet_Gplus_Reverse_v12-d2a71c3e10bdac33a8236fd290776517-pPb_HM/USER
 
 pp skims (42X):
 - High multiplicity:
