@@ -27,7 +27,7 @@ EPEtaDecoAnalyzer::EPEtaDecoAnalyzer(const edm::ParameterSet& iConfig) :
 EPEtaDecoAnalyzer::~EPEtaDecoAnalyzer() 
 {}
 
-void EPEtaDecoAnalyzer::beginRun(const edm::Run& iRun, const edm::EventSetup& iSetup)
+void EPEtaDecoAnalyzer::beginJob()
 {
   hDeltaZvtx = theOutputs->make<TH1D>("deltazvtx",";#Delta z_{vtx}",200,-1.0,1.0);
 
@@ -49,12 +49,12 @@ void EPEtaDecoAnalyzer::beginRun(const edm::Run& iRun, const edm::EventSetup& iS
     hBackgroundSinnPvsN[i] = theOutputs->make<TH2D>(Form("backgroundsin%dpvsn",i+1),Form(";sin(%d#Delta#phi)_{P};sin(%d#Delta#phi)_{N}",i+1,i+1),500,-0.3,0.3,500,-0.3,0.3);
   }
 */
-  DiHadronCorrelationMultiBase::beginRun(iRun, iSetup);
+  DiHadronCorrelationMultiBase::beginJob();
 }
 
-void EPEtaDecoAnalyzer::endRun(const edm::Run& iRun, const edm::EventSetup& iSetup)
+void EPEtaDecoAnalyzer::endJob()
 {
-  DiHadronCorrelationMultiBase::endRun(iRun, iSetup);
+  DiHadronCorrelationMultiBase::endJob();
   
   if(!cutPara.IsCorr) return;
 

@@ -35,8 +35,8 @@ class EbyEFlowAnalyzer : public DiHadronCorrelationMultiBase {
    TNtuple* q2Ntuple;
 */
 
-   virtual void beginRun(const edm::Run&, const edm::EventSetup&);
-   virtual void endRun(const edm::Run&, const edm::EventSetup&);
+   virtual void beginJob();
+   virtual void endJob();
 
    virtual void NormalizeHists();
    virtual void FillHistsSignal(const DiHadronCorrelationEvent& eventcorr);

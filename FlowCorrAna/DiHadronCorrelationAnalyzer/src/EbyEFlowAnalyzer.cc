@@ -28,7 +28,7 @@ EbyEFlowAnalyzer::EbyEFlowAnalyzer(const edm::ParameterSet& iConfig) :
 EbyEFlowAnalyzer::~EbyEFlowAnalyzer() 
 {}
 
-void EbyEFlowAnalyzer::beginRun(const edm::Run& iRun, const edm::EventSetup& iSetup)
+void EbyEFlowAnalyzer::beginJob()
 {
   hDeltaZvtx = theOutputs->make<TH1D>("deltazvtx",";#Delta z_{vtx}",200,-1.0,1.0);
 
@@ -45,12 +45,12 @@ void EbyEFlowAnalyzer::beginRun(const edm::Run& iRun, const edm::EventSetup& iSe
   
   q2Ntuple = theOutputs->make<TNtuple>("q2ntuple","","run:lumi:evtnum:cent:q2hf:q2hfp:q2hfm:q2mid:hf");
 */
-  DiHadronCorrelationMultiBase::beginRun(iRun, iSetup);
+  DiHadronCorrelationMultiBase::beginJob();
 }
 
-void EbyEFlowAnalyzer::endRun(const edm::Run& iRun, const edm::EventSetup& iSetup)
+void EbyEFlowAnalyzer::endJob()
 {
-  DiHadronCorrelationMultiBase::endRun(iRun, iSetup);
+  DiHadronCorrelationMultiBase::endJob();
   
   if(!cutPara.IsCorr) return;
 

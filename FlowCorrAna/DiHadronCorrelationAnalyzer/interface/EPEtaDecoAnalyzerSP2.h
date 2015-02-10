@@ -1,5 +1,5 @@
-#ifndef EPPtDecoAnalyzerSP_
-#define EPPtDecoAnalyzerSP_
+#ifndef EPEtaDecoAnalyzerSP2_
+#define EPEtaDecoAnalyzerSP2_
 
 #ifndef DiHadronCorrelationMultiBase_
 #include "DiHadronCorrelationMultiBase.h"
@@ -14,14 +14,19 @@ class TH3D;
 class TTree;
 class TList;
 
-class EPPtDecoAnalyzerSP : public DiHadronCorrelationMultiBase {
+#define MAXETATRGBINS2 6
+#define ETATRGBINWIDTH2 0.8
+
+class EPEtaDecoAnalyzerSP2 : public DiHadronCorrelationMultiBase {
    
  protected:
 
    // histograms
    TH1D* hDeltaZvtx;
-   TH2D* hSignalCosn[MAXPTTRGBINS][MAXPTASSBINS];
-   TH2D* hBackgroundCosn[MAXPTTRGBINS][MAXPTASSBINS];
+   TH2D* hSignalCosnSame[MAXETATRGBINS2];
+   TH2D* hBackgroundCosnSame[MAXETATRGBINS2];
+   TH2D* hSignalCosnDiff[MAXETATRGBINS2];
+   TH2D* hBackgroundCosnDiff[MAXETATRGBINS2];
 
    // parameters
    int    bkgFactor;
@@ -34,8 +39,8 @@ class EPPtDecoAnalyzerSP : public DiHadronCorrelationMultiBase {
    virtual void FillHistsBackground(const DiHadronCorrelationEvent& eventcorr_trg, const DiHadronCorrelationEvent& eventcorr_ass);
    
  public:
-   EPPtDecoAnalyzerSP(const edm::ParameterSet&);
-   ~EPPtDecoAnalyzerSP();
+   EPEtaDecoAnalyzerSP2(const edm::ParameterSet&);
+   ~EPEtaDecoAnalyzerSP2();
 
 };
-#endif  // EPPtDecoAnalyzerSP_
+#endif  // EPEtaDecoAnalyzerSP2_

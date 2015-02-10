@@ -21,6 +21,8 @@ class CutParameters {
    double  etaassmax;   
    double  etamultmin;
    double  etamultmax;
+   double  chargeasymmin;
+   double  chargeasymmax;
    vector<double>  pttrgmin;
    vector<double>  pttrgmax;
    vector<double>  ptassmin;
@@ -37,6 +39,7 @@ class CutParameters {
    double  zvtxbin;
    double  vtxsepmin;
    double  etacms;
+   double  etagap;
    int     nvtxmax;
    bool    istrigger;
    vector<TString> triggernames;
@@ -87,12 +90,15 @@ class CutParameters {
    bool IsSymmetrize;
    bool IsPtWeightTrg;  
    bool IsPtWeightAss;
+   bool IsTrgEtaCutAbs;
+   bool IsAssEtaCutAbs; 
    bool IsHarmonics;
    bool IsHarmonicsEta1Eta2;
    bool IsFlowQVector;
    bool IsPPTrkQuality;
    bool IsHITrkQuality;
    bool IsDebug;
+   bool IsReCenter;
 };
 
 #endif  // CutParameters_

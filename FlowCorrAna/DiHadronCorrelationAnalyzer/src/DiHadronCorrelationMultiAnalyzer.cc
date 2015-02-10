@@ -26,14 +26,14 @@ DiHadronCorrelationMultiAnalyzer::DiHadronCorrelationMultiAnalyzer(const edm::Pa
 {
   cutPara.IsSymmetrize=1;
   cutPara.IsHarmonics = iConfig.getParameter<bool>("IsHarmonics");
-  cutPara.IsHarmonicsEta1Eta2=0;
+  cutPara.IsHarmonicsEta1Eta2 = iConfig.getParameter<bool>("IsHarmonicsEta1Eta2");
   bkgFactor = 10; 
 }
 
 DiHadronCorrelationMultiAnalyzer::~DiHadronCorrelationMultiAnalyzer()
 {}
 
-void DiHadronCorrelationMultiAnalyzer::beginRun(const edm::Run& iRun, const edm::EventSetup& iSetup)
+void DiHadronCorrelationMultiAnalyzer::beginJob()
 {
   double etabinwidth = (cutPara.etatrgmax-cutPara.etaassmin-cutPara.etatrgmin+cutPara.etaassmax)/NEtaBins;
   double phibinwidth = 2*PI/NPhiBins;
@@ -107,19 +107,19 @@ void DiHadronCorrelationMultiAnalyzer::beginRun(const edm::Run& iRun, const edm:
                                      NPhiBins*2+1,-PI-phibinwidth/2.,PI+phibinwidth/2.);
     }
   }
-  DiHadronCorrelationMultiBase::beginRun(iRun, iSetup);
+  DiHadronCorrelationMultiBase::beginJob();
 }
 
-void DiHadronCorrelationMultiAnalyzer::endRun(const edm::Run& iRun, const edm::EventSetup& iSetup)
+void DiHadronCorrelationMultiAnalyzer::endJob()
 {
-  DiHadronCorrelationMultiBase::endRun(iRun, iSetup);
+  DiHadronCorrelationMultiBase::endJob();
 
   if(!cutPara.IsCorr) return;
   
   cout<< "Start sorting the events!" << endl;
   std::sort(eventcorrArray.begin(),eventcorrArray.end());
   cout<< "Finish sorting the events!" << endl;
-  
+  cout<< "Total of " << eventcorrArray.size() << " events are selected!" << endl;   
   cout<< "Start running correlation analysis!" << endl;
   for(unsigned int i=0;i<eventcorrArray.size();i++)
   {

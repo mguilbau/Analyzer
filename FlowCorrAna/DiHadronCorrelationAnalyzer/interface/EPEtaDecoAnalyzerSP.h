@@ -25,6 +25,10 @@ class EPEtaDecoAnalyzerSP : public DiHadronCorrelationMultiBase {
    TH1D* hDeltaZvtx;
    TH2D* hSignalCosn[MAXETATRGBINS];
    TH2D* hBackgroundCosn[MAXETATRGBINS];
+   TH2D* hSignalCosnSame[MAXETATRGBINS];
+   TH2D* hBackgroundCosnSame[MAXETATRGBINS];
+   TH2D* hSignalCosnDiff[MAXETATRGBINS];
+   TH2D* hBackgroundCosnDiff[MAXETATRGBINS];
    TH2D* hSignalSinn[MAXETATRGBINS];
    TH2D* hBackgroundSinn[MAXETATRGBINS];
    TH2D* hSignalSinnPvsN[5];
@@ -33,8 +37,8 @@ class EPEtaDecoAnalyzerSP : public DiHadronCorrelationMultiBase {
    // parameters
    int    bkgFactor;
 
-   virtual void beginRun(const edm::Run&, const edm::EventSetup&);
-   virtual void endRun(const edm::Run&, const edm::EventSetup&);
+   virtual void beginJob();
+   virtual void endJob();
 
    virtual void NormalizeHists();
    virtual void FillHistsSignal(const DiHadronCorrelationEvent& eventcorr);
