@@ -19,3 +19,15 @@ hltHM120150.HLTPaths = ['HLT_PAPixelTracks_Multiplicity100_v*']
 
 hltMB = hltHM220.clone()
 hltMB.HLTPaths = ['HLT_PAZeroBiasPixel_SingleTrack_v*']
+
+hltHM100On = hltHM220.clone()
+hltHM100On.HLTPaths = ['HLT_PAPixelTracks_Multiplicity100_v*']
+
+hltHM130On = hltHM220.clone()
+hltHM130On.HLTPaths = ['HLT_PAPixelTracks_Multiplicity130_v*']
+
+hltHM160On = hltHM220.clone()
+hltHM160On.HLTPaths = ['HLT_PAPixelTracks_Multiplicity160_v*']
+
+hltHM190On = hltHM220.clone()
+hltHM190On.HLTPaths = ['HLT_PAPixelTracks_Multiplicity190_v*']

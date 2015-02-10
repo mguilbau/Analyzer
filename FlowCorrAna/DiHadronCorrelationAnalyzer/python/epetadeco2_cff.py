@@ -1,20 +1,20 @@
 import FWCore.ParameterSet.Config as cms
 
-from FlowCorrAna.DiHadronCorrelationAnalyzer.epetadeco_cfi import *
+from FlowCorrAna.DiHadronCorrelationAnalyzer.epetadeco2_cfi import *
 from FlowCorrAna.DiHadronCorrelationAnalyzer.hltFilter_cff import *
 
 epetadeco_ana_HI_hfp = epetadeco_ana.clone(
-#  TrgTrackCollection = cms.string('hiGeneralAndPixelTracks'),
-  TrgTrackCollection = cms.string('hiGeneralTracks'),
+  TrgTrackCollection = cms.string('hiGeneralAndPixelTracks'),
+#  TrgTrackCollection = cms.string('hiGeneralTracks'),
   VertexCollection = cms.string('hiSelectedVertex'),
   GenParticleCollection = cms.string('hiGenParticles'),
 
   IsHITrkQuality = cms.bool(True),
   IsPPTrkQuality = cms.bool(False),
 
-  etaassmin = cms.double(4.4),
+  etaassmin = cms.double(5.0),
   etaassmax = cms.double(5.0),
-  pttrgmin = cms.vdouble(0.5),
+  pttrgmin = cms.vdouble(1.0),
 
 #  ptassmin = cms.vdouble(1.0),
 

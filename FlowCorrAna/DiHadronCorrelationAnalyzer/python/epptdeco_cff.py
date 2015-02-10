@@ -12,6 +12,11 @@ epptdeco_ana_HI = epptdeco_ana.clone(
   IsHITrkQuality = cms.bool(True),
   IsPPTrkQuality = cms.bool(False),
 
+  etatrgmin = cms.double(-2.4),
+  etatrgmax = cms.double(2.4),
+  etaassmin = cms.double(-2.4),
+  etaassmax = cms.double(2.4),
+
   EffFileName = cms.string('')
 )
 

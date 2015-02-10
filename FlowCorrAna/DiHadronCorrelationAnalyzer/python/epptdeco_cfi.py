@@ -59,12 +59,15 @@ epptdeco_ana = cms.EDAnalyzer('EPPtDecoAnalyzerSP',
   IsFullMatrix = cms.bool(False),
   IsPtWeightTrg = cms.bool(False),
   IsPtWeightAss = cms.bool(False),
+  IsTrgEtaCutAbs = cms.bool(False),
+  IsAssEtaCutAbs = cms.bool(False),
   IsHITrkQuality = cms.bool(False),
   IsPPTrkQuality = cms.bool(True),
   IsDebug = cms.bool(False),
   IsInvMass = cms.bool(False),
   IsEventEngineer = cms.bool(False),
 
-  EffFileName = cms.string('TrackCorrections_HIJING_538_OFFICIAL_Mar24.root')
+  EffFileName = cms.string('TrackCorrections_HIJING_538_OFFICIAL_Mar24.root'),
+  EtaPhiFileName = cms.string(''),
 #  EffFileName = cms.string('')
 )
