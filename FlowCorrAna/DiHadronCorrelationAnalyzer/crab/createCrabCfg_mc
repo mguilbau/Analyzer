@@ -3,7 +3,7 @@
 pdname=Hydjet1p8_TuneDrum_Quenched_MinBias_2760GeV
 #dataset=/Hydjet1p8_TuneDrum_Quenched_MinBias_2760GeV/davidlw-RECO_5320_v1-71a485a731d6b2661f997f58ff50f0c0/USER
 dataset=/Hydjet1p8_TuneDrum_Quenched_MinBias_2760GeV/davidlw-RECO_pixeltracks_5320_v1-6c39a3733463cd9bceaa11f85fda740d/USER
-nevents=10000
+nevents=5000
 
 ### dihadroncorrelation
 #tag=pt033_factorization_eff0_v1
@@ -15,12 +15,16 @@ nevents=10000
 #type=epptdeco
 
 ### epetadeco
-tag=pttrg033_ptassallweight_etaass45_pixel_eff0_v42
-type=epetadeco_mc
+#tag=pttrg033_ptassallweight_etaass445_eff0_v42
+#type=epetadeco_gen
 
 ### ebyeflow
 #tag=pttrg13_eff0_v1
 #type=ebyeflow
+
+### chargedepcorr
+tag=pttrg033_ptassallweight_etaass445_eff0_v17
+type=chargedepcorr_mc
 
 cat > crab_${type}_cent010.cfg << EOF
 [CRAB]
@@ -35,7 +39,7 @@ datasetpath             = $dataset
 pset                    = ../cfg/${type}_cent010_cfg.py
 total_number_of_events   = -1
 events_per_job     = $nevents
-output_file = ${type}.root
+#output_file = ${type}.root
 
 [USER]
 copy_data               = 1
@@ -46,8 +50,8 @@ ui_working_dir = $pdname/${type}_cent010_$tag
 check_user_remote_dir   = 0
 
 [GRID]
-max_rss = 3000
-se_white_list = mit.edu
+#max_rss = 3000
+#se_white_list = mit.edu
 allow_overflow = 0
 #max_wall_clock_time=600
 EOF
@@ -65,7 +69,7 @@ datasetpath             = $dataset
 pset                    = ../cfg/${type}_cent1020_cfg.py
 total_number_of_events   = -1
 events_per_job     = $nevents
-output_file = ${type}.root
+#output_file = ${type}.root
 
 [USER]
 copy_data               = 1
@@ -76,8 +80,8 @@ ui_working_dir = $pdname/${type}_cent1020_$tag
 check_user_remote_dir   = 0
 
 [GRID]
-max_rss = 3000
-se_white_list = mit.edu
+#max_rss = 3000
+#se_white_list = mit.edu
 allow_overflow = 0
 #max_wall_clock_time=600
 EOF
@@ -95,7 +99,7 @@ datasetpath             = $dataset
 pset                    = ../cfg/${type}_cent2030_cfg.py
 total_number_of_events   = -1
 events_per_job     = $nevents
-output_file = ${type}.root
+#output_file = ${type}.root
 
 [USER]
 copy_data               = 1
@@ -106,8 +110,8 @@ ui_working_dir = $pdname/${type}_cent2030_$tag
 check_user_remote_dir   = 0
 
 [GRID]
-max_rss = 3000
-se_white_list = mit.edu
+#max_rss = 3000
+#se_white_list = mit.edu
 allow_overflow = 0
 #max_wall_clock_time=600
 EOF
@@ -125,7 +129,7 @@ datasetpath             = $dataset
 pset                    = ../cfg/${type}_cent3040_cfg.py
 total_number_of_events   = -1
 events_per_job     = $nevents
-output_file = ${type}.root
+#output_file = ${type}.root
 
 [USER]
 copy_data               = 1
@@ -136,8 +140,8 @@ ui_working_dir = $pdname/${type}_cent3040_$tag
 check_user_remote_dir   = 0
 
 [GRID]
-max_rss = 3000
-se_white_list = mit.edu
+#max_rss = 3000
+#se_white_list = mit.edu
 allow_overflow = 0
 #max_wall_clock_time=600
 EOF
@@ -155,7 +159,7 @@ datasetpath             = $dataset
 pset                    = ../cfg/${type}_cent4050_cfg.py
 total_number_of_events   = -1
 events_per_job     = $nevents
-output_file = ${type}.root
+#output_file = ${type}.root
 
 [USER]
 copy_data               = 1
@@ -166,8 +170,8 @@ ui_working_dir = $pdname/${type}_cent4050_$tag
 check_user_remote_dir   = 0
 
 [GRID]
-max_rss = 3000
-se_white_list = mit.edu
+#max_rss = 3000
+#se_white_list = mit.edu
 allow_overflow = 0
 #max_wall_clock_time=600
 EOF
@@ -185,7 +189,7 @@ datasetpath             = $dataset
 pset                    = ../cfg/${type}_cent5060_cfg.py
 total_number_of_events   = -1
 events_per_job     = $nevents
-output_file = ${type}.root
+#output_file = ${type}.root
 
 [USER]
 copy_data               = 1
@@ -196,8 +200,38 @@ ui_working_dir = $pdname/${type}_cent5060_$tag
 check_user_remote_dir   = 0
 
 [GRID]
-max_rss = 3000
-se_white_list = mit.edu
+#max_rss = 3000
+#se_white_list = mit.edu
+allow_overflow = 0
+#max_wall_clock_time=600
+EOF
+
+cat > crab_${type}_cent080.cfg << EOF
+[CRAB]
+jobtype = cmssw
+scheduler = remoteGlidein
+use_server   = 0
+
+[CMSSW]
+use_dbs3 = 1 
+dbs_url                 = phys03
+datasetpath             = $dataset
+pset                    = ../cfg/${type}_cent080_cfg.py
+total_number_of_events   = -1
+events_per_job     = $nevents
+#output_file = ${type}.root
+
+[USER]
+copy_data               = 1
+storage_element         = T2_US_MIT
+
+user_remote_dir = $pdname/${type}_cent080_$tag
+ui_working_dir = $pdname/${type}_cent080_$tag
+check_user_remote_dir   = 0
+
+[GRID]
+#max_rss = 3000
+#se_white_list = mit.edu
 allow_overflow = 0
 #max_wall_clock_time=600
 EOF
@@ -209,6 +243,7 @@ crab -create -submit -cfg crab_${type}_cent3040.cfg
 crab -create -submit -cfg crab_${type}_cent2030.cfg
 crab -create -submit -cfg crab_${type}_cent1020.cfg
 crab -create -submit -cfg crab_${type}_cent010.cfg
+crab -create -submit -cfg crab_${type}_cent080.cfg
 EOF
 chmod u+x submit_${type}
 
@@ -221,5 +256,6 @@ nohup hadd -f $scratchdir/${type}_cent3040_$tag.root $hadoopdir/${type}_cent3040
 nohup hadd -f $scratchdir/${type}_cent2030_$tag.root $hadoopdir/${type}_cent2030_$tag/*.root > /tmp/nohup3.out &
 nohup hadd -f $scratchdir/${type}_cent1020_$tag.root $hadoopdir/${type}_cent1020_$tag/*.root > /tmp/nohup4.out &
 nohup hadd -f $scratchdir/${type}_cent010_$tag.root $hadoopdir/${type}_cent010_$tag/*.root > /tmp/nohup5.out &
+nohup hadd -f $scratchdir/${type}_cent080_$tag.root $hadoopdir/${type}_cent080_$tag/*.root > /tmp/nohup6.out &
 EOF
 chmod u+x merge_${type}_all

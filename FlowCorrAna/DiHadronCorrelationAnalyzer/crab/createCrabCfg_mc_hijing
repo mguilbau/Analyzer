@@ -1,0 +1,223 @@
+#!/bin/bash
+
+#pdname=Hydjet1p8_TuneDrum_Quenched_MinBias_2760GeV
+#dataset=/Hydjet1p8_TuneDrum_Quenched_MinBias_2760GeV/davidlw-RECO_5320_v1-71a485a731d6b2661f997f58ff50f0c0/USER
+#dataset=/Hydjet1p8_TuneDrum_Quenched_MinBias_2760GeV/davidlw-RECO_pixeltracks_5320_v1-6c39a3733463cd9bceaa11f85fda740d/USER
+pdname=AMPT_hijing_53x_v1
+dataset=/AMPT_hijing_53x_v1/davidlw-AMPT_hijing_53x_v1-192217a8621b84870589d7611656bfcb/USER
+nevents=5000
+
+### dihadroncorrelation
+#tag=pt033_factorization_eff0_v1
+#tag=ptall_hf_eff0_v1
+#type=dihadroncorrelation
+
+### epptdeco
+#tag=pt033_factorization_eff0_v2
+#type=epptdeco
+
+### epetadeco
+tag=pttrg033_ptassallweight_etaass243_eff0_v42
+type=epetadeco_gen
+
+### ebyeflow
+#tag=pttrg13_eff0_v1
+#type=ebyeflow
+
+cat > crab_${type}_n0160.cfg << EOF
+[CRAB]
+jobtype = cmssw
+scheduler = remoteGlidein
+use_server   = 0
+
+[CMSSW]
+use_dbs3 = 1 
+dbs_url                 = phys03
+datasetpath             = $dataset
+pset                    = ../cfg/${type}_n0160_cfg.py
+total_number_of_events   = -1
+events_per_job     = $nevents
+output_file = ${type}.root
+
+[USER]
+copy_data               = 1
+storage_element         = T2_US_MIT
+
+user_remote_dir = $pdname/${type}_n0160_$tag
+ui_working_dir = $pdname/${type}_n0160_$tag
+check_user_remote_dir   = 0
+
+[GRID]
+#max_rss = 3000
+#se_white_list = mit.edu
+allow_overflow = 0
+#max_wall_clock_time=600
+EOF
+
+cat > crab_${type}_n160500.cfg << EOF
+[CRAB]
+jobtype = cmssw
+scheduler = remoteGlidein
+use_server   = 0
+
+[CMSSW]
+use_dbs3 = 1 
+dbs_url                 = phys03
+datasetpath             = $dataset
+pset                    = ../cfg/${type}_n160500_cfg.py
+total_number_of_events   = -1
+events_per_job     = $nevents
+output_file = ${type}.root
+
+[USER]
+copy_data               = 1
+storage_element         = T2_US_MIT
+
+user_remote_dir = $pdname/${type}_n160500_$tag
+ui_working_dir = $pdname/${type}_n160500_$tag
+check_user_remote_dir   = 0
+
+[GRID]
+#max_rss = 3000
+#se_white_list = mit.edu
+allow_overflow = 0
+#max_wall_clock_time=600
+EOF
+
+cat > crab_${type}_n5001200.cfg << EOF
+[CRAB]
+jobtype = cmssw
+scheduler = remoteGlidein
+use_server   = 0
+
+[CMSSW]
+use_dbs3 = 1 
+dbs_url                 = phys03
+datasetpath             = $dataset
+pset                    = ../cfg/${type}_n5001200_cfg.py
+total_number_of_events   = -1
+events_per_job     = $nevents
+output_file = ${type}.root
+
+[USER]
+copy_data               = 1
+storage_element         = T2_US_MIT
+
+user_remote_dir = $pdname/${type}_n5001200_$tag
+ui_working_dir = $pdname/${type}_n5001200_$tag
+check_user_remote_dir   = 0
+
+[GRID]
+#max_rss = 3000
+#se_white_list = mit.edu
+allow_overflow = 0
+#max_wall_clock_time=600
+EOF
+
+cat > crab_${type}_n12002500.cfg << EOF
+[CRAB]
+jobtype = cmssw
+scheduler = remoteGlidein
+use_server   = 0
+
+[CMSSW]
+use_dbs3 = 1 
+dbs_url                 = phys03
+datasetpath             = $dataset
+pset                    = ../cfg/${type}_n12002500_cfg.py
+total_number_of_events   = -1
+events_per_job     = $nevents
+output_file = ${type}.root
+
+[USER]
+copy_data               = 1
+storage_element         = T2_US_MIT
+
+user_remote_dir = $pdname/${type}_n12002500_$tag
+ui_working_dir = $pdname/${type}_n12002500_$tag
+check_user_remote_dir   = 0
+
+[GRID]
+#max_rss = 3000
+#se_white_list = mit.edu
+allow_overflow = 0
+#max_wall_clock_time=600
+EOF
+
+cat > crab_${type}_n2500.cfg << EOF
+[CRAB]
+jobtype = cmssw
+scheduler = remoteGlidein
+use_server   = 0
+
+[CMSSW]
+use_dbs3 = 1 
+dbs_url                 = phys03
+datasetpath             = $dataset
+pset                    = ../cfg/${type}_n2500_cfg.py
+total_number_of_events   = -1
+events_per_job     = $nevents
+output_file = ${type}.root
+
+[USER]
+copy_data               = 1
+storage_element         = T2_US_MIT
+
+user_remote_dir = $pdname/${type}_n2500_$tag
+ui_working_dir = $pdname/${type}_n2500_$tag
+check_user_remote_dir   = 0
+
+[GRID]
+#max_rss = 3000
+#se_white_list = mit.edu
+allow_overflow = 0
+#max_wall_clock_time=600
+EOF
+
+cat > submit_${type} << EOF 
+crab -create -cfg crab_${type}_n2500.cfg
+crab -create -cfg crab_${type}_n12002500.cfg
+crab -create -cfg crab_${type}_n5001200.cfg
+crab -create -cfg crab_${type}_n160500.cfg
+crab -create -cfg crab_${type}_n0160.cfg
+crab -submit 1-500 -c $pdname/${type}_n2500_$tag
+crab -submit 501-1000 -c $pdname/${type}_n2500_$tag
+crab -submit 1001-1500 -c $pdname/${type}_n2500_$tag
+crab -submit 1501-2000 -c $pdname/${type}_n2500_$tag
+crab -submit 2001-2500 -c $pdname/${type}_n2500_$tag
+crab -submit 2501-3000 -c $pdname/${type}_n2500_$tag
+crab -submit 3001-3500 -c $pdname/${type}_n2500_$tag
+crab -submit 1-500 -c $pdname/${type}_n12002500_$tag
+crab -submit 501-1000 -c $pdname/${type}_n12002500_$tag
+crab -submit 1001-1500 -c $pdname/${type}_n12002500_$tag
+crab -submit 1501-2000 -c $pdname/${type}_n12002500_$tag
+crab -submit 2001-2500 -c $pdname/${type}_n12002500_$tag
+crab -submit 2501-3000 -c $pdname/${type}_n12002500_$tag
+crab -submit 3001-3500 -c $pdname/${type}_n12002500_$tag
+crab -submit 1-500 -c $pdname/${type}_n5001200_$tag
+crab -submit 501-1000 -c $pdname/${type}_n5001200_$tag
+crab -submit 1-500 -c $pdname/${type}_n160500_$tag
+crab -submit 501-1000 -c $pdname/${type}_n160500_$tag
+crab -submit 1-500 -c $pdname/${type}_n0160_$tag
+crab -submit 501-1000 -c $pdname/${type}_n0160_$tag
+EOF
+chmod u+x submit_${type}
+
+hadoopdir=/mnt/hadoop/cms/store/user/davidlw/$pdname
+scratchdir=/export/d00/scratch/davidlw/DiHadronCorrelations/outputs_312/HijingReco_Minbias_2760GeV/merged
+
+cat > merge_${type} << EOF 
+hadd -f /tmp/${type}_n\$1_seq\$2_$tag.root $hadoopdir/${type}_n\$1_$tag/${type}_\$2*.root
+scp /tmp/${type}_n\$1_seq\$2_$tag.root hidsk0001:$scratchdir/
+EOF
+
+cat > merge_${type}_all << EOF 
+nohup hadd -f $scratchdir/${type}_n0160_$tag.root $scratchdir/${type}_n0160_seq*_$tag.root > /tmp/nohup.out &
+nohup hadd -f $scratchdir/${type}_n160500_$tag.root $scratchdir/${type}_n160500_seq*_$tag.root > /tmp/nohup1.out &
+nohup hadd -f $scratchdir/${type}_n5001200_$tag.root $scratchdir/${type}_n5001200_seq*_$tag.root > /tmp/nohup2.out &
+nohup hadd -f $scratchdir/${type}_n12002500_$tag.root $scratchdir/${type}_n12002500_seq*_$tag.root > /tmp/nohup3.out &
+nohup hadd -f $scratchdir/${type}_n2500_$tag.root $scratchdir/${type}_n2500_seq*_$tag.root > /tmp/nohup4.out &
+EOF
+
+chmod u+x merge_${type}
+chmod u+x merge_${type}_all

@@ -11,7 +11,7 @@ Universe     = vanilla
 
 Notification = Error
 Requirements = (Machine != "hibat0009.cmsaf.mit.edu") && (Machine !="t2bat0236.cmsaf.mit.edu") && (Machine !="lnbat0002.cmsaf.mit.edu")
-Executable   = $dir/merge_epptdeco
+Executable   = $dir/merge_chargedepcorr
 Arguments    = $1 $2
 Rank         = Mips
 GetEnv       = True

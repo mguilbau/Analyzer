@@ -2,10 +2,12 @@
 
 pdname=ReggeGribovPartonMCfix_EposLHC_5TeV_pPb
 dataset=/ReggeGribovPartonMCfix_EposLHC_5TeV_pPb/davidlw-RecoSkim_batch1_v1-84cb8c951385c1f95541c031462cec6b/USER
+#pdname=Hijing_PPb502_MinimumBias
+#dataset=/Hijing_PPb502_MinimumBias/davidlw-RecoSkim_batch1_v1-84cb8c951385c1f95541c031462cec6b/USER
 nevents=50000
 
 ### epetadeco
-tag=pttrg033_ptassallweight_etaass34_eff1_v42
+tag=pttrg033_ptassallweight_etaass445_eff1_v42
 #tag=pttrgallweighttower_ptassallweight_etaass45_eff1_v9
 type=epetadeco_gen
 
@@ -37,8 +39,8 @@ ui_working_dir = $pdname/${type}_n100_$tag
 check_user_remote_dir   = 0
 
 [GRID]
-max_rss = 3000
-se_white_list = mit.edu
+#max_rss = 3000
+#se_white_list = mit.edu
 allow_overflow = 0
 EOF
 
@@ -50,6 +52,7 @@ chmod u+x submit_${type}_pPb
 
 hadoopdir=/mnt/hadoop/cms/store/user/davidlw/$pdname
 scratchdir=/export/d00/scratch/davidlw/DiHadronCorrelations/outputs_312/EPOSReco_Minbias_5TeV/merged
+#scratchdir=/export/d00/scratch/davidlw/DiHadronCorrelations/outputs_312/HijingReco_Minbias_5TeV/merged
 cat > merge_${type}_pPb << EOF 
 nohup hadd -f $scratchdir/${type}_n100_$tag.root $hadoopdir/${type}_n100_$tag/*.root > /tmp/nohup.out & 
 EOF

@@ -1,15 +1,18 @@
 #!/bin/bash
 
 pdname=PAHighPt
-dataset=/PAHighPt/davidlw-PA2013_FlowCorr_PromptReco_TrkHM_Gplus_v15-702fa69daea9da948fe2472b4d29b5b5/USER
-#dataset=/PAHighPt/davidlw-PA2013_FlowCorr_PromptReco_TrkHM_Gplus_Rereco_v15-702fa69daea9da948fe2472b4d29b5b5/USER
+#dataset=/PAHighPt/davidlw-PA2013_FlowCorr_PromptReco_TrkHM_Gplus_v15-702fa69daea9da948fe2472b4d29b5b5/USER
+dataset=/PAHighPt/davidlw-PA2013_FlowCorr_PromptReco_TrkHM_Gplus_Rereco_v15-702fa69daea9da948fe2472b4d29b5b5/USER
 #dataset=/PAHighPt/davidlw-PA2013_FlowCorr_PromptReco_TrkHM_Gplus_Reverse_v15-702fa69daea9da948fe2472b4d29b5b5/USER
 njobs=10
 
+### chargedepcorr
+tag=pttrg033_ptassallweight_etaass445_reverse_eff1_zvtx1_bin01_v13
+type=chargedepcorr
+
 ### epetadeco
-tag=pttrg033_ptassallweight_etaass34_eff1_v42
-#tag=pttrgallweighttower_ptassallweight_etaass45_eff1_v9
-type=epetadeco
+#tag=pttrg033_ptassallweight_etaass445_reverse_eff1_v42
+#type=epetadeco
 
 ### ebyeflow
 #tag=pttrg033_rereco_eff1_v3
@@ -28,7 +31,7 @@ datasetpath             = $dataset
 pset                    = ../cfg/${type}_pPb_n120150_cfg.py
 total_number_of_lumis   = -1 
 lumis_per_job     = $njobs 
-output_file = ${type}.root
+#output_file = ${type}.root
 
 [USER]
 copy_data               = 1
@@ -39,8 +42,8 @@ ui_working_dir =  $pdname/${type}_n120150_$tag
 check_user_remote_dir   = 0
 
 [GRID]
-max_rss = 3000
-se_white_list = mit.edu
+#max_rss = 3000
+#se_white_list = mit.edu
 allow_overflow = 0
 EOF
 
@@ -57,7 +60,7 @@ datasetpath             = $dataset
 pset                    = ../cfg/${type}_pPb_n150185_cfg.py
 total_number_of_lumis   = -1 
 lumis_per_job     = $njobs 
-output_file = ${type}.root
+#output_file = ${type}.root
 
 [USER]
 copy_data               = 1
@@ -68,8 +71,8 @@ ui_working_dir = $pdname/${type}_n150185_$tag
 check_user_remote_dir   = 0
 
 [GRID]
-max_rss = 3000
-se_white_list = mit.edu
+#max_rss = 3000
+#se_white_list = mit.edu
 allow_overflow = 0
 EOF
 
@@ -86,7 +89,7 @@ datasetpath             = $dataset
 pset                    = ../cfg/${type}_pPb_n185220_cfg.py
 total_number_of_lumis   = -1 
 lumis_per_job     = $njobs 
-output_file = ${type}.root
+#output_file = ${type}.root
 
 [USER]
 copy_data               = 1
@@ -97,8 +100,8 @@ ui_working_dir = $pdname/${type}_n185220_$tag
 check_user_remote_dir   = 0
 
 [GRID]
-max_rss = 3000
-se_white_list = mit.edu
+#max_rss = 3000
+#se_white_list = mit.edu
 allow_overflow = 0
 EOF
 
@@ -115,7 +118,7 @@ datasetpath             = $dataset
 pset                    = ../cfg/${type}_pPb_n220260_cfg.py
 total_number_of_lumis   = -1 
 lumis_per_job     = $njobs 
-output_file = ${type}.root
+#output_file = ${type}.root
 
 [USER]
 copy_data               = 1
@@ -126,8 +129,8 @@ ui_working_dir = $pdname/${type}_n220260_$tag
 check_user_remote_dir   = 0
 
 [GRID]
-max_rss = 3000
-se_white_list = mit.edu
+#max_rss = 3000
+#se_white_list = mit.edu
 allow_overflow = 0
 EOF
 
@@ -144,7 +147,7 @@ datasetpath             = $dataset
 pset                    = ../cfg/${type}_pPb_n260_cfg.py
 total_number_of_lumis   = -1 
 lumis_per_job     = $njobs 
-output_file = ${type}.root
+#output_file = ${type}.root
 
 [USER]
 copy_data               = 1
@@ -155,8 +158,8 @@ ui_working_dir = $pdname/${type}_n260_$tag
 check_user_remote_dir   = 0
 
 [GRID]
-max_rss = 3000
-se_white_list = mit.edu
+#max_rss = 3000
+#se_white_list = mit.edu
 allow_overflow = 0
 EOF
 
