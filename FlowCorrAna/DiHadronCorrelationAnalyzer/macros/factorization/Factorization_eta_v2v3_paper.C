@@ -1,7 +1,7 @@
 #include "/net/hisrv0001/home/davidlw/useful_macros/CF.C"
 #include "/net/hisrv0001/home/davidlw/useful_macros/makeMultiPanelCanvas.C"
 
-void Factorization_eta()
+void Factorization_eta_v2v3_paper()
 {
   const int nfiles = 24;
   TString filename[nfiles];
@@ -191,7 +191,7 @@ if(jj==7 && nbin==1) cout<<"neg nbin="<<nbin<<" i="<<i<<" "<<Vn1[i][nbin]<<" "<<
     fit[jj][nbin]->SetParameter(0,0.01);
     gr[jj][nbin]->Fit(Form("fit_%d_%d",nbin,jj),"RNO");
     fit[jj][nbin]->SetLineColor(color[nbin]);
-    fit[jj][nbin]->SetLineStyle(9);
+    fit[jj][nbin]->SetLineStyle(7);
     fit[jj][nbin]->SetLineWidth(1);
     if(jj<8)
     {    
@@ -246,33 +246,38 @@ if(jj==7 && nbin==1) cout<<"neg nbin="<<nbin<<" i="<<i<<" "<<Vn1[i][nbin]<<" "<<
 
   ff.close();
 
-  TString histtitle[8] = {"0-0.2%","0-5%","5-10%","10-20%","20-30%","30-40%","40-50%","50-60%"};
-  TLine* ll = new TLine(0,1.,5.0,1.);
+  TString histtitle[8] = {"0-0.2% centrality","0-5%","5-10%","10-20%","20-30%","30-40%","40-50%","50-60%"};
+  TLine* ll = new TLine(-0.12,1.,2.49,1.);
   TCanvas* c = new TCanvas("c","c",920,500);
   makeMultiPanelCanvas(c,4,2,0.01,0.0,0.25,0.2,0.02);
-  TH2D* htmp = new TH2D("htmp",";#eta^{a};r_{2}(#eta^{a},#eta^{b})",100,-0.1,2.5,100,0.831-0.02,1.06-0.02);
+  TH2D* htmp = new TH2D("htmp",";#eta^{a};r_{2}(#eta^{a},#eta^{b})",100,-0.12,2.49,100,0.831-0.02,1.06-0.02);
   fixedFontHist(htmp,1.8,2.8);
   htmp->GetXaxis()->CenterTitle();
   htmp->GetYaxis()->CenterTitle();
   htmp->GetYaxis()->SetTitleSize(htmp->GetYaxis()->GetTitleSize()*1.2);
   htmp->GetXaxis()->SetTitleSize(htmp->GetXaxis()->GetTitleSize()*1.);
+  htmp->GetXaxis()->SetLabelSize(htmp->GetXaxis()->GetLabelSize()*0.95);
+  htmp->GetXaxis()->SetNdivisions(510);
+
   for(int jj=0;jj<8;jj++)
   {
     c->cd(jj+1);
     htmp->Draw();
     ll->Draw("Lsame");
-    gr[jj][1]->SetMarkerStyle(24);
+    gr[jj][1]->SetMarkerStyle(21);
     gr[jj][1]->Draw("Psame");
     fit[jj][1]->Draw("Lsame");
+    cout<<fit[jj][1]->GetChisquare()/fit[jj][1]->GetNDF()<<endl;
 
     gr[jj+8][1]->SetMarkerStyle(25);
 //    fit[jj+8][1]->SetLineStyle(5);
     gr[jj+8][1]->Draw("Psame");
 //    fit[jj+8][1]->Draw("Lsame");
-
+/*
     gr[jj+16][1]->SetMarkerStyle(28);
     gr[jj+16][1]->SetMarkerColor(1);
     gr[jj+16][1]->Draw("Psame");
+*/
   }
 
   TLatex* latex2 = new TLatex();
@@ -283,8 +288,10 @@ if(jj==7 && nbin==1) cout<<"neg nbin="<<nbin<<" i="<<i<<" "<<Vn1[i][nbin]<<" "<<
   latex2->DrawLatex(0.29,0.865,"CMS PbPb #sqrt{s_{NN}} = 2.76 TeV");
   c->cd(2);
   latex2->DrawLatex(0.08,0.05,histtitle[1]);
-  latex2->DrawLatex(0.07,0.3,"0.3 < p_{T}^{a} < 3 GeV/c");
-  latex2->DrawLatex(0.07,0.18,"p_{T}^{b} > 0 GeV/c");
+  latex2->SetTextSize(0.98*latex2->GetTextSize());
+  latex2->DrawLatex(0.1,0.285,"0.3 < p_{T}^{a} < 3.0 GeV/c");
+  latex2->DrawLatex(0.1,0.18,"p_{T}^{b} > 0 GeV/c");
+  latex2->SetTextSize(latex2->GetTextSize()/0.98);
   c->cd(4);
   latex2->DrawLatex(0.08,0.05,histtitle[3]);
   c->cd(3);
@@ -300,11 +307,11 @@ if(jj==7 && nbin==1) cout<<"neg nbin="<<nbin<<" i="<<i<<" "<<Vn1[i][nbin]<<" "<<
   latex2->SetTextSize(0.85*latex2->GetTextSize());
   latex2->DrawLatex(0.31,0.24,histtitle[4]);
 
-  TLegend* legend2 = new TLegend(0.31,0.14,0.65,0.38);
+  TLegend* legend2 = new TLegend(0.26,0.16,0.78,0.46);
   legend2->SetFillStyle(0);
-  legend2->AddEntry(gr[0][1],"4.4<#eta^{b}<5","P");
-  legend2->AddEntry(gr[16][1],"4<#eta^{b}<5","P");
-  legend2->AddEntry(gr[8][1],"3<#eta^{b}<4","P");
+  legend2->AddEntry(gr[0][1],"4.4 < #eta^{b} < 5.0","P");
+  legend2->AddEntry(gr[8][1],"3.0 < #eta^{b} < 4.0","P");
+  legend2->AddEntry(fit[0][1],"Exponential fits","L");
   c->cd(1);
   legend2->Draw("same");
 
@@ -335,30 +342,35 @@ if(jj==7 && nbin==1) cout<<"neg nbin="<<nbin<<" i="<<i<<" "<<Vn1[i][nbin]<<" "<<
 
   TCanvas* cc = new TCanvas("cc","cc",920,500);
   makeMultiPanelCanvas(cc,4,2,0.01,0.0,0.25,0.2,0.02);
-  TH2D* htmp1 = new TH2D("htmp1",";#eta^{a};r_{3}(#eta^{a},#eta^{b})",100,-0.1,2.5,100,0.831-0.02,1.06-0.02);
+  TH2D* htmp1 = new TH2D("htmp1",";#eta^{a};r_{3}(#eta^{a},#eta^{b})",100,-0.12,2.49,100,0.831-0.02,1.06-0.02);
   fixedFontHist(htmp1,1.8,2.8);
   htmp1->GetXaxis()->CenterTitle();
   htmp1->GetYaxis()->CenterTitle();
   htmp1->GetYaxis()->SetTitleSize(htmp1->GetYaxis()->GetTitleSize()*1.2);
   htmp1->GetXaxis()->SetTitleSize(htmp1->GetXaxis()->GetTitleSize()*1.);
+  htmp1->GetXaxis()->SetLabelSize(htmp1->GetXaxis()->GetLabelSize()*0.95);
+  htmp1->GetXaxis()->SetNdivisions(510);
+
   for(int jj=0;jj<8;jj++)
   {
     cc->cd(jj+1);
     htmp1->Draw();
     ll->Draw("Lsame");
-    gr[jj][2]->SetMarkerStyle(24);
+    gr[jj][2]->SetMarkerStyle(21);
     gr[jj][2]->Draw("Psame");
     fit[jj][2]->Draw("Lsame");
+    cout<<fit[jj][2]->GetChisquare()/fit[jj][2]->GetNDF()<<endl;
 
     gr[jj+8][2]->SetMarkerStyle(25);
 //    fit[jj+8][2]->SetLineStyle(5);
     gr[jj+8][2]->Draw("Psame");
 //    fit[jj+8][2]->Draw("Lsame");
-
+/*
     gr[jj+16][2]->SetMarkerStyle(28);
     gr[jj+16][2]->SetMarkerColor(1);
     gr[jj+16][2]->Draw("Psame");
     fit[jj+16][2]->Draw("Lsame");
+*/
   }
 
   TLatex* latex3 = new TLatex();
@@ -369,8 +381,10 @@ if(jj==7 && nbin==1) cout<<"neg nbin="<<nbin<<" i="<<i<<" "<<Vn1[i][nbin]<<" "<<
   latex3->DrawLatex(0.29,0.865,"CMS PbPb #sqrt{s_{NN}} = 2.76 TeV");
   cc->cd(2);
   latex3->DrawLatex(0.08,0.05,histtitle[1]);
-  latex3->DrawLatex(0.07,0.28,"0.3 < p_{T}^{a} < 3 GeV/c");
-  latex3->DrawLatex(0.07,0.18,"p_{T}^{b} > 0 GeV/c");
+  latex3->SetTextSize(0.98*latex3->GetTextSize());
+  latex3->DrawLatex(0.1,0.285,"0.3 < p_{T}^{a} < 3.0 GeV/c");
+  latex3->DrawLatex(0.1,0.18,"p_{T}^{b} > 0 GeV/c");
+  latex3->SetTextSize(latex3->GetTextSize()/0.98);
   cc->cd(4);
   latex3->DrawLatex(0.08,0.05,histtitle[3]);
   cc->cd(3);
@@ -386,11 +400,12 @@ if(jj==7 && nbin==1) cout<<"neg nbin="<<nbin<<" i="<<i<<" "<<Vn1[i][nbin]<<" "<<
   latex3->SetTextSize(0.85*latex3->GetTextSize());
   latex3->DrawLatex(0.31,0.24,histtitle[4]);
 
-  TLegend* legend3 = new TLegend(0.31,0.14,0.65,0.38);
+  TLegend* legend3 = new TLegend(0.26,0.16,0.78,0.46);
   legend3->SetFillStyle(0);
-  legend3->AddEntry(gr[0][1],"4.4<#eta^{b}<5","P");
-  legend3->AddEntry(gr[16][1],"4<#eta^{b}<5","P");
-  legend3->AddEntry(gr[8][1],"3<#eta^{b}<4","P");
+  legend3->AddEntry(gr[0][1],"4.4 < #eta^{b} < 5.0","P");
+//  legend3->AddEntry(gr[16][1],"4<#eta^{b}<5","P");
+  legend3->AddEntry(gr[8][1],"3.0 < #eta^{b} < 4.0","P");
+  legend3->AddEntry(fit[0][1],"Exponential fits","L");
   cc->cd(1);
   legend3->Draw("same");
 /*
@@ -416,6 +431,9 @@ if(jj==7 && nbin==1) cout<<"neg nbin="<<nbin<<" i="<<i<<" "<<Vn1[i][nbin]<<" "<<
     fit[jj+8][3]->Draw("Lsame");
   }
 */
+  SaveCanvas(c,"HI/FactBreak","epetadeco_HI_r2");
+  SaveCanvas(cc,"HI/FactBreak","epetadeco_HI_r3");
+return;
   TCanvas* c1 = new TCanvas("c1","c1",500,500);
   TH2D* htmp2 = new TH2D("htmp2",";Centrality;C",100,0,1.0,100,0.0,0.06);
   htmp2->Draw();
@@ -440,7 +458,6 @@ if(jj==7 && nbin==1) cout<<"neg nbin="<<nbin<<" i="<<i<<" "<<Vn1[i][nbin]<<" "<<
   gr1_slope[1]->Write();
   gr1_slope[2]->Write();
   f_slope_out->Close();
-
 
   double c2th_05[4] = {1,0.961347696746,0.880663601763,0.754486161464};
   double c2th_05_err[4] = {0,0.000356333410703,0.000338330912667,0.000274987058522};
@@ -522,7 +539,7 @@ if(jj==7 && nbin==1) cout<<"neg nbin="<<nbin<<" i="<<i<<" "<<Vn1[i][nbin]<<" "<<
 
   TCanvas* cth3 = new TCanvas("cth3","",900,330);
   makeMultiPanelCanvas(cth3,3,1,0.01,0.0,0.2,0.17,0.02);
-  TH2D* htmp9 = new TH2D("htmp9",";#eta^{a};r_{3}(#eta^{a},#eta^{b})",100,-0.1,2.5,100,0.7,1.06);
+  TH2D* htmp9 = new TH2D("htmp9",";#eta^{a};r_{3}(#eta^{a},#eta^{b})",100,-0.12,2.49,100,0.7,1.06);
   fixedFontHist(htmp9,0.9,1.3);
   htmp9->GetXaxis()->CenterTitle();
   htmp9->GetYaxis()->CenterTitle();
@@ -559,13 +576,12 @@ if(jj==7 && nbin==1) cout<<"neg nbin="<<nbin<<" i="<<i<<" "<<Vn1[i][nbin]<<" "<<
   latex8->DrawLatex(0.07,0.25,"p_{T}^{b} > 0 GeV/c");
   cth3->cd(3);
   latex8->DrawLatex(0.68,0.25,histtitle[4]);
-return;
+/*
   SaveCanvas(cth,"HI/FactBreak","epetadeco_HI_theory_r2");
   SaveCanvas(cth3,"HI/FactBreak","epetadeco_HI_theory_r3");
-
-return;
-  SaveCanvas(c,"HI/FactBreak","epetadeco_HI_alletab_r2");
-  SaveCanvas(cc,"HI/FactBreak","epetadeco_HI_alletab_r3");
+*/
+  SaveCanvas(c,"HI/FactBreak","epetadeco_HI_r2");
+  SaveCanvas(cc,"HI/FactBreak","epetadeco_HI_r3");
 //  SaveCanvas(ccaa,"HI/FactBreak","epetadeco_HI_r2ratio");
 //  SaveCanvas(c1,"HI/FactBreak","epetadeco_HI_C");
 //  SaveCanvas(cc2,"HI/FactBreak","epetadeco_HI_cos");

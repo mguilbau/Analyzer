@@ -3,24 +3,28 @@
 
 void Factorization_eta_pPb_paper()
 {
-  const int nfiles = 8;
+  const int nfiles = 15;
   TString filename[nfiles];
-  filename[1] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n150185_pttrg033_ptassallweight_etaass452_eff1_v17.root");
-  filename[2] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n185220_pttrg033_ptassallweight_etaass452_eff1_v17.root");
-  filename[3] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n220260_pttrg033_ptassallweight_etaass452_eff1_v17.root");
-  filename[0] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n120150_pttrg033_ptassallweight_etaass452_eff1_v17.root");
+  filename[1] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n150185_pttrg033_ptassallweight_etaass445_eff1_all_v42.root");
+  filename[2] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n185220_pttrg033_ptassallweight_etaass445_eff1_all_v42.root");
+  filename[3] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n220260_pttrg033_ptassallweight_etaass445_eff1_all_v42.root");
+  filename[4] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n260_pttrg033_ptassallweight_etaass445_eff1_all_v42.root");
+  filename[0] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n120150_pttrg033_ptassallweight_etaass445_eff1_all_v42.root");
 
-  filename[5] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n150185_pttrg033_ptassallweight_etaass45_eff1_v15.root");
-  filename[6] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n185220_pttrg033_ptassallweight_etaass45_eff1_v15.root");
-  filename[7] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n220260_pttrg033_ptassallweight_etaass45_eff1_v15.root");
-  filename[4] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n120150_pttrg033_ptassallweight_etaass45_eff1_v15.root");
-/*
-  filename[9] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n150185_pttrg033_ptassallweight_etaass445_eff1_all_v10.root");
-  filename[10] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n185220_pttrg033_ptassallweight_etaass445_eff1_all_v10.root");
-  filename[11] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n220260_pttrg033_ptassallweight_etaass445_eff1_all_v10.root");
-  filename[8] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n120150_pttrg033_ptassallweight_etaass445_eff1_all_v10.root");
-*/
-  const int ntrgbins = 20;
+  filename[6] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n150185_pttrg033_ptassallweight_etaass34_eff1_all_v42.root");
+  filename[7] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n185220_pttrg033_ptassallweight_etaass34_eff1_all_v42.root");
+  filename[8] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n220260_pttrg033_ptassallweight_etaass34_eff1_all_v42.root");
+  filename[9] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n260_pttrg033_ptassallweight_etaass34_eff1_all_v42.root");
+  filename[5] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n120150_pttrg033_ptassallweight_etaass34_eff1_all_v42.root");
+
+  filename[11] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n150185_pttrg033_ptassallweight_etaass45_eff1_all_v42.root");
+  filename[12] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n185220_pttrg033_ptassallweight_etaass45_eff1_all_v42.root");
+  filename[13] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n220260_pttrg033_ptassallweight_etaass45_eff1_all_v42.root");
+  filename[14] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n260_pttrg033_ptassallweight_etaass45_eff1_all_v42.root");
+  filename[10] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n120150_pttrg033_ptassallweight_etaass45_eff1_all_v42.root");
+
+
+  const int ntrgbins = 16;
   const int ntrgbins1 = ntrgbins;
   const int ntrgbins2 = ntrgbins/2;
   TGraphErrors* gr[nfiles][6];
@@ -32,10 +36,14 @@ void Factorization_eta_pPb_paper()
   TF1* fit[nfiles][6];
   TF1* fit_aver[nfiles][6];
   TF1* fit1_aver[nfiles][6];
+  double slope[6][nfiles];
+  double slope_err[6][nfiles];
+  double slope1[6][nfiles];
+  double slope1_err[6][nfiles];
 
-  double eta[ntrgbins2] = {0.12,0.36,0.6,0.84,1.08,1.32,1.56,1.8,2.04,2.28};
+//  double eta[ntrgbins2] = {0.12,0.36,0.6,0.84,1.08,1.32,1.56,1.8,2.04,2.28};
 //  double eta[ntrgbins2] = {0.1,0.3,0.5,0.7,0.9,1.1,1.3,1.5,1.7,1.9,2.1,2.3};    
-//  double eta[ntrgbins2] = {0.15,0.45,0.75,1.05,1.35,1.65,1.95,2.25};
+  double eta[ntrgbins2] = {0.15,0.45,0.75,1.05,1.35,1.65,1.95,2.25};
 //  double eta[ntrgbins2] = {0.2,0.6,1.0,1.4,1.8,2.2};
   double eta_err[ntrgbins2] = {0.0};
   Color_t color[6] = {1,kRed, kBlue, kGreen+2,1,1};
@@ -128,9 +136,9 @@ if(nbin==1 && jj==3 ) cout<<rn1[ntrgbins2-i-1]<<" "<<rn1_err[ntrgbins2-i-1]<<end
 //    gr_tot[jj][nbin]->SetMarkerSize(0.9*gr_tot[jj][nbin]->GetMarkerSize());
     gr_ratio[jj][nbin] = new TGraphErrors(ntrgbins2,eta,rn_ratio,eta_err,rn_ratio_err);
     gr_ratio[jj][nbin]->SetMarkerColor(color[nbin]); 
-    if(jj<4) fit[jj][nbin] = new TF1(Form("fit_%d_%d",nbin,jj),"exp(2*[0]*(-x-4.6))/exp(2*[0]*(x-4.6))",0.0,2.06);
-    else if(jj>=4 && jj<8) fit[jj][nbin] = new TF1(Form("fit_%d_%d",nbin,jj),"exp(2*[0]*(-x-4.6))/exp(2*[0]*(x-4.6))",0.0,2.06);
-    else if(jj>=8) fit[jj][nbin] = new TF1(Form("fit_%d_%d",nbin,jj),"exp(2*[0]*(-x-4.6))/exp(2*[0]*(x-4.6))",0.0,2.06);
+    if(jj<5) fit[jj][nbin] = new TF1(Form("fit_%d_%d",nbin,jj),"exp(2*[0]*(-x-4.6))/exp(2*[0]*(x-4.6))",0.0,2.5);
+    else if(jj>=5 && jj<10) fit[jj][nbin] = new TF1(Form("fit_%d_%d",nbin,jj),"exp(2*[0]*(-x-3.5))/exp(2*[0]*(x-3.5))",0.0,1.1);
+    else if(jj>=10) fit[jj][nbin] = new TF1(Form("fit_%d_%d",nbin,jj),"exp(2*[0]*(-x-4.6))/exp(2*[0]*(x-4.6))",0.0,2.06);
 /*
     if(jj<4) fit[jj][nbin] = new TF1(Form("fit_%d_%d",nbin,jj),"(1-[1]+[1]*exp([0]*(-x-4.5)))/(1-[1]+[1]*exp([0]*(x-4.5)))",0.0,2.5);
     else if(jj>=4 && jj<8) fit[jj][nbin] = new TF1(Form("fit_%d_%d",nbin,jj),"(1-[1]+[1]*exp([0]*(-x-3.5)))/(1-[1]+[1]*exp([0]*(x-3.5)))",0.0,1.4);
@@ -141,8 +149,19 @@ if(nbin==1 && jj==3 ) cout<<rn1[ntrgbins2-i-1]<<" "<<rn1_err[ntrgbins2-i-1]<<end
     fit[jj][nbin]->SetParLimits(1,0,0.2);
     gr_tot[jj][nbin]->Fit(Form("fit_%d_%d",nbin,jj),"RNO");
     fit[jj][nbin]->SetLineColor(color[nbin]);
-    fit[jj][nbin]->SetLineStyle(9);
+    fit[jj][nbin]->SetLineStyle(7);
     fit[jj][nbin]->SetLineWidth(1);
+
+    if(jj<5)
+    {
+      slope[nbin][jj] = fit[jj][nbin]->GetParameter(0);
+      slope_err[nbin][jj] = fit[jj][nbin]->GetParError(0);
+    }
+    else
+    {
+      slope1[nbin][jj-10] = fit[jj][nbin]->GetParameter(0);
+      slope1_err[nbin][jj-10] = fit[jj][nbin]->GetParError(0);
+    }
 
 //    fit1_aver[jj][nbin] = new TF1(Form("fit1_aver_%d_%d",nbin,jj),"[1]*exp(-[0]*x)+1-[1]",0,5.0);
     fit1_aver[jj][nbin] = new TF1(Form("fit1_aver_%d_%d",nbin,jj),"exp(-[0]*x)",0,5.0);
@@ -163,28 +182,51 @@ if(nbin==1 && jj==3 ) cout<<rn1[ntrgbins2-i-1]<<" "<<rn1_err[ntrgbins2-i-1]<<end
   }
 }
 
-  TString histtitle[4] = {"120 < N_{trk}^{offline} < 150", "150 < N_{trk}^{offline} < 185", "185 < N_{trk}^{offline} < 220", "220 < N_{trk}^{offline} < 260"};
 
-  TLine* ll = new TLine(0,1.,2.65,1.);
+  ofstream ff("r2_eta_pPb.txt");
+
+  for(int nbin=1;nbin<2;nbin++) {
+    cout<<"i="<<nbin+1<<endl;
+    ff<<"i="<<nbin+1<<endl;
+    for(int j=0;j<5;j++) { cout<<slope[nbin][j]<<" "; ff<<slope[nbin][j]<<", ";}
+    cout<<endl;
+    ff<<endl;
+    for(int j=0;j<5;j++) { cout<<slope_err[nbin][j]<<" "; ff<<slope_err[nbin][j]<<", ";}
+    cout<<endl;
+    ff<<endl;
+  }
+
+  TString histtitle[5] = {"120 #leq N_{trk}^{offline} < 150", "150 #leq N_{trk}^{offline} < 185", "185 #leq N_{trk}^{offline} < 220", "220 #leq N_{trk}^{offline} < 260", "N_{trk}^{offline} #geq 260"};
+
+  TLine* ll = new TLine(-0.12,1.,2.49,1.);
   TCanvas* c = new TCanvas("c","c",530,500);
   makeMultiPanelCanvas(c,2,2,0.01,0.0,0.2,0.18,0.02);
-  TH2D* htmp = new TH2D("htmp",";#eta^{a};#sqrt{r_{2}(-#eta^{a},-#eta^{b}) #times r_{2}(#eta^{a},#eta^{b})}",100,-0.1,2.2,100,0.701,1.06);
+  TH2D* htmp = new TH2D("htmp",";#eta^{a};#sqrt{r_{2}(-#eta^{a},-#eta^{b}) #times r_{2}(#eta^{a},#eta^{b})}",100,-0.12,2.49,100,0.601,1.06);
   fixedFontHist(htmp,1.8,2.1);
   htmp->GetXaxis()->CenterTitle();
   htmp->GetYaxis()->CenterTitle();
   htmp->GetYaxis()->SetTitleSize(htmp->GetYaxis()->GetTitleSize()*1.2);
   htmp->GetXaxis()->SetTitleSize(htmp->GetXaxis()->GetTitleSize()*1.);
+  htmp->GetXaxis()->SetLabelSize(htmp->GetXaxis()->GetLabelSize()*0.95);
+  htmp->GetXaxis()->SetNdivisions(510);
+
   for(int jj=0;jj<4;jj++)
   {
     c->cd(jj+1);
     htmp->Draw();
     ll->Draw("Lsame");
+
+    gr_tot[jj][1]->SetMarkerStyle(20);
     gr_tot[jj][1]->Draw("Psame");
     fit[jj][1]->Draw("Lsame");
-//    gr_tot[jj+4][1]->SetMarkerStyle(24);
-//    fit[jj+4][1]->SetLineStyle(5);
-//    gr_tot[jj+4][1]->Draw("Psame");
-//    fit[jj+4][1]->Draw("Lsame");
+    cout<<fit[jj][1]->GetChisquare()/fit[jj][1]->GetNDF()<<endl;
+    gr_tot[jj+5][1]->SetMarkerStyle(24);
+    gr_tot[jj+5][1]->Draw("Psame");
+/*
+    gr_tot[jj+10][1]->SetMarkerStyle(28);
+    gr_tot[jj+10][1]->SetMarkerColor(1);
+    gr_tot[jj+10][1]->Draw("Psame");
+*/
 /*
     gr_tot[jj+8][1]->SetMarkerStyle(28);
     fit[jj+8][1]->SetLineStyle(9);
@@ -194,35 +236,44 @@ if(nbin==1 && jj==3 ) cout<<rn1[ntrgbins2-i-1]<<" "<<rn1_err[ntrgbins2-i-1]<<end
   }
   TLatex* latex = new TLatex();
   latex->SetNDC();
-  latex->SetTextSize(1.43*latex->GetTextSize());
+  latex->SetTextSize(1.3*latex->GetTextSize());
   c->cd(1);
   latex->DrawLatex(0.27,0.05,histtitle[0]);
-  latex->DrawLatex(0.55,0.74,"0.3 < p_{T}^{a} < 3 GeV/c");
-  latex->DrawLatex(0.55,0.65,"p_{T}^{b} > 0 GeV/c");
-  latex->DrawLatex(0.24,0.87,"CMS pPb #sqrt{s_{NN}} = 5.02 TeV");
+//  latex->DrawLatex(0.58,0.74,"0.3 < p_{T}^{a} < 3 GeV/c");
+//  latex->DrawLatex(0.58,0.65,"p_{T}^{b} > 0 GeV/c");
+  latex->DrawLatex(0.24,0.885,"CMS pPb #sqrt{s_{NN}} = 5.02 TeV");
+  latex->DrawLatex(0.68,0.7,"L_{int} = 35 nb^{-1}");
   c->cd(2);
+  latex->SetTextSize(1.05*latex->GetTextSize());
+  latex->DrawLatex(0.12,0.29,"0.3 < p_{T}^{a} < 3.0 GeV/c");
+  latex->DrawLatex(0.12,0.18,"p_{T}^{b} > 0 GeV/c");
+  latex->SetTextSize(latex->GetTextSize()/1.05);
   latex->DrawLatex(0.09,0.05,histtitle[1]);
   c->cd(4);
+  latex->SetTextSize(0.9*latex->GetTextSize());
   latex->DrawLatex(0.09,0.22,histtitle[3]);
+  latex->SetTextSize(latex->GetTextSize()/0.9);
   c->cd(3);
   latex->SetTextSize(0.85*latex->GetTextSize());
   latex->DrawLatex(0.27,0.22,histtitle[2]);
-/*
-  TLegend* legend = new TLegend(0.22,0.16,0.62,0.36);
+
+  TLegend* legend = new TLegend(0.23,0.16,0.7,0.41);
   legend->SetFillStyle(0);
 //  legend->AddEntry(gr_tot[8][1],"4.4<#eta^{b}<5","P");
-  legend->AddEntry(gr_tot[0][1],"4<#eta^{b}<5","P");
+  legend->AddEntry(gr_tot[0][1],"4.4 < #eta^{b} < 5.0","P");
 //  legend->AddEntry(fit[0][1],"Exponential fit","L");
-  legend->AddEntry(gr_tot[4][1],"3<#eta^{b}<4","P");
+//  legend->AddEntry(gr_tot[10][1],"4<#eta^{b}<5","P");  
+  legend->AddEntry(gr_tot[5][1],"3.0 < #eta^{b} < 4.0","P");
+  legend->AddEntry(fit[0][1],"Exponential fits","L");
 //  legend->AddEntry(fit[4][1],"Exponential fit","L");
+
   c->cd(1);  
   legend->Draw();
-*/
 
-  TLine* ll = new TLine(0,1.,5.0,1.);
+  TLine* ll = new TLine(-0.12,1.,2.49,1.);
   TCanvas* ca = new TCanvas("ca","ca",560,500);
   makeMultiPanelCanvas(ca,2,2,0.02,0.0,0.27,0.18,0.02);
-  TH2D* htmpa = new TH2D("htmpa",";#eta^{a};#frac{v_{2}(#eta^{a})}{v_{2}(-#eta^{a})} =  #sqrt{#frac{r_{2}(#eta^{a},#eta^{b})}{r_{2}(-#eta^{a},-#eta^{b})}}",100,-0.1,2.2,100,0.92,1.03);
+  TH2D* htmpa = new TH2D("htmpa",";#eta^{a};#frac{v_{2}(#eta^{a})}{v_{2}(-#eta^{a})} =  #sqrt{#frac{r_{2}(#eta^{a},#eta^{b})}{r_{2}(-#eta^{a},-#eta^{b})}}",100,-0.1,2.5,100,0.91,1.045);
   fixedFontHist(htmpa,1.8,2.7);
   htmpa->GetXaxis()->CenterTitle();
   htmpa->GetYaxis()->CenterTitle();
@@ -234,35 +285,39 @@ if(nbin==1 && jj==3 ) cout<<rn1[ntrgbins2-i-1]<<" "<<rn1_err[ntrgbins2-i-1]<<end
     htmpa->Draw();
     ll->Draw("Lsame");
     gr_ratio[jj][1]->Draw("Psame");
-//    gr_ratio[jj+4][1]->SetMarkerStyle(24);
-//    gr_ratio[jj+4][1]->Draw("Psame");
+    gr_ratio[jj+5][1]->SetMarkerStyle(24);
+    gr_ratio[jj+5][1]->Draw("Psame");
   }
   TLatex* latex1 = new TLatex();
   latex1->SetNDC();
-  latex1->SetTextSize(1.4*latex1->GetTextSize());
+  latex1->SetTextSize(1.3*latex1->GetTextSize());
   ca->cd(1);
   latex1->DrawLatex(0.33,0.05,histtitle[0]);
-  latex1->DrawLatex(0.31,0.865,"CMS pPb #sqrt{s_{NN}} = 5.02 TeV");
+  latex1->DrawLatex(0.31,0.88,"CMS pPb #sqrt{s_{NN}} = 5.02 TeV");
+  latex1->DrawLatex(0.31,0.77,"L_{int} = 35 nb^{-1}");
+
   ca->cd(2);
   latex1->DrawLatex(0.075,0.05,histtitle[1]);
-  latex1->DrawLatex(0.07,0.26,"0.3 < p_{T}^{a} < 3 GeV/c");
-  latex1->DrawLatex(0.07,0.16,"p_{T}^{b} > 0 GeV/c");
+  latex1->DrawLatex(0.08,0.29,"0.3 < p_{T}^{a} < 3 GeV/c");
+  latex1->DrawLatex(0.08,0.19,"p_{T}^{b} > 0 GeV/c");
   ca->cd(4);
+  latex1->SetTextSize(0.9*latex1->GetTextSize());
   latex1->DrawLatex(0.075,0.22,histtitle[3]);
+  latex1->SetTextSize(latex1->GetTextSize()/0.9);
   ca->cd(3);
   latex1->SetTextSize(0.85*latex1->GetTextSize());
   latex1->DrawLatex(0.33,0.22,histtitle[2]);
-/*
-  TLegend* legend1 = new TLegend(0.3,0.15,0.57,0.35);
+
+  TLegend* legend1 = new TLegend(0.34,0.15,0.57,0.35);
   legend1->SetFillStyle(0);
-  legend1->AddEntry(gr_ratio[0][1],"4<#eta^{b}<5","P");
-  legend1->AddEntry(gr_ratio[4][1],"3<#eta^{b}<4","P");
+  legend1->AddEntry(gr_ratio[0][1],"4.4 < #eta^{b} < 5","P");
+  legend1->AddEntry(gr_ratio[5][1],"3 < #eta^{b} < 4","P");
   ca->cd(1);
   legend1->Draw();
-*/
+
   TCanvas* c2 = new TCanvas("c2","c2",810,400);
   makeMultiPanelCanvas(c2,4,2,0.016,0.0,0.24,0.2,0.02);
-  TH2D* htmp2 = new TH2D("htmp2",";#eta^{a};r_{2}(#eta^{a},#eta^{b})",100,-0.1,2.2,100,0.71,1.06);
+  TH2D* htmp2 = new TH2D("htmp2",";#eta^{a};r_{2}(#eta^{a},#eta^{b})",100,-0.12,2.49,100,0.61,1.06);
   fixedFontHist(htmp2,1.6,1.8);
   htmp2->GetXaxis()->CenterTitle();
   htmp2->GetYaxis()->CenterTitle();
@@ -276,14 +331,14 @@ if(nbin==1 && jj==3 ) cout<<rn1[ntrgbins2-i-1]<<" "<<rn1_err[ntrgbins2-i-1]<<end
     htmp2->Draw();
     ll->Draw("Lsame");
     gr[jj][1]->Draw("Psame");
-    gr[jj+4][1]->SetMarkerStyle(24);
-    gr[jj+4][1]->Draw("Psame");
+    gr[jj+5][1]->SetMarkerStyle(24);
+    gr[jj+5][1]->Draw("Psame");
     c2->cd(jj+5);
     htmp2a->Draw();
     ll->Draw("Lsame");
     gr1[jj][1]->Draw("Psame");
-    gr1[jj+4][1]->SetMarkerStyle(24);
-    gr1[jj+4][1]->Draw("Psame");
+    gr1[jj+5][1]->SetMarkerStyle(24);
+    gr1[jj+5][1]->Draw("Psame");
   } 
   TLatex* latex2 = new TLatex();
   latex2->SetNDC();
@@ -309,15 +364,14 @@ if(nbin==1 && jj==3 ) cout<<rn1[ntrgbins2-i-1]<<" "<<rn1_err[ntrgbins2-i-1]<<end
   c2->cd(5);
   latex2->SetTextSize(0.9*latex2->GetTextSize());
   latex2->DrawLatex(0.3,0.24,histtitle[0]);
-/*
-  TLegend* legend2 = new TLegend(0.3,0.18,0.57,0.42);
+
+  TLegend* legend2 = new TLegend(0.3,0.18,0.6,0.44);
   legend2->SetFillStyle(0);
-  legend2->AddEntry(gr_ratio[0][1],"4<#eta^{b}<5","P");
-  legend2->AddEntry(gr_ratio[4][1],"3<#eta^{b}<4","P");
+  legend2->AddEntry(gr_ratio[0][1],"4.4 < #eta^{b} < 5","P");
+  legend2->AddEntry(gr_ratio[5][1],"3 < #eta^{b} < 4","P");
   c2->cd(1);
   legend2->Draw();
-*/
-return;
+/*
   TCanvas* cc2 = new TCanvas("cc2","cc2",530,500);
   makeMultiPanelCanvas(cc2,2,2,0.01,0.0,0.2,0.18,0.02);
   TH2D* htmp22 = new TH2D("htmp22",";|#eta^{a}-#eta^{b}|;cos[n(#Psi_{n}(#eta^{a})-#Psi_{n}(#eta^{b}))]",100,0,5,100,0.731,1.06);
@@ -347,9 +401,10 @@ return;
   cc2->cd(3);
   latex3->SetTextSize(0.85*latex3->GetTextSize());
   latex3->DrawLatex(0.24,0.22,histtitle[2]);
-return;
+*/
+
   SaveCanvas(c,"HI/FactBreak","epetadeco_pPb_r2tot");
   SaveCanvas(c2,"HI/FactBreak","epetadeco_pPb_r2sep");
   SaveCanvas(ca,"HI/FactBreak","epetadeco_pPb_r2ratio");
-  SaveCanvas(cc2,"HI/FactBreak","epetadeco_pPb_cos");
+//  SaveCanvas(cc2,"HI/FactBreak","epetadeco_pPb_cos");
 }

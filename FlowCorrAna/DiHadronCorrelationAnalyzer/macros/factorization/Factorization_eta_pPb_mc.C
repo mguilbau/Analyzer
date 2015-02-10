@@ -5,19 +5,19 @@ void Factorization_eta_pPb_mc()
 {
   const int nfiles = 15;
   TString filename[nfiles];
-  filename[1] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/EPOSReco_Minbias_5TeV/merged/epetadeco_mc_n100_pttrg033_ptassallweight_etaass45_eff1_v42.root");
+  filename[1] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/EPOSReco_Minbias_5TeV/merged/epetadeco_mc_n100_pttrg033_ptassallweight_etaass445_eff1_v42.root");
   filename[2] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/EPOSReco_Minbias_5TeV/merged/epetadeco_mc_n100_pttrg033_ptassallweight_etaass34_eff1_v42.root");
   filename[3] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/EPOSReco_Minbias_5TeV/merged/epetadeco_mc_n100_pttrg033_ptassallweight_etaass45_eff1_v42.root");
   filename[4] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/EPOSReco_Minbias_5TeV/merged/epetadeco_mc_n100_pttrg033_ptassallweight_etaass45_eff1_v42.root");
   filename[0] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/EPOSReco_Minbias_5TeV/merged/epetadeco_mc_n100_pttrg033_ptassallweight_etaass45_eff1_v42.root");
 
-  filename[6] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/EPOSReco_Minbias_5TeV/merged/epetadeco_gen_n100_pttrg033_ptassallweight_etaass45_eff1_v42.root");
+  filename[6] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/EPOSReco_Minbias_5TeV/merged/epetadeco_gen_n100_pttrg033_ptassallweight_etaass445_eff1_v42.root");
   filename[7] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/EPOSReco_Minbias_5TeV/merged/epetadeco_gen_n100_pttrg033_ptassallweight_etaass34_eff1_v42.root");
   filename[8] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/EPOSReco_Minbias_5TeV/merged/epetadeco_gen_n100_pttrg033_ptassallweight_etaass34_eff1_v42.root");
   filename[9] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/EPOSReco_Minbias_5TeV/merged/epetadeco_gen_n100_pttrg033_ptassallweight_etaass34_eff1_v42.root");
   filename[5] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/EPOSReco_Minbias_5TeV/merged/epetadeco_gen_n100_pttrg033_ptassallweight_etaass34_eff1_v42.root");
 
-  filename[10] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n120150_pttrg033_ptassallweight_etaass45_eff1_all_v42.root");
+  filename[10] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n120150_pttrg033_ptassallweight_etaass445_eff1_all_v42.root");
   filename[11] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n120150_pttrg033_ptassallweight_etaass34_eff1_all_v42.root");
   filename[12] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n220260_pttrg033_ptassallweight_etaass45_eff1_all_v42.root");
   filename[13] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n260_pttrg033_ptassallweight_etaass45_eff1_all_v42.root");
@@ -205,7 +205,7 @@ if(nbin==1 && jj==3 ) cout<<rn1[ntrgbins2-i-1]<<" "<<rn1_err[ntrgbins2-i-1]<<end
   TLine* ll = new TLine(0,1.,2.65,1.);
   TCanvas* c = new TCanvas("c","c",530,300);
   makeMultiPanelCanvas(c,2,1,0.01,0.0,0.2,0.18,0.02);
-  TH2D* htmp = new TH2D("htmp",";#eta^{a};#sqrt{r_{2}(-#eta^{a},-#eta^{b}) #times r_{2}(#eta^{a},#eta^{b})}",100,-0.1,2.23,100,0.68,1.06);
+  TH2D* htmp = new TH2D("htmp",";#eta^{a};#sqrt{r_{2}(-#eta^{a},-#eta^{b}) #times r_{2}(#eta^{a},#eta^{b})}",100,-0.1,2.5,100,0.58,1.06);
   fixedFontHist(htmp,1.8/1.7,2.1/1.7);
   htmp->GetXaxis()->CenterTitle();
   htmp->GetYaxis()->CenterTitle();
@@ -251,7 +251,7 @@ if(nbin==1 && jj==3 ) cout<<rn1[ntrgbins2-i-1]<<" "<<rn1_err[ntrgbins2-i-1]<<end
   TLine* ll = new TLine(0,1.,5.0,1.);
   TCanvas* ca = new TCanvas("ca","ca",560,500);
   makeMultiPanelCanvas(ca,2,2,0.02,0.0,0.27,0.18,0.02);
-  TH2D* htmpa = new TH2D("htmpa",";#eta^{a};#frac{v_{2}(#eta^{a})}{v_{2}(-#eta^{a})} =  #sqrt{#frac{r_{2}(#eta^{a},#eta^{b})}{r_{2}(-#eta^{a},-#eta^{b})}}",100,-0.1,2.23,100,0.91,1.045);
+  TH2D* htmpa = new TH2D("htmpa",";#eta^{a};#frac{v_{2}(#eta^{a})}{v_{2}(-#eta^{a})} =  #sqrt{#frac{r_{2}(#eta^{a},#eta^{b})}{r_{2}(-#eta^{a},-#eta^{b})}}",100,-0.1,2.5,100,0.91,1.045);
   fixedFontHist(htmpa,1.8,2.7);
   htmpa->GetXaxis()->CenterTitle();
   htmpa->GetYaxis()->CenterTitle();
@@ -290,7 +290,7 @@ if(nbin==1 && jj==3 ) cout<<rn1[ntrgbins2-i-1]<<" "<<rn1_err[ntrgbins2-i-1]<<end
 
   TCanvas* c2 = new TCanvas("c2","c2",500,400);
   makeMultiPanelCanvas(c2,2,2,0.016,0.0,0.24,0.2,0.02);
-  TH2D* htmp2 = new TH2D("htmp2",";#eta^{a};r_{2}(#eta^{a},#eta^{b})",100,-0.1,2.2,100,0.61,1.09);
+  TH2D* htmp2 = new TH2D("htmp2",";#eta^{a};r_{2}(#eta^{a},#eta^{b})",100,-0.1,2.5,100,0.51,1.09);
   fixedFontHist(htmp2,1.6,1.8);
   htmp2->GetXaxis()->CenterTitle();
   htmp2->GetYaxis()->CenterTitle();
@@ -329,7 +329,7 @@ if(nbin==1 && jj==3 ) cout<<rn1[ntrgbins2-i-1]<<" "<<rn1_err[ntrgbins2-i-1]<<end
   latex2->SetNDC();
   latex2->SetTextSize(1.5*latex2->GetTextSize());
   c2->cd(1);
-  latex2->DrawLatex(0.30,0.05,"4 < #eta^{b} < 5");
+  latex2->DrawLatex(0.30,0.05,"4.4 < #eta^{b} < 5");
   latex2->DrawLatex(0.28,0.865,"CMS pPb #sqrt{s_{NN}} = 5.02 TeV");
   c2->cd(2);
   latex2->DrawLatex(0.08,0.05,"3 < #eta^{b} < 4");

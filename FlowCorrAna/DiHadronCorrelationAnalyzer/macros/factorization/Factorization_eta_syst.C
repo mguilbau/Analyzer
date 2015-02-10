@@ -3,26 +3,36 @@
 
 void Factorization_eta_syst()
 {
-  const int nfiles = 16;
+  const int nfiles = 24;
   TString filename[nfiles];
 
-  filename[0] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent002_pttrg13_ptassallweight_etaass45_eff0_v42.root");
+  filename[0] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent002_pttrg13_ptassallweight_etaass445_eff1_v44.root");
   filename[1] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent002_pttrg13_ptassallweight_etaass34_eff0_v42.root");
-  filename[2] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent5060_pttrg13_ptassallweight_etaass45_eff0_v42.root");
-  filename[3] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent5060_pttrg13_ptassallweight_etaass34_eff0_v42.root");
+  filename[2] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent5060_pttrg033_ptassallweight_etaass445_eff1_v44.root");
+  filename[3] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent5060_pttrg033_ptassallweight_etaass34_eff0_v42.root");
   filename[4] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent2030_pttrg033_ptassallweight_etaass45_eff0_v42.root");
   filename[5] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent3040_pttrg033_ptassallweight_etaass45_eff0_v42.root");
   filename[6] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent4050_pttrg033_ptassallweight_etaass45_eff0_v42.root");
   filename[7] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent5060_pttrg033_ptassallweight_etaass34_eff0_v42.root");
 
-  filename[8] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent002_pttrg13_ptassallweight_etaass45_general_eff0_v42.root");
+  filename[8] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent002_pttrg13_ptassallweight_etaass445_general_eff1_v44.root");
   filename[9] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent002_pttrg13_ptassallweight_etaass34_general_eff0_v42.root");
-  filename[10] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent5060_pttrg13_ptassallweight_etaass45_general_eff0_v42.root");
+  filename[10] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent5060_pttrg13_ptassallweight_etaass445_general_eff1_v44.root");
   filename[11] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent5060_pttrg13_ptassallweight_etaass34_general_eff0_v42.root");
   filename[12] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent2030_pttrg033_ptassallweight_etaass34_eff0_v42.root");
   filename[13] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent3040_pttrg033_ptassallweight_etaass34_eff0_v42.root");
   filename[14] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent4050_pttrg033_ptassallweight_etaass34_eff0_v42.root");
   filename[15] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent5060_pttrg13_ptassallweight_etaass34_eff0_v42.root");
+
+  filename[16] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent002_pttrg033_ptass1infweight_etaass445_eff1_v44.root");
+  filename[17] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent002_pttrg033_ptass1infweight_etaass34_eff0_v42.root");
+  filename[18] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent5060_pttrg033_ptass1infweight_etaass445_eff1_v44.root");
+  filename[19] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent5060_pttrg033_ptass1infweight_etaass34_eff0_v42.root");
+  filename[20] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent2030_pttrg033_ptassallweight_etaass34_eff0_v42.root");
+  filename[21] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent3040_pttrg033_ptassallweight_etaass34_eff0_v42.root");
+  filename[22] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent4050_pttrg033_ptassallweight_etaass34_eff0_v42.root");
+  filename[23] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent5060_pttrg13_ptassallweight_etaass34_eff0_v42.root");
+
 /*
   filename[8] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent002_pttrg053_ptassallweight_etaass45_eff0_v18.root");
   filename[9] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/HIData_Minbias_2760GeV/merged/epetadeco_cent05_pttrg053_ptassallweight_etaass45_eff0_v18.root");
@@ -168,7 +178,7 @@ if(jj==7 && nbin==1) cout<<"neg nbin="<<nbin<<" i="<<i<<" "<<Vn1[i][nbin]<<" "<<
 */
 //    fit[jj][nbin] = new TF1(Form("fit_%d_%d",nbin,jj),"(1+[0]*(-x-4.5)*(-x-4.5))/(1+[0]*(x-4.5)*(x-4.5))",0,3.0);
 //    fit[jj][nbin] = new TF1(Form("fit_%d_%d",nbin,jj),"(1+[0]*(-x-4.5))/(1+[0]*(x-4.5))",0,3.0);
-    if(jj<8) fit[jj][nbin] = new TF1(Form("fit_%d_%d",nbin,jj),"exp([0]*(-x-4.6))/exp([0]*(x-4.6))",0.0,2.08);
+    if(jj<8) fit[jj][nbin] = new TF1(Form("fit_%d_%d",nbin,jj),"exp([0]*(-x-4.6))/exp([0]*(x-4.6))",0.0,2.5);
     else fit[jj][nbin] = new TF1(Form("fit_%d_%d",nbin,jj),"exp([0]*(-x-3.5))/exp([0]*(x-3.5))",0.0,1.1);
     fit[jj][nbin]->SetParameter(0,0.01);
     gr[jj][nbin]->Fit(Form("fit_%d_%d",nbin,jj),"RNO");
@@ -232,7 +242,7 @@ if(jj==7 && nbin==1) cout<<"neg nbin="<<nbin<<" i="<<i<<" "<<Vn1[i][nbin]<<" "<<
   TLine* ll = new TLine(0,1.,5.0,1.);
   TCanvas* c = new TCanvas("c","c",600,500);
   makeMultiPanelCanvas(c,2,2,0.01,0.0,0.2,0.2,0.02);
-  TH2D* htmp = new TH2D("htmp",";#eta^{a};r_{2}(#eta^{a},#eta^{b})",100,-0.1,2.23,100,0.831,1.06);
+  TH2D* htmp = new TH2D("htmp",";#eta^{a};r_{2}(#eta^{a},#eta^{b})",100,-0.1,2.5,100,0.711,1.06);
   fixedFontHist(htmp,1.8,2.2);
   htmp->GetXaxis()->CenterTitle();
   htmp->GetYaxis()->CenterTitle();
@@ -248,9 +258,14 @@ if(jj==7 && nbin==1) cout<<"neg nbin="<<nbin<<" i="<<i<<" "<<Vn1[i][nbin]<<" "<<
     fit[jj][1]->Draw("Lsame");
 
     gr[jj+8][1]->SetMarkerStyle(25);
-//    fit[jj+8][1]->SetLineStyle(5);
+    gr[jj+8][1]->SetMarkerColor(1);
     gr[jj+8][1]->Draw("Psame");
-//    fit[jj+8][1]->Draw("Lsame");
+/*
+    gr[jj+16][1]->SetMarkerStyle(28);
+    gr[jj+16][1]->SetMarkerColor(1);
+    gr[jj+16][1]->SetMarkerSize(gr[jj+16][1]->GetMarkerSize()*1.4);
+    gr[jj+16][1]->Draw("Psame");
+*/
   }
 
   TLatex* latex2 = new TLatex();
@@ -258,7 +273,7 @@ if(jj==7 && nbin==1) cout<<"neg nbin="<<nbin<<" i="<<i<<" "<<Vn1[i][nbin]<<" "<<
   latex2->SetTextSize(1.5*latex2->GetTextSize());
   c->cd(1);
   latex2->DrawLatex(0.26,0.05,histtitle[0]);
-  latex2->DrawLatex(0.66,0.05,"4<#eta^{b}<5");
+  latex2->DrawLatex(0.66,0.05,"4.4<#eta^{b}<5");
   latex2->DrawLatex(0.24,0.865,"CMS PbPb #sqrt{s_{NN}} = 2.76 TeV");
   c->cd(2);
   latex2->DrawLatex(0.08,0.05,histtitle[0]);
@@ -267,18 +282,21 @@ if(jj==7 && nbin==1) cout<<"neg nbin="<<nbin<<" i="<<i<<" "<<Vn1[i][nbin]<<" "<<
   latex2->DrawLatex(0.07,0.18,"p_{T}^{b} > 0 GeV/c");
   c->cd(4);
   latex2->SetTextSize(0.8*latex2->GetTextSize());
-  latex2->DrawLatex(0.08,0.25,histtitle[1]);
+  latex2->DrawLatex(0.08,0.25,histtitle[7]);
   latex2->DrawLatex(0.56,0.25,"3<#eta^{b}<4");
   c->cd(3);
-  latex2->DrawLatex(0.66,0.25,"4<#eta^{b}<5");
-  latex2->DrawLatex(0.25,0.25,histtitle[1]);
+  latex2->DrawLatex(0.66,0.25,"4.4<#eta^{b}<5");
+  latex2->DrawLatex(0.25,0.25,histtitle[7]);
 
-  TLegend* legend2 = new TLegend(0.2,0.24,0.85,0.48);
+  TLegend* legend2 = new TLegend(0.2,0.15,0.8,0.45);
   legend2->SetFillStyle(0);
-//  legend2->AddEntry(gr[0][1],"0.3<p_{T}^{a}<3 GeV/c","P");
-//  legend2->AddEntry(gr[8][1],"1<p_{T}^{a}<3 GeV/c","P");
+//  legend2->AddEntry(gr[0][1],"0.3<p_{T}^{a}<3 GeV, p_{T}^{b}>0 GeV","P");
+//  legend2->AddEntry(gr[8][1],"1<p_{T}^{a}<3 GeV, p_{T}^{b}>0 GeV","P");
+//  legend2->AddEntry(gr[16][1],"0.3<p_{T}^{a}<3 GeV, p_{T}^{b}>1 GeV","P");
   legend2->AddEntry(gr[0][1],"Pixel+General tracks","P");
   legend2->AddEntry(gr[8][1],"General tracks","P");
+//  legend2->AddEntry(gr[0][1],"w/ trk. eff. weight","P");
+//  legend2->AddEntry(gr[8][1],"w/o trk. eff. weight","P");
   c->cd(1);
   legend2->Draw("same");
 

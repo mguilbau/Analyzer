@@ -3,25 +3,27 @@
 
 void Factorization_eta_pPb()
 {
-  const int nfiles = 10;
+  const int nfiles = 15;
   TString filename[nfiles];
-  filename[1] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n150185_pttrg033_ptassallweight_etaass45_eff1_all_v42.root");
-  filename[2] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n185220_pttrg033_ptassallweight_etaass45_eff1_all_v42.root");
-  filename[3] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n220260_pttrg033_ptassallweight_etaass45_eff1_all_v42.root");
-  filename[4] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n260_pttrg033_ptassallweight_etaass45_eff1_all_v42.root");
-  filename[0] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n120150_pttrg033_ptassallweight_etaass45_eff1_all_v42.root");
+  filename[1] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n150185_pttrg033_ptassallweight_etaass445_eff1_all_v42.root");
+  filename[2] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n185220_pttrg033_ptassallweight_etaass445_eff1_all_v42.root");
+  filename[3] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n220260_pttrg033_ptassallweight_etaass445_eff1_all_v42.root");
+  filename[4] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n260_pttrg033_ptassallweight_etaass445_eff1_all_v42.root");
+  filename[0] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n120150_pttrg033_ptassallweight_etaass445_eff1_all_v42.root");
 
   filename[6] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n150185_pttrg033_ptassallweight_etaass34_eff1_all_v42.root");
   filename[7] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n185220_pttrg033_ptassallweight_etaass34_eff1_all_v42.root");
   filename[8] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n220260_pttrg033_ptassallweight_etaass34_eff1_all_v42.root");
   filename[9] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n260_pttrg033_ptassallweight_etaass34_eff1_all_v42.root");
   filename[5] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n120150_pttrg033_ptassallweight_etaass34_eff1_all_v42.root");
-/*
-  filename[9] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n150185_pttrg033_ptassallweight_etaass445_eff1_all_v10.root");
-  filename[10] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n185220_pttrg033_ptassallweight_etaass445_eff1_all_v10.root");
-  filename[11] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n220260_pttrg033_ptassallweight_etaass445_eff1_all_v10.root");
-  filename[8] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n120150_pttrg033_ptassallweight_etaass445_eff1_all_v10.root");
-*/
+
+  filename[11] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n150185_pttrg033_ptassallweight_etaass45_eff1_all_v42.root");
+  filename[12] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n185220_pttrg033_ptassallweight_etaass45_eff1_all_v42.root");
+  filename[13] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n220260_pttrg033_ptassallweight_etaass45_eff1_all_v42.root");
+  filename[14] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n260_pttrg033_ptassallweight_etaass45_eff1_all_v42.root");
+  filename[10] = Form("/net/hisrv0001/home/davidlw/scratch1/DiHadronCorrelations/outputs_312/PAData_Minbias_5TeV/merged/epetadeco_n120150_pttrg033_ptassallweight_etaass45_eff1_all_v42.root");
+
+
   const int ntrgbins = 16;
   const int ntrgbins1 = ntrgbins;
   const int ntrgbins2 = ntrgbins/2;
@@ -134,7 +136,7 @@ if(nbin==1 && jj==3 ) cout<<rn1[ntrgbins2-i-1]<<" "<<rn1_err[ntrgbins2-i-1]<<end
 //    gr_tot[jj][nbin]->SetMarkerSize(0.9*gr_tot[jj][nbin]->GetMarkerSize());
     gr_ratio[jj][nbin] = new TGraphErrors(ntrgbins2,eta,rn_ratio,eta_err,rn_ratio_err);
     gr_ratio[jj][nbin]->SetMarkerColor(color[nbin]); 
-    if(jj<5) fit[jj][nbin] = new TF1(Form("fit_%d_%d",nbin,jj),"exp(2*[0]*(-x-4.6))/exp(2*[0]*(x-4.6))",0.0,2.08);
+    if(jj<5) fit[jj][nbin] = new TF1(Form("fit_%d_%d",nbin,jj),"exp(2*[0]*(-x-4.6))/exp(2*[0]*(x-4.6))",0.0,2.5);
     else if(jj>=5 && jj<10) fit[jj][nbin] = new TF1(Form("fit_%d_%d",nbin,jj),"exp(2*[0]*(-x-3.5))/exp(2*[0]*(x-3.5))",0.0,1.1);
     else if(jj>=10) fit[jj][nbin] = new TF1(Form("fit_%d_%d",nbin,jj),"exp(2*[0]*(-x-4.6))/exp(2*[0]*(x-4.6))",0.0,2.06);
 /*
@@ -199,7 +201,7 @@ if(nbin==1 && jj==3 ) cout<<rn1[ntrgbins2-i-1]<<" "<<rn1_err[ntrgbins2-i-1]<<end
   TLine* ll = new TLine(0,1.,2.65,1.);
   TCanvas* c = new TCanvas("c","c",530,500);
   makeMultiPanelCanvas(c,2,2,0.01,0.0,0.2,0.18,0.02);
-  TH2D* htmp = new TH2D("htmp",";#eta^{a};#sqrt{r_{2}(-#eta^{a},-#eta^{b}) #times r_{2}(#eta^{a},#eta^{b})}",100,-0.1,2.23,100,0.701,1.06);
+  TH2D* htmp = new TH2D("htmp",";#eta^{a};#sqrt{r_{2}(-#eta^{a},-#eta^{b}) #times r_{2}(#eta^{a},#eta^{b})}",100,-0.1,2.5,100,0.601,1.06);
   fixedFontHist(htmp,1.8,2.1);
   htmp->GetXaxis()->CenterTitle();
   htmp->GetYaxis()->CenterTitle();
@@ -210,12 +212,18 @@ if(nbin==1 && jj==3 ) cout<<rn1[ntrgbins2-i-1]<<" "<<rn1_err[ntrgbins2-i-1]<<end
     c->cd(jj+1);
     htmp->Draw();
     ll->Draw("Lsame");
+
+    gr_tot[jj][1]->SetMarkerStyle(25);
     gr_tot[jj][1]->Draw("Psame");
     fit[jj][1]->Draw("Lsame");
+
     gr_tot[jj+5][1]->SetMarkerStyle(24);
-//    fit[jj+4][1]->SetLineStyle(5);
     gr_tot[jj+5][1]->Draw("Psame");
-//    fit[jj+4][1]->Draw("Lsame");
+
+    gr_tot[jj+10][1]->SetMarkerStyle(28);
+    gr_tot[jj+10][1]->SetMarkerColor(1);
+    gr_tot[jj+10][1]->Draw("Psame");
+
 /*
     gr_tot[jj+8][1]->SetMarkerStyle(28);
     fit[jj+8][1]->SetLineStyle(9);
@@ -230,7 +238,7 @@ if(nbin==1 && jj==3 ) cout<<rn1[ntrgbins2-i-1]<<" "<<rn1_err[ntrgbins2-i-1]<<end
   latex->DrawLatex(0.27,0.05,histtitle[0]);
 //  latex->DrawLatex(0.58,0.74,"0.3 < p_{T}^{a} < 3 GeV/c");
 //  latex->DrawLatex(0.58,0.65,"p_{T}^{b} > 0 GeV/c");
-  latex->DrawLatex(0.24,0.88,"CMS pPb #sqrt{s_{NN}} = 5.02 TeV");
+  latex->DrawLatex(0.24,0.885,"CMS pPb #sqrt{s_{NN}} = 5.02 TeV");
   latex->DrawLatex(0.68,0.7,"L_{int} = 35 nb^{-1}");
   c->cd(2);
   latex->DrawLatex(0.12,0.27,"0.3 < p_{T}^{a} < 3 GeV/c");
@@ -244,11 +252,12 @@ if(nbin==1 && jj==3 ) cout<<rn1[ntrgbins2-i-1]<<" "<<rn1_err[ntrgbins2-i-1]<<end
   latex->SetTextSize(0.85*latex->GetTextSize());
   latex->DrawLatex(0.27,0.22,histtitle[2]);
 
-  TLegend* legend = new TLegend(0.25,0.18,0.58,0.35);
+  TLegend* legend = new TLegend(0.25,0.18,0.62,0.39);
   legend->SetFillStyle(0);
 //  legend->AddEntry(gr_tot[8][1],"4.4<#eta^{b}<5","P");
-  legend->AddEntry(gr_tot[0][1],"4<#eta^{b}<5","P");
+  legend->AddEntry(gr_tot[0][1],"4.4<#eta^{b}<5","P");
 //  legend->AddEntry(fit[0][1],"Exponential fit","L");
+  legend->AddEntry(gr_tot[10][1],"4<#eta^{b}<5","P");  
   legend->AddEntry(gr_tot[5][1],"3<#eta^{b}<4","P");
 //  legend->AddEntry(fit[4][1],"Exponential fit","L");
 
@@ -258,7 +267,7 @@ if(nbin==1 && jj==3 ) cout<<rn1[ntrgbins2-i-1]<<" "<<rn1_err[ntrgbins2-i-1]<<end
   TLine* ll = new TLine(0,1.,5.0,1.);
   TCanvas* ca = new TCanvas("ca","ca",560,500);
   makeMultiPanelCanvas(ca,2,2,0.02,0.0,0.27,0.18,0.02);
-  TH2D* htmpa = new TH2D("htmpa",";#eta^{a};#frac{v_{2}(#eta^{a})}{v_{2}(-#eta^{a})} =  #sqrt{#frac{r_{2}(#eta^{a},#eta^{b})}{r_{2}(-#eta^{a},-#eta^{b})}}",100,-0.1,2.23,100,0.91,1.045);
+  TH2D* htmpa = new TH2D("htmpa",";#eta^{a};#frac{v_{2}(#eta^{a})}{v_{2}(-#eta^{a})} =  #sqrt{#frac{r_{2}(#eta^{a},#eta^{b})}{r_{2}(-#eta^{a},-#eta^{b})}}",100,-0.1,2.5,100,0.91,1.045);
   fixedFontHist(htmpa,1.8,2.7);
   htmpa->GetXaxis()->CenterTitle();
   htmpa->GetYaxis()->CenterTitle();
@@ -295,14 +304,14 @@ if(nbin==1 && jj==3 ) cout<<rn1[ntrgbins2-i-1]<<" "<<rn1_err[ntrgbins2-i-1]<<end
 
   TLegend* legend1 = new TLegend(0.34,0.15,0.57,0.35);
   legend1->SetFillStyle(0);
-  legend1->AddEntry(gr_ratio[0][1],"4<#eta^{b}<5","P");
+  legend1->AddEntry(gr_ratio[0][1],"4.4<#eta^{b}<5","P");
   legend1->AddEntry(gr_ratio[5][1],"3<#eta^{b}<4","P");
   ca->cd(1);
   legend1->Draw();
 
   TCanvas* c2 = new TCanvas("c2","c2",810,400);
   makeMultiPanelCanvas(c2,4,2,0.016,0.0,0.24,0.2,0.02);
-  TH2D* htmp2 = new TH2D("htmp2",";#eta^{a};r_{2}(#eta^{a},#eta^{b})",100,-0.1,2.2,100,0.71,1.06);
+  TH2D* htmp2 = new TH2D("htmp2",";#eta^{a};r_{2}(#eta^{a},#eta^{b})",100,-0.1,2.5,100,0.61,1.06);
   fixedFontHist(htmp2,1.6,1.8);
   htmp2->GetXaxis()->CenterTitle();
   htmp2->GetYaxis()->CenterTitle();
@@ -350,9 +359,9 @@ if(nbin==1 && jj==3 ) cout<<rn1[ntrgbins2-i-1]<<" "<<rn1_err[ntrgbins2-i-1]<<end
   latex2->SetTextSize(0.9*latex2->GetTextSize());
   latex2->DrawLatex(0.3,0.24,histtitle[0]);
 
-  TLegend* legend2 = new TLegend(0.3,0.18,0.57,0.42);
+  TLegend* legend2 = new TLegend(0.3,0.18,0.6,0.44);
   legend2->SetFillStyle(0);
-  legend2->AddEntry(gr_ratio[0][1],"4<#eta^{b}<5","P");
+  legend2->AddEntry(gr_ratio[0][1],"4.4<#eta^{b}<5","P");
   legend2->AddEntry(gr_ratio[5][1],"3<#eta^{b}<4","P");
   c2->cd(1);
   legend2->Draw();
@@ -388,8 +397,8 @@ if(nbin==1 && jj==3 ) cout<<rn1[ntrgbins2-i-1]<<" "<<rn1_err[ntrgbins2-i-1]<<end
   latex3->DrawLatex(0.24,0.22,histtitle[2]);
 */
 
-  SaveCanvas(c,"HI/FactBreak","epetadeco_pPb_r2tot");
-  SaveCanvas(c2,"HI/FactBreak","epetadeco_pPb_r2sep");
-  SaveCanvas(ca,"HI/FactBreak","epetadeco_pPb_r2ratio");
+  SaveCanvas(c,"HI/FactBreak","epetadeco_pPb_alletab_r2tot");
+  SaveCanvas(c2,"HI/FactBreak","epetadeco_pPb_alletab_r2sep");
+  SaveCanvas(ca,"HI/FactBreak","epetadeco_pPb_alletab_r2ratio");
 //  SaveCanvas(cc2,"HI/FactBreak","epetadeco_pPb_cos");
 }
