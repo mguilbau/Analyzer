@@ -36,11 +36,14 @@ process.hltHIUCC.throw = cms.bool(False)
 process.source = cms.Source("PoolSource",
                                 fileNames = cms.untracked.vstring(
 #'/store/user/davidlw/HIMinBiasUPC/PR2011_MBUCC_TRKANASKIM_official_v1/71a7d203fff2b3f389673e6fdd587ee0/hiGoodColl_1023_1_S52.root'
-#'file:/net/hisrv0001/home/davidlw/pPb_HM.root'
-'/store/user/davidlw/HIMinBiasUPC/Skim_rereco_MB_pixeltracks_final_v2/9c1b4b9b6b9ff3e493a474ba7d01bc76/hiMB_1766_1_1s8.root'
+#'root://xrootd.unl.edu//store/user/appeltel/HIMinBiasUPC/pixelTrackReco_devel_v0/a236e4501225ae15b3601563d612abb5/pixeltrackreco_6_1_qSR.root'
+#'/store/user/davidlw/HIMinBiasUPC/Skim_rereco_UCC_pixeltracks_final_v2/1407d97c78fb8eac4c87a1e8dfca2bd9/hiUCC_1345_1_cAg.root',
+#'/store/user/davidlw/HIMinBiasUPC/Skim_rereco_UCC_pixeltracks_final_v2/1407d97c78fb8eac4c87a1e8dfca2bd9/hiUCC_1719_1_vXS.root',
+'/store/user/davidlw/HIMinBiasUPC/Skim_rereco_UCC_pixeltracks_final_v2/1407d97c78fb8eac4c87a1e8dfca2bd9/hiUCC_1707_1_A6v.root'
                 )
+#                                secondaryFileNames = cms.untracked.vstring('')
                             )
-process.load("FlowCorrAna.DiHadronCorrelationAnalyzer.dihadroncorrelation_cff")
+process.load("FlowCorrAna.DiHadronCorrelationAnalyzer.epetadeco2_cff")
 
 process.options = cms.untracked.PSet(
     wantSummary = cms.untracked.bool(True)
@@ -48,16 +51,10 @@ process.options = cms.untracked.PSet(
 
 # Additional output definition
 process.TFileService = cms.Service("TFileService",
-                                   fileName = cms.string('dihadroncorrelation.root')
+                                   fileName = cms.string('epetadeco2.root')
                                    )
 
-process.ana_step = cms.Path(process.hltHIMB*process.corr_ana_HI)
-#process.ana_step = cms.Path(process.corr_ana)
-#process.corr_ana.IsCorr = cms.bool(False)
-#process.corr_ana.IsDebug = cms.bool(True)
-#process.ana_step = cms.Path(process.corr_ana)
-process.corr_ana_HI.centmin = cms.int32(100)
-process.corr_ana_HI.centmax = cms.int32(120)
-#process.corr_ana.V0CandidateCollection = cms.string('generalV0CandidateLowPt')
-#process.corr_ana.TriggerID = cms.string('Kshort')
-process.corr_ana_HI.EffFileName = cms.string('TrackCorrections_HYDJET_5320_hiGenPixelTrk_cent50100.root')
+process.ana_hfp = cms.Path(process.hltHIUCC*process.epetadeco_ana_HI_hfp)
+process.epetadeco_ana_HI_hfp.centmin = cms.int32(1100)
+process.epetadeco_ana_HI_hfp.centmax = cms.int32(10000)
+process.epetadeco_ana_HI_hfp.EffFileName = cms.string('TrackCorrections_HYDJET_5320_hiGenPixelTrk_cent05.root')

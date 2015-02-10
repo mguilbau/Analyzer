@@ -56,4 +56,4 @@ process.TFileService = cms.Service("TFileService",
 process.ana = cms.Path(process.hltHIMB*process.epptdeco_ana_HI)
 process.epptdeco_ana_HI.centmin = cms.int32(100)
 process.epptdeco_ana_HI.centmax = cms.int32(120)
-process.epptdeco_ana_HI.EffFileName = cms.string('TrackCorrections_HYDJET_5320_hiGenPixelTrk_cent50100.root')
+process.epptdeco_ana_HI.EffFileName = cms.string('TrackCorrections_HYDJET_5320_hiGenPixelTrk_cent3050.root')

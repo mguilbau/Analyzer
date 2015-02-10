@@ -6,9 +6,9 @@ process.MessageLogger.cerr.FwkReport.reportEvery = 2000
 
 ### conditions
 process.load("Configuration.StandardSequences.FrontierConditions_GlobalTag_cff")
-#process.GlobalTag.globaltag = 'GR_R_53_LV6::All'
-from Configuration.AlCa.GlobalTag import GlobalTag
-process.GlobalTag = GlobalTag(process.GlobalTag, 'auto:startup', '')
+process.GlobalTag.globaltag = 'GR_R_53_LV6::All'
+#from Configuration.AlCa.GlobalTag import GlobalTag
+#process.GlobalTag = GlobalTag(process.GlobalTag, 'auto:startup', '')
 
 process.maxEvents = cms.untracked.PSet(
     input = cms.untracked.int32(-1)
@@ -18,7 +18,7 @@ from HeavyIonsAnalysis.Configuration.CommonFunctions_cff import *
 overrideCentrality(process)
 process.HeavyIonGlobalParameters = cms.PSet(
         centralityVariable = cms.string("HFtowers"),
-        nonDefaultGlauberModel = cms.string("Hydjet_Drum"),
+#        nonDefaultGlauberModel = cms.string("Hydjet_Drum"),
         centralitySrc = cms.InputTag("hiCentrality")
         )
 
