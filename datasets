@@ -17,12 +17,12 @@ prompt: /PAHighPt/davidlw-PA2013_FlowCorr_PromptReco_HighPtTrk_Gplus_v15-c6b99cb
 
 pp skims (42X):
 - High multiplicity:
-/MinimumBias/davidlw-PP2010A_Apr21ReReco_HM_v9-d69896af73c68e6bd17f99e1971f93cb/USER
-/MinimumBias/davidlw-PP2010B_Apr21ReReco_HM_v9-d69896af73c68e6bd17f99e1971f93cb/USER
+/MinimumBias/davidlw-PP2010B_Apr21ReReco_HM_v12-cc548d017fb4ce4d172ac1ea16bdf91c/USER
+/MinimumBias/davidlw-PP2010A_Apr21ReReco_HM_v12-cc548d017fb4ce4d172ac1ea16bdf91c/USER
 - MB:
-/MinimumBias/davidlw-PP2010Commission_May19ReReco_MB_v9-36adfa9ae7dce15c9f3c602d52ade4c9/USER
-/MinimumBias/davidlw-PP2010A_Apr21ReReco_MB_v9-36adfa9ae7dce15c9f3c602d52ade4c9/USER
-/MinimumBias/davidlw-PP2010B_Apr21ReReco_MB_v9-36adfa9ae7dce15c9f3c602d52ade4c9/USER
+/MinimumBias/davidlw-PP2010Commission_May19ReReco_MB_v12-cc548d017fb4ce4d172ac1ea16bdf91c/USER
+/MinimumBias/davidlw-PP2010A_Apr21ReReco_MB_v12-cc548d017fb4ce4d172ac1ea16bdf91c/USER
+/MinimumBias/davidlw-PP2010B_Apr21ReReco_MB_v12-cc548d017fb4ce4d172ac1ea16bdf91c/USER
 
 PbPb skim:
 - MB, pp rereco (53X): /HIMinBiasUPC/davidlw-PR2011_MBPPRereco_TRKANASKIM_v4-2be5f21752c831f670ba8ae18cdae752/USER
@@ -61,8 +61,8 @@ pPb MC sample (53X):
 /EPOS_GEN-SIM_1M_batch8/davidlw-RecoSkim_v1-96137662441175d818189f055278f49a/USER
 /EPOS_GEN-SIM_1M_batch9/davidlw-RecoSkim_v1-96137662441175d818189f055278f49a/USER
 
-pp MC sample (447):
-- pythia6, Z2start: /MinBias_TuneZ2_7TeV-pythia6/davidlw-Skim_v9-c6135b7f7dda01e254641f2177d658f1/USER
+pp MC sample (428):
+- pythia6, Z2start: /MinBias_TuneZ2_7TeV-pythia6/davidlw-Skim_v12-0b0ef6f65f16dabff16a120aebf130d5/USER
 
 PbPb MC sample (53X):
 - HYDJET, 32K: /Hydjet1p8_TuneDrum_Quenched_MinBias_2760GeV/davidlw-RECO_v1-0e6ab43111ff2b7e6299139d8f86b661/USER
