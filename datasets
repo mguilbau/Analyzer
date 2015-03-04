@@ -25,16 +25,16 @@ pp skims (42X):
 /MinimumBias/davidlw-PP2010B_Apr21ReReco_MB_v12-cc548d017fb4ce4d172ac1ea16bdf91c/USER
 
 PbPb skim:
-- MB, pp rereco (53X): /HIMinBiasUPC/davidlw-PR2011_MBPPRereco_TRKANASKIM_v4-2be5f21752c831f670ba8ae18cdae752/USER
+- MB, pp rereco (53X): /HIMinBiasUPC/davidlw-PR2011_MBPPRereco_TRKANASKIM_v6-ccf03100d177f42de0f9cdc7627799d3/USER
 - MB, pixel track (53X): /HIMinBiasUPC/davidlw-Skim_rereco_MB_pixeltracks_final_v2-9c1b4b9b6b9ff3e493a474ba7d01bc76/USER (hiGeneralAndPixelTracks,use highPurity; hiSelectedVertex)
 - UCC, pixel tracks (53X): /HIMinBiasUPC/davidlw-Skim_rereco_UCC_pixeltracks_final_v2-1407d97c78fb8eac4c87a1e8dfca2bd9/USER (hiGeneralAndPixelTracks,use highPurity; hiSelectedVertex)
 
 pPb MC sample (53X):
-- EPOS LHC, 5M: /ReggeGribovPartonMCfix_EposLHC_5TeV_pPb/davidlw-RecoSkim_batch1_v1-84cb8c951385c1f95541c031462cec6b/USER
-- Hijing, 5M: /Hijing_PPb502_MinimumBias/davidlw-RecoSkim_batch2_v1-84cb8c951385c1f95541c031462cec6b/USER
-- Hijing, 1M: /Hijing_PPb502_MinimumBias/davidlw-RecoSkim_batch4_v1-84cb8c951385c1f95541c031462cec6b/USER
-- Hijing, 2M, trackingParticles: /HIJING_MB/davidlw-RecoSkim_batch3_v1-84cb8c951385c1f95541c031462cec6b/USER
-- Hijing, 10M: /Hijing_PPb502_MinimumBias/davidlw-RecoSkim_batch1_v1-84cb8c951385c1f95541c031462cec6b/USER
+- EPOS LHC, 5M: /ReggeGribovPartonMCfix_EposLHC_5TeV_pPb/davidlw-RecoSkim_ReTracking_v4_5M-5cde49c8740ff28f897f533d05a99dbc/USER
+- Hijing, 5M: /Hijing_PPb502_MinimumBias/davidlw-RecoSkim_ReTracking_v4_5M-5cde49c8740ff28f897f533d05a99dbc/USER
+- Hijing, 1M: /Hijing_PPb502_MinimumBias/davidlw-RecoSkim_ReTracking_v4_1M-5cde49c8740ff28f897f533d05a99dbc/USER
+- Hijing, 2M, trackingParticles: /HIJING_MB/davidlw-RecoSkim_ReTracking_v4_2M-5cde49c8740ff28f897f533d05a99dbc/USER
+- Hijing, 10M: /Hijing_PPb502_MinimumBias/davidlw-RecoSkim_ReTracking_v4_10M-5cde49c8740ff28f897f533d05a99dbc/USER
 /EPOS_GEN-SIM_1M_batch12/davidlw-RecoSkim_ReTracking_v4-5cde49c8740ff28f897f533d05a99dbc/USER
 /EPOS_GEN-SIM_1M_batch13/davidlw-RecoSkim_ReTracking_v4-5cde49c8740ff28f897f533d05a99dbc/USER
 /EPOS_GEN-SIM_1M_batch14/davidlw-RecoSkim_ReTracking_v4-5cde49c8740ff28f897f533d05a99dbc/USER
