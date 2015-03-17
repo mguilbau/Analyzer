@@ -1,6 +1,6 @@
 import FWCore.ParameterSet.Config as cms
 import FlowCorrAna.DiHadronCorrelationAnalyzer.PPPileUpVertexFilter_cfi
-pileupVertexFilterCutG = Demo.DemoAnalyzer.PPPileUpVertexFilter_cfi.pileupVertexFilter.clone()
+pileupVertexFilterCutG = FlowCorrAna.DiHadronCorrelationAnalyzer.PPPileUpVertexFilter_cfi.pileupVertexFilter.clone()
 pileupVertexFilterCutGloose = pileupVertexFilterCutG.clone(
                                                            dzCutByNtrk = cms.vdouble(
                                                                                      999., 4.5, 3.2, 3.0, 1.8, 1.8, 1.35, 0.9
