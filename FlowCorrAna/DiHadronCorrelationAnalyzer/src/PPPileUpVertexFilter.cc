@@ -109,13 +109,17 @@ PPPileUpVertexFilter::filter(edm::Event& iEvent, const edm::EventSetup& iSetup)
         {
             for( unsigned int j=0; j<dzCutByNtrk_.size() ; j++)
             {
-                if ( nTrk == (int)j && dz > dzCutByNtrk_[j] && dz < dzTolerance_ )
+                if ( nTrk == (int)j && dz > dzCutByNtrk_[j])
                     accepted = false;
+                if (dz > dzTolerance_)
+                    accepted = true;
             }
             // last dz value in vector is applied to all greater values of Ntrk
             if ( nTrk >= (int)dzCutByNtrk_.size()
-                && dz > dzCutByNtrk_[dzCutByNtrk_.size()-1] && dz < dzTolerance_ )
+                && dz > dzCutByNtrk_[dzCutByNtrk_.size()-1])
                 accepted = false;
+            if (dz > dzTolerance_)
+                accepted = true;
         }
         // DxyDzCut: filter on PVs above a diagonal line on the Dxy vs Dz plot
         if ( doDxyDzCut_ )
