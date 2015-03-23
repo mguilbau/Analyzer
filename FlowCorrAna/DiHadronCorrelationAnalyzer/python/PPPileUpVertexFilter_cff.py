@@ -92,3 +92,9 @@ pileupVertexFilterCut_dz05_noGplus = pileupVertexFilterCutG.clone(
                                                                                           ),
                                                                 dzTolerance = cms.double(0.5),
                                                                 )
+pileupVertexFilterCut_vtx1 = pileupVertexFilterCutG.clone(
+                                                                  dzCutByNtrk = cms.vdouble(
+                                                                                            999., 0.0, 0.0, 0.0, 0.0
+                                                                                            ),
+                                                                  dzTolerance = cms.double(9999.),
+                                                                  )
