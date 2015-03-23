@@ -9,7 +9,7 @@ pileupVertexFilter = cms.EDFilter('PPPileUpVertexFilter',
                                   dxyDzCutPar0 = cms.double(0.6),
                                   dxyDzCutPar1 = cms.double(13.333),
                                   surfaceMinDzEval = cms.double(0.2),
-                                  dzTolerance = cms.double(0.5),
+                                  dzTolerance = cms.double(9999.),
                                   dzCutByNtrk = cms.vdouble(
                                                             999., 3.0, 2.4, 2.0, 1.2, 1.2, 0.9, 0.6
                                                             ),
