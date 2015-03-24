@@ -72,7 +72,13 @@ pileupVertexFilterCutGplus = pileupVertexFilterCutG.clone(
                                                           dxyVeto = cms.double(0.05),
                                                           dzTolerance = cms.double(9999.)
                                                           )
-
+pileupVertexFilterCutGplusPP = pileupVertexFilterCutG.clone(
+                                                            dzCutByNtrk = cms.vdouble(
+                                                                                      999., 4.0, 4.0, 1.6, 1.0, 0.7, 0.5, 0.4, 0.3, 0.2, 0.0
+                                                                                      ),
+                                                            dxyVeto = cms.double(999.),
+                                                            dzTolerance = cms.double(9999.)
+                                                            )
 pileupVertexFilterCut_dz05_Gplus = pileupVertexFilterCutG.clone(
                                                           dzCutByNtrk = cms.vdouble(
                                                                                     999., 999., 999., 3.0, 2.0,
@@ -86,6 +92,14 @@ pileupVertexFilterCut_dz05_Gplus = pileupVertexFilterCutG.clone(
                                                           dxyVeto = cms.double(0.05),
                                                           dzTolerance = cms.double(0.5),
                                                           )
+pileupVertexFilterCut_dz05_GplusPP = pileupVertexFilterCutG.clone(
+                                                                  dzCutByNtrk = cms.vdouble(
+                                                                                            999., 4.0, 4.0, 1.6, 1.0, 0.7, 0.5, 0.4, 0.3, 0.2, 0.0
+                                                                                            ),
+                                                                dxyVeto = cms.double(999.),
+                                                                dzTolerance = cms.double(0.5),
+                                                                )
+
 pileupVertexFilterCut_dz05_noGplus = pileupVertexFilterCutG.clone(
                                                                 dzCutByNtrk = cms.vdouble(
                                                                                           999., 0.0, 0.0, 0.0, 0.0
@@ -103,6 +117,13 @@ pileupVertexFilterCut_dz10_Gplus = pileupVertexFilterCutG.clone(
                                                                                           0.0
                                                                                           ),
                                                                 dxyVeto = cms.double(0.05),
+                                                                dzTolerance = cms.double(1.0),
+                                                                )
+pileupVertexFilterCut_dz10_GplusPP = pileupVertexFilterCutG.clone(
+                                                                  dzCutByNtrk = cms.vdouble(
+                                                                                            999., 4.0, 4.0, 1.6, 1.0, 0.7, 0.5, 0.4, 0.3, 0.2, 0.0
+                                                                                            ),
+                                                                dxyVeto = cms.double(999.),
                                                                 dzTolerance = cms.double(1.0),
                                                                 )
 pileupVertexFilterCut_dz10_noGplus = pileupVertexFilterCutG.clone(
@@ -124,6 +145,13 @@ pileupVertexFilterCut_dz20_Gplus = pileupVertexFilterCutG.clone(
                                                                 dxyVeto = cms.double(0.05),
                                                                 dzTolerance = cms.double(2.0),
                                                                 )
+pileupVertexFilterCut_dz20_GplusPP = pileupVertexFilterCutG.clone(
+                                                                  dzCutByNtrk = cms.vdouble(
+                                                                                            999., 4.0, 4.0, 1.6, 1.0, 0.7, 0.5, 0.4, 0.3, 0.2, 0.0
+                                                                                            ),
+                                                                dxyVeto = cms.double(999.),
+                                                                dzTolerance = cms.double(2.0),
+                                                                )
 pileupVertexFilterCut_dz20_noGplus = pileupVertexFilterCutG.clone(
                                                                   dzCutByNtrk = cms.vdouble(
                                                                                             999., 0.0, 0.0, 0.0, 0.0
@@ -141,6 +169,13 @@ pileupVertexFilterCut_dz30_Gplus = pileupVertexFilterCutG.clone(
                                                                                           0.0
                                                                                           ),
                                                                 dxyVeto = cms.double(0.05),
+                                                                dzTolerance = cms.double(3.0),
+                                                                )
+pileupVertexFilterCut_dz30_GplusPP = pileupVertexFilterCutG.clone(
+                                                                  dzCutByNtrk = cms.vdouble(
+                                                                                            999., 4.0, 4.0, 1.6, 1.0, 0.7, 0.5, 0.4, 0.3, 0.2, 0.0
+                                                                                            ),
+                                                                dxyVeto = cms.double(999.),
                                                                 dzTolerance = cms.double(3.0),
                                                                 )
 pileupVertexFilterCut_dz30_noGplus = pileupVertexFilterCutG.clone(
@@ -162,6 +197,13 @@ pileupVertexFilterCut_dz40_Gplus = pileupVertexFilterCutG.clone(
                                                                 dxyVeto = cms.double(0.05),
                                                                 dzTolerance = cms.double(4.0),
                                                                 )
+ileupVertexFilterCut_dz40_GplusPP = pileupVertexFilterCutG.clone(
+                                                                 dzCutByNtrk = cms.vdouble(
+                                                                                           999., 4.0, 4.0, 1.6, 1.0, 0.7, 0.5, 0.4, 0.3, 0.2, 0.0
+                                                                                           ),
+                                                               dxyVeto = cms.double(999.),
+                                                               dzTolerance = cms.double(4.0),
+                                                               )
 pileupVertexFilterCut_dz40_noGplus = pileupVertexFilterCutG.clone(
                                                                   dzCutByNtrk = cms.vdouble(
                                                                                             999., 0.0, 0.0, 0.0, 0.0
@@ -174,3 +216,4 @@ pileupVertexFilterCut_vtx1 = pileupVertexFilterCutG.clone(
                                                                                             ),
                                                                   dzTolerance = cms.double(9999.),
                                                                   )
+
