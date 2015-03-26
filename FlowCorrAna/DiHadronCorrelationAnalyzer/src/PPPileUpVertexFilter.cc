@@ -109,6 +109,7 @@ PPPileUpVertexFilter::filter(edm::Event& iEvent, const edm::EventSetup& iSetup)
         {
             for( unsigned int j=0; j<dzCutByNtrk_.size() ; j++)
             {
+                // tolerate events with dz > dzTolerance
                 if ( nTrk == (int)j && dz > dzCutByNtrk_[j] && dz < dzTolerance_)
                     accepted = false;
             }
