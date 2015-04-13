@@ -17,12 +17,12 @@ prompt: /PAHighPt/davidlw-PA2013_FlowCorr_PromptReco_HighPtTrk_Gplus_v15-c6b99cb
 
 pp skims (42X):
 - High multiplicity:
-/MinimumBias/davidlw-PP2010B_Apr21ReReco_HM_v12-cc548d017fb4ce4d172ac1ea16bdf91c/USER
-/MinimumBias/davidlw-PP2010A_Apr21ReReco_HM_v12-cc548d017fb4ce4d172ac1ea16bdf91c/USER
+/MinimumBias/davidlw-PP2010A_Apr21ReReco_HM_v15-37a29cefb72cfd8a32b518de55c522c3/USER
+/MinimumBias/davidlw-PP2010B_Apr21ReReco_HM_v15-37a29cefb72cfd8a32b518de55c522c3/USER
 - MB:
 /MinimumBias/davidlw-PP2010Commission_May19ReReco_MB_v12-cc548d017fb4ce4d172ac1ea16bdf91c/USER
-/MinimumBias/davidlw-PP2010A_Apr21ReReco_MB_v12-cc548d017fb4ce4d172ac1ea16bdf91c/USER
-/MinimumBias/davidlw-PP2010B_Apr21ReReco_MB_v12-cc548d017fb4ce4d172ac1ea16bdf91c/USER
+/MinimumBias/davidlw-PP2010A_Apr21ReReco_MB_v15-a22ec6e49db0b96306e023b3703084d4/USER
+/MinimumBias/davidlw-PP2010B_Apr21ReReco_MB_v15-a22ec6e49db0b96306e023b3703084d4/USER
 
 PbPb skim:
 - MB, pp rereco (53X): /HIMinBiasUPC/davidlw-PR2011_MBPPRereco_TRKANASKIM_v6-ccf03100d177f42de0f9cdc7627799d3/USER
