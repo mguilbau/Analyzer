@@ -99,6 +99,7 @@ class CutParameters {
    bool IsHITrkQuality;
    bool IsDebug;
    bool IsReCenter;
+   bool IsCheckV0Dau;
 };
 
 #endif  // CutParameters_
