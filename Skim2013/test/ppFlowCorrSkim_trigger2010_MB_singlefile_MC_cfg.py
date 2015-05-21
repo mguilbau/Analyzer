@@ -15,15 +15,14 @@ process.MessageLogger.cerr.FwkReport.reportEvery = 200
 
 process.source = cms.Source("PoolSource",
    fileNames = cms.untracked.vstring(
-#'/store/data/Run2010B/MinimumBias/RECO/Apr21ReReco-v1/0000/A04CD88D-A570-E011-A188-001A92810AA2.root'
-'/store/data/Run2010B/MinimumBias/AOD/Apr21ReReco-v1/0000/024D7BD3-E170-E011-B66A-002618943932.root'
+'/store/mc/Fall11/MinBias_TuneZ2_7TeV-pythia6/GEN-SIM-RECODEBUG/NoPileUp_START42_V14B-v1/20000/00370B82-2540-E311-BB9E-00266CF258D8.root'
 )
 )
 
 # =============== Other Statements =====================
-process.maxEvents = cms.untracked.PSet(input = cms.untracked.int32(4000))
+process.maxEvents = cms.untracked.PSet(input = cms.untracked.int32(1000))
 process.options = cms.untracked.PSet(wantSummary = cms.untracked.bool(True))
-process.GlobalTag.globaltag = 'GR_R_44_V10::All'
+process.GlobalTag.globaltag = 'START44_V13::All'
 
 # =============== Import Sequences =====================
 process.load('Appeltel.RpPbAnalysis.PAPileUpVertexFilter_cff')
@@ -42,8 +41,8 @@ process.PAcollisionEventSelection = cms.Sequence(process.hfCoincFilter *
                                          )
 
 process.eventFilter_HM = cms.Sequence( 
-    process.minBiasOrzeroBiasHLTBscFilter *
-    process.PAcollisionEventSelection
+#    process.minBiasOrzeroBiasHLTBscFilterMC *
+    process.PAcollisionEventSelection 
 #    process.pileupVertexFilterCutGplus
 )
 
@@ -55,64 +54,21 @@ process.eventFilter_HM_step = cms.Path( process.eventFilter_HM )
 process.generalV0CandidatesNew = process.generalV0Candidates.clone (
     tkNhitsCut = cms.int32(0),
     tkChi2Cut = cms.double(7.0),
-    dauTransImpactSigCut = cms.double(1.0),
-    dauLongImpactSigCut = cms.double(1.0),
+    dauTransImpactSigCut = cms.double(0.5),
+    dauLongImpactSigCut = cms.double(0.5),
     xiVtxSignificance3DCut = cms.double(0.0),
     xiVtxSignificance2DCut = cms.double(0.0),
     vtxSignificance2DCut = cms.double(0.0),
-    vtxSignificance3DCut = cms.double(0.0),
-    innerHitPosCut = cms.double(-1)
+    vtxSignificance3DCut = cms.double(0.0)
 )
 process.v0rereco_step = cms.Path( process.eventFilter_HM * process.generalV0CandidatesNew )
-
-########## ReTracking #########################################################################
-process.generalTracksLowPt = process.generalTracks.clone()
-process.iterTracking.replace(process.generalTracks,process.generalTracksLowPt)
-process.offlinePrimaryVerticesLowPt = process.offlinePrimaryVertices.clone( TrackLabel = cms.InputTag("generalTracksLowPt") )
-process.generalV0CandidatesLowPt = process.generalV0CandidatesNew.clone(
-  trackRecoAlgorithm = cms.InputTag('generalTracksLowPt'),
-  vertexRecoAlgorithm = cms.InputTag('offlinePrimaryVerticesLowPt')
-)
-
-process.detachedTripletStepSeeds.RegionFactoryPSet.RegionPSet.ptMin = 0.1
-process.mixedTripletStepSeedsA.RegionFactoryPSet.RegionPSet.ptMin = 0.25
-process.mixedTripletStepSeedsB.RegionFactoryPSet.RegionPSet.ptMin = 0.35
-process.pixelLessStepSeeds.RegionFactoryPSet.RegionPSet.ptMin = 0.5
-process.pixelPairStepSeeds.RegionFactoryPSet.RegionPSet.ptMin = 0.3
-
-process.dedxTruncated40LowPt = process.dedxTruncated40.clone(
-    tracks                     = cms.InputTag("generalTracksLowPt"),
-    trajectoryTrackAssociation = cms.InputTag("generalTracksLowPt")
-)
-process.dedxHarmonic2LowPt = process.dedxHarmonic2.clone(
-    tracks                     = cms.InputTag("generalTracksLowPt"),
-    trajectoryTrackAssociation = cms.InputTag("generalTracksLowPt")
-)
-process.dedxDiscrimASmiLowPt = process.dedxDiscrimASmi.clone(
-    tracks                     = cms.InputTag("generalTracksLowPt"),
-    trajectoryTrackAssociation = cms.InputTag("generalTracksLowPt")
-)
-process.trackingGlobalReco.replace(process.dedxTruncated40,process.dedxTruncated40LowPt)
-process.trackingGlobalReco.replace(process.dedxHarmonic2,process.dedxHarmonic2LowPt)
-process.trackingGlobalReco.replace(process.dedxDiscrimASmi,process.dedxDiscrimASmiLowPt)
-
-process.reTracking = cms.Sequence(
-   process.siPixelRecHits *
-   process.siStripMatchedRecHits *
-   process.recopixelvertexing *
-   process.trackingGlobalReco *
-   process.offlinePrimaryVerticesLowPt *
-   process.generalV0CandidatesLowPt
-)
-
-process.reTracking_step = cms.Path( process.eventFilter_HM * process.reTracking )
 
 ###############################################################################################
 
 process.load("RiceHIG.Skim2013.ppanalysisSkimContentFull_cff")
 process.output_HM = cms.OutputModule("PoolOutputModule",
     outputCommands = process.analysisSkimContent.outputCommands,
-    fileName = cms.untracked.string('pPb_HM.root'),
+    fileName = cms.untracked.string('pPb_HM_MC.root'),
     SelectEvents = cms.untracked.PSet(SelectEvents = cms.vstring('eventFilter_HM_step')),
     dataset = cms.untracked.PSet(
       dataTier = cms.untracked.string('AOD'),
@@ -124,7 +80,6 @@ process.output_HM_step = cms.EndPath(process.output_HM)
 process.schedule = cms.Schedule(
     process.eventFilter_HM_step,
 #    process.dEdx_step,
-#    process.reTracking_step,
     process.v0rereco_step,
     process.output_HM_step
 )

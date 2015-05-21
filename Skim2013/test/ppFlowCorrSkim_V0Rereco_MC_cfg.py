@@ -14,15 +14,14 @@ process.load('Configuration.EventContent.EventContentHeavyIons_cff')
 
 process.source = cms.Source("PoolSource",
    fileNames = cms.untracked.vstring(
-#'/store/user/davidlw/MinimumBias/PP2010B_Apr21ReReco_HM_v9/d69896af73c68e6bd17f99e1971f93cb/ppGoodColl_105_1_cyV.root'
-'/store/results/heavy-ions/MinimumBias/StoreResults-PP2010A_Apr21ReReco_TRKANASKIM_HIGHMULT_v2-d3b00b9920e9d4ebdfcff6a3f8ddc689-ppGoodColl_trigger85/MinimumBias/USER/StoreResults-PP2010A_Apr21ReReco_TRKANASKIM_HIGHMULT_v2-d3b00b9920e9d4ebdfcff6a3f8ddc689-ppGoodColl_trigger85/0000/049AE624-8E3E-E211-8285-0026B93785F5.root'
+'/store/user/davidlw/MinimumBias/PP2010B_Apr21ReReco_HM_v9/d69896af73c68e6bd17f99e1971f93cb/ppGoodColl_105_1_cyV.root'
 )
 )
 
 # =============== Other Statements =====================
-process.maxEvents = cms.untracked.PSet(input = cms.untracked.int32(-1))
+process.maxEvents = cms.untracked.PSet(input = cms.untracked.int32(100))
 process.options = cms.untracked.PSet(wantSummary = cms.untracked.bool(True))
-process.GlobalTag.globaltag = 'GR_R_44_V10::All'
+process.GlobalTag.globaltag = 'START44_V13::All'
 
 ########## V0 candidate rereco ############################################################### 
 process.generalV0CandidatesNew = process.generalV0Candidates.clone (
