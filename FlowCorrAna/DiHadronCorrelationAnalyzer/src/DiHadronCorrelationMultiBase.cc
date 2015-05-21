@@ -115,6 +115,7 @@ DiHadronCorrelationMultiBase::DiHadronCorrelationMultiBase(const edm::ParameterS
   cutPara.IsDebug = iConfig.getParameter<bool>("IsDebug");
   cutPara.IsInvMass = iConfig.getParameter<bool>("IsInvMass");
   cutPara.IsEventEngineer = iConfig.getParameter<bool>("IsEventEngineer");
+  cutPara.IsCheckV0Dau = iConfig.getParameter<bool>("IsCheckV0Dau");
 
   TString eff_filename(iConfig.getParameter<string>("EffFileName")); 
   hEffWeight = 0;
@@ -620,6 +621,33 @@ void DiHadronCorrelationMultiBase::LoopTracks(const edm::Event& iEvent, const ed
      }
 
      if(cutPara.IsHITrkQuality && !trk.quality(reco::TrackBase::highPurity)) continue;
+
+     if(cutPara.IsCheckV0Dau)
+     {
+       edm::Handle<reco::VertexCompositeCandidateCollection > v0candidates;
+       if(cutPara.v0CandidateCollection.Contains("kshort")) iEvent.getByLabel(cutPara.v0CandidateCollection.Data(), "Kshort", v0candidates);
+       if(cutPara.v0CandidateCollection.Contains("lambda")) iEvent.getByLabel(cutPara.v0CandidateCollection.Data(), "Lambda", v0candidates);
+
+       if(!v0candidates->size()) return;
+       for(unsigned it=0; it<v0candidates->size(); ++it)
+       {
+         const VertexCompositeCandidate& v0candidate = (*v0candidates)[it];
+
+         const reco::Candidate * dau1 = v0candidate.daughter(0);
+         const reco::Candidate * dau2 = v0candidate.daughter(1);       
+
+         double eta_dau1 = dau1->eta();
+         double phi_dau1 = dau1->phi();
+         double pt_dau1 = dau1->pt();
+
+         double eta_dau2 = dau2->eta();
+         double phi_dau2 = dau2->phi();
+         double pt_dau2 = dau2->pt();
+
+         if(fabs(eta-eta_dau1)<0.03 && fabs(phi-phi_dau1)<0.03 && fabs(pt-pt_dau1)<0.01) { cout<<"found a Kshort dau1 match!"<<endl; continue; }
+         if(fabs(eta-eta_dau2)<0.03 && fabs(phi-phi_dau2)<0.03 && fabs(pt-pt_dau2)<0.01) { cout<<"found a Kshort dau2 match!"<<endl; continue; }
+       }
+     }
 
      double effweight = GetEffWeight(eta,phi,pt,0.5*(cutPara.zvtxmax+cutPara.zvtxmin),hiCentrality,charge);
      double trgweight = GetTrgWeight(nMult);
