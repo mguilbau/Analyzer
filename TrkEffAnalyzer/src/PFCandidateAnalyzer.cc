@@ -108,7 +108,7 @@ PFCandidateAnalyzer::analyze(const Event& iEvent,
     iEvent.getByLabel(inputTagTracks_,trackCollection);
     iSetup.get<TrackAssociatorRecord>().get("TrackAssociatorByHits",theAssociator);
     theAssociatorByHits = (const TrackAssociatorByHits*) theAssociator.product();  
-    recSimColl= theAssociatorByHits->associateRecoToSim(trackCollection,TPCollectionHfake,&iEvent);
+    recSimColl= theAssociatorByHits->associateRecoToSim(trackCollection,TPCollectionHfake,&iEvent,&iSetup);
   }
 
   // get PFCandidates

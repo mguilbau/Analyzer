@@ -114,8 +114,8 @@ TrkEffAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
       iSetup.get<TrackAssociatorRecord>().get("TrackAssociatorByHits",theAssociator);
       theAssociatorByHits = (const TrackAssociatorByHits*) theAssociator.product();
       
-      simRecColl= theAssociatorByHits->associateSimToReco(trackCollection,TPCollectionHeff,&iEvent);
-      recSimColl= theAssociatorByHits->associateRecoToSim(trackCollection,TPCollectionHfake,&iEvent);
+      simRecColl= theAssociatorByHits->associateSimToReco(trackCollection,TPCollectionHeff,&iEvent,&iSetup);
+      recSimColl= theAssociatorByHits->associateRecoToSim(trackCollection,TPCollectionHfake,&iEvent,&iSetup);
     }else{
       iEvent.getByLabel(associatorMap_,simtorecoCollectionH);
       simRecColl= *(simtorecoCollectionH.product());
@@ -380,6 +380,13 @@ TrkEffAnalyzer::isAccepted(TrackingParticle & tp)
 {
   std::vector<bool> f(nLayers, false);
 
+  int nlayers = tp.numberOfTrackerLayers();
+
+  bool canBePair = false;
+  bool canBeTriplet = false;
+  if(nlayers==2) canBePair = true;
+  if(nlayers>=3) canBeTriplet = true;
+/*
   const std::vector<PSimHit> & simHits = tp.trackPSimHit(DetId::Tracker);
   
   for(std::vector<PSimHit>::const_iterator simHit = simHits.begin();
@@ -412,7 +419,7 @@ TrkEffAnalyzer::isAccepted(TrackingParticle & tp)
       (f[BPix2] && f[FPix2_neg]) ||
       (f[FPix2_neg] && f[FPix2_neg]) ||
       (f[FPix2_pos] && f[FPix2_pos]) );
-
+*/
   return std::pair<bool,bool>(canBeTriplet, canBePair);
 }
 

@@ -485,12 +485,12 @@ void V0Validator::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetu
   reco::SimToRecoCollection simtorecoCollectionH;
 
   if(isMatchByHitsOrChi2_) {
-    recotosimCollectionH = associatorByHits->associateRecoToSim(trackCollectionH,TPCollectionH,&iEvent );
-    simtorecoCollectionH = associatorByHits->associateSimToReco(trackCollectionH,TPCollectionH,&iEvent );
+    recotosimCollectionH = associatorByHits->associateRecoToSim(trackCollectionH,TPCollectionH,&iEvent,&iSetup );
+    simtorecoCollectionH = associatorByHits->associateSimToReco(trackCollectionH,TPCollectionH,&iEvent,&iSetup );
   }
   else {
-    recotosimCollectionH = associatorByChi2->associateRecoToSim(trackCollectionH,TPCollectionH,&iEvent );
-    simtorecoCollectionH = associatorByChi2->associateSimToReco(trackCollectionH,TPCollectionH,&iEvent );
+    recotosimCollectionH = associatorByChi2->associateRecoToSim(trackCollectionH,TPCollectionH,&iEvent,&iSetup );
+    simtorecoCollectionH = associatorByChi2->associateSimToReco(trackCollectionH,TPCollectionH,&iEvent,&iSetup );
   }
 //  reco::VertexRecoToSimCollection vr2s = associatorByTracks->associateRecoToSim(primaryVtxCollectionH, TVCollectionH, iEvent, r2s);
 //  reco::VertexSimToRecoCollection vs2r = associatorByTracks->associateSimToReco(primaryVtxCollectionH, TVCollectionH, iEvent, s2r);
