@@ -48,7 +48,7 @@
 #include "DataFormats/Common/interface/TriggerResults.h"
 #include "DataFormats/Math/interface/deltaPhi.h"
 #include "DataFormats/HepMCCandidate/interface/GenParticle.h"
-#include "RecoHI/HiCentralityAlgos/interface/CentralityProvider.h"
+//#include "RecoHI/HiCentralityAlgos/interface/CentralityProvider.h"
 #include "DataFormats/HeavyIonEvent/interface/CentralityBins.h"
 #include "DataFormats/HeavyIonEvent/interface/Centrality.h"
 #include "DataFormats/HeavyIonEvent/interface/EvtPlane.h"

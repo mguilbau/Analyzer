@@ -2,6 +2,8 @@ import FWCore.ParameterSet.Config as cms
 
 corr_ana = cms.EDAnalyzer('DiHadronCorrelationMultiAnalyzer',
 
+  centralityBinLabel = cms.InputTag("centralityBin","HFtowers"), 
+
   TrgTrackCollection = cms.string('generalTracks'),
   VertexCollection = cms.string('offlinePrimaryVertices'),
   GenParticleCollection = cms.string('genParticles'),
@@ -70,6 +72,7 @@ corr_ana = cms.EDAnalyzer('DiHadronCorrelationMultiAnalyzer',
   IsDebug = cms.bool(False),
   IsInvMass = cms.bool(False),
   IsEventEngineer = cms.bool(False),
+  IsCheckV0Dau = cms.bool(False),
 
   EffFileName = cms.string('TrackCorrections_HIJING_538_OFFICIAL_Mar24.root'),
   EtaPhiFileName = cms.string('')

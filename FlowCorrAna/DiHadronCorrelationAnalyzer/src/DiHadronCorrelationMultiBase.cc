@@ -23,7 +23,7 @@
 #include "HepMC/HeavyIon.h"
 
 DiHadronCorrelationMultiBase::DiHadronCorrelationMultiBase(const edm::ParameterSet& iConfig) :
-  cent(0),
+//  cent(0),
   hEffWeight(0),
   hTrgWeight(0),
   nMult(0),
@@ -48,6 +48,8 @@ DiHadronCorrelationMultiBase::DiHadronCorrelationMultiBase(const edm::ParameterS
   zVtxError(99999.)
 {
   TH1::SetDefaultSumw2();
+
+  tag_ = consumes<int>(iConfig.getParameter<edm::InputTag>("centralityBinLabel"));
 
   cutPara.trgtrackCollection = iConfig.getParameter<string>("TrgTrackCollection");
   cutPara.genParticleCollection = iConfig.getParameter<string>("GenParticleCollection");
@@ -880,13 +882,18 @@ double DiHadronCorrelationMultiBase::GetEventEngineer(const edm::Event& iEvent, 
 
 int DiHadronCorrelationMultiBase::GetCentralityBin(const edm::Event& iEvent, const edm::EventSetup& iSetup)
 {
-  if(!cent) cent = new CentralityProvider(iSetup);
-  cent->newEvent(iEvent,iSetup);
+//  if(!cent) cent = new CentralityProvider(iSetup);
+//  cent->newEvent(iEvent,iSetup);
+
+  iEvent.getByToken(tag_,cbin_);
+  int bin = *cbin_;
 
 //  double hf = cent->raw()->EtHFhitSum();
+/*
   hft = cent->raw()->EtHFtowerSum();
   npixel = cent->raw()->multiplicityPixel();
   zdc = cent->raw()->zdcSum();
+*/
 //  double eb = cent->raw()->EtEBSum();
 //  double eep = cent->raw()->EtEESumPlus();
 //  double eem = cent->raw()->EtEESumMinus();
@@ -898,9 +905,10 @@ int DiHadronCorrelationMultiBase::GetCentralityBin(const edm::Event& iEvent, con
       hHFvsZDC->Fill(hft,zdc);
     }
 */
-  int bin = cent->getBin();
+//  int bin = cent->getBin();
 
 // UCC centrality bins
+/*
   if(hft>3260 && npixel>51400 && cutPara.centmin==1000 && cutPara.centmax == 10000) bin=1000;
   if(hft>3400 && hft<3600 && npixel>51000 && npixel<57000 && cutPara.centmin==2000 && cutPara.centmax == 10000) bin=2000;
   if(hft>3400 && hft<3600 && npixel>51000 && npixel<57000 && zdc<2000 && cutPara.centmin==3000 && cutPara.centmax == 10000) bin=3000;
@@ -913,6 +921,7 @@ int DiHadronCorrelationMultiBase::GetCentralityBin(const edm::Event& iEvent, con
   if((7.0*hft+zdc)<36000 && 1.15*hft>zdc && hft>3260 && npixel>51400 && cutPara.centmin==1200 && cutPara.centmax == 10000) bin=1200;
   if((7.0*hft+zdc)<36000 && hft>3393 && npixel>53450 && cutPara.centmin==2100 && cutPara.centmax == 10000) bin=2100;
   if((7.0*hft+zdc)<36000 && 1.15*hft>zdc && hft>3393 && npixel>53450 && cutPara.centmin==2200 && cutPara.centmax == 10000) bin=2200;
+*/
 // pPb centrality bins
 /*
   if(!cutPara.centralityCollection.Contains("pACentrality")) return bin;

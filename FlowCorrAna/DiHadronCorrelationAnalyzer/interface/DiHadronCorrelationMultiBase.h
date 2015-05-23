@@ -48,7 +48,7 @@
 #include "DataFormats/Common/interface/TriggerResults.h"
 #include "DataFormats/Math/interface/deltaPhi.h"
 #include "DataFormats/HepMCCandidate/interface/GenParticle.h"
-#include "RecoHI/HiCentralityAlgos/interface/CentralityProvider.h"
+//#include "RecoHI/HiCentralityAlgos/interface/CentralityProvider.h"
 //#include "DataFormats/HeavyIonEvent/interface/CentralityProvider.h"
 #include "DataFormats/HeavyIonEvent/interface/CentralityBins.h"
 #include "DataFormats/HeavyIonEvent/interface/Centrality.h"
@@ -124,8 +124,11 @@ class DiHadronCorrelationMultiBase : public edm::EDAnalyzer {
    DiHadronCorrelationEvent* eventcorr;
    vector<DiHadronCorrelationEvent> eventcorrArray;
 
-   CentralityProvider * cent;
+//   CentralityProvider * cent;
    edm::Service<TFileService> theOutputs;
+
+   edm::Handle<int> cbin_;
+   edm::EDGetTokenT<int> tag_;
 
    // histograms
    TH2D*  hEffWeight;
