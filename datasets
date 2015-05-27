@@ -62,7 +62,8 @@ pPb MC sample (53X):
 /EPOS_GEN-SIM_1M_batch11/davidlw-RecoSkim_ReTracking_v4-5cde49c8740ff28f897f533d05a99dbc/USER
 
 pp MC sample (428):
-- pythia6, Z2start: /MinBias_TuneZ2_7TeV-pythia6/davidlw-Skim_v12-0b0ef6f65f16dabff16a120aebf130d5/USER
+- pythia6, Z2: /MinBias_TuneZ2_7TeV-pythia6/davidlw-Skim_v15-1709136df11f28c8f8a8a944d51c46a6/USER
+#/MinBias_TuneZ2_7TeV-pythia6/davidlw-Skim_v12-0b0ef6f65f16dabff16a120aebf130d5/USER
 
 PbPb MC sample (53X):
 - HYDJET, 32K: /Hydjet1p8_TuneDrum_Quenched_MinBias_2760GeV/davidlw-RECO_v1-0e6ab43111ff2b7e6299139d8f86b661/USER
