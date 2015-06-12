@@ -72,7 +72,6 @@ class TTree;
 class TNtuple;
 class TVector3;
 class TLorentzVector;
-class DiHadronCorrelationEvent;
 
 using namespace std;
 using namespace reco;
