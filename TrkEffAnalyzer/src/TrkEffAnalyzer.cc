@@ -20,7 +20,7 @@
 #include "SimTracker/TrackAssociation/interface/TrackAssociatorByHits.h"
 #include "DataFormats/PatCandidates/interface/Jet.h"
 #include "RecoJets/JetAlgorithms/interface/JetAlgoHelper.h"
-#include "RiceHIG/TrkEffAnalyzer/interface/TrkEffAnalyzer.h"
+#include "FlowCorrAna/TrkEffAnalyzer/interface/TrkEffAnalyzer.h"
 
 #include "DataFormats/HepMCCandidate/interface/GenParticleFwd.h"
 #include "DataFormats/HepMCCandidate/interface/GenParticle.h"

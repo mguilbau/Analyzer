@@ -41,7 +41,7 @@ process.v0rereco_step = cms.Path( process.generalV0CandidatesNew )
 
 ###############################################################################################
 
-process.load("RiceHIG.Skim2013.ppanalysisSkimContentFull_cff")
+process.load("FlowCorrAna.Skim2013.ppanalysisSkimContentFull_cff")
 process.output_HM = cms.OutputModule("PoolOutputModule",
     outputCommands = process.analysisSkimContent.outputCommands,
     fileName = cms.untracked.string('pPb_HM.root'),

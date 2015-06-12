@@ -71,8 +71,8 @@ process.source = cms.Source("PoolSource",
 )
 
 # Track efficiency analyzer
-process.load("RiceHIG.TrkEffAnalyzer.trkEffAnalyzer_cff")
-process.load("RiceHIG.Skim2013.ppExtraReco_cff")
+process.load("FlowCorrAna.TrkEffAnalyzer.trkEffAnalyzer_cff")
+process.load("FlowCorrAna.Skim2013.ppExtraReco_cff")
 #process.trkEffAnalyzer.tracks = cms.untracked.InputTag('selectTracks')
 #process.trackingParticleRecoTrackAsssociation.label_tr = cms.untracked.InputTag('selectTracks')
 process.trkEffAnalyzer.tracks = cms.untracked.InputTag('generalTracks')

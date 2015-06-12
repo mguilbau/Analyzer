@@ -17,7 +17,7 @@
 #include "DataFormats/VertexReco/interface/VertexFwd.h"
 #include "DataFormats/BeamSpot/interface/BeamSpot.h"
 #include "Geometry/TrackerGeometryBuilder/interface/TrackerGeometry.h"
-#include "RiceHIG/TrkEffAnalyzer/interface/TrkEffHistograms.h"
+#include "FlowCorrAna/TrkEffAnalyzer/interface/TrkEffHistograms.h"
 
 // define track efficiency analyzer class
 class TrkEffAnalyzer : public edm::EDAnalyzer {

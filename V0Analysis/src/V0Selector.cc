@@ -3,7 +3,7 @@
 // Package:    V0Selector
 // Class:      V0Selector
 // 
-/**\class V0Selector V0Selector.cc RiceHIG/V0Analysis/src/V0Selector.cc
+/**\class V0Selector V0Selector.cc FlowCorrAna/V0Analysis/src/V0Selector.cc
 
  Description: <one line class summary>
 
@@ -19,7 +19,7 @@
 // system include files
 #include <memory>
 
-#include "RiceHIG/V0Analysis/interface/V0Selector.h"
+#include "FlowCorrAna/V0Analysis/interface/V0Selector.h"
 
 const double piMass = 0.13957018;
 const double piMassSquared = piMass*piMass;

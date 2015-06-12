@@ -3,7 +3,7 @@
 // Package:    V0Selector
 // Class:      V0Selector
 // 
-/**\class V0Selector V0Selector.h RiceHIG/V0Analysis/interface/V0Selector.h
+/**\class V0Selector V0Selector.h FlowCorrAna/V0Analysis/interface/V0Selector.h
 
  Description: <one line class summary>
 

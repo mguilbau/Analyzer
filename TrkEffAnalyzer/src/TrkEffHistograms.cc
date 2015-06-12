@@ -1,4 +1,4 @@
-#include "RiceHIG/TrkEffAnalyzer/interface/TrkEffHistograms.h"
+#include "FlowCorrAna/TrkEffAnalyzer/interface/TrkEffHistograms.h"
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
 
 #include "TTree.h"

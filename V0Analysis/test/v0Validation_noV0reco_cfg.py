@@ -42,8 +42,8 @@ process.source = cms.Source("PoolSource",
 ### validation-specific includes
 process.load("SimTracker.TrackAssociation.TrackAssociatorByHits_cfi")
 process.load("SimTracker.TrackAssociation.TrackAssociatorByChi2_cfi")
-process.load("RiceHIG.V0Analysis.v0selector_cff")
-process.load("RiceHIG.V0Analysis.v0validator_cff")
+process.load("FlowCorrAna.V0Analysis.v0selector_cff")
+process.load("FlowCorrAna.V0Analysis.v0validator_cff")
 
 #process.v0Validator.kShortCollection = cms.InputTag('generalV0CandidatesNew:Kshort')
 #process.v0Validator.lambdaCollection = cms.InputTag('generalV0CandidatesNew:Lambda')

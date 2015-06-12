@@ -17,7 +17,7 @@
 //
 
 
-#include "RiceHIG/V0Analysis/interface/V0Validator.h"
+#include "FlowCorrAna/V0Analysis/interface/V0Validator.h"
 #include "DataFormats/VertexReco/interface/VertexFwd.h"
 
 typedef std::vector<TrackingVertex> TrackingVertexCollection;

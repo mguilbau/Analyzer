@@ -27,7 +27,7 @@ process.GlobalTag.globaltag = 'GR_R_44_V10::All'
 
 # =============== Import Sequences =====================
 process.load('Appeltel.RpPbAnalysis.PAPileUpVertexFilter_cff')
-process.load("RiceHIG.Skim2013.EventFilter_cff")
+process.load("FlowCorrAna.Skim2013.EventFilter_cff")
 #process.load("UserCode.EnergyLossPID.EnergyLossProducer_cff")
 
 process.PAprimaryVertexFilter = cms.EDFilter("VertexSelector",
@@ -109,7 +109,7 @@ process.reTracking_step = cms.Path( process.eventFilter_HM * process.reTracking 
 
 ###############################################################################################
 
-process.load("RiceHIG.Skim2013.ppanalysisSkimContentFull_cff")
+process.load("FlowCorrAna.Skim2013.ppanalysisSkimContentFull_cff")
 process.output_HM = cms.OutputModule("PoolOutputModule",
     outputCommands = process.analysisSkimContent.outputCommands,
     fileName = cms.untracked.string('pPb_HM.root'),

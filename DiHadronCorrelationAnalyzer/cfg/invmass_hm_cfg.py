@@ -36,7 +36,7 @@ process.source = cms.Source("PoolSource",
 #                                secondaryFileNames = cms.untracked.vstring('')
                             )
 process.load("FlowCorrAna.DiHadronCorrelationAnalyzer.invmass_cff")
-process.load("RiceHIG.V0Analysis.v0selector_cff")
+process.load("FlowCorrAna.V0Analysis.v0selector_cff")
 
 process.options = cms.untracked.PSet(
     wantSummary = cms.untracked.bool(True)
