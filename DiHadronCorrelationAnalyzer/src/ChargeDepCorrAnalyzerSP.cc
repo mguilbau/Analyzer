@@ -1,4 +1,3 @@
-#include "../interface/ChargeDepCorrAnalyzerSP.h"
 #include <TH1.h>
 #include <TH2.h>
 #include <TH3.h>
@@ -15,6 +14,8 @@
 #include <vector> 
 #include <iostream>
 #include "Math/Vector3D.h"
+
+#include "FlowCorrAna/DiHadronCorrelationAnalyzer/interface/ChargeDepCorrAnalyzerSP.h"
 
 using namespace std;
 

@@ -2,7 +2,7 @@
 #define ChargeDepCorrAnalyzerSP_
 
 #ifndef DiHadronCorrelationMultiBase_
-#include "DiHadronCorrelationMultiBase.h"
+#include "FlowCorrAna/DiHadronCorrelationAnalyzer/interface/DiHadronCorrelationMultiBase.h"
 #endif 
 
 #include <vector>
